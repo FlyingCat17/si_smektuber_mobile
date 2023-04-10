@@ -12,10 +12,10 @@ import com.nekoid.smektuber.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Otp_verifikasi#newInstance} factory method to
+ * Use the {@link ForgotPassword#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Otp_verifikasi extends Fragment {
+public class ForgotPassword extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class Otp_verifikasi extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Otp_verifikasi() {
+    public ForgotPassword() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class Otp_verifikasi extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Otp_verifikasi.
+     * @return A new instance of fragment forgot_password.
      */
     // TODO: Rename and change types and number of parameters
-    public static Otp_verifikasi newInstance(String param1, String param2) {
-        Otp_verifikasi fragment = new Otp_verifikasi();
+    public static ForgotPassword newInstance(String param1, String param2) {
+        ForgotPassword fragment = new ForgotPassword();
         Bundle args = new Bundle();
         args.putString( ARG_PARAM1, param1 );
         args.putString( ARG_PARAM2, param2 );
@@ -61,6 +61,6 @@ public class Otp_verifikasi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate( R.layout.fragment_otp_verifikasi, container, false );
+        return inflater.inflate( R.layout.fragment_forgot_password, container, false );
     }
 }

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:paddingRight="25dp"
     android:paddingLeft="25dp"
-    tools:context=".screen.auth.Otp_verifikasi">
+    tools:context=".screen.auth.OtpVerification">
 
     <include
         android:id="@+id/backIcon"
