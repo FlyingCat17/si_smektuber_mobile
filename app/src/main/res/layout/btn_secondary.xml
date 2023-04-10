@@ -1,0 +1,15 @@
+<com.google.android.material.button.MaterialButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:text="@string/btnRegister"
+    android:textSize="18sp"
+    android:fontFamily="@font/urbanist_medium"
+    android:textAllCaps="false"
+    android:backgroundTint="@color/white"
+    android:textColor="@color/cyanblue"
+    app:cornerRadius="10dp"
+    app:strokeWidth="2dp"
+    app:strokeColor="@color/cyanblue"
+    />
