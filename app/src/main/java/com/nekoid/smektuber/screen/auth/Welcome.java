@@ -2,65 +2,61 @@ package com.nekoid.smektuber.screen.auth;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import com.google.android.material.button.MaterialButton;
 
 import com.nekoid.smektuber.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Welcome#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Welcome extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private View view;
+    private Button btnToLogin, btnToRegister;
     public Welcome() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Welcome.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Welcome newInstance(String param1, String param2) {
-        Welcome fragment = new Welcome();
-        Bundle args = new Bundle();
-        args.putString( ARG_PARAM1, param1 );
-        args.putString( ARG_PARAM2, param2 );
-        fragment.setArguments( args );
-        return fragment;
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate( R.layout.fragment_welcome,container, false );
+        init();
+        return view;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString( ARG_PARAM1 );
-            mParam2 = getArguments().getString( ARG_PARAM2 );
-        }
-    }
+    private void init(){
+        btnToLogin = view.findViewById( R.id.btnToSignIn );
+        btnToRegister= view.findViewById( R.id.btnToSignUp );
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate( R.layout.fragment_welcome, container, false );
+        btnToLogin.setOnClickListener( v -> {
+//            getActivity()
+//                    .getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace( R.id.frameAuthContainer,new Login() )
+//                    .addToBackStack( null )
+//                    .commit();
+            FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in ,R.anim.fade_out);
+            transaction.replace(R.id.frameAuthContainer, new Login());
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } );
+        btnToRegister.setOnClickListener( v ->{
+            // change fragment register
+            getActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace( R.id.frameAuthContainer, new Register() )
+                    .addToBackStack( null )
+                    .commit();
+        } );
     }
 }

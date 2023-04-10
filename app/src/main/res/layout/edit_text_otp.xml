@@ -1,6 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<com.google.android.material.textfield.TextInputLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/otp_input_layout"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:boxBackgroundColor="@color/white"
+    app:hintEnabled="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/otp_input"
+        android:layout_width="70sp"
+        android:layout_height="70sp"
+        android:layout_marginRight="27dp"
+        android:maxLength="1"
+        android:inputType="number"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="25sp"
+        android:fontFamily="@font/urbanist_medium"
+        android:padding="0dp" />
+
+</com.google.android.material.textfield.TextInputLayout>
