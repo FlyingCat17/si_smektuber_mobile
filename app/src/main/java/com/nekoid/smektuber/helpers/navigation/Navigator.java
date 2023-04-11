@@ -1,4 +1,4 @@
-package com.nekoid.smektuber.navigation;
+package com.nekoid.smektuber.helpers.navigation;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,28 +23,6 @@ public class Navigator {
         context.startActivity(intent);
         Log.i(TAG, "start activity : " + context.toString());
     }
-
-//    public static void pushReplacement(Context context, Class route) {
-//        Intent intent = new Intent(context, route);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        context.startActivity(intent);
-//    }
-//
-//    public static void pushReplacement(Context context, Class route, Object arguments) {
-////        Intent intent = new Intent(context, route);
-////        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//
-//        Intent intent = setIntent(context, route);
-////        intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//        setArgs(arguments, intent);
-//        context.startActivity(intent);
-//    }
-//
-//    public static void pop(Context context) {
-//        Context ctx = getContext();
-//        Intent intent = setIntent(context, savedContext.getClass());
-//
-//    }
 
     @Nullable
     public static Object getArgs(Activity activity) {
