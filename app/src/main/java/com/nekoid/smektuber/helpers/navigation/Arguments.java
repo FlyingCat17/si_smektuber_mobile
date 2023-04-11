@@ -1,4 +1,4 @@
-package com.nekoid.smektuber.navigation;
+package com.nekoid.smektuber.helpers.navigation;
 
 import androidx.annotation.Nullable;
 
