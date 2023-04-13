@@ -8,7 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.navigation.Navigator;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.screen.auth.AuthActivity;
 
 public class SplashScreen extends AppCompatActivity {
