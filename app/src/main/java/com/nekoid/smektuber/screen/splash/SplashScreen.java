@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 
+import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.screen.auth.WelcomeAuth;
 
 public class SplashScreen extends AppCompatActivity {
@@ -20,6 +21,8 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        // Panggil method setTransparentStatusBar()
+        StatusBarUtil.setTransparentStatusBar(this);
 
         logo = findViewById(R.id.logo);
         anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade);

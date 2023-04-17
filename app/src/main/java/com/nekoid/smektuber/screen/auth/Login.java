@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 
 public class Login extends AppCompatActivity {
     private Button btnLogin;
@@ -20,6 +21,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_login );
+        // Panggil method setTransparentStatusBar()
+        StatusBarUtil.setTransparentStatusBar(this);
         init();
     }
 
