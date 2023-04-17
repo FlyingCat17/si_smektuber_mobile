@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 
 public class WelcomeAuth extends AppCompatActivity {
     private Button btnToLogin, btnToRegister;
@@ -14,6 +15,8 @@ public class WelcomeAuth extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_welcome_auth );
+        // Panggil method setTransparentStatusBar()
+        StatusBarUtil.setTransparentStatusBar(this);
         init();
     }
 

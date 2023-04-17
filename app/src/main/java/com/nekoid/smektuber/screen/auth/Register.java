@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.helpers.widget.Style;
 
 public class Register extends AppCompatActivity {
@@ -21,6 +22,8 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_register );
+        // Panggil method setTransparentStatusBar()
+        StatusBarUtil.setTransparentStatusBar(this);
         init();
     }
 
