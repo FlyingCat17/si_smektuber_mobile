@@ -9,7 +9,8 @@ import android.widget.ImageView;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.screen.auth.AuthActivity;
+
+import com.nekoid.smektuber.screen.auth.WelcomeAuth;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Navigator.push(SplashScreen.this, AuthActivity.class);
+                Navigator.push(SplashScreen.this, WelcomeAuth.class);
                 finish();
             }
 
