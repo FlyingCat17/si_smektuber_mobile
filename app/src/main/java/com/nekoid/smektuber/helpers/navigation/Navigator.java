@@ -21,7 +21,16 @@ public class Navigator {
     public static void push(Context context, Class route) {
         Intent intent = new Intent(context, route);
         context.startActivity(intent);
+        ((Activity) context).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         Log.i(TAG, "start activity : " + context.toString());
+    }
+
+    public static void goBack(Activity activity, Class route) {
+        Intent intent = new Intent(activity, route);
+        activity.startActivity(intent);
+//        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        activity.finish();
+        Log.i(TAG, "Back pressed, start activity : " + route.getSimpleName());
     }
 
     @Nullable
