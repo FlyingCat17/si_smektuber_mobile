@@ -1,159 +1,63 @@
 package com.nekoid.smektuber.helpers.widget;
 
+import android.app.Activity;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.textfield.TextInputLayout;
+import com.nekoid.smektuber.R;
+
 abstract class Coloring extends Spacing {
-    public Coloring(EditText editText) {
-        super(editText);
+    public Coloring(Activity activity, EditText editText) {
+        super(activity, editText);
     }
 
-    public Coloring(Button button) {
-        super(button);
+    public Coloring(Activity activity, Button button) {
+        super(activity, button);
     }
 
-    public Style setTextColor(Color color) {
-        if (this.isButton()) {
-            this.button.setTextColor(color.getColor());
-        } else if (this.isEditText()) {
-            this.editText.setTextColor(color.getColor());
-        } else {
-            this.exception();
-        }
+    public Coloring(Activity activity, TextInputLayout textInputLayout) {
+        super(activity, textInputLayout);
+    }
+
+    public Style textColor(int color) {
+        this.textColor = new Color(this.activity, color).getColor();
         return this.instance();
     }
 
-    public Style setTextColor(String color) {
-        if (this.isButton()) {
-            this.button.setTextColor(android.graphics.Color.parseColor(color));
-        } else if (this.isEditText()) {
-            this.editText.setTextColor(android.graphics.Color.parseColor(color));
-        } else {
-            this.exception();
-        }
+    public Style textColor(String color) {
+        this.textColor = android.graphics.Color.parseColor(color);
         return this.instance();
     }
 
-   public Style setTextColor(int color) {
-        if (this.isButton()) {
-            this.button.setTextColor(color);
-        } else if (this.isEditText()) {
-            this.editText.setTextColor(color);
-        } else {
-            this.exception();
-        }
+    public Style backgroundColor(int color) {
+        this.backgroundColor = new Color(this.activity, color).getColor();
         return this.instance();
     }
 
-    public Style setBackgroundColor(Color color) {
-        if (this.isButton()) {
-            this.button.setBackgroundColor(color.getColor());
-        } else if (this.isEditText()) {
-            this.editText.setBackgroundColor(color.getColor());
-        } else {
-            this.exception();
-        }
+    public Style backgroundColor(String color) {
+        this.backgroundColor = android.graphics.Color.parseColor(color);
         return this.instance();
     }
 
-    public Style setBackgroundColor(String color) {
-        if (this.isButton()) {
-            this.button.setBackgroundColor(android.graphics.Color.parseColor(color));
-        } else if (this.isEditText()) {
-            this.editText.setBackgroundColor(android.graphics.Color.parseColor(color));
-        } else {
-            this.exception();
-        }
+    public Style hintTextColor(int color) {
+        this.hintTextColor = new Color(this.activity, color).getColor();
         return this.instance();
     }
 
-    public Style setBackgroundColor(int color) {
-        if (this.isButton()) {
-            this.button.setBackgroundColor(color);
-        } else if (this.isEditText()) {
-            this.editText.setBackgroundColor(color);
-        } else {
-            this.exception();
-        }
+    public Style hintTextColor(String color) {
+        this.hintTextColor = android.graphics.Color.parseColor(color);
         return this.instance();
     }
 
-    public Style setHintTextColor(Color color) {
-        if (this.isButton()) {
-            this.button.setHintTextColor(color.getColor());
-        } else if (this.isEditText()) {
-            this.editText.setHintTextColor(color.getColor());
-        } else {
-            this.exception();
-        }
+    public Style outlineColor(int color) {
+        this.outlineColor = new Color(this.activity, color).getColor();
         return this.instance();
     }
 
-    public Style setHintTextColor(String color) {
-        if (this.isButton()) {
-            this.button.setHintTextColor(android.graphics.Color.parseColor(color));
-        } else if (this.isEditText()) {
-            this.editText.setHintTextColor(android.graphics.Color.parseColor(color));
-        } else {
-            this.exception();
-        }
-        return this.instance();
-    }
-
-    public Style setHintTextColor(int color) {
-        if (this.isButton()) {
-            this.button.setHintTextColor(color);
-        } else if (this.isEditText()) {
-            this.editText.setHintTextColor(color);
-        } else {
-            this.exception();
-        }
-        return this.instance();
-    }
-
-    public Style setOutlineColor(Color color) {
-        if (this.isButton()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                this.button.setOutlineSpotShadowColor(color.getColor());
-            }
-        } else if (this.isEditText()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                this.editText.setOutlineSpotShadowColor(color.getColor());
-            }
-        } else {
-            this.exception();
-        }
-        return this.instance();
-    }
-
-    public Style setOutlineColor(String color) {
-        if (this.isButton()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                this.button.setOutlineSpotShadowColor(android.graphics.Color.parseColor(color));
-            }
-        } else if (this.isEditText()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                this.editText.setOutlineSpotShadowColor(android.graphics.Color.parseColor(color));
-            }
-        } else {
-            this.exception();
-        }
-        return this.instance();
-    }
-
-    public Style setOutlineColor(int color) {
-        if (this.isButton()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                this.button.setOutlineSpotShadowColor(color);
-            }
-        } else if (this.isEditText()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                this.editText.setOutlineSpotShadowColor(color);
-            }
-        } else {
-            this.exception();
-        }
+    public Style outlineColor(String color) {
+        this.outlineColor = android.graphics.Color.parseColor(color);
         return this.instance();
     }
 }
