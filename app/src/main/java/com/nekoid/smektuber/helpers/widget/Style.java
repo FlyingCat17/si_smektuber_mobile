@@ -1,157 +1,87 @@
 package com.nekoid.smektuber.helpers.widget;
 
+import android.app.Activity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 public class Style extends Coloring {
-    public Style(Button button) {
-        super(button);
+    public Style(Activity activity, Button button) {
+        super(activity, button);
     }
 
-    public Style(EditText editText) {
-        super(editText);
+    public Style(Activity activity, EditText editText) {
+        super(activity,editText);
     }
 
-    public Style setMaxLines(int lines) {
-        if (this.isButton()) {
-            this.button.setMaxLines(lines);
-        } else if (this.isEditText()) {
-            this.editText.setMaxLines(lines);
-        } else {
-            this.exception();
-        }
+    public Style(Activity activity, TextInputLayout textInputLayout) {
+        super(activity, textInputLayout);
+    }
+
+    public Style maxLines(int lines) {
+        this.maxLines = lines;
         return this;
     }
 
-    public Style setMinLines(int lines) {
-        if (this.isButton()) {
-            this.button.setMinLines(lines);
-        } else if (this.isEditText()) {
-            this.editText.setMinLines(lines);
-        } else {
-            this.exception();
-        }
+    public Style minLines(int lines) {
+        this.minLines = lines;
         return this;
     }
 
-    public Style setLines(int lines) {
-        if (this.isButton()) {
-            this.button.setLines(lines);
-        } else if (this.isEditText()) {
-            this.editText.setLines(lines);
-        } else {
-            this.exception();
-        }
+    public Style lines(int lines) {
+        this.lines = lines;
         return this;
     }
 
-    public Style setMaxEms(int ems) {
-        if (this.isButton()) {
-            this.button.setMaxEms(ems);
-        } else if (this.isEditText()) {
-            this.editText.setMaxEms(ems);
-        } else {
-            this.exception();
-        }
+    public Style maxEms(int ems) {
+        this.maxEms = ems;
         return this;
     }
 
-    public Style setMinEms(int ems) {
-        if (this.isButton()) {
-            this.button.setMinEms(ems);
-        } else if (this.isEditText()) {
-            this.editText.setMinEms(ems);
-        } else {
-            this.exception();
-        }
+    public Style minEms(int ems) {
+        this.minEms = ems;
         return this;
     }
 
-    public Style setEms(int ems) {
-        if (this.isButton()) {
-            this.button.setEms(ems);
-        } else if (this.isEditText()) {
-            this.editText.setEms(ems);
-        } else {
-            this.exception();
-        }
+    public Style ems(int ems) {
+        this.ems = ems;
         return this;
     }
 
-    public Style setFont(Font font) {
-        if (this.isButton()) {
-             this.button.setTypeface(font.getFont());
-        } else if (this.isEditText()) {
-            this.editText.setTypeface(font.getFont());
-        } else {
-            this.exception();
-        }
+    public Style font(String font) {
+        this.font = new Font(this.activity, font).getFont();
         return this;
    }
 
-    public Style setText(String text) {
-        if (this.isButton()) {
-            this.button.setText(text);
-        } else if (this.isEditText()) {
-            this.editText.setText(text);
-        } else {
-            this.exception();
-        }
+    public Style text(String text) {
+        this.text = text;
         return this;
     }
 
-    public Style setHintText(String text) {
-        if (this.isButton()) {
-            this.button.setHint(text);
-        } else if (this.isEditText()) {
-            this.editText.setHint(text);
-        } else {
-            this.exception();
-        }
+    public Style hintText(String text) {
+        this.hintText = text;
         return this;
     }
 
-    public Style setEnabled(boolean enabled) {
-        if (this.isButton()) {
-            this.button.setEnabled(enabled);
-        } else if (this.isEditText()) {
-            this.editText.setEnabled(enabled);
-        } else {
-            this.exception();
-        }
+    public Style isEnabled(boolean enabled) {
+        this.isEnabled = enabled;
         return this;
     }
 
-    public Style setFocusable(boolean focusable) {
-        if (this.isButton()) {
-            this.button.setFocusable(focusable);
-        } else if (this.isEditText()) {
-            this.editText.setFocusable(focusable);
-        } else {
-            this.exception();
-        }
+    public Style isFocusable(boolean focusable) {
+        this.isFocusable = focusable;
         return this;
     }
 
-    public Style setFocusableInTouchMode(boolean focusable) {
-        if (this.isButton()) {
-            this.button.setFocusableInTouchMode(focusable);
-        } else if (this.isEditText()) {
-            this.editText.setFocusableInTouchMode(focusable);
-        } else {
-            this.exception();
-        }
+    public Style isFocusableInTouchMode(boolean focusable) {
+        this.isFocusableInTouchMode = focusable;
         return this;
     }
 
-    public Style setClickable(boolean clickable) {
-        if (this.isButton()) {
-            this.button.setClickable(clickable);
-        } else if (this.isEditText()) {
-            this.editText.setClickable(clickable);
-        } else {
-            this.exception();
-        }
+    public Style isClickable(boolean clickable) {
+        this.isClickable = clickable;
         return this;
     }
 
@@ -160,14 +90,8 @@ public class Style extends Coloring {
      * @param visibility View.VISIBLE, View.INVISIBLE, View.GONE
      * @return Style
      */
-    public Style setVisibility(int visibility) {
-        if (this.isButton()) {
-            this.button.setVisibility(visibility);
-        } else if (this.isEditText()) {
-            this.editText.setVisibility(visibility);
-        } else {
-            this.exception();
-        }
+    public Style isVisible(int visibility) {
+        this.isVisible = visibility;
         return this;
     }
 }

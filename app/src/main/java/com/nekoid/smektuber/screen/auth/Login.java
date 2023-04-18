@@ -1,14 +1,10 @@
 package com.nekoid.smektuber.screen.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-//import androidx.widget.Toolbar;
 import androidx.appcompat.widget.Toolbar;
-
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
@@ -36,19 +32,11 @@ public class Login extends AppCompatActivity {
         txtToRegister.setOnClickListener( v->{
             Navigator.push( this,Register.class );
         } );
-        toolbar.setOnClickListener( v->{
-            onBackPressed();
-        } );
     }
-    @Override
-    public void onBackPressed() {
-        // Custom route
-        // startActivity(new Intent(this, WelcomeAuth.class));
-        Navigator.goBack( this,WelcomeAuth.class );
-    }
+
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        Navigator.of(this).pop();
         return true;
     }
 }
