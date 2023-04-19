@@ -33,26 +33,16 @@ public class Register extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToLogin = findViewById( R.id.txtToLogin );
         btnRegister = findViewById( R.id.btnRegister );
-        new Style( btnRegister ).setText( "Daftar" )
-                .setFontSize( 15 );
 
         // action
         txtToLogin.setOnClickListener( v-> {
             Navigator.push( this,Login.class );
         } );
-        toolbar.setOnClickListener( v-> {
-            onBackPressed();
-        } );
     }
-    @Override
-    public void onBackPressed() {
-        // Custom route back previous Page :
-        // startActivity(new Intent(this, WelcomeAuth.class));
-        Navigator.goBack(this, WelcomeAuth.class);
-    }
+
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        Navigator.of(this).pop();
         return true;
     }
 }
