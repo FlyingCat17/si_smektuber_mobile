@@ -8,6 +8,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
+import com.nekoid.smektuber.screen.home.HomeMember;
+import com.nekoid.smektuber.screen.home.Ppdb;
 
 public class Login extends AppCompatActivity {
     private Button btnLogin;
@@ -32,6 +34,10 @@ public class Login extends AppCompatActivity {
         txtToRegister.setOnClickListener( v->{
             Navigator.push( this,Register.class );
         } );
+
+        btnLogin.setOnClickListener( v -> {
+            Navigator.push(this, HomeMember.class);
+        });
     }
 
     @Override
