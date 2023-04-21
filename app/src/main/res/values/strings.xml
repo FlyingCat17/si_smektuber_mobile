@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">smektuber</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Akun">Akun</string>
+    <string name="Beranda">Beranda</string>
+    <string name="PPDB">PPDB</string>
+    <string name="Loker">Loker</string>
     <string name="titleApp">SISTEM INFORMASI\n SMKN 7 JEMBER</string>
     <string name="footer">Version 1.0\n JTI POLIJE NekoID 2023</string>
     <string name="titleLogin">Selamat Datang \nKembali!</string>
