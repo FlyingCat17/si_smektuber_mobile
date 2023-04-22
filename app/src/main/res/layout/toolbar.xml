@@ -10,6 +10,7 @@
     android:paddingStart="10dp"
     app:navigationIcon="@drawable/arrow_back"
     android:paddingEnd="10dp"
-    android:paddingRight="10dp">
+    android:paddingRight="10dp"
+    >
 
 </androidx.appcompat.widget.Toolbar>

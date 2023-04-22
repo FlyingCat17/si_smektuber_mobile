@@ -6,11 +6,70 @@
     tools:context=".screen.home.Account">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/IconUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Akun"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:src="@drawable/iconuser"
+        android:layout_marginTop="64dp"
+        android:layout_marginLeft="24dp"
+        />
+
+    <TextView
+        android:id="@+id/FullnameAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:text="@string/Fullname"
+        android:fontFamily="@font/urbanist"
+        android:textSize="18sp"
+        android:layout_marginTop="89dp"
+        android:layout_marginLeft="132dp"
+        android:layout_marginRight="52dp"
+        android:textColor="@color/Color00000"
+        />
+
+    <TextView
+        android:id="@+id/UsernameAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:text="@string/Username"
+        android:fontFamily="@font/urbanist"
+        android:layout_marginTop="114dp"
+        android:layout_marginLeft="132dp"
+        android:layout_marginRight="52dp"
+        android:textColor="@color/Color7D7D7D"
+        />
+
+    <com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="@string/ButtonUbahProfil"
+        android:fontFamily="@font/urbanist_medium"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/blue01"
+        android:textColor="@color/white"
+        app:cornerRadius="8dp"
+        android:id="@+id/ButtonUbahProfil"
+        android:layout_marginTop="191dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="20dp"
+        />
+
+    <com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="@string/ButtonKeluarAkun"
+        android:fontFamily="@font/urbanist_medium"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/ColorFF3642"
+        android:textColor="@color/white"
+        app:cornerRadius="8dp"
+        android:id="@+id/ButtonKeluarAkun"
+        android:layout_marginTop="257dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="23dp"
+        />
 
 </RelativeLayout>
