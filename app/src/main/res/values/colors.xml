@@ -21,4 +21,11 @@
     <color name="whiteSky">#FEFEFE</color>
     <color name="greyVariant">#8391A1</color>
     <color name="whiteVariant">#F7F8F9</color>
+    <color name="ColorC3E8FF">#C3E8FF</color>
+    <color name="ColorE7E7E7">#E7E7E7</color>
+    <color name="Color26A3E9">#26A3E9</color>
+    <color name="Color312E48">#312E48</color>
+    <color name="ColorFC313D">#FC313D</color>
+    <color name="Color05D77F">#05D77F</color>
+    <color name="ColorFFC22E">#FFC22E</color>
 </resources>

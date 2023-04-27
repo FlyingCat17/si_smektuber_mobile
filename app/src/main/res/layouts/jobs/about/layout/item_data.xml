@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+                <ImageView
+                    android:layout_width="217dp"
+                    android:layout_height="122dp"
+                    android:src="@drawable/imageartikel"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="22dp"/>
+                <TextView
+                    android:id="@+id/DataText"
+                    android:layout_width="217dp"
+                    android:layout_height="34dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="22dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="9dp"
+                    android:text="Artikel Ini"
+                    android:textAppearance="@style/artikel_ini"
+                    android:lineSpacingExtra="2sp"
+                    android:gravity="center_vertical"
+                    />
+
+        </LinearLayout>
+
+</LinearLayout>
