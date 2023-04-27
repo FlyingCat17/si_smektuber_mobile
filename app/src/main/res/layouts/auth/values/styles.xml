@@ -7,4 +7,69 @@
     <style name="HiddenPasswordStyle">
         <item name="android:textSize">20sp</item>
     </style>
+
+    <style name="sistem_info">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/Color00000</item>
+        <item name="fontFamily">@font/urbanist_bold</item>
+    </style>
+
+    <style name="selengkapny">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/Color26A3E9</item>
+        <item name="fontFamily">@font/poppinsmedium</item>
+    </style>
+
+    <style name="Arrow">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/Color26A3E9</item>
+        <item name="fontFamily">@font/poppinsmedium</item>
+    </style>
+
+    <style name="jl_pb_sudir">
+        <item name="android:textSize">10sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:fontFamily">@font/urbanistsemibold</item>
+    </style>
+
+    <style name="TitleMenuHome">
+        <item name="android:textSize">13sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/montserratbold</item>
+    </style>
+
+    <style name="DetailTitleHome">
+        <item name="android:textSize">10sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/montserratsemibold</item>
+    </style>
+
+    <style name="artikel">
+        <item name="android:textSize">17sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/poppinsbold</item>
+    </style>
+
+    <style name="lihat_semua">
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/poppinsbold</item>
+    </style>
+
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="artikel_ini">
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
 </resources>

@@ -16,6 +16,8 @@ public class HomeMember extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Account account = new Account();
     Dashboard dashboard = new Dashboard();
+
+    NoJobs jobs = new NoJobs();
     Ppdb ppdb = new Ppdb();
 
     @Override
@@ -37,6 +39,9 @@ public class HomeMember extends AppCompatActivity {
                         return true;
                     case R.id.Ppdb:
                         getSupportFragmentManager().beginTransaction().replace(R.id.r,ppdb).commit();
+                        return true;
+                    case R.id.Loker:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.r,jobs).commit();
                         return true;
                     case R.id.Akun:
                         getSupportFragmentManager().beginTransaction().replace(R.id.r,account).commit();

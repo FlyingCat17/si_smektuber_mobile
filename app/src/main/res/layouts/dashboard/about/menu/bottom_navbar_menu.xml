@@ -10,6 +10,11 @@
         android:icon="@drawable/ppdb_selector"
         />
 
+    <item android:id="@+id/Loker"
+        android:title="@string/Loker"
+        android:icon="@drawable/job_selector"
+        />
+
     <item android:id="@+id/Akun"
         android:title="@string/Akun"
         android:icon="@drawable/account_selector"
