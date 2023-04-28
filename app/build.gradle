@@ -29,6 +29,7 @@ android {
                             'src/main/res/layouts/ppdb',
                             'src/main/res/layouts/dashboard',
                             'src/main/res/layouts/auth',
+                            'src/main/res/layouts/loader',
                             'src/main/res/layouts',
                             'src/main/res'
                     ]

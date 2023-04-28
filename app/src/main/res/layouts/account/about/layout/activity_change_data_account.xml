@@ -1,9 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
     tools:context=".screen.home.ChangeDataAccount">
+    <include
+        android:id="@+id/backIcon"
+        layout="@layout/toolbar"/>
+    <ScrollView
+        android:id="@+id/content"
+        android:layout_below="@+id/backIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/IconUploadImage"
+                    android:layout_width="130dp"
+                    android:layout_height="134.65dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="115dp"
+                    android:layout_marginLeft="115dp"
+                    android:padding="5dp"
+                    app:strokeWidth="1dp"
+                    app:shapeAppearanceOverlay="@style/circleImageView"
+                    android:background="@color/Color33000000"
+                    android:src="@drawable/iconuploadimage"
+                    >
+
+                </com.google.android.material.imageview.ShapeableImageView>
+
+            </RelativeLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:hint="@string/hintUsername"
+                app:endIconMode="clear_text">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:id="@+id/Ca_username"
+                    android:inputType="textEmailAddress"
+                    android:fontFamily="@font/urbanist"
+                    android:textSize="15sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:hint="@string/hintName"
+                app:endIconMode="clear_text">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:id="@+id/Ca_Name"
+                    android:inputType="text"
+                    android:fontFamily="@font/urbanist"
+                    android:textSize="15sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:hint="@string/hintName"
+                app:endIconMode="clear_text">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:id="@+id/Ca_Email"
+                    android:inputType="textEmailAddress"
+                    android:fontFamily="@font/urbanist"
+                    android:textSize="15sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:hint="@string/hintPassword"
+                app:endIconMode="password_toggle">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:id="@+id/Ca_password"
+                    android:inputType="textVisiblePassword"
+                    android:fontFamily="@font/urbanist"
+                    android:textSize="15sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:hint="@string/hintNewPasswordConfirm"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:id="@+id/Ca_KonfirmasiPassword"
+                    android:inputType="textVisiblePassword"
+                    android:fontFamily="@font/urbanist"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <include
+                android:id="@+id/BtnMemperbarui"
+                layout="@layout/button_change"
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>
