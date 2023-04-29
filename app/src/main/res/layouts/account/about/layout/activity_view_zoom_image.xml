@@ -34,16 +34,17 @@
         android:paddingRight="10dp">
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/ViewZoomImage"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/imageuser"
+        android:layout_height="401.89dp"
+        android:background="@drawable/iconuser"
+        android:src="@drawable/rectangle_loader"
+        android:layout_gravity="center"
         android:layout_marginRight="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="199dp"
         android:layout_marginBottom="199dp"
-        android:scaleType="centerCrop"
-        />
+        android:scaleType="centerCrop">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

@@ -43,4 +43,26 @@ JL. PB. SUDIRMAN NO.16, Jatiroto, Kec. Sumberbaru, Kab. Jember Prov. Jawa Timur
     <string name="preview_lok">Preview Lokasi\nSMK Negeri 7 Jember </string>
     <string name="artikel">Artikel</string>
     <string name="lihat_semua">Lihat Semua</string>
+
+<!--    Nofication-->
+    <string name="gagal_masuk">Gagal Masuk</string>
+    <string name="pastikan_ka">Pastikan Kata Sandi yang anda\nmasukkan benar</string>
+    <string name="pastikan_us">Pastikan Username yang anda\nmasukkan sesuai</string>
+    <string name="email_anda_">Email Anda Tidak Terdaftar Pastikan Anda Telah Memasukkan Dengan Benar</string>
+    <string name="gagal">Gagal</string>
+    <string name="kata_sandi_">Kata Sandi Gagal Berubah</string>
+    <string name="pastikan_kata_sandi">Pastikan Kata sandi anda \nsama dengan kata sandi awal</string>
+    <string name="kata_sandi_Berubah">Kata Sandi Berubah</string>
+    <string name="kata_sandi_Berhasil">Kata sandi Anda telah berhasi\ndiubah</string>
+    <string name="berhasil_da">Berhasil Daftar</string>
+    <string name="akun_anda_t">Akun Anda telah berhasil terdaftar.</string>
+    <string name="Title_pendaftaran">Pendaftaran telah ditutup</string>
+    <string name="mohon_menun">Mohon menunggu informasi terbaru mengenai pendaftaran PPDB di masa mendatang</string>
+    <string name="berhasil_berubah">Berhasil Berubah</string>
+    <string name="akun_anda_merubah">Akun Anda telah berhasil Diperbarui.</string>
+    <string name="tidak_ada_i">Tidak Ada Internet</string>
+    <string name="pastikan_in">Pastikan Internet anda\nterhubung tanpa gangguan</string>
+    <string name="data_anda_t">Data Anda telah terekam\nTunggu informasi selanjutnya</string>
+    <string name="anda_telah_terdaftar">Anda Telah Terdaftar</string>
+
 </resources>

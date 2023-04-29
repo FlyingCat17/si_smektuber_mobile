@@ -20,6 +20,8 @@ android {
         main {
             res.srcDirs =
                     [
+                            'src/main/res/layouts/notification/about',
+                            'src/main/res/layouts/notification/about/notif no internet',
                             'src/main/res/layouts/jobs/about',
                             'src/main/res/layouts/account/about',
                             'src/main/res/layouts/dashboard/about',

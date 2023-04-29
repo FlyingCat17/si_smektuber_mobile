@@ -1,0 +1,11 @@
+<com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:text="Kembali"
+    android:fontFamily="@font/urbanist_medium"
+    android:textAllCaps="false"
+    android:backgroundTint="@color/ColorFF0000"
+    android:textColor="@color/white"
+    app:cornerRadius="8dp"
+    />
