@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.home.Notif_Fail_Login_Password"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
+    >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/successmark"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginRight="130dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="230dp"
+        android:clipToOutline="true"
+        android:background="@drawable/icon_exclamation_mark"
+        />
+
+    <TextView
+        android:id="@+id/gagal_masuk"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="360dp"
+        android:text="@string/Title_pendaftaran"
+        android:textAppearance="@style/gagal_masuk"
+        android:gravity="center_horizontal|top"
+        />
+
+    <TextView
+        android:layout_width="226dp"
+        android:layout_height="69dp"
+        android:layout_marginLeft="67dp"
+        android:layout_marginRight="67dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="400dp"
+        android:text="@string/mohon_menun"
+        android:textAppearance="@style/pastikan_ka"
+        android:lineSpacingExtra="4sp"
+        android:translationY="-2.25sp"
+        android:gravity="center_horizontal|top"
+        />
+
+    <include
+        android:id="@+id/BtnPPDBClosed"
+        layout="@layout/button_kembali_ke_beranda"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="499dp"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"/>
+
+
+</RelativeLayout>

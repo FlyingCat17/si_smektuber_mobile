@@ -1,78 +1,48 @@
 package com.nekoid.smektuber.screen.auth;
 
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+//import android.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
+import com.nekoid.smektuber.helpers.widget.Style;
 
-public class Register extends Fragment {
-
-   private View view;
-   private Toolbar toolbar;
-   private Button btnRegister;
-   private TextView txtToLogin;
-    public Register() {
-        // Required empty public constructor
-    }
-
-    @Nullable
+public class Register extends AppCompatActivity {
+    private Toolbar toolbar;
+    private Button btnRegister;
+    private TextView txtToLogin;
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        view = inflater.inflate( R.layout.fragment_register ,container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_register );
+        // Panggil method setTransparentStatusBar()
+        StatusBarUtil.setTransparentStatusBar(this);
         init();
-        return view;
     }
 
-        private void init(){
-            // init component
-            txtToLogin = view.findViewById( R.id.txtToLogin );
-            btnRegister = view.findViewById( R.id.btn_register );
+    private void init(){
+        toolbar = findViewById( R.id.backIcon );
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        txtToLogin = findViewById( R.id.txtToLogin );
+        btnRegister = findViewById( R.id.btnRegister );
 
-            // link to login
-            txtToLogin.setOnClickListener( v->{
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace( R.id.frameAuthContainer, new Login() )
-                        .addToBackStack( null )
-                        .commit();
-            } );
+        // action
+        txtToLogin.setOnClickListener( v-> {
+            Navigator.push( this,Login.class );
+        } );
+    }
 
-            // Add backPressed fragment
-            toolbar = view.findViewById( R.id.backIcon );
-            ((AppCompatActivity) requireActivity()).setSupportActionBar( toolbar );
-            ((AppCompatActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            // Add back
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    requireActivity().onBackPressed();
-    //                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameAuthContainer, new Welcome()).commit();
-                }
-            });
-        }
-
-       @Override
-       public boolean onOptionsItemSelected(MenuItem item) {
-            switch (item.getItemId()) {
-                case android.R.id.home:
-                    requireActivity().onBackPressed();
-                    return true;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-        }
+    @Override
+    public boolean onSupportNavigateUp() {
+        Navigator.of(this).pop();
+        return true;
+    }
 }

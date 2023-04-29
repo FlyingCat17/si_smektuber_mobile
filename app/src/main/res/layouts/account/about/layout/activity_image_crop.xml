@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.home.ViewZoomImage"
+    android:background="@color/Color00000"
+    >
+
+
+
+    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbarNo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="22sp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/bg_rounded_image_zoom_view"
+        android:paddingStart="10dp"
+        app:navigationIcon="@drawable/close_round_x"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp">
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Potong Foto"
+        android:textSize="17sp"
+        android:fontFamily="@font/poppinsbold"
+        android:textColor="@color/white"
+        android:layout_marginTop="65dp"
+        android:layout_centerHorizontal="true">
+    </TextView>
+
+    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbarYes"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/bg_rounded_image_zoom_view"
+        android:paddingStart="10dp"
+        app:navigationIcon="@drawable/done"
+        android:paddingEnd="10dp">
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/ViewZoomImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/imageuser"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="199dp"
+        android:layout_marginBottom="199dp"
+        android:scaleType="centerCrop"
+        />
+
+</RelativeLayout>

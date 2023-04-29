@@ -9,12 +9,24 @@
     <color name="white">#FFFFFFFF</color>
     <!--  Custom Color  -->
     <color name="grey">#D1D1D1</color>
+    <color name="color484C52">#484C52</color>
     <color name="blue01">#19A7CE</color>
     <color name="blue02">#0185A9</color>
     <color name="blue03">#0073C5</color>
-    <color name="red01">#FF0000</color>
+    <color name="ColorFF3642">#FF3642</color>
+    <color name="ColorFF0000">#FF0000</color>
+    <color name="Color00000">#000000</color>
+    <color name="Color7D7D7D">#7D7D7D</color>
     <color name="cyanblue">#1E232C</color>
     <color name="whiteSky">#FEFEFE</color>
     <color name="greyVariant">#8391A1</color>
     <color name="whiteVariant">#F7F8F9</color>
+    <color name="ColorC3E8FF">#C3E8FF</color>
+    <color name="ColorE7E7E7">#E7E7E7</color>
+    <color name="Color26A3E9">#26A3E9</color>
+    <color name="Color312E48">#312E48</color>
+    <color name="ColorFC313D">#FC313D</color>
+    <color name="Color05D77F">#05D77F</color>
+    <color name="ColorFFC22E">#FFC22E</color>
+    <color name="Color33000000">#33000000</color>
 </resources>
