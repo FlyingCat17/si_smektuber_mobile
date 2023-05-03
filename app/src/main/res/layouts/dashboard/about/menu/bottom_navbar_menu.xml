@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/Dashboard"
+        android:title="@string/Beranda"
+        android:icon="@drawable/home_selector"
+        />
+
+    <item android:id="@+id/Ppdb"
+        android:title="@string/PPDB"
+        android:icon="@drawable/ppdb_selector"
+        />
+
+    <item android:id="@+id/Loker"
+        android:title="@string/Loker"
+        android:icon="@drawable/job_selector"
+        />
+
+    <item android:id="@+id/Akun"
+        android:title="@string/Akun"
+        android:icon="@drawable/account_selector"
+        />
+</menu>

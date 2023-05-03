@@ -20,13 +20,27 @@ android {
         main {
             res.srcDirs =
                     [
+<<<<<<< HEAD
 //                            'src/main/res/layouts/dashboard/about',
 //                            'src/main/res/layouts/account',
 //                            'src/main/res/layouts/article',
 //                            'src/main/res/layouts/jobs',
 //                            'src/main/res/layouts/ppdb',
 //                            'src/main/res/layouts/dashboard',
+=======
+                            'src/main/res/layouts/notification/about',
+                            'src/main/res/layouts/notification/about/notif no internet',
+                            'src/main/res/layouts/jobs/about',
+                            'src/main/res/layouts/account/about',
+                            'src/main/res/layouts/dashboard/about',
+                            'src/main/res/layouts/account',
+                            'src/main/res/layouts/article',
+                            'src/main/res/layouts/jobs',
+                            'src/main/res/layouts/ppdb',
+                            'src/main/res/layouts/dashboard',
+>>>>>>> 2668f7e751b49ce2481a7fe17873dca0c5f3d739
                             'src/main/res/layouts/auth',
+                            'src/main/res/layouts/loader',
                             'src/main/res/layouts',
                             'src/main/res'
                     ]
@@ -49,7 +63,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'nl.joery.animatedbottombar:library:1.1.0'
 }

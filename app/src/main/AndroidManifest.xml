@@ -12,6 +12,18 @@
         android:theme="@style/Theme.Smektuber"
         tools:targetApi="31">
         <activity
+            android:name=".screen.home.Notification"
+            android:exported="false" />
+        <activity
+            android:name=".ChangeDataAccount"
+            android:exported="false" />
+        <activity
+            android:name=".ImageCrop"
+            android:exported="false" />
+        <activity
+            android:name=".ViewZoomImage"
+            android:exported="false" />
+        <activity
             android:name=".screen.auth.Register"
             android:exported="false" />
         <activity
