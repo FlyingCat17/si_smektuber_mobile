@@ -15,13 +15,14 @@
             android:name=".screen.home.Notification"
             android:exported="false" />
         <activity
-            android:name=".ChangeDataAccount"
+
+            android:name=".screen.home.ChangeDataAccount"
             android:exported="false" />
         <activity
-            android:name=".ImageCrop"
+            android:name=".screen.home.ImageCrop"
             android:exported="false" />
         <activity
-            android:name=".ViewZoomImage"
+            android:name=".screen.home.ViewZoomImage"
             android:exported="false" />
         <activity
             android:name=".screen.auth.Register"
