@@ -54,6 +54,7 @@
         android:textColor="@color/white"
         app:cornerRadius="8dp"
         android:id="@+id/ButtonUbahProfil"
+        android:onClick="ButtonUbahProfill"
         android:layout_marginTop="191dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="20dp"

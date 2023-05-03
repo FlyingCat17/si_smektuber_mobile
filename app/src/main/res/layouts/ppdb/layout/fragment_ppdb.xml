@@ -3,13 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingRight="22dp"
+    android:paddingLeft="22dp"
     tools:context=".screen.home.Jobs">
 
-    <ImageView
-        android:layout_width="251dp"
-        android:layout_height="185dp"
-        android:src="@drawable/icon_no_information_ppdb"
+    <TextView
+        android:id="@+id/informasi_p"
+        android:layout_width="140dp"
+        android:layout_height="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="41dp"
+        android:text="@string/informasi_Ppdb"
+        android:textAppearance="@style/informasi_p"
+        android:lineSpacingExtra="-2sp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

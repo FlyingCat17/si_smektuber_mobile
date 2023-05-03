@@ -64,5 +64,7 @@ JL. PB. SUDIRMAN NO.16, Jatiroto, Kec. Sumberbaru, Kab. Jember Prov. Jawa Timur
     <string name="pastikan_in">Pastikan Internet anda\nterhubung tanpa gangguan</string>
     <string name="data_anda_t">Data Anda telah terekam\nTunggu informasi selanjutnya</string>
     <string name="anda_telah_terdaftar">Anda Telah Terdaftar</string>
+    <string name="informasi_Ppdb">Informasi PPDB</string>
+    <string name="informasi_lowongan">Informasi Lowongan</string>
 
 </resources>
