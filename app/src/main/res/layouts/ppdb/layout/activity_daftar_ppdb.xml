@@ -89,6 +89,7 @@
                     android:inputType="number"
                     android:fontFamily="@font/urbanist"
                     android:text="05/08/2012"
+                    android:maxLength="10"
                     android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,6 +121,7 @@
                     android:layout_height="65dp"
                     android:id="@+id/Dp_no_hp"
                     android:inputType="number"
+                    android:maxLength="12"
                     android:fontFamily="@font/urbanist"
                     android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -199,6 +201,7 @@
                     android:layout_height="65dp"
                     android:id="@+id/Dp_tahun_lulus"
                     android:inputType="number"
+                    android:maxLength="4"
                     android:fontFamily="@font/urbanist"
                     android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -212,6 +215,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
+                    android:maxLength="4"
                     android:id="@+id/Dp_tahun_penda"
                     android:inputType="number"
                     android:fontFamily="@font/urbanist"
@@ -230,7 +234,7 @@
                     android:layout_height="65dp"
                     android:textSize="15sp"
                     android:fontFamily="@font/urbanist"
-                    android:inputType="none"/>
+                    android:inputType="text"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

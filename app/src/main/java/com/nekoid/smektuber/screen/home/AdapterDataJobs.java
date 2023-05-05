@@ -13,24 +13,24 @@ import com.nekoid.smektuber.R;
 
 import java.util.List;
 
-public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData> {
+public class AdapterDataJobs extends RecyclerView.Adapter<AdapterData.HolderData>{
     List<String> listData;
     LayoutInflater inflater;
 
-    public AdapterData(Context context, List<String> listData) {
+    public AdapterDataJobs(Context context, List<String> listData) {
         this.listData = listData;
         this.inflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
-    public HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_data, parent, false);
-        return new HolderData(view);
+    public AdapterData.HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.item_data_jobs, parent, false);
+        return new AdapterData.HolderData(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HolderData holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterData.HolderData holder, int position) {
         holder.txtData.setText(listData.get(position));
     }
 
@@ -44,7 +44,7 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData> {
         public HolderData(@NonNull View itemView) {
             super(itemView);
 
-            txtData = itemView.findViewById(R.id.DataText);
+            txtData = itemView.findViewById(R.id.DataTextJobs);
         }
     }
 }

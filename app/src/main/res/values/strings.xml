@@ -64,6 +64,8 @@ JL. PB. SUDIRMAN NO.16, Jatiroto, Kec. Sumberbaru, Kab. Jember Prov. Jawa Timur
     <string name="pastikan_in">Pastikan Internet anda\nterhubung tanpa gangguan</string>
     <string name="data_anda_t">Data Anda telah terekam\nTunggu informasi selanjutnya</string>
     <string name="anda_telah_terdaftar">Anda Telah Terdaftar</string>
+
+<!--    PPDB-->
     <string name="informasi_Ppdb">Informasi PPDB</string>
     <string name="informasi_lowongan">Informasi Lowongan</string>
     <string name="penerimaan_">Penerimaan Peserta Didik Baru untuk\nSMK Negeri se Jawa Timur termasuk di\ndalamnya SMK Negeri 7 Jember, akan\ndibuka tahapannya mulai tanggal 20 Juni\n2023 dan terintegrasi dalam sistem PPDB SMK Negeri seluruh Jawa Timur tahun 2022 (PPDB Jatim 2022). Sistem PPDB SMK Negeri 7 Jember Tahun Pelajaran 2022/2023\nmenggunakan Sistem Online yang dibagi\nmenjadi 3 tahapan pendaftaran :\n\n1. Tahap I (Online)\na. Jalur Afirmasi;\nb. Jalur Perpindahan Tugas Orang Tua/Wali;\nc. Jalur Prestasi Hasil Lomba;\n\n2. Tahap II (Online)\nJalur Prestasi Nilai Akademik;\n\n3. Tahap III (Online)\nJalur Zonasi.\n\nBerikut ini Jadwal dan POS PPDB SMK NEGERI 7 JEMBER :</string>
@@ -84,5 +86,8 @@ JL. PB. SUDIRMAN NO.16, Jatiroto, Kec. Sumberbaru, Kab. Jember Prov. Jawa Timur
     <string name="jurusan_yan">Jurusan Yang Dipilih</string>
     <string name="my_dropdown_prompt">Pilih item</string>
 
+<!--    Jobs-->
+    <string name="detail_lowo">Detail Lowongan</string>
+    <string name="artikel_ini">Artikel ini sangat keren jadi ini isi sebenarnya jangan lupa ini hanya kata kata.</string>
 
 </resources>

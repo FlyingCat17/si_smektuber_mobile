@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.home.DetailJobs">
+
+    <include
+        android:id="@+id/backIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginStart="22dp"
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/informasi_p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="65dp"
+        android:text="@string/detail_lowo"
+        android:textAppearance="@style/informasi_p"
+        android:lineSpacingExtra="-2sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ScrollView
+        android:layout_below="@+id/backIcon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/ImageJobs"
+                android:layout_width="match_parent"
+                android:layout_height="310.37dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/welcome_img"
+                />
+
+            <TextView
+                android:id="@+id/artikel_ini"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ImageJobs"
+                android:layout_marginTop="16.63dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/artikel_ini"
+                android:textAppearance="@style/Text_Jobs"
+                />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>
