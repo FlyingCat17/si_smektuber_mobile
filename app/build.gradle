@@ -19,7 +19,9 @@ android {
     sourceSets {
         main {
             res.srcDirs =
-                    [       'src/main/res/layouts/dashboard/about/visiandmisi',
+                    [
+                            'src/main/res/layouts/dashboard/about/visiandmisi',
+                            'src/main/res/layouts/dashboard/about/article',
                             'src/main/res/layouts/dashboard/about/extrakurikuler',
                             'src/main/res/layouts/dashboard/about/maps',
                             'src/main/res/layouts/dashboard/about/',

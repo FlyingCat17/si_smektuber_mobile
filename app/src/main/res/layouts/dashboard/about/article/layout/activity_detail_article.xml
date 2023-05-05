@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
-        android:text="@string/detail_lowo"
+        android:text="@string/detail_article"
         android:textAppearance="@style/informasi_p"
         android:lineSpacingExtra="-2sp"
         android:layout_centerVertical="true"
@@ -42,11 +42,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="310.37dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/welcome_img"
+                android:background="@drawable/imagenoarticle"
                 />
 
             <TextView
-                android:id="@+id/TextDetailJobs"
+                android:id="@+id/TextArticle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ImageJobs"

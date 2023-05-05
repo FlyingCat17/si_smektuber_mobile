@@ -12,6 +12,15 @@
         android:theme="@style/Theme.Smektuber"
         tools:targetApi="31">
         <activity
+            android:name=".screen.home.VisiAndMisi"
+            android:exported="false" />
+        <activity
+            android:name=".screen.home.DetailArticle"
+            android:exported="false" />
+        <activity
+            android:name=".screen.home.ArticleViewAll"
+            android:exported="false" />
+        <activity
             android:name=".screen.home.DetailJobs"
             android:exported="false" />
         <activity

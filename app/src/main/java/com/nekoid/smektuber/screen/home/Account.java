@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.screen.auth.Login;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,8 +66,12 @@ public class Account extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         Button btn = view.findViewById(R.id.ButtonUbahProfil);
+        Button button = view.findViewById(R.id.ButtonKeluarAkun);
         btn.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(ChangeDataAccount.class);
+        });
+        button.setOnClickListener(v -> {
+            Navigator.of(getActivity()).push(Login.class);
         });
         // Inflate the layout for this fragment
         return view;

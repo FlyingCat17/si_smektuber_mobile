@@ -173,7 +173,9 @@
                                             android:backgroundTint="@color/Color312E48"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginLeft="22dp"
-                                            android:layout_marginTop="24dp">
+                                            android:layout_marginTop="24dp"
+                                            android:clickable="true"
+                                            android:focusable="true">
 
                                                 <ImageView
                                                     android:layout_width="24dp"
@@ -220,6 +222,8 @@
                                             android:backgroundTint="@color/ColorFC313D"
                                             android:layout_alignParentRight="true"
                                             android:layout_marginRight="22dp"
+                                            android:clickable="true"
+                                            android:focusable="true"
                                             android:layout_marginTop="24dp">
 
                                                 <ImageView
@@ -273,6 +277,8 @@
                                             android:backgroundTint="@color/Color05D77F"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginLeft="22dp"
+                                            android:clickable="true"
+                                            android:focusable="true"
                                             android:layout_marginTop="14dp">
 
                                                 <ImageView
@@ -320,6 +326,8 @@
                                             android:backgroundTint="@color/ColorFFC22E"
                                             android:layout_alignParentRight="true"
                                             android:layout_marginRight="22dp"
+                                            android:clickable="true"
+                                            android:focusable="true"
                                             android:layout_marginTop="14dp">
 
                                                 <ImageView
