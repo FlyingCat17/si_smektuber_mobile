@@ -9,7 +9,7 @@
     <string name="footer">Version 1.0\n JTI POLIJE NekoID 2023</string>
     <string name="titleLogin">Selamat Datang \nKembali!</string>
     <string name="titleRegister">Halo! Daftar untuk\nmemulai</string>
-    <string name="hintUsername">Masukkan Nomor Induk Siswa Nasional</string>
+    <string name="hintUsername">Masukkan Username</string>
     <string name="hintPassword">Masukkan Kata Sandi</string>
     <string name="hintNewPassword">Kata Sandi Baru</string>
     <string name="hintNewPasswordConfirm">Konfirmasi Kata Sandi</string>

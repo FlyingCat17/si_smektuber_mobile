@@ -7,6 +7,7 @@
     tools:context=".screen.home.Account">
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profileImg"
         android:layout_width="73.6dp"
         android:layout_height="73.6dp"
         android:layout_marginTop="72.64dp"
@@ -15,7 +16,7 @@
         app:strokeWidth="1dp"
         app:strokeColor="@color/Color00000"
         app:shapeAppearanceOverlay="@style/circleImageView"
-        android:background="@drawable/iconuser"
+        android:background="@id/profileImg"
         />
 
     <TextView

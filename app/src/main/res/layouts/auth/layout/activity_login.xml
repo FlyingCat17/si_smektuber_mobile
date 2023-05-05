@@ -33,6 +33,7 @@
             android:layout_marginTop="32dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:hint="@string/hintUsername"
+            android:id="@+id/txtLayoutUsername"
             app:endIconMode="clear_text">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -51,6 +52,7 @@
             android:hint="@string/hintPassword"
             app:endIconMode="password_toggle"
             app:endIconTint="@color/black"
+            android:id="@+id/txtLayoutPassword"
             app:passwordToggleTint="@color/black"
             app:hintTextAppearance="@style/TextAppearance.MaterialComponents.Caption">
             <com.google.android.material.textfield.TextInputEditText
