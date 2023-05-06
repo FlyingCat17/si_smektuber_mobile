@@ -19,7 +19,7 @@ import com.nekoid.smektuber.screen.auth.Login;
 import com.nekoid.smektuber.screen.auth.Register;
 
 public class VisiAndMisi extends AppCompatActivity {
-
+//    Dashboard dashboard = new Dashboard();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,19 +29,7 @@ public class VisiAndMisi extends AppCompatActivity {
 //        myButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                FragmentManager fragmentManager = getSupportFragmentManager();
-//
-//                // Membuat instance dari FragmentTransaction
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//
-//                // Membuat instance dari Fragment yang akan ditambahkan
-//                Dashboard myFragment = new Dashboard();
-//
-//                // Menambahkan Fragment ke dalam Activity
-//                fragmentTransaction.add(R.id.r,myFragment);
-//
-//                // Menjalankan transaksi Fragment
-//                fragmentTransaction.commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.r,dashboard).commit();
 //            }
 //        });
     }

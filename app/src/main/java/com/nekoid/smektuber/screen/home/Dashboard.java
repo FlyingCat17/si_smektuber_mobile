@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
@@ -75,6 +76,14 @@ public class Dashboard extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         ConstraintLayout btn = view.findViewById(R.id.Visi_Misi);
+        TextView ntm = view.findViewById(R.id.lihat_semua);
+        ConstraintLayout n = view.findViewById(R.id.Map_Lokasi);
+        n.setOnClickListener(v -> {
+            Navigator.of(getActivity()).push(MapsActivity.class);
+        });
+        ntm.setOnClickListener(v ->{
+            Navigator.of(getActivity()).push(ArticleViewAll.class);
+        });
         btn.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(VisiAndMisi.class);
         });

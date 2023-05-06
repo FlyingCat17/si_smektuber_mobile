@@ -392,6 +392,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentRight="true"
                                             android:layout_marginRight="22dp"
+                                            android:clickable="true"
                                             android:layout_alignParentTop="true"
                                             android:layout_marginTop="20dp"
                                             android:text="@string/lihat_semua"
@@ -404,14 +405,14 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:fillViewport="true"
+                                            android:layout_marginTop="49dp"
                                             android:overScrollMode="never"
                                             >
                                                 <LinearLayout
                                                     android:id="@+id/ItemArtikel"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="match_parent"
-                                                    android:orientation="horizontal"
-                                                    android:layout_marginTop="49dp">
+                                                    android:orientation="horizontal">
 
                                                         <androidx.recyclerview.widget.RecyclerView
                                                             android:id="@+id/rvData"
