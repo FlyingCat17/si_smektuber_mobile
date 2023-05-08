@@ -20,7 +20,7 @@ public class HomeMember extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Account account = new Account();
     Dashboard dashboard = new Dashboard();
-
+//    No_Information_Ppdb ppdb = new No_Information_Ppdb();
     NoJobs jobs = new NoJobs();
     Ppdb ppdb = new Ppdb();
 

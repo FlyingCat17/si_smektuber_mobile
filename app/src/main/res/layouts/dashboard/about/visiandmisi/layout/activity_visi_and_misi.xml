@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
+    tools:context=".screen.home.DetailJobs">
+
+    <include
+        android:id="@+id/backIcon"
+        layout="@layout/toolbar"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <TextView
+        android:id="@+id/TitleVisiMisi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/visi_misi"
+        android:textAppearance="@style/informasi_p"
+        android:lineSpacingExtra="-2sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ScrollView
+        android:layout_below="@+id/backIcon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/TxtVisi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="32dp"
+                android:paddingBottom="32dp"
+                android:text="@string/visi_terwuj"
+                android:textAppearance="@style/visi_terwuj"
+                android:lineSpacingExtra="3sp"
+                android:gravity="center_vertical"
+                android:background="@drawable/rectangle_visiandmisi"
+                />
+
+            <TextView
+                android:id="@+id/txtMisi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="25dp"
+                android:paddingTop="32dp"
+                android:paddingBottom="32dp"
+                android:layout_marginTop="278dp"
+                android:text="@string/misi_memben"
+                android:textAppearance="@style/visi_terwuj"
+                android:lineSpacingExtra="3sp"
+                android:gravity="center_vertical"
+                android:background="@drawable/rectangle_visiandmisi"
+                android:layout_marginBottom="47dp"
+                />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

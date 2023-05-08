@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -20,15 +21,19 @@ android {
         main {
             res.srcDirs =
                     [
+                            'src/main/res/layouts/dashboard/about/',
+                            'src/main/res/layouts/dashboard/about/maps',
+                            'src/main/res/layouts/dashboard/about/visiandmisi',
+                            'src/main/res/layouts/dashboard/about/article',
+                            'src/main/res/layouts/dashboard/about/extrakurikuler',
+                            'src/main/res/layouts/jobs',
+                            'src/main/res/layouts/ppdb',
                             'src/main/res/layouts/notification/about',
                             'src/main/res/layouts/notification/about/notif no internet',
                             'src/main/res/layouts/jobs/about',
                             'src/main/res/layouts/account/about',
-                            'src/main/res/layouts/dashboard/about',
                             'src/main/res/layouts/account',
                             'src/main/res/layouts/article',
-                            'src/main/res/layouts/jobs',
-                            'src/main/res/layouts/ppdb',
                             'src/main/res/layouts/dashboard',
                             'src/main/res/layouts/auth',
                             'src/main/res/layouts/loader',
@@ -48,6 +53,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    task DownloadSources(type: Sync) {
+        // Konfigurasi tugas DownloadSources di sini
+    }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -59,6 +70,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'nl.joery.animatedbottombar:library:1.1.0'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.jjoe64:graphview:4.2.2'
+    implementation 'com.karumi:dexter:6.2.3'
 
 //    volley
     implementation 'com.android.volley:volley:1.2.1'

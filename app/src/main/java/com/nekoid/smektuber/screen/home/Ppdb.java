@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +63,12 @@ public class Ppdb extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ppdb, container, false);
+        View view = inflater.inflate(R.layout.fragment_ppdb, container, false);
+        Button btn = view.findViewById(R.id.BtnDaftarSiswa);
+        btn.setOnClickListener(v -> {
+            Navigator.of(getActivity()).push(DaftarPPDB.class);
+        });
+        // Inflate the layout for this fragment
+        return view;
     }
 }

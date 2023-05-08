@@ -39,7 +39,7 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData> {
         return listData.size();
     }
 
-    public class HolderData extends RecyclerView.ViewHolder{
+    public static class HolderData extends RecyclerView.ViewHolder{
         TextView txtData;
         public HolderData(@NonNull View itemView) {
             super(itemView);

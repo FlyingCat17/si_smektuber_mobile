@@ -65,4 +65,52 @@ JL. PB. SUDIRMAN NO.16, Jatiroto, Kec. Sumberbaru, Kab. Jember Prov. Jawa Timur
     <string name="data_anda_t">Data Anda telah terekam\nTunggu informasi selanjutnya</string>
     <string name="anda_telah_terdaftar">Anda Telah Terdaftar</string>
 
+<!--    PPDB-->
+    <string name="informasi_Ppdb">Informasi PPDB</string>
+    <string name="informasi_lowongan">Informasi Lowongan</string>
+    <string name="penerimaan_">Penerimaan Peserta Didik Baru untuk\nSMK Negeri se Jawa Timur termasuk di\ndalamnya SMK Negeri 7 Jember, akan\ndibuka tahapannya mulai tanggal 20 Juni\n2023 dan terintegrasi dalam sistem PPDB SMK Negeri seluruh Jawa Timur tahun 2022 (PPDB Jatim 2022). Sistem PPDB SMK Negeri 7 Jember Tahun Pelajaran 2022/2023\nmenggunakan Sistem Online yang dibagi\nmenjadi 3 tahapan pendaftaran :\n\n1. Tahap I (Online)\na. Jalur Afirmasi;\nb. Jalur Perpindahan Tugas Orang Tua/Wali;\nc. Jalur Prestasi Hasil Lomba;\n\n2. Tahap II (Online)\nJalur Prestasi Nilai Akademik;\n\n3. Tahap III (Online)\nJalur Zonasi.\n\nBerikut ini Jadwal dan POS PPDB SMK NEGERI 7 JEMBER :</string>
+    <string name="welcome_bac">Daftar untuk bergabung dengan SMKN 7 JEMBER</string>
+    <string name="email">Email</string>
+    <string name="kata_sandi">Kata Sandi</string>
+    <string name="username">Username</string>
+    <string name="nama_lengka">Nama Lengkap</string>
+    <string name="tanggal_lah">Tanggal Lahir</string>
+    <string name="alamat">Alamat</string>
+    <string name="no_hp">No HP</string>
+    <string name="nama_ayah">Nama Ayah</string>
+    <string name="nama_ibu">Nama Ibu</string>
+    <string name="nama_wali_o">Nama Wali                                     (Opsional)</string>
+    <string name="asal_sekola">Asal Sekolah</string>
+    <string name="tahun_lulus">Tahun Lulus</string>
+    <string name="tahun_penda">Tahun Pendaftaran</string>
+    <string name="jurusan_yan">Jurusan Yang Dipilih</string>
+    <string name="my_dropdown_prompt">Pilih item</string>
+
+<!--    Jobs-->
+    <string name="detail_lowo">Detail Lowongan</string>
+    <string name="artikel_ini">Artikel ini sangat keren jadi ini isi sebenarnya jangan lupa ini hanya kata kata.</string>
+
+<!--    Article-->
+    <string name="detail_article">Detail Artikel</string>
+
+<!--    Visi Misi-->
+    <string name="visi_misi">Visi &amp; Misi</string>
+    <string name="visi_terwuj">Visi :\nTerwujudnya tamatan yang\nberwawasan iptek dan imtaq \nmenuju manusia yang\nberkepribadian bangsa\nindonesia. serta berjiwa\nwirausaha yang berazaskan\npancasila.</string>
+    <string name="misi_memben">Misi :\nMembentuk sumber daya\n      manusia yang siap bekerja\n      yang didasari rasa Ikhlas,\n      Iman dan Taqwa.\n 2. Membentuk dan membangun\n     sumber daya manusia yang\n     bermoral dan berjiwa\n     wirausaha.\n 3. Menyiapkan tamatan yang\n     beretos kerja tinggi, ulet dan\n     siap bersaing di dunia kerja.\n4.  Menyiapakan tamatan yang\n     mampu mengembangkan\n     bakat/minatnya guna bekal\n     hidup di masyarkat.\n5.  Membangun insan yang ber-\n     perilaku hidup sehat dan\n     demokratis,</string>
+
+<!--    Maps-->
+    <string name="maplokasi">Map Lokasi</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
+<!--    Tentang School-->
+    <string name="tentang">Tentang</string>
+    <string name="NamaHeadMaster">Dwi Anggraeni S.Pd, M.Pd</string>
+    <string name="Title1">Selayang Pandang</string>
+    <string name="Title2">Kepala Sekolah</string>
+    <string name="Title3">Nama</string>
+    <string name="Title4">Akreditasi</string>
+    <string name="Title5">Media Sosial</string>
+    <string name="Akreditasi">B+</string>
+    <string name="selayang_pa">SMKN 7 JEMBER adalah Sekolah Menengah Kejuruan yang terletak di jalan PB.Sudirman No 16 Jatiroto Lor,. Sekolah ini berdiri pada tahun 2007, memang sekolah ini terletak di paling ujung barat Kabupaten Jember, tetapi kelengkapan praktikum sekolah ini tidak kalah dengan SMK lainnya, mengingat umurnya yang masih seumur jagung, sekolah ini juga cukup berprestasi, pasalnya SMK ini pernah meraih juara 2 LKS se-kabupaten Jember di kejuruan Teknik Kendaraan Ringan (TKR) dan juara 3 di kejuruan Teknik Komputer dan Jaringan (TKJ). SMK ini juga mengeluarkan tim Paskibra dalam peringatan HUT RI setiap tahunnya.</string>
+
 </resources>

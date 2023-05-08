@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.home.Jobs">
+
+    <include
+        android:id="@+id/backIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginStart="22dp"
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/TitleArtikel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="65dp"
+        android:text="@string/artikel"
+        android:textAppearance="@style/artikelViewALL"
+        android:lineSpacingExtra="-2sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvData"
+                android:layout_marginTop="34dp"
+                android:paddingRight="22dp"
+                android:paddingLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TitleArtikel"/>
+
+
+</RelativeLayout>

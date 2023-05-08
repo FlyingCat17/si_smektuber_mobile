@@ -26,11 +26,10 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/IconUploadImage"
-                    android:layout_width="130dp"
-                    android:layout_height="134.65dp"
+                    android:layout_width="133.6dp"
+                    android:layout_height="133.6dp"
                     android:layout_marginTop="40dp"
-                    android:layout_marginRight="115dp"
-                    android:layout_marginLeft="115dp"
+                    android:layout_centerHorizontal="true"
                     android:padding="5dp"
                     app:strokeWidth="1dp"
                     app:shapeAppearanceOverlay="@style/circleImageView"
@@ -48,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:hint="@string/hintUsername"
+                android:hint="@string/username"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -64,12 +63,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:hint="@string/hintName"
+                android:hint="@string/nama_lengka"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:id="@+id/Ca_Name"
+                    android:id="@+id/Ca_NameLengkap"
                     android:inputType="text"
                     android:fontFamily="@font/urbanist"
                     android:textSize="15sp"/>
@@ -80,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:hint="@string/hintName"
+                android:hint="@string/email"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -96,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:hint="@string/hintPassword"
+                android:hint="@string/kata_sandi"
                 app:endIconMode="password_toggle">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -129,7 +128,8 @@
             <include
                 android:id="@+id/BtnMemperbarui"
                 layout="@layout/button_change"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="65dp"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"/>
         </LinearLayout>
