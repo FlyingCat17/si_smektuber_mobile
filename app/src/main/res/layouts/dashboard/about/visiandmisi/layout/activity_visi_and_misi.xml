@@ -39,7 +39,7 @@
             android:layout_marginTop="20dp">
 
             <TextView
-                android:id="@+id/visi_terwuj"
+                android:id="@+id/TxtVisi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
@@ -55,7 +55,7 @@
                 />
 
             <TextView
-                android:id="@+id/misi_memben"
+                android:id="@+id/txtMisi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="25dp"

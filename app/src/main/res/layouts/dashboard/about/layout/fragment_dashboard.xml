@@ -21,7 +21,7 @@
                                 <ImageView
                                     android:layout_width="38.51dp"
                                     android:layout_height="45.53dp"
-                                    android:id="@+id/imageView"
+                                    android:id="@+id/IconPesan"
                                     android:layout_marginTop="38dp"
                                     android:layout_marginEnd="22.49dp"
                                     android:layout_marginBottom="20.47dp"
@@ -40,9 +40,9 @@
                                     android:fontFamily="@font/urbanistsemibold"
                                     android:textSize="19sp"
                                     android:textColor="@color/white"
-                                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                                    app:layout_constraintBottom_toBottomOf="@+id/IconPesan"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                                    app:layout_constraintTop_toTopOf="@+id/IconPesan"
                                     />
 
                                 <TextView
@@ -54,9 +54,9 @@
                                     android:fontFamily="@font/urbanistsemibold"
                                     android:textSize="19sp"
                                     android:textColor="@color/white"
-                                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                                    app:layout_constraintBottom_toBottomOf="@+id/IconPesan"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                                    app:layout_constraintTop_toTopOf="@+id/IconPesan"
                                     />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -76,7 +76,7 @@
                                     android:layout_marginTop="28dp">
 
                                         <TextView
-                                            android:id="@+id/sistem_info"
+                                            android:id="@+id/TitleSistemInformasi"
                                             android:layout_width="wrap_content"
                                             android:layout_height="36dp"
                                             android:layout_alignParentLeft="true"
@@ -92,21 +92,6 @@
 
                                         <TextView
                                             android:id="@+id/ButtonSelengkapnya"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="36dp"
-                                            android:layout_alignParentLeft="true"
-                                            android:layout_marginLeft="20dp"
-                                            android:layout_marginStart="20dp"
-                                            android:layout_alignParentTop="true"
-                                            android:layout_marginTop="20dp"
-                                            android:textAppearance="@style/sistem_info"
-                                            android:text="@string/titleHome"
-                                            app:layout_constraintStart_toStartOf="parent"
-                                            app:layout_constraintTop_toTopOf="parent"
-                                            />
-
-                                        <TextView
-                                            android:id="@+id/selengkapny"
                                             android:layout_width="wrap_content"
                                             android:layout_height="18dp"
                                             app:layout_constraintStart_toStartOf="parent"
@@ -369,11 +354,12 @@
                                 </RelativeLayout>
                                 
                                 <RelativeLayout
-                                    android:id="@+id/TitleArtikel"
+                                    android:id="@+id/Title"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
 
                                         <TextView
+                                            android:id="@+id/TitleArtikel"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
@@ -387,7 +373,7 @@
                                             />
 
                                         <TextView
-                                            android:id="@+id/lihat_semua"
+                                            android:id="@+id/Titlelihat_semua"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentRight="true"

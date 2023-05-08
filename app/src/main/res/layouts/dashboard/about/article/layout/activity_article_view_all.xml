@@ -14,7 +14,7 @@
         layout="@layout/toolbar"/>
 
     <TextView
-        android:id="@+id/informasi_p"
+        android:id="@+id/TitleArtikel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -25,25 +25,14 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/informasi_p"
-        >
-        <LinearLayout
-            android:layout_marginTop="34dp"
-            android:paddingRight="22dp"
-            android:paddingLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvData"
+                android:layout_marginTop="34dp"
+                android:paddingRight="22dp"
+                android:paddingLeft="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-
-    </ScrollView>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TitleArtikel"/>
 
 
 </RelativeLayout>

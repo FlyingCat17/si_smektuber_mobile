@@ -68,7 +68,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:id="@+id/Ca_Name"
+                    android:id="@+id/Ca_NameLengkap"
                     android:inputType="text"
                     android:fontFamily="@font/urbanist"
                     android:textSize="15sp"/>

@@ -15,7 +15,7 @@
         layout="@layout/toolbar"/>
 
     <TextView
-        android:id="@+id/informasi_p"
+        android:id="@+id/TitleTentang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/ImageJobs"
+                android:id="@+id/ImageSchool"
                 android:layout_width="match_parent"
                 android:layout_height="310.37dp"
                 android:layout_marginTop="20dp"
@@ -46,13 +46,13 @@
                 />
 
             <TextView
-                android:id="@+id/SelayangPadang"
+                android:id="@+id/TitleSelayangPadang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16.63dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
-                android:layout_below="@+id/ImageJobs"
+                android:layout_below="@+id/ImageSchool"
                 android:text="@string/Title1"
                 android:textAppearance="@style/selayang_title"
                 />
@@ -61,7 +61,7 @@
                 android:id="@+id/TxtAboutSchool"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/SelayangPadang"
+                android:layout_below="@+id/TitleSelayangPadang"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"

@@ -1,6 +1,7 @@
 package com.nekoid.smektuber.screen.home;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,9 +10,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
 
 public class AboutSchool extends AppCompatActivity {
     ImageView BtnFB, BtnIG, BtnYoutube, BtnTT;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +23,7 @@ public class AboutSchool extends AppCompatActivity {
         BtnIG = findViewById(R.id.Instagram);
         BtnYoutube = findViewById(R.id.Youtube);
         BtnTT = findViewById(R.id.Tiktok);
+        toolbar = findViewById( R.id.backIcon );
 
         BtnFB.setOnClickListener(v -> {
             Intent intent = new Intent(android.content.Intent.ACTION_VIEW,

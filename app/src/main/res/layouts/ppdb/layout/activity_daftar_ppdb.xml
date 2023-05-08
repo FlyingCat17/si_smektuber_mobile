@@ -25,7 +25,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/welcome_back"
+                    android:id="@+id/TitleDaftar"
                     android:layout_width="0dp"
                     android:layout_height="117dp"
                     android:layout_alignParentLeft="true"
@@ -54,7 +54,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:id="@+id/Dp_username"
+                    android:id="@+id/Dp_NISN"
                     android:inputType="textEmailAddress"
                     android:fontFamily="@font/urbanist"
                     android:textSize="15sp"/>
@@ -216,7 +216,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:maxLength="4"
-                    android:id="@+id/Dp_tahun_penda"
+                    android:id="@+id/Dp_tahun_pendaftaran"
                     android:inputType="number"
                     android:fontFamily="@font/urbanist"
                     android:textSize="15sp"/>
@@ -229,7 +229,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:hint="@string/jurusan_yan">
                 <AutoCompleteTextView
-                    android:id="@+id/auto_complete_txt"
+                    android:id="@+id/Dp_Jurusan"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:textSize="15sp"

@@ -6,7 +6,7 @@
     tools:context=".screen.home.Jobs">
 
     <TextView
-        android:id="@+id/informasi_p"
+        android:id="@+id/TitleInformasiPPDB"
         android:layout_width="140dp"
         android:layout_height="24dp"
         android:layout_alignParentTop="true"
@@ -19,6 +19,7 @@
         />
 
     <ImageView
+        android:id="@+id/ImageTidakAdaInformasiPPDB"
         android:layout_width="251dp"
         android:layout_height="185dp"
         android:src="@drawable/icon_no_information_ppdb"
