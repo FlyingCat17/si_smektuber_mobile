@@ -29,6 +29,7 @@
                 android:fontFamily="@font/urbanist_bold"
                 android:layout_marginTop="19dp"/>
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutUsername"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="32dp"
@@ -44,6 +45,7 @@
                     android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutFullName"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="36dp"
@@ -59,6 +61,7 @@
                     android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutEmail"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="36dp"
@@ -74,6 +77,7 @@
                     android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutPassword"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="36dp"
