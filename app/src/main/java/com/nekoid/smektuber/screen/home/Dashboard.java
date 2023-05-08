@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -77,6 +78,7 @@ public class Dashboard extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         ConstraintLayout btn = view.findViewById(R.id.Visi_Misi);
         TextView ntm = view.findViewById(R.id.lihat_semua);
+        TextView jk = view.findViewById(R.id.selengkapny);
         ConstraintLayout n = view.findViewById(R.id.Map_Lokasi);
         n.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(MapsActivity.class);
@@ -87,6 +89,10 @@ public class Dashboard extends Fragment {
         btn.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(VisiAndMisi.class);
         });
+        jk.setOnClickListener(v -> {
+            Navigator.of(getActivity()).push(AboutSchool.class);
+        });
+
         // Inflate the layout for this fragment
         return view;
     }
