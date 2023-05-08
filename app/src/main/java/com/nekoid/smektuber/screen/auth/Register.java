@@ -36,7 +36,8 @@ public class Register extends AppCompatActivity {
 
         // action
         txtToLogin.setOnClickListener( v-> {
-            Navigator.push( this,Login.class );
+//            Navigator.push( this,Login.class );
+            Navigator.of( this ).pushReplacement( Login.class );
         } );
     }
 
@@ -45,4 +46,5 @@ public class Register extends AppCompatActivity {
         Navigator.of(this).pop();
         return true;
     }
+
 }

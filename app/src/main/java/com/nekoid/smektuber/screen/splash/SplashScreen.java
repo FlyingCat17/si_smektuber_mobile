@@ -12,6 +12,7 @@ import com.nekoid.smektuber.helpers.navigation.Navigator;
 
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.helpers.widget.Style;
+import com.nekoid.smektuber.screen.auth.Login;
 import com.nekoid.smektuber.screen.auth.WelcomeAuth;
 
 public class SplashScreen extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Navigator.of(SplashScreen.this).pushReplacement(WelcomeAuth.class);
+                Navigator.of(SplashScreen.this).pushReplacement( Login.class);
             }
 
             @Override

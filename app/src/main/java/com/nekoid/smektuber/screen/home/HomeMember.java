@@ -6,9 +6,11 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -23,6 +25,7 @@ public class HomeMember extends AppCompatActivity {
 
     NoJobs jobs = new NoJobs();
     Ppdb ppdb = new Ppdb();
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,5 +57,16 @@ public class HomeMember extends AppCompatActivity {
                 return false;
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Ketuk sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 }

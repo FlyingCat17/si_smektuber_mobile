@@ -3,10 +3,12 @@ package com.nekoid.smektuber.screen.auth;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,7 +46,8 @@ public class Login extends AppCompatActivity {
     private TextInputLayout txtLayoutUsername, txtLayoutPassword;
 //    private EditText et_username, et_password;
     private TextInputEditText et_username, et_password;
-    Toolbar toolbar;
+    private ProgressDialog dialog;
+//    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -55,15 +58,17 @@ public class Login extends AppCompatActivity {
     }
 
     private void init(){
+        dialog = new ProgressDialog( getBaseContext() );
+        dialog.setCancelable( false );
         txtLayoutUsername = findViewById( R.id.txtLayoutUsername );
         txtLayoutPassword = findViewById( R.id.txtLayoutPassword );
         et_username = findViewById( R.id.et_username );
         et_password = findViewById( R.id.et_password );
         btnLogin = findViewById( R.id.btnLogin );
         txtToRegister = findViewById( R.id.txtToRegister );
-        toolbar = findViewById( R.id.backIcon );
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        toolbar = findViewById( R.id.backIcon );
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         txtToRegister.setOnClickListener( v->{
             Navigator.push( this,Register.class );
@@ -131,10 +136,17 @@ public class Login extends AppCompatActivity {
     }
 
     private void goLogin() {
+//        if (isFinishing()) {
+//            return;
+//        }
+//        dialog.setMessage( "Sedang Login !!!" );
+//        dialog.show();
         StringRequest request = new StringRequest(Request.Method.POST, UrlsApi.LOGIN, response -> {
             try {
                 JSONObject jsonObject = new JSONObject(response);
-                if (jsonObject.getBoolean("success")) {
+                Log.e( "data object",jsonObject+"" );
+                if (jsonObject.getInt( "status" )==200) {
+//                    String message = jsonObject.getJSONObject( "Success" );
                     JSONObject userData = jsonObject.getJSONObject("data").getJSONObject("user");
                     String accessToken = jsonObject.getJSONObject("data").getString("access_token");
                     String name = userData.getString("name");
@@ -161,21 +173,29 @@ public class Login extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            dialog.dismiss();
         }, error -> {
             error.printStackTrace();
             if (error instanceof NetworkError) {
                 Toast.makeText(this, "No network available", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             } else if (error instanceof ServerError) {
                 Toast.makeText(this, "Server error", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             } else if (error instanceof AuthFailureError) {
                 Toast.makeText(this, "Auth failure", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             } else if (error instanceof ParseError) {
                 Toast.makeText(this, "Parse error", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             } else if (error instanceof TimeoutError) {
                 Toast.makeText(this, "Timeout error", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             } else {
                 Toast.makeText(this, "Unknown error", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
+            dialog.dismiss();
         }) {
             // add parameters to POST request
             @Override
@@ -183,6 +203,7 @@ public class Login extends AppCompatActivity {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("username", et_username.getText().toString().trim());
                 params.put("password", et_password.getText().toString().trim());
+
                 return params;
             }
 
@@ -199,7 +220,12 @@ public class Login extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(getBaseContext());
         queue.add(request);
     }
-    
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         Navigator.of(this).pop();

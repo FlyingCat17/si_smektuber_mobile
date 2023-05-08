@@ -42,7 +42,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".screen.jurusan.Index"
+            android:name=".screen.jurusan.jurusan"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
