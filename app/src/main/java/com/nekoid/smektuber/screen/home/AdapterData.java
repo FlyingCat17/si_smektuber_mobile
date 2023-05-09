@@ -44,7 +44,7 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData> {
         public HolderData(@NonNull View itemView) {
             super(itemView);
 
-            txtData = itemView.findViewById(R.id.DataText);
+            txtData = itemView.findViewById(R.id.DataTextArtikel);
         }
     }
 }

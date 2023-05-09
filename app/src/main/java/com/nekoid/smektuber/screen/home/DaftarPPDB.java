@@ -19,7 +19,7 @@ public class DaftarPPDB extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar_ppdb);
-        autoCompleteTxt = findViewById(R.id.auto_complete_txt);
+        autoCompleteTxt = findViewById(R.id.Dp_Jurusan);
 
         adapterItems = new ArrayAdapter<String>(this,R.layout.list_item,items);
         autoCompleteTxt.setAdapter(adapterItems);
