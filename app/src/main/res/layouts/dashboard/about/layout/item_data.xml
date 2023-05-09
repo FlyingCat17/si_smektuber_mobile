@@ -12,13 +12,10 @@
             android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    app:cardCornerRadiusTopRight="15dp"
-                    app:cardCornerRadiusTopLeft="15dp"
-                    app:cardCornerRadiusBottomRight="15dp"
-                    app:cardBackgroundColor="@color/blue01"
                     android:layout_width="217dp"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="22dp"
+                    android:background="@drawable/rectangle_artikel"
                     android:layout_height="122dp">
 
                         <ImageView
