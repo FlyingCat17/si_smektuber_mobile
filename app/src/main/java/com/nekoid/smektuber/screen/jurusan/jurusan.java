@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.nekoid.smektuber.R;
 
-public class Index extends AppCompatActivity {
+public class jurusan extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_index);
+        setContentView(R.layout.activity_jurusan );
     }
 }
