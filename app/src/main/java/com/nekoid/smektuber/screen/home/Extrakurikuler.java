@@ -1,4 +1,4 @@
-package com.nekoid.smektuber.screen.jurusan;
+package com.nekoid.smektuber.screen.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.nekoid.smektuber.R;
 
-public class jurusan extends AppCompatActivity {
+public class Extrakurikuler extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jurusan );
+        setContentView(R.layout.activity_extrakurikuler);
     }
 }
