@@ -47,8 +47,8 @@
 
                                 <TextView
                                     android:id="@+id/Fullname"
-                                    android:layout_width="119dp"
-                                    android:layout_height="27dp"
+                                    android:layout_width="240dp"
+                                    android:layout_height="25dp"
                                     android:layout_marginStart="63dp"
                                     android:text="@string/Fullname"
                                     android:fontFamily="@font/urbanistsemibold"
