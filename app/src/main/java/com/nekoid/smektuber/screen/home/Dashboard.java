@@ -77,8 +77,8 @@ public class Dashboard extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         ConstraintLayout btn = view.findViewById(R.id.Visi_Misi);
-        TextView ntm = view.findViewById(R.id.lihat_semua);
-        TextView jk = view.findViewById(R.id.selengkapny);
+        TextView ntm = view.findViewById(R.id.Titlelihat_semua);
+        TextView jk = view.findViewById(R.id.ButtonSelengkapnya);
         ConstraintLayout n = view.findViewById(R.id.Map_Lokasi);
         n.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(MapsActivity.class);
