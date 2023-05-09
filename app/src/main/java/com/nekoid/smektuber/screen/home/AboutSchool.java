@@ -19,6 +19,10 @@ public class AboutSchool extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_school);
+        init();
+        setToolbar();
+    }
+    private void init(){
         BtnFB = findViewById(R.id.FaceBook);
         BtnIG = findViewById(R.id.Instagram);
         BtnYoutube = findViewById(R.id.Youtube);
@@ -48,5 +52,15 @@ public class AboutSchool extends AppCompatActivity {
                     Uri.parse("https://www.tiktok.com/@smknegeri7jember"));
             startActivity(intent);
         });
+    }
+    private void setToolbar(){
+        toolbar = findViewById( R.id.backIcon );
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        Navigator.of(this).pop();
+        return true;
     }
 }
