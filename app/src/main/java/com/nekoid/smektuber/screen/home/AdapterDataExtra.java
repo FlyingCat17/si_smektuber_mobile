@@ -14,36 +14,36 @@ import com.nekoid.smektuber.R;
 
 import java.util.List;
 
-public class AdapterData extends RecyclerView.Adapter<AdapterData.MyViewHolder> {
+public class AdapterDataExtra extends RecyclerView.Adapter<AdapterDataExtra.MyViewHolder> {
     private final Context context;
-    private final List<MenuArtikelDashboard> list;
-    private AdapterData.Dialog dialog;
+    private final List<MenuExtra> list;
+    private Dialog dialog;
 
-    public void setDialog(AdapterData.Dialog dialog) {
+    public void setDialog(Dialog dialog) {
         this.dialog = dialog;
     }
 
     //    sintaks untuk mau membawa data dari card yang di klick
     public interface Dialog{
-        void onClick(MenuArtikelDashboard menuArtikelDashboard);
+        void onClick(MenuExtra menuExtra);
     }
 
-    public AdapterData(Context context, List<MenuArtikelDashboard> list) {
+    public AdapterDataExtra(Context context, List<MenuExtra> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public AdapterData.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_data, parent, false);
-        return new AdapterData.MyViewHolder(view);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.row_menu_extra, parent, false);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterData.MyViewHolder holder, int position) {
-        holder.DataTextArtikel.setText(list.get(position).getDataTextArtikel());
-        holder.ImageArtikel.setImageDrawable(list.get(position).getImageArtikel());
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.TitleMenuExtra.setText(list.get(position).getTitleMenuExtra());
+        holder.ImageExtra.setImageDrawable(list.get(position).getImageExtra());
     }
 
     @Override
@@ -52,12 +52,12 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.MyViewHolder> 
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-        ImageView ImageArtikel;
-        TextView DataTextArtikel;
+        ImageView ImageExtra;
+        TextView TitleMenuExtra;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            ImageArtikel = itemView.findViewById(R.id.ImageArtikel);
-            DataTextArtikel = itemView.findViewById(R.id.DataTextArtikel);
+            ImageExtra = itemView.findViewById(R.id.ImageExtra);
+            TitleMenuExtra = itemView.findViewById(R.id.TitleMenuExtra);
 
             itemView.setOnClickListener(v -> {
                 if (dialog!=null){

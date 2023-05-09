@@ -19,14 +19,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="65dp"
-        android:text="@string/artikel"
+        android:text="@string/ekstrakurik"
         android:textAppearance="@style/artikelViewALL"
         android:lineSpacingExtra="-2sp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvData"
+        android:id="@+id/rvDataExtra"
         android:layout_marginTop="34dp"
         android:paddingRight="22dp"
         android:paddingLeft="20dp"

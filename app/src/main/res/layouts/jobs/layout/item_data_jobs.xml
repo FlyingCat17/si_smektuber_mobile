@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="22dp"
@@ -13,26 +14,44 @@
         android:background="@drawable/rectangle_item_data_jobs2"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ImageJobs"
-            android:layout_width="191dp"
-            android:layout_height="122dp"
-            android:background="@drawable/rectangle_item_data_jobs1"
-            android:scaleType="fitXY"/>
-
-        <TextView
-            android:id="@+id/DataTextJobs"
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="15dp"
             android:layout_height="121dp"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="206dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginTop="0dp"
-            android:lineSpacingExtra="2sp"
-            android:text="Artikel Artikel ini sangat keren jadi ini sebenarnya jangan lupa"
-            android:textAppearance="@style/artikel_jobs" />
+            android:layout_alignParentRight="true">
+            <TextView
+                android:id="@+id/DataTextJobs"
+                android:layout_width="wrap_content"
+                android:layout_height="121dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="206dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginTop="0dp"
+                android:lineSpacingExtra="2sp"
+                android:text="Artikel Artikel ini sangat keren jadi ini sebenarnya jangan lupa"
+                android:textAppearance="@style/artikel_jobs" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ImageJobsCard"
+                android:layout_width="191dp"
+                android:layout_height="122dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                >
+
+                <ImageView
+                    android:id="@+id/ImageJobs"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/imageartikel"
+                    android:scaleType="fitXY"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 
