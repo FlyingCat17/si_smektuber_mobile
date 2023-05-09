@@ -7,7 +7,7 @@
     android:paddingLeft="22dp"
     android:paddingRight="22dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".screen.home.Account">
+    tools:context=".screen.home.Ppdb">
 
 
     <RelativeLayout
