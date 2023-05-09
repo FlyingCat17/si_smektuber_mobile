@@ -7,17 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.helpers.navigation.Navigator;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Ppdb#newInstance} factory method to
+ * Use the {@link No_Information_Ppdb#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Ppdb extends Fragment {
+public class No_Information_Ppdb extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +26,7 @@ public class Ppdb extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Ppdb() {
+    public No_Information_Ppdb() {
         // Required empty public constructor
     }
 
@@ -38,11 +36,11 @@ public class Ppdb extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Ppdb.
+     * @return A new instance of fragment No_Information_Ppdb.
      */
     // TODO: Rename and change types and number of parameters
-    public static Ppdb newInstance(String param1, String param2) {
-        Ppdb fragment = new Ppdb();
+    public static No_Information_Ppdb newInstance(String param1, String param2) {
+        No_Information_Ppdb fragment = new No_Information_Ppdb();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,12 +61,6 @@ public class Ppdb extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_ppdb, container, false);
-        Button btn = view.findViewById(R.id.BtnDaftarSiswa);
-        btn.setOnClickListener(v -> {
-            Navigator.of(getActivity()).push(DaftarPPDB.class);
-        });
-        // Inflate the layout for this fragment
-        return view;
+        return inflater.inflate(R.layout.fragment_no__information__ppdb, container, false);
     }
 }

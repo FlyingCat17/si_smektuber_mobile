@@ -6,22 +6,23 @@
     tools:context=".screen.home.Jobs">
 
     <TextView
-        android:id="@+id/TitleInformasiLowongan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/TitleInformasiPPDB"
+        android:layout_width="140dp"
+        android:layout_height="24dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="41dp"
-        android:text="@string/informasi_lowongan"
+        android:text="@string/informasi_Ppdb"
         android:textAppearance="@style/informasi_p"
         android:lineSpacingExtra="-2sp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />
+
     <ImageView
-        android:id="@+id/ImageTidakAdaInformasiLowongan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/iconnojobs"
+        android:id="@+id/ImageTidakAdaInformasiPPDB"
+        android:layout_width="251dp"
+        android:layout_height="185dp"
+        android:src="@drawable/icon_no_information_ppdb"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
 

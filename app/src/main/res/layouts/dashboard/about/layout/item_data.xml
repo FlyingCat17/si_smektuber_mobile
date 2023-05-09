@@ -11,20 +11,22 @@
             android:orientation="vertical">
             
                 <ImageView
+                    android:id="@+id/ImageArtikel"
                     android:layout_width="217dp"
                     android:layout_height="122dp"
-                    android:src="@drawable/imageartikel"
+                    android:src="@drawable/rectangle_artikel"
+                    android:scaleType="fitXY"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="22dp"/>
                 <TextView
-                    android:id="@+id/DataText"
+                    android:id="@+id/DataTextArtikel"
                     android:layout_width="217dp"
                     android:layout_height="34dp"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="22dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="9dp"
-                    android:text="Artikel Ini"
+                    android:text="Artikel Artikel ini sangat keren jadi ini sebenarnya jangan lupa"
                     android:textAppearance="@style/artikel_ini"
                     android:lineSpacingExtra="2sp"
                     android:gravity="center_vertical"

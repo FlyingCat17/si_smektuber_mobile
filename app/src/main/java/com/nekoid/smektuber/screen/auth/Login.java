@@ -32,7 +32,6 @@ import com.nekoid.smektuber.config.volley.UrlsApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.screen.home.HomeMember;
-import com.nekoid.smektuber.screen.home.Ppdb;
 
 import org.json.JSONException;
 import org.json.JSONObject;
