@@ -16,7 +16,7 @@
         app:strokeWidth="1dp"
         app:strokeColor="@color/Color00000"
         app:shapeAppearanceOverlay="@style/circleImageView"
-        android:background="@id/profileImg"
+        android:background="@drawable/iconuser"
         />
 
     <TextView
