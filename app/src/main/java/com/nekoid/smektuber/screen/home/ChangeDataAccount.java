@@ -11,6 +11,7 @@ import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.screen.auth.Register;
 
 public class ChangeDataAccount extends AppCompatActivity {
+
 //    Button Back;
     Toolbar toolbar;
     @Override
