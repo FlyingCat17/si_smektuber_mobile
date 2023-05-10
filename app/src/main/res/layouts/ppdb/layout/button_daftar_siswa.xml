@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    android:text="Daftar Siswa"
+    android:text="Daftar Disini"
     android:fontFamily="@font/urbanist_medium"
     android:textAllCaps="false"
     android:backgroundTint="@color/blue01"
