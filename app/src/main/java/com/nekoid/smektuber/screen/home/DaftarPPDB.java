@@ -95,7 +95,7 @@ public class DaftarPPDB extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         calendar.set(year, month, dayOfMonth);
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy", Locale.getDefault());
                         String selectedDate = sdf.format(calendar.getTime());
                         TanggalLahir.setText(selectedDate);
                     }
