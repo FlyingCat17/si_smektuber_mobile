@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.home.Loader"
+    tools:context=".screen.notification.Loader"
     android:background="@color/Color33000000"
     >
     <androidx.constraintlayout.widget.ConstraintLayout

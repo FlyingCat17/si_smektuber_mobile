@@ -2,23 +2,22 @@ package com.nekoid.smektuber.screen.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
-import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
+import com.nekoid.smektuber.screen.home.account.Account;
+import com.nekoid.smektuber.screen.home.dashboard.Dashboard;
+import com.nekoid.smektuber.screen.home.job.NoJobs;
+import com.nekoid.smektuber.screen.home.ppdb.Ppdb;
 
 public class HomeMember extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
