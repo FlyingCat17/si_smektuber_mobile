@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.home.Dashboard"
+    tools:context=".screen.home.dashboard.Dashboard"
     >
         <ScrollView
             android:layout_width="match_parent"
