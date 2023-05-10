@@ -148,6 +148,7 @@ public class Login extends AppCompatActivity {
                     editor.putString("email", email);
                     editor.putString("role", role);
                     editor.putString("username", username);
+                    editor.putBoolean( "isLoggedIn",true );
                     editor.apply();
 
                     // start HomeMember activity

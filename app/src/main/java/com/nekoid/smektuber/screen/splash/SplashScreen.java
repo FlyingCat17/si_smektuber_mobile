@@ -2,6 +2,8 @@ package com.nekoid.smektuber.screen.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,6 +16,7 @@ import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.helpers.widget.Style;
 import com.nekoid.smektuber.screen.auth.Login;
 import com.nekoid.smektuber.screen.auth.WelcomeAuth;
+import com.nekoid.smektuber.screen.home.HomeMember;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -36,7 +39,15 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Navigator.of(SplashScreen.this).pushReplacement( Login.class);
+                SharedPreferences userPref = getApplicationContext().getSharedPreferences( "user", Context.MODE_PRIVATE );
+                boolean isLoggedIn = userPref.getBoolean( "isLoggedIn" ,false);
+
+                if (isLoggedIn){
+                    Navigator.of(SplashScreen.this).pushReplacement( HomeMember.class);
+                }else {
+                    Navigator.of(SplashScreen.this).pushReplacement( Login.class);
+                }
+
             }
 
             @Override
