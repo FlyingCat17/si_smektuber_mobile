@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.View;
@@ -36,6 +38,15 @@ public class HomeMember extends AppCompatActivity {
         bottomNavigationView.setItemTextColor(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.r,dashboard).commit();
         StatusBarUtil.setTransparentStatusBar(this);
+
+        Menu menu = bottomNavigationView.getMenu();
+        SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        String role = sharedPreferences.getString("role", null);
+        if (!role.isEmpty() && role.equals("member")) {
+            menu.removeItem(R.id.Loker);
+        } else if (!role.isEmpty() && role.equals("siswa")) {
+            menu.removeItem(R.id.Ppdb);
+        }
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
