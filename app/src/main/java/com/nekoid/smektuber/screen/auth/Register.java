@@ -22,25 +22,29 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_register );
-        // Panggil method setTransparentStatusBar()
         StatusBarUtil.setTransparentStatusBar(this);
+        setToolbar();
         init();
     }
 
     private void init(){
-        toolbar = findViewById( R.id.backIcon );
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToLogin = findViewById( R.id.txtToLogin );
         btnRegister = findViewById( R.id.btnRegister );
+        btnRegister.setText( "Register" );
 
         // action
         txtToLogin.setOnClickListener( v-> {
 //            Navigator.push( this,Login.class );
-            Navigator.of( this ).pushReplacement( Login.class );
+//            Navigator.of( this ).pushReplacement( Login.class );
+//            Navigator.of( this ).pop();
+            onBackPressed();
         } );
     }
-
+    private void setToolbar(){
+        toolbar = findViewById( R.id.backIconL );
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
     @Override
     public boolean onSupportNavigateUp() {
         Navigator.of(this).pop();
