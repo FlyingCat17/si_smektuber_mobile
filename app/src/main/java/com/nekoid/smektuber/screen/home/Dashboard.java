@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +28,11 @@ import java.util.List;
  */
 public class Dashboard extends Fragment {
 
-    RecyclerView recyclerView;
+
+    private List<MenuJurus> list = new ArrayList<>();
+    private AdapterDataJurusan adapterDataJurusan;
+
+    private RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     AdapterData adapterData;
     List<String> listData;
@@ -80,6 +85,16 @@ public class Dashboard extends Fragment {
         TextView ntm = view.findViewById(R.id.Titlelihat_semua);
         TextView jk = view.findViewById(R.id.ButtonSelengkapnya);
         ConstraintLayout n = view.findViewById(R.id.Map_Lokasi);
+        ConstraintLayout extra = view.findViewById(R.id.Extrakurikuler);
+        ConstraintLayout jurusan = view.findViewById(R.id.Jurusan);
+
+
+        jurusan.setOnClickListener(v -> {
+            Navigator.of(getActivity()).push(Jurusan.class);
+        });
+        extra.setOnClickListener(v -> {
+            Navigator.of(getActivity()).push(Extrakurikuler.class);
+        });
         n.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(MapsActivity.class);
         });
