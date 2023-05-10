@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="22dp"
     android:paddingRight="22dp"
-    tools:context=".screen.home.ChangeDataAccount">
+    tools:context=".screen.home.account.ChangeDataAccount">
     <include
         android:id="@+id/backIcon"
         layout="@layout/toolbar"/>

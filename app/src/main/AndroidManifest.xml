@@ -20,19 +20,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".screen.home.Extrakurikuler"
+            android:name=".screen.home.ekstarkurikuler.Extrakurikuler"
             android:exported="false" />
         <activity
-            android:name=".screen.home.Jurusan"
+            android:name=".screen.home.jurusan.Jurusan"
             android:exported="false" />
         <activity
-            android:name=".screen.home.DetailJurusan"
+            android:name=".screen.home.jurusan.DetailJurusan"
             android:exported="false" />
         <activity
-            android:name=".screen.home.DetailExtra"
+            android:name=".screen.home.ekstarkurikuler.DetailExtra"
             android:exported="false" />
         <activity
-            android:name=".screen.home.AboutSchool"
+            android:name=".screen.home.about.AboutSchool"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -50,35 +50,35 @@
             android:value="AIzaSyDT5dNQc8JucaGAw9Qdgy5jKYHA9uv6EEI" />
 
         <activity
-            android:name=".screen.home.MapsActivity"
+            android:name=".screen.home.maps.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".screen.home.VisiAndMisi"
+            android:name=".screen.home.visiMisi.VisiAndMisi"
             android:exported="false" />
         <activity
-            android:name=".screen.home.DetailArticle"
+            android:name=".screen.home.article.DetailArticle"
             android:exported="false" />
         <activity
-            android:name=".screen.home.ArticleViewAll"
+            android:name=".screen.home.article.ArticleViewAll"
             android:exported="false" />
         <activity
-            android:name=".screen.home.DetailJobs"
+            android:name=".screen.home.job.DetailJobs"
             android:exported="false" />
         <activity
-            android:name=".screen.home.DaftarPPDB"
+            android:name=".screen.home.ppdb.DaftarPPDB"
             android:exported="false" />
         <activity
-            android:name=".screen.home.Notification"
+            android:name=".screen.notification.Notification"
             android:exported="false" />
         <activity
-            android:name=".screen.home.ChangeDataAccount"
+            android:name=".screen.home.account.ChangeDataAccount"
             android:exported="false" />
         <activity
-            android:name=".screen.home.ImageCrop"
+            android:name=".screen.home.account.ImageCrop"
             android:exported="false" />
         <activity
-            android:name=".screen.home.ViewZoomImage"
+            android:name=".screen.home.account.ViewZoomImage"
             android:exported="false" />
         <activity
             android:name=".screen.auth.Register"
@@ -91,13 +91,6 @@
             android:exported="false" />
         <activity
             android:name=".screen.home.HomeMember"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".screen.jurusan.jurusan"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

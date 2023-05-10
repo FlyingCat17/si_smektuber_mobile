@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
 //    private EditText et_username, et_password;
     private TextInputEditText et_username, et_password;
     private ProgressDialog dialog;
-//    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -65,9 +65,6 @@ public class Login extends AppCompatActivity {
         et_password = findViewById( R.id.et_password );
         btnLogin = findViewById( R.id.btnLogin );
         txtToRegister = findViewById( R.id.txtToRegister );
-//        toolbar = findViewById( R.id.backIcon );
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         txtToRegister.setOnClickListener( v->{
             Navigator.push( this,Register.class );
@@ -82,53 +79,43 @@ public class Login extends AppCompatActivity {
 
         et_username.addTextChangedListener( new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (!et_username.getText().toString().isEmpty()){
                     txtLayoutUsername.setErrorEnabled( false );
                 }
             }
-
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         } );
 
         et_password.addTextChangedListener( new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (et_password.getText().toString().length()>7){
+                if (!et_password.getText().toString().isEmpty()){
                     txtLayoutPassword.setErrorEnabled( false );
                 }
             }
-
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         } );
     }
 
     private boolean validate(){
-        if (et_username.getText().toString().isEmpty()){
+        String username = et_username.getText().toString();
+        String password = et_password.getText().toString().trim();
+        if (username.isEmpty()){
             txtLayoutUsername.setErrorEnabled( true );
             txtLayoutUsername.setError( "Mohon isi username anda" );
             return false;
         }
-        if(et_password.getText().toString().length()<8){
-//            txtLayoutPassword.setErrorEnabled( true );
-            txtLayoutPassword.setErrorEnabled( false );
-            txtLayoutPassword.setError( "Password Minimal 8 Karakter" );
+        if(password.isEmpty()){
+            txtLayoutPassword.setErrorEnabled( true );
+            txtLayoutPassword.setError( "Mohon isi Password anda" );
+            txtLayoutPassword.setErrorIconDrawable(null);
             return false;
         }
         return true;
@@ -201,7 +188,7 @@ public class Login extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("username", et_username.getText().toString().trim());
-                params.put("password", et_password.getText().toString().trim());
+                params.put("password",et_password.getText().toString().trim());
 
                 return params;
             }

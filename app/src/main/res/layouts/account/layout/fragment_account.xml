@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".screen.home.Account">
+    tools:context=".screen.home.account.Account">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ImageProfil"
