@@ -1,6 +1,7 @@
 package com.nekoid.smektuber.screen.home;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,10 +29,15 @@ public class DaftarPPDB extends AppCompatActivity {
     AutoCompleteTextView autoCompleteTxt;
     private EditText TanggalLahir, TahunLulus;
     ArrayAdapter<String> adapterItems;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar_ppdb);
+        init();
+        setToolbar();
+    }
+    private void init(){
         autoCompleteTxt = findViewById(R.id.Dp_Jurusan);
         adapterItems = new ArrayAdapter<String>(this,R.layout.list_item,items);
         autoCompleteTxt.setAdapter(adapterItems);
@@ -57,6 +64,18 @@ public class DaftarPPDB extends AppCompatActivity {
                 String item = parent.getItemAtPosition(position).toString();
             }
         });
+
+
+    }
+    private void setToolbar(){
+        toolbar = findViewById( R.id.backIcon );
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        Navigator.of(this).pop();
+        return true;
     }
 
     private void showTahun() {
