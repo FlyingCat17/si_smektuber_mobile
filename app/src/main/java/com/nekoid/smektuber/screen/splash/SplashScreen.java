@@ -39,15 +39,21 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                SharedPreferences userPref = getApplicationContext().getSharedPreferences( "user", Context.MODE_PRIVATE );
-                boolean isLoggedIn = userPref.getBoolean( "isLoggedIn" ,false);
+                SharedPreferences userPref = getSharedPreferences("user", MODE_PRIVATE);
+                String accessToken = userPref.getString("access_token", "");
+                long expiresAt = userPref.getLong("expires_at", 0);
 
-                if (isLoggedIn){
-                    Navigator.of(SplashScreen.this).pushReplacement( HomeMember.class);
-                }else {
-                    Navigator.of(SplashScreen.this).pushReplacement( Login.class);
+                if (!accessToken.isEmpty() && System.currentTimeMillis() >= expiresAt) {
+                    // Token has expired, perform re-login
+                    Navigator.of(SplashScreen.this).pushReplacement(Login.class);
+                } else {
+                    boolean isLoggedIn = userPref.getBoolean("isLoggedIn", false);
+                    if (isLoggedIn) {
+                        Navigator.of(SplashScreen.this).pushReplacement(HomeMember.class);
+                    } else {
+                        Navigator.of(SplashScreen.this).pushReplacement(Login.class);
+                    }
                 }
-
             }
 
             @Override

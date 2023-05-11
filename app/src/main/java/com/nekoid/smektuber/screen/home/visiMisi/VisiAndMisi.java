@@ -13,6 +13,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -36,6 +39,9 @@ public class VisiAndMisi extends AppCompatActivity {
 //    Dashboard dashboard = new Dashboard();
     private TextView tvVisi , tvMisi;
     Toolbar toolbar;
+    private ProgressBar progressBar;
+    private LinearLayout cardVisi, cardMisi;
+    private ScrollView contentVM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +52,12 @@ public class VisiAndMisi extends AppCompatActivity {
     }
     private void init(){
         //
+        progressBar = findViewById( R.id.progressBar );
         tvVisi = findViewById( R.id.TxtVisi );
         tvMisi = findViewById( R.id.TxtMisi );
+        cardVisi = findViewById( R.id.cardVisi );
+        cardMisi = findViewById( R.id.cardMisi );
+        contentVM = findViewById( R.id.cVM );
     }
     private void fetchData(){
         String url = UrlsApi.ABOUT;
@@ -57,7 +67,12 @@ public class VisiAndMisi extends AppCompatActivity {
 
         Map<String, String> headers = new HashMap<>();
         headers.put("Authorization", "Bearer " + accessToken);
+        progressBar.setVisibility(View.VISIBLE);
+        contentVM.setVisibility( View.GONE );
         JsonObjectRequest request = new JsonObjectRequest( Request.Method.GET, url, null, response -> {
+            progressBar.setVisibility(View.GONE);
+            contentVM.setVisibility( View.VISIBLE );
+
             try {
                 JSONObject data = response.getJSONObject("data");
                 String visi = data.getString("vission");
@@ -70,6 +85,8 @@ public class VisiAndMisi extends AppCompatActivity {
             }
         }, error -> {
             // handle error
+            progressBar.setVisibility(View.GONE);
+            contentVM.setVisibility( View.VISIBLE );
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
