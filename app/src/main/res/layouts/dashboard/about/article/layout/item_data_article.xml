@@ -11,10 +11,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
         android:background="@drawable/rectangle_item_data_jobs2"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
+            android:layout_below="@+id/ImageArtikelCard"
+            android:id="@+id/TextArticleCard"
             android:layout_width="wrap_content"
             app:cardBackgroundColor="@color/blue01"
             app:cardCornerRadius="15dp"
@@ -25,31 +28,33 @@
                 android:id="@+id/DataTextArtikel"
                 android:layout_width="wrap_content"
                 android:layout_height="121dp"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="206dp"
+                android:layout_marginLeft="200dp"
+                android:layout_marginRight="22dp"
                 android:paddingTop="10dp"
+                android:textAlignment="viewStart"
                 android:paddingBottom="10dp"
                 android:layout_marginTop="0dp"
                 android:lineSpacingExtra="2sp"
-                android:text="Artikel Artikel ini sangat keren jadi ini sebenarnya jangan lupa"
+                android:text=" "
                 android:textAppearance="@style/artikel_" />
+        </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/ImageArtikelCard"
-                android:layout_width="191dp"
-                android:layout_height="122dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ImageArtikelCard"
+            android:layout_width="191dp"
+            android:layout_height="122dp"
+            android:background="@color/white"
+            android:foreground="?android:attr/selectableItemBackground"
+            >
 
-                <ImageView
-                    android:id="@+id/ImageArtikel"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/imageartikel"
-                    android:scaleType="fitXY"/>
-
-            </androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/ImageArtikel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/imageartikel"
+                android:scaleType="fitXY"/>
 
         </androidx.cardview.widget.CardView>
 

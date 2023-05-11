@@ -1,9 +1,11 @@
 package com.nekoid.smektuber.screen.home.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,11 +16,15 @@ import android.widget.TextView;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.adapter.AdapterData;
+import com.nekoid.smektuber.adapter.AdapterDataExtra;
 import com.nekoid.smektuber.adapter.AdapterDataJurusan;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.screen.home.about.AboutSchool;
 import com.nekoid.smektuber.screen.home.article.ArticleViewAll;
+import com.nekoid.smektuber.screen.home.article.MenuArtikelDashboard;
+import com.nekoid.smektuber.screen.home.ekstarkurikuler.DetailExtra;
 import com.nekoid.smektuber.screen.home.ekstarkurikuler.Extrakurikuler;
+import com.nekoid.smektuber.screen.home.ekstarkurikuler.MenuExtra;
 import com.nekoid.smektuber.screen.home.jurusan.Jurusan;
 import com.nekoid.smektuber.screen.home.jurusan.MenuJurus;
 import com.nekoid.smektuber.screen.home.maps.MapsActivity;
@@ -36,9 +42,7 @@ public class Dashboard extends Fragment {
 
 
     private List<MenuJurus> list = new ArrayList<>();
-    private AdapterDataJurusan adapterDataJurusan;
 
-    private RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     AdapterData adapterData;
     List<String> listData;
@@ -93,6 +97,16 @@ public class Dashboard extends Fragment {
         ConstraintLayout n = view.findViewById(R.id.Map_Lokasi);
         ConstraintLayout extra = view.findViewById(R.id.Extrakurikuler);
         ConstraintLayout jurusan = view.findViewById(R.id.Jurusan);
+        RecyclerView recyclerView = view.findViewById(R.id.rvData);
+
+//        adapterData = new AdapterDataExtra(List);
+//        adapterData.setDialog(new AdapterData.Dialog() {
+//            @Override
+//            public void onClick(MenuArtikelDashboard menuArtikelDashboard) {
+//                Navigator.of(getActivity()).push( Jurusan.class);
+//            }
+//        });
+//        recyclerView.setAdapter(adapterData);
 
 
         jurusan.setOnClickListener(v -> {

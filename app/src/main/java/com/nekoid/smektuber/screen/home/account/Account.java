@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +79,12 @@ public class Account extends Fragment {
         tvUsername = view.findViewById( R.id.UsernameAccount );
         Button btnUpdate = view.findViewById( R.id.ButtonUbahProfil );
         Button btnLogout = view.findViewById( R.id.ButtonKeluarAkun );
+        ImageView ImageProfil1 = view.findViewById(R.id.ImageProfilAccount);
+
+
+        ImageProfil1.setOnClickListener(v -> {
+            Navigator.of( getActivity()).push(ViewZoomImage.class);
+        });
         btnUpdate.setOnClickListener( v -> {
             Navigator.of( getActivity() ).push( ChangeDataAccount.class );
         } );

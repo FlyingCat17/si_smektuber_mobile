@@ -8,5 +8,6 @@ public class UrlsApi {
     public static final String REGISTER = BASE_URL+"/auth/register";
     public static final String LOGOUT = BASE_URL+"/auth/logout";
     public static final String ABOUT = BASE_URL+"/about";
+    public static final String ARTICLE = BASE_URL+"/article";
 
 }

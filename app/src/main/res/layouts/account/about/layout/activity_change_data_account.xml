@@ -25,6 +25,21 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ImageUserProfil"
+                    android:layout_width="133.6dp"
+                    android:layout_height="133.6dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:padding="5dp"
+                    app:strokeWidth="1dp"
+                    android:scaleType="fitXY"
+                    app:shapeAppearanceOverlay="@style/circleImageView"
+                    android:background="@drawable/iconuser"
+                    >
+
+                </com.google.android.material.imageview.ShapeableImageView>
+
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/IconUploadImage"
                     android:layout_width="133.6dp"
                     android:layout_height="133.6dp"
@@ -33,8 +48,7 @@
                     android:padding="5dp"
                     app:strokeWidth="1dp"
                     app:shapeAppearanceOverlay="@style/circleImageView"
-                    android:background="@color/Color33000000"
-                    android:src="@drawable/iconuploadimage"
+                    app:srcCompat="@drawable/iconuploadimage"
                     >
 
                 </com.google.android.material.imageview.ShapeableImageView>
