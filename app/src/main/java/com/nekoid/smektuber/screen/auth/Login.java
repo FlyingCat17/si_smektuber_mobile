@@ -31,6 +31,7 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.config.volley.UrlsApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
+import com.nekoid.smektuber.models.User;
 import com.nekoid.smektuber.screen.home.HomeMember;
 
 import org.json.JSONException;
@@ -40,6 +41,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
+    private User user;
     private Button btnLogin;
     private TextView txtToRegister;
     private TextInputLayout txtLayoutUsername, txtLayoutPassword;
@@ -132,6 +134,7 @@ public class Login extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(response);
                 Log.e( "data object",jsonObject+"" );
                 if (jsonObject.getInt( "status" )==200) {
+                    user = User.fromJson(jsonObject.getJSONObject("data"));
 //                    String message = jsonObject.getJSONObject( "Success" );
                     JSONObject userData = jsonObject.getJSONObject("data").getJSONObject("user");
                     String accessToken = jsonObject.getJSONObject("data").getString("access_token");
