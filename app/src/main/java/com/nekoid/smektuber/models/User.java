@@ -1,13 +1,60 @@
 package com.nekoid.smektuber.models;
 
-public class User extends Models {
-    public String username;
-    public String password;
-    public String token;
+import androidx.annotation.NonNull;
 
-    public User(String username, String password, String token) {
+import org.json.JSONObject;
+
+import java.util.Map;
+
+public class User extends Models {
+    public String name;
+    public String email;
+    public String role;
+    public String username;
+
+    public User(String name, String email, String role, String username) {
+        this.name = name;
+        this.email = email;
+        this.role = role;
         this.username = username;
-        this.password = password;
-        this.token = token;
+    }
+
+    public static User fromJson(JSONObject json) {
+        try {
+            return new User(
+                    json.getString("name"),
+                    json.getString("email"),
+                    json.getString("role"),
+                    json.getString("username")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public String toJson() {
+        String json = "{";
+        json += "\"name\":\"" + name + "\",";
+        json += "\"email\":\"" + email + "\",";
+        json += "\"role\":\"" + role + "\",";
+        json += "\"username\":\"" + username + "\"";
+        json += "}";
+        return json;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        String user = "name:";
+        user += name;
+        user += ", email:";
+        user += email;
+        user += ", role:";
+        user += role;
+        user += ", username:";
+        user += username;
+        return user;
     }
 }

@@ -116,6 +116,12 @@ public class DaftarPPDB extends AppCompatActivity {
                         calendar.set(year, month, dayOfMonth);
                         SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy", Locale.getDefault());
                         String selectedDate = sdf.format(calendar.getTime());
+                        if (validateBirthday(year, month, dayOfMonth)) {
+                            Toast.makeText(DaftarPPDB.this, "Tanggal Lahir : " + selectedDate, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(DaftarPPDB.this, "Umur minimal 13 tahun dan maksimal 17 tahun", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         TanggalLahir.setText(selectedDate);
                     }
                 },
@@ -124,5 +130,18 @@ public class DaftarPPDB extends AppCompatActivity {
                 calendar.get(Calendar.DAY_OF_MONTH)
         );
         datePickerDialog.show();
+    }
+
+    protected boolean validateBirthday(int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -17);
+        if (calendar.get(Calendar.YEAR) > year) {
+            return false;
+        }
+        calendar.add(Calendar.YEAR, +4);
+        if (calendar.get(Calendar.YEAR) < year) {
+            return false;
+        }
+        return true;
     }
 }
