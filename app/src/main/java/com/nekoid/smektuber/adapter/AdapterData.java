@@ -1,6 +1,7 @@
 package com.nekoid.smektuber.adapter;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.screen.home.article.MenuArtikelDashboard;
+import com.nekoid.smektuber.helpers.Utils;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.models.ArticleModel;
+import com.nekoid.smektuber.screen.home.article.DetailArticle;
 
 import java.util.List;
 
 public class AdapterData extends RecyclerView.Adapter<AdapterData.MyViewHolder> {
-    private final Context context;
-    private final List<MenuArtikelDashboard> list;
+    private final Activity activity;
+    private final List<ArticleModel> articleModels;
     private AdapterData.Dialog dialog;
 
     public void setDialog(AdapterData.Dialog dialog) {
@@ -26,33 +30,35 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.MyViewHolder> 
 
     //    sintaks untuk mau membawa data dari card yang di klick
     public interface Dialog{
-        void onClick(MenuArtikelDashboard menuArtikelDashboard);
+        void onClick(ArticleModel menuArtikelDashboard);
     }
 
-    public AdapterData(Context context, List<MenuArtikelDashboard> list) {
-        this.context = context;
-        this.list = list;
+    public AdapterData(Activity activity, List<ArticleModel> articles) {
+        this.activity = activity;
+        this.articleModels = articles;
     }
 
     @NonNull
     @Override
     public AdapterData.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_data, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.item_data, parent, false);
         return new AdapterData.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterData.MyViewHolder holder, int position) {
-        holder.DataTextArtikel.setText(list.get(position).getDataTextArtikel());
-        holder.ImageArtikel.setImageDrawable(list.get(position).getImageArtikel());
+    public void onBindViewHolder(@NonNull AdapterData.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.DataTextArtikel.setText(articleModels.get(position).title);
+        holder.ImageArtikel.setImageBitmap(Utils.downloadImage(articleModels.get(position).thumbnail));
+        holder.articleModel = articleModels.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return articleModels.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
+        ArticleModel articleModel;
         ImageView ImageArtikel;
         TextView DataTextArtikel;
         public MyViewHolder(@NonNull View itemView) {
@@ -61,8 +67,9 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.MyViewHolder> 
             DataTextArtikel = itemView.findViewById(R.id.DataTextArtikel);
 
             itemView.setOnClickListener(v -> {
+                Navigator.of(activity).push(DetailArticle.class, articleModel);
                 if (dialog!=null){
-                    dialog.onClick(list.get(getLayoutPosition()));
+                    dialog.onClick(articleModels.get(getLayoutPosition()));
                 }
             });
         }
