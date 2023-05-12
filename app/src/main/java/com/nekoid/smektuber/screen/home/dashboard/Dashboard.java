@@ -1,6 +1,8 @@
 package com.nekoid.smektuber.screen.home.dashboard;
 
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nekoid.smektuber.R;
@@ -97,17 +100,14 @@ public class Dashboard extends Fragment {
         ConstraintLayout n = view.findViewById(R.id.Map_Lokasi);
         ConstraintLayout extra = view.findViewById(R.id.Extrakurikuler);
         ConstraintLayout jurusan = view.findViewById(R.id.Jurusan);
-        RecyclerView recyclerView = view.findViewById(R.id.rvData);
+        ImageView image = view.findViewById(R.id.IconPesan);
 
-//        adapterData = new AdapterDataExtra(List);
-//        adapterData.setDialog(new AdapterData.Dialog() {
-//            @Override
-//            public void onClick(MenuArtikelDashboard menuArtikelDashboard) {
-//                Navigator.of(getActivity()).push( Jurusan.class);
-//            }
-//        });
-//        recyclerView.setAdapter(adapterData);
 
+        image.setOnClickListener(v -> {
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse("https://wa.me/+6285604982258"));
+            startActivity(intent);
+        });
 
         jurusan.setOnClickListener(v -> {
             Navigator.of(getActivity()).push( Jurusan.class);

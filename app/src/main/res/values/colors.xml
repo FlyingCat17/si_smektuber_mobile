@@ -33,4 +33,15 @@
     <color name="ucrop_color_toolbar">@color/white</color>
     <color name="ucrop_color_statusbar">@color/Color00000</color>
     <color name="ucrop_color_widget_active">@color/Color00000</color>
+    
+<!--    Color Themes Night-->
+    <color name="bgPrimary">#4D5CD9</color>
+    <color name="bgSecondary">#2B2D5C</color>
+    <color name="bgcardVisiMisi">#8F9FD7</color>
+    <color name="bgBottomBar">#C3E8FF</color>
+    <color name="textPrimary">#FFFFFF</color>
+    <color name="textScondary">#FFFFFF</color>
+    <color name="borderInput">#A429CF</color>
+    <color name="bgInputText">#555555</color>
+    
 </resources>

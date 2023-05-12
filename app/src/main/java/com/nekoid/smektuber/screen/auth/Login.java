@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
@@ -55,6 +56,7 @@ public class Login extends AppCompatActivity {
         setContentView( R.layout.activity_login );
         // Panggil method setTransparentStatusBar()
         StatusBarUtil.setTransparentStatusBar(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         init();
     }
 
