@@ -1,10 +1,12 @@
 package com.nekoid.smektuber.screen.home.article;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 public class MenuArtikelDashboard {
     private String DataTextArtikel;
     private Drawable ImageArtikel;
+    private Bitmap imageUrl;
 
 
     public MenuArtikelDashboard() {
@@ -15,9 +17,18 @@ public class MenuArtikelDashboard {
         ImageArtikel = imageArtikel;
     }
 
+    public MenuArtikelDashboard(String dataTextArtikel, Bitmap imageUrl) {
+        DataTextArtikel = dataTextArtikel;
+        this.imageUrl = imageUrl;
+    }
+
     public String getDataTextArtikel() {
 
         return DataTextArtikel;
+    }
+
+    public Bitmap getImageUrl() {
+        return imageUrl;
     }
 
     public void setTitleDataTextArtikel(String dataTextArtikel) {

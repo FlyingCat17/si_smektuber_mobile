@@ -1,31 +1,54 @@
 package com.nekoid.smektuber.screen.home.dashboard;
 
+<<<<<<< HEAD
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
+=======
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+>>>>>>> 650e569efbcd247c5f64114b01e1a5b4a41d2b6d
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.adapter.AdapterData;
 import com.nekoid.smektuber.adapter.AdapterDataExtra;
 import com.nekoid.smektuber.adapter.AdapterDataJurusan;
+import com.nekoid.smektuber.config.volley.PublicApi;
+import com.nekoid.smektuber.config.volley.UrlsApi;
+import com.nekoid.smektuber.helpers.Utils;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.screen.home.about.AboutSchool;
 import com.nekoid.smektuber.screen.home.article.ArticleViewAll;
 import com.nekoid.smektuber.screen.home.article.MenuArtikelDashboard;
+<<<<<<< HEAD
 import com.nekoid.smektuber.screen.home.ekstarkurikuler.DetailExtra;
+=======
+>>>>>>> 650e569efbcd247c5f64114b01e1a5b4a41d2b6d
 import com.nekoid.smektuber.screen.home.ekstarkurikuler.Extrakurikuler;
 import com.nekoid.smektuber.screen.home.ekstarkurikuler.MenuExtra;
 import com.nekoid.smektuber.screen.home.jurusan.Jurusan;
@@ -33,8 +56,16 @@ import com.nekoid.smektuber.screen.home.jurusan.MenuJurus;
 import com.nekoid.smektuber.screen.home.maps.MapsActivity;
 import com.nekoid.smektuber.screen.home.visiMisi.VisiAndMisi;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,12 +74,17 @@ import java.util.List;
  */
 public class Dashboard extends Fragment {
 
+<<<<<<< HEAD
 
     private List<MenuJurus> list = new ArrayList<>();
 
     LinearLayoutManager linearLayoutManager;
+=======
+    private RecyclerView recyclerView;
+>>>>>>> 650e569efbcd247c5f64114b01e1a5b4a41d2b6d
     AdapterData adapterData;
-    List<String> listData;
+
+    List<ArticleModel> listArticle = new ArrayList<ArticleModel>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -94,6 +130,7 @@ public class Dashboard extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        recyclerView = view.findViewById(R.id.rvData);
         ConstraintLayout btn = view.findViewById(R.id.Visi_Misi);
         TextView ntm = view.findViewById(R.id.Titlelihat_semua);
         TextView jk = view.findViewById(R.id.ButtonSelengkapnya);
@@ -127,8 +164,44 @@ public class Dashboard extends Fragment {
         jk.setOnClickListener(v -> {
             Navigator.of(getActivity()).push( AboutSchool.class);
         });
+        request();
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    protected void request() {
+        StringRequest getArticle = PublicApi.get("/article", listArticles());
+        PublicApi.addParams(null);
+
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        queue.add(getArticle);
+    }
+
+    protected Response.Listener<String> listArticles() {
+        return response -> {
+            try {
+                JSONObject responses = new JSONObject(response);
+                if (responses.getInt("status") == 200) {
+                    JSONArray arrays = responses.getJSONArray("data");
+                    if (arrays.length() > 0) {
+                        for (int i = 0; i < arrays.length(); i++) {
+                            listArticle.add(ArticleModel.fromJson(new JSONObject(arrays.getString(i))));
+                            if (i == 5) break;
+                        }
+                        setAdapterData();
+                    }
+                }
+            } catch (JSONException e) {
+            }
+        };
+    }
+
+    protected void setAdapterData() {
+        adapterData = new AdapterData(getActivity(), listArticle);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapterData);
     }
 }

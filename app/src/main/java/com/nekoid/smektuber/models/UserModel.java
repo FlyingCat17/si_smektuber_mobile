@@ -4,24 +4,22 @@ import androidx.annotation.NonNull;
 
 import org.json.JSONObject;
 
-import java.util.Map;
-
-public class User extends Models {
+public class UserModel extends Models {
     public String name;
     public String email;
     public String role;
     public String username;
 
-    public User(String name, String email, String role, String username) {
+    public UserModel(String name, String email, String role, String username) {
         this.name = name;
         this.email = email;
         this.role = role;
         this.username = username;
     }
 
-    public static User fromJson(JSONObject json) {
+    public static UserModel fromJson(JSONObject json) {
         try {
-            return new User(
+            return new UserModel(
                     json.getString("name"),
                     json.getString("email"),
                     json.getString("role"),
