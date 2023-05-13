@@ -46,6 +46,7 @@ public class Extrakurikuler extends AppCompatActivity {
         list.add(new MenuExtra("Pramuka", getDrawable(R.drawable.imageuser)));
         list.add(new MenuExtra("Pramuka", getDrawable(R.drawable.imageuser)));
         list.add(new MenuExtra("Pramuka", getDrawable(R.drawable.imageuser)));
+//        list.add(new MenuExtra("Pramuka", getDrawable(R.drawable.imageuser)));
 
         adapterDataExtra = new AdapterDataExtra(getApplicationContext(), list);
         adapterDataExtra.setDialog(new AdapterDataExtra.Dialog() {

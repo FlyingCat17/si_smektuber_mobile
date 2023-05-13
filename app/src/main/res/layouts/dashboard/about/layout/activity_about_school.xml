@@ -37,24 +37,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/shimmerLayout"
+            <ImageView
+                android:id="@+id/ImageSchool"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-
-                <ImageView
-                    android:id="@+id/ImageSchool"
-                    android:layout_width="match_parent"
-                    android:layout_height="310.37dp"
-                    android:layout_marginTop="20dp"
-                    android:scaleType="fitXY"
-                    android:background="@drawable/imagenoimageschool"
-                    />
-
-            </LinearLayout>
+                android:layout_height="310.37dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/imagenoimageschool"
+                />
 
             <TextView
                 android:id="@+id/TitleSelayangPadang"
@@ -63,7 +52,7 @@
                 android:layout_marginTop="16.63dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
-                android:layout_below="@+id/shimmerLayout"
+                android:layout_below="@+id/ImageSchool"
                 android:text="@string/Title1"
                 android:textAppearance="@style/selayang_title"
                 />
@@ -99,7 +88,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="22dp"
-                android:scaleType="fitXY"
                 android:layout_marginRight="22dp"
                 android:layout_below="@+id/Titleheadmaster"
                 android:background="@drawable/imageheadmaster"
