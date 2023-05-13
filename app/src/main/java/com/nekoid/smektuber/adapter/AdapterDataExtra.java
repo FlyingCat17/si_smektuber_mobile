@@ -1,5 +1,6 @@
 package com.nekoid.smektuber.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,48 +12,47 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.models.ExtracurricularModel;
+import com.nekoid.smektuber.screen.home.ekstarkurikuler.DetailExtra;
 import com.nekoid.smektuber.screen.home.ekstarkurikuler.MenuExtra;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class AdapterDataExtra extends RecyclerView.Adapter<AdapterDataExtra.MyViewHolder> {
-    private final Context context;
-    private final List<MenuExtra> list;
-    private Dialog dialog;
 
-    public void setDialog(Dialog dialog) {
-        this.dialog = dialog;
-    }
+    private final Activity activity;
 
-    //    sintaks untuk mau membawa data dari card yang di klick
-    public interface Dialog{
-        void onClick(MenuExtra menuExtra);
-    }
+    private final List<ExtracurricularModel> extracurricularModels;
 
-    public AdapterDataExtra(Context context, List<MenuExtra> list) {
-        this.context = context;
-        this.list = list;
+    public AdapterDataExtra(Activity activity, List<ExtracurricularModel> extracurricularModels) {
+        this.activity = activity;
+        this.extracurricularModels = extracurricularModels;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.row_menu_extra, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.row_menu_extra, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.TitleMenuExtra.setText(list.get(position).getTitleMenuExtra());
-        holder.ImageExtra.setImageDrawable(list.get(position).getImageExtra());
+        holder.TitleMenuExtra.setText(extracurricularModels.get(position).name);
+        Picasso.get().load(extracurricularModels.get(position).photo).into(holder.ImageExtra);
+        holder.extracurricularModel = extracurricularModels.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return extracurricularModels.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
+
+        ExtracurricularModel extracurricularModel;
         ImageView ImageExtra;
         TextView TitleMenuExtra;
         public MyViewHolder(@NonNull View itemView) {
@@ -61,9 +61,7 @@ public class AdapterDataExtra extends RecyclerView.Adapter<AdapterDataExtra.MyVi
             TitleMenuExtra = itemView.findViewById(R.id.TitleMenuExtra);
 
             itemView.setOnClickListener(v -> {
-                if (dialog!=null){
-                    dialog.onClick(list.get(getLayoutPosition()));
-                }
+                Navigator.of(activity).push(DetailExtra.class, extracurricularModel);
             });
         }
     }

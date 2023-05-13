@@ -19,7 +19,7 @@ public enum Endpoint {
 
     // ARTICLE
     LIST_ARTICLE("/article"),
-    GET_ARTICLE_BY_ID("/article/{id}"),
+    GET_ARTICLE_BY_ID("/article/"),
 
     // USER
     GET_USER("/user/detail"),
@@ -30,18 +30,18 @@ public enum Endpoint {
 
     // LOKER
     LIST_JOBS("/jobs"),
-    GET_JOB_BY_ID("/jobs/{id}"),
+    GET_JOB_BY_ID("/jobs/"),
 
     // ABOUT OF SCHOOL
     ABOUT("/about"),
 
     // MAJOR
     LIST_MAJOR("/major"),
-    GET_MAJOR_BY_ID("/major/{id}"),
+    GET_MAJOR_BY_ID("/major/"),
 
     // EXTRACURRICULAR
     LIST_EXTRACURRICULAR("/extracurricular"),
-    GET_EXTRACURRICULAR_BY_ID("/extracurricular/{id}"),
+    GET_EXTRACURRICULAR_BY_ID("/extracurricular/"),
     ;
 
     private String url;
