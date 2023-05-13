@@ -10,11 +10,14 @@ public class UserModel extends Models {
     public String role;
     public String username;
 
-    public UserModel(String name, String email, String role, String username) {
+    public boolean emailVerified;
+
+    public UserModel(String name, String email, String role, String username, boolean emailVerified) {
         this.name = name;
         this.email = email;
         this.role = role;
         this.username = username;
+        this.emailVerified = emailVerified;
     }
 
     public static UserModel fromJson(JSONObject json) {
@@ -23,7 +26,8 @@ public class UserModel extends Models {
                     json.getString("name"),
                     json.getString("email"),
                     json.getString("role"),
-                    json.getString("username")
+                    json.getString("username"),
+                    json.getBoolean("email_verified_at")
             );
         } catch (Exception e) {
             e.printStackTrace();
