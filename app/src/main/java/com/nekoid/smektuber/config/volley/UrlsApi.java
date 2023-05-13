@@ -9,5 +9,6 @@ public class UrlsApi {
     public static final String LOGOUT = BASE_URL+"/auth/logout";
     public static final String REFRESH_TOKEN = BASE_URL+"/auth/refresh";
     public static final String ABOUT = BASE_URL+"/about";
+    public static final String ARTICLE = BASE_URL+"/article";
 
 }

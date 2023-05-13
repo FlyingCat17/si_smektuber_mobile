@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,12 +21,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.config.volley.Endpoint;
 import com.nekoid.smektuber.config.volley.PublicApi;
 import com.nekoid.smektuber.config.volley.UrlsApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.screen.auth.Login;
+import com.nekoid.smektuber.screen.home.about.AboutSchool;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +49,8 @@ public class Account extends Fragment {
     private String mParam1;
     private String mParam2;
     private TextView tvFullname, tvUsername;
+
+    private ImageView ImageProfil1;
 
     public Account() {
         // Required empty public constructor
@@ -80,6 +85,12 @@ public class Account extends Fragment {
         tvUsername = view.findViewById( R.id.UsernameAccount );
         Button btnUpdate = view.findViewById( R.id.ButtonUbahProfil );
         Button btnLogout = view.findViewById( R.id.ButtonKeluarAkun );
+        ImageProfil1 = view.findViewById(R.id.ImageProfilAccount);
+
+
+        ImageProfil1.setOnClickListener(v -> {
+            Navigator.of( getActivity()).push(ViewZoomImage.class);
+        });
         btnUpdate.setOnClickListener( v -> {
             Navigator.of( getActivity() ).push( ChangeDataAccount.class );
         } );
@@ -97,10 +108,14 @@ public class Account extends Fragment {
         SharedPreferences userPref = getActivity().getSharedPreferences( "user", MODE_PRIVATE );
         String fullname = userPref.getString( "name", "" );
         String username = userPref.getString( "username", "" );
+        String imageUser = userPref.getString("avatar", "");
 
         // Set user data to views
         tvFullname.setText( fullname );
         tvUsername.setText( username );
+        Glide.with(Account.this)
+                .load(imageUser)
+                .into(ImageProfil1);
     }
 
     private void doLogout() {
