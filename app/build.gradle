@@ -51,8 +51,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_16
-        targetCompatibility JavaVersion.VERSION_16
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     task DownloadSources(type: Sync) {
         // Konfigurasi tugas DownloadSources di sini
@@ -75,9 +75,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.jjoe64:graphview:4.2.2'
     implementation 'com.karumi:dexter:6.2.3'
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-    implementation 'com.github.dhaval2404:imagepicker:2.1'
 
 //    volley
     implementation 'com.android.volley:volley:1.2.1'

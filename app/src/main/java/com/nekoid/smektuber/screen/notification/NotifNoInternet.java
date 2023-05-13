@@ -7,10 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.screen.home.HomeMember;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,15 +57,10 @@ public class NotifNoInternet extends Fragment {
         }
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_notif_no_internet, container, false);
-        Button BtnNoInternet = view.findViewById(R.id.BtnNotifNoInternet);
-        BtnNoInternet.setOnClickListener(v -> {
-        });
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_notif_no_internet, container, false);
     }
 }
