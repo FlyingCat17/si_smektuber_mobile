@@ -1,15 +1,11 @@
 package com.nekoid.smektuber.screen.home.dashboard;
 
-<<<<<<< HEAD
-import android.content.Intent;
-import android.media.Image;
-import android.net.Uri;
-=======
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
->>>>>>> 650e569efbcd247c5f64114b01e1a5b4a41d2b6d
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -45,10 +41,7 @@ import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.screen.home.about.AboutSchool;
 import com.nekoid.smektuber.screen.home.article.ArticleViewAll;
 import com.nekoid.smektuber.screen.home.article.MenuArtikelDashboard;
-<<<<<<< HEAD
-import com.nekoid.smektuber.screen.home.ekstarkurikuler.DetailExtra;
-=======
->>>>>>> 650e569efbcd247c5f64114b01e1a5b4a41d2b6d
+
 import com.nekoid.smektuber.screen.home.ekstarkurikuler.Extrakurikuler;
 import com.nekoid.smektuber.screen.home.ekstarkurikuler.MenuExtra;
 import com.nekoid.smektuber.screen.home.jurusan.Jurusan;
@@ -74,14 +67,7 @@ import java.util.Map;
  */
 public class Dashboard extends Fragment {
 
-<<<<<<< HEAD
-
-    private List<MenuJurus> list = new ArrayList<>();
-
-    LinearLayoutManager linearLayoutManager;
-=======
     private RecyclerView recyclerView;
->>>>>>> 650e569efbcd247c5f64114b01e1a5b4a41d2b6d
     AdapterData adapterData;
 
     List<ArticleModel> listArticle = new ArrayList<ArticleModel>();

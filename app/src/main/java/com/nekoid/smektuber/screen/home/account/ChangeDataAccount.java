@@ -16,18 +16,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.config.volley.PublicApi;
 import com.nekoid.smektuber.config.volley.UrlsApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.screen.auth.Register;
+import com.nekoid.smektuber.screen.notification.Notif_Succes_change_Data_Account;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChangeDataAccount extends AppCompatActivity {
     ImageView UploadImage, ImageUser;
@@ -36,6 +46,8 @@ public class ChangeDataAccount extends AppCompatActivity {
 //    Button Back;
     Toolbar toolbar;
     Button updateButton;
+
+    Notif_Succes_change_Data_Account notif_succes_change_data_account = new Notif_Succes_change_Data_Account();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,37 +80,32 @@ public class ChangeDataAccount extends AppCompatActivity {
     }
 
     private void updateProfile() {
-        // Buat objek JSON untuk mengirim data ke API
-        String url = UrlsApi.USER;
-        JSONObject requestData = new JSONObject();
-        try {
-            // Tambahkan data yang ingin diupdate ke objek JSON
-            requestData.put("name", Name);
-            requestData.put("username", Username);
-            requestData.put("email", Email);
-            // ... tambahkan data lainnya sesuai kebutuhan
+        Map <String, String> params = new HashMap<>();
+        params.put("username", Username.getText().toString().trim());
+        params.put("name", Name.getText().toString());
+        params.put("email", Email.getText().toString());
+        PublicApi.addParams(params);
+        StringRequest Update = PublicApi.put("/user/update", Profile());
 
-            // Buat permintaan POST dengan menggunakan JsonObjectRequest
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestData,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            // Tangani respons dari API jika sukses
-                            Toast.makeText(ChangeDataAccount.this, "Profil berhasil diperbarui", Toast.LENGTH_SHORT).show();
-                            // Lakukan tindakan selanjutnya setelah memperbarui profil
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // Tangani error jika terjadi kesalahan dalam permintaan
-                            Toast.makeText(ChangeDataAccount.this, "Gagal memperbarui profil", Toast.LENGTH_SHORT).show();
-                            // Lakukan tindakan
-                        }
-                    });
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(Update);
+    }
+
+    protected Response.Listener<String> Profile() {
+        return response -> {
+            try {
+                JSONObject responses = new JSONObject(response);
+                if (responses.getInt("status") == 200) {
+                    JSONObject object = responses.getJSONObject("data");
+                    Toast.makeText(this, "Behasii", Toast.LENGTH_SHORT).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.r,notif_succes_change_data_account).commit();
+//                    Navigator.of(this).pop();
+                } else if (responses.getInt("status") == 400) {
+                    Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+            }
+        };
     }
 
     @Override

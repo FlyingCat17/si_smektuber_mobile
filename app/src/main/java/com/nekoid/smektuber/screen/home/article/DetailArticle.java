@@ -13,12 +13,10 @@ import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.models.ArticleModel;
 
 public class DetailArticle extends AppCompatActivity {
-<<<<<<< HEAD
-    private Toolbar toolbar;
-=======
+
     ImageView thumbnail;
     TextView title, description;
->>>>>>> 650e569efbcd247c5f64114b01e1a5b4a41d2b6d
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
