@@ -25,7 +25,7 @@ public class Login extends BaseActivity {
 
     private Button btnLogin;
 
-    private TextView txtToRegister;
+    private TextView txtToRegister, txtToForgotPassword;
 
     private TextInputLayout txtLayoutUsername, txtLayoutPassword;
 
@@ -53,7 +53,10 @@ public class Login extends BaseActivity {
         et_password = findViewById( R.id.et_password );
         btnLogin = findViewById( R.id.btnLogin );
         txtToRegister = findViewById( R.id.txtToRegister );
-
+        txtToForgotPassword = findViewById( R.id.forgotPw );
+        txtToForgotPassword.setOnClickListener( v->{
+            Navigator.push( this,ForgotPassword.class );
+        } );
         txtToRegister.setOnClickListener( v->{
             Navigator.push( this,Register.class );
         } );

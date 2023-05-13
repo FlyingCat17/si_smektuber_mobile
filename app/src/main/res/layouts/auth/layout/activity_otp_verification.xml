@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="22dp"
+    android:paddingLeft="22dp"
+    tools:context=".screen.auth.OtpVerification">
+    <include
+        android:id="@+id/backIcon"
+        layout="@layout/toolbar"/>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/titleOtp"
+        android:textSize="35sp"
+        android:textColor="@color/cyanblue"
+        android:fontFamily="@font/urbanist_bold"
+        android:layout_below="@+id/backIcon"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:id="@+id/tvDescTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/title"
+        android:text="@string/tvDescOtp"
+        android:fontFamily="@font/urbanist"
+        android:textSize="18sp"
+        android:textColor="@color/greyVariant"/>
+    <LinearLayout
+        android:id="@+id/formInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:layout_below="@+id/tvDescTitle">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutotp01"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_otp01"
+                    android:layout_width="70sp"
+                    android:layout_height="70sp"
+                    android:layout_marginRight="27dp"
+                    android:maxLength="1"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="25sp"
+                    android:fontFamily="@font/urbanist_medium"
+                    android:padding="0dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutotp02"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_otp02"
+                    android:layout_width="70sp"
+                    android:layout_height="70sp"
+                    android:layout_marginRight="27dp"
+                    android:maxLength="1"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="25sp"
+                    android:fontFamily="@font/urbanist_medium"
+                    android:padding="0dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutotp03"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_otp03"
+                    android:layout_width="70sp"
+                    android:layout_height="70sp"
+                    android:layout_marginRight="27dp"
+                    android:maxLength="1"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="25sp"
+                    android:fontFamily="@font/urbanist_medium"
+                    android:padding="0dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutotp04"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_otp04"
+                    android:layout_width="70sp"
+                    android:layout_height="70sp"
+                    android:layout_marginRight="27dp"
+                    android:maxLength="1"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="25sp"
+                    android:fontFamily="@font/urbanist_medium"
+                    android:padding="0dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <include
+            android:id="@+id/btnSendOtp"
+            layout="@layout/button"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginTop="40dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tidak menerima kode? "
+            android:textSize="15sp"
+            android:fontFamily="@font/urbanist"
+            android:textColor="@color/cyanblue"/>
+        <TextView
+            android:id="@+id/btnReSendOtp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="3dp"
+            android:text="Kirim Ulang"
+            android:textSize="15sp"
+            android:fontFamily="@font/urbanist_bold"
+            android:textColor="@color/blue03"/>
+    </LinearLayout>
+</RelativeLayout>

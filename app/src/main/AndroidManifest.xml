@@ -3,11 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
 
     <application
         android:allowBackup="true"
@@ -19,6 +16,15 @@
         android:theme="@style/Theme.Smektuber"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".screen.auth.OtpVerification"
+            android:exported="false" />
+        <activity
+            android:name=".screen.auth.ResetPassword"
+            android:exported="false" />
+        <activity
+            android:name=".screen.auth.ForgotPassword"
+            android:exported="false" />
         <activity
             android:name=".screen.home.ekstarkurikuler.Extrakurikuler"
             android:exported="false" />

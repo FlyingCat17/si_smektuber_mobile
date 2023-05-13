@@ -48,8 +48,8 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull AdapterData.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.articleDescription.setText(articleModels.get(position).title != null ? articleModels.get(position).title : "");
-        Picasso.get().load(articleModels.get(position).thumbnail).into(holder.articleThumbnail);
+        holder.DataTextArtikel.setText(articleModels.get(position).title != null ? articleModels.get(position).title : "");
+        holder.ImageArtikel.setImageBitmap(Utils.downloadImage(articleModels.get(position).thumbnail));
         holder.articleModel = articleModels.get(position);
     }
 
