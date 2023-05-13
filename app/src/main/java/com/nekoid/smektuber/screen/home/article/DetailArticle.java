@@ -1,7 +1,6 @@
 package com.nekoid.smektuber.screen.home.article;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -13,10 +12,8 @@ import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.models.ArticleModel;
 
 public class DetailArticle extends AppCompatActivity {
-
     ImageView thumbnail;
     TextView title, description;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

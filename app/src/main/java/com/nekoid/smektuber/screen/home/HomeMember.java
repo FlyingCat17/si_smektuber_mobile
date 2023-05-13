@@ -3,13 +3,6 @@ package com.nekoid.smektuber.screen.home;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,23 +19,21 @@ import com.nekoid.smektuber.screen.home.account.Account;
 import com.nekoid.smektuber.screen.home.dashboard.Dashboard;
 import com.nekoid.smektuber.screen.home.job.NoJobs;
 import com.nekoid.smektuber.screen.home.ppdb.Ppdb;
-import com.nekoid.smektuber.screen.notification.NotifNoInternet;
 
 public class HomeMember extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Account account = new Account();
     Dashboard dashboard = new Dashboard();
-
-    NotifNoInternet notifNoInternet = new NotifNoInternet();
-
-
 //    No_Information_Ppdb ppdb = new No_Information_Ppdb();
     NoJobs jobs = new NoJobs();
     Ppdb ppdb = new Ppdb();
     boolean doubleBackToExitPressedOnce = false;
 
+<<<<<<< HEAD
 //    private Internet internet;
 
+=======
+>>>>>>> b24c9c0a5e5f917d2a6c55e2eed14e633e1b266a
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +44,11 @@ public class HomeMember extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.r,dashboard).commit();
         StatusBarUtil.setTransparentStatusBar(this);
 
+<<<<<<< HEAD
 //        internet = new Internet();
 
+=======
+>>>>>>> b24c9c0a5e5f917d2a6c55e2eed14e633e1b266a
         Menu menu = bottomNavigationView.getMenu();
         SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
         String role = sharedPreferences.getString("role", null);
@@ -63,7 +57,6 @@ public class HomeMember extends AppCompatActivity {
         } else if (!role.isEmpty() && role.equals("siswa")) {
             menu.removeItem(R.id.Ppdb);
         }
-
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -86,6 +79,7 @@ public class HomeMember extends AppCompatActivity {
             }
         });
     }
+<<<<<<< HEAD
 
 //    protected void onResume() {
 //        super.onResume();
@@ -125,6 +119,8 @@ public class HomeMember extends AppCompatActivity {
 //        }
 //    }
 
+=======
+>>>>>>> b24c9c0a5e5f917d2a6c55e2eed14e633e1b266a
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {

@@ -19,7 +19,7 @@
                     android:layout_height="122dp">
 
                         <ImageView
-                            android:id="@+id/ImageArtikel1"
+                            android:id="@+id/ImageArtikel"
                             android:layout_width="217dp"
                             android:layout_height="122dp"
                             android:background="@drawable/rectangle_artikel"
@@ -29,7 +29,7 @@
             
 
                 <TextView
-                    android:id="@+id/DataTextArtikel1"
+                    android:id="@+id/DataTextArtikel"
                     android:layout_width="217dp"
                     android:layout_height="34dp"
                     android:layout_alignParentLeft="true"
