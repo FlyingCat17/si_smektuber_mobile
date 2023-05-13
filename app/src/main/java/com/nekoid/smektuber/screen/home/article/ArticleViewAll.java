@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import com.android.volley.Response;
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.adapter.AdapterData;
 import com.nekoid.smektuber.adapter.AdapterDataArticleViewAll;
 import com.nekoid.smektuber.config.volley.Endpoint;
 import com.nekoid.smektuber.config.volley.PublicApi;
@@ -28,8 +27,6 @@ public class ArticleViewAll extends BaseActivity {
     private RecyclerView recyclerView;
 
     List<ArticleModel> articleModelList = new ArrayList<ArticleModel>();
-
-    AdapterData adapterData;
     AdapterDataArticleViewAll adapterDataArticleViewAll;
 
     @Override
