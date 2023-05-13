@@ -2,6 +2,7 @@ package com.nekoid.smektuber.screen.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,16 +25,11 @@ public class HomeMember extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Account account = new Account();
     Dashboard dashboard = new Dashboard();
-//    No_Information_Ppdb ppdb = new No_Information_Ppdb();
+    //    No_Information_Ppdb ppdb = new No_Information_Ppdb();
     NoJobs jobs = new NoJobs();
     Ppdb ppdb = new Ppdb();
     boolean doubleBackToExitPressedOnce = false;
 
-<<<<<<< HEAD
-//    private Internet internet;
-
-=======
->>>>>>> b24c9c0a5e5f917d2a6c55e2eed14e633e1b266a
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +39,8 @@ public class HomeMember extends AppCompatActivity {
         bottomNavigationView.setItemTextColor(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.r,dashboard).commit();
         StatusBarUtil.setTransparentStatusBar(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-<<<<<<< HEAD
-//        internet = new Internet();
-
-=======
->>>>>>> b24c9c0a5e5f917d2a6c55e2eed14e633e1b266a
         Menu menu = bottomNavigationView.getMenu();
         SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
         String role = sharedPreferences.getString("role", null);
@@ -79,48 +71,6 @@ public class HomeMember extends AppCompatActivity {
             }
         });
     }
-<<<<<<< HEAD
-
-//    protected void onResume() {
-//        super.onResume();
-//        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-//        registerReceiver(internet, intentFilter);
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        unregisterReceiver(internet);
-//    }
-
-//    public class Internet extends BroadcastReceiver {
-//
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            if (isNetworkAvailable(context)) {
-//                Toast.makeText(context, "Koneksi internet tersedia", Toast.LENGTH_SHORT).show();
-//                // Lakukan tindakan yang sesuai ketika koneksi tersedia
-//            } else {
-//                getSupportFragmentManager().beginTransaction().replace(R.id.r,notifNoInternet).commit();
-//                Toast.makeText(context, "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
-//                // Lakukan tindakan yang sesuai ketika koneksi terputus
-//            }
-//        }
-
-//        private boolean isNetworkAvailable(Context context) {
-//            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//
-//            if (connectivityManager != null) {
-//                NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-//                return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-//            }
-//
-//            return false;
-//        }
-//    }
-
-=======
->>>>>>> b24c9c0a5e5f917d2a6c55e2eed14e633e1b266a
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
