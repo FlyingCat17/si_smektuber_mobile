@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.screen.home.article.DetailArticle;
@@ -48,8 +47,8 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull AdapterData.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.DataTextArtikel.setText(articleModels.get(position).title != null ? articleModels.get(position).title : "");
-        holder.ImageArtikel.setImageBitmap(Utils.downloadImage(articleModels.get(position).thumbnail));
+        holder.articleDescription.setText(articleModels.get(position).title != null ? articleModels.get(position).title : "");
+        Picasso.get().load(articleModels.get(position).thumbnail).into(holder.articleThumbnail);
         holder.articleModel = articleModels.get(position);
     }
 
