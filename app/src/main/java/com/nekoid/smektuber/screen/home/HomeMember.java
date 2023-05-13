@@ -41,7 +41,7 @@ public class HomeMember extends AppCompatActivity {
     Ppdb ppdb = new Ppdb();
     boolean doubleBackToExitPressedOnce = false;
 
-    private Internet internet;
+//    private Internet internet;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class HomeMember extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.r,dashboard).commit();
         StatusBarUtil.setTransparentStatusBar(this);
 
-        internet = new Internet();
+//        internet = new Internet();
 
         Menu menu = bottomNavigationView.getMenu();
         SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
@@ -70,19 +70,15 @@ public class HomeMember extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.Dashboard:
-                        onResume();
                         getSupportFragmentManager().beginTransaction().replace(R.id.r,dashboard).commit();
                         return true;
                     case R.id.Ppdb:
-                        onResume();
                         getSupportFragmentManager().beginTransaction().replace(R.id.r,ppdb).commit();
                         return true;
                     case R.id.Loker:
-                        onResume();
                         getSupportFragmentManager().beginTransaction().replace(R.id.r,jobs).commit();
                         return true;
                     case R.id.Akun:
-                        onResume();
                         getSupportFragmentManager().beginTransaction().replace(R.id.r,account).commit();
                         return true;
                 }
@@ -91,43 +87,43 @@ public class HomeMember extends AppCompatActivity {
         });
     }
 
-    protected void onResume() {
-        super.onResume();
-        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(internet, intentFilter);
-    }
+//    protected void onResume() {
+//        super.onResume();
+//        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+//        registerReceiver(internet, intentFilter);
+//    }
+//
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        unregisterReceiver(internet);
+//    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(internet);
-    }
+//    public class Internet extends BroadcastReceiver {
+//
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            if (isNetworkAvailable(context)) {
+//                Toast.makeText(context, "Koneksi internet tersedia", Toast.LENGTH_SHORT).show();
+//                // Lakukan tindakan yang sesuai ketika koneksi tersedia
+//            } else {
+//                getSupportFragmentManager().beginTransaction().replace(R.id.r,notifNoInternet).commit();
+//                Toast.makeText(context, "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
+//                // Lakukan tindakan yang sesuai ketika koneksi terputus
+//            }
+//        }
 
-    public class Internet extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (isNetworkAvailable(context)) {
-                Toast.makeText(context, "Koneksi internet tersedia", Toast.LENGTH_SHORT).show();
-                // Lakukan tindakan yang sesuai ketika koneksi tersedia
-            } else {
-                getSupportFragmentManager().beginTransaction().replace(R.id.r,notifNoInternet).commit();
-                Toast.makeText(context, "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
-                // Lakukan tindakan yang sesuai ketika koneksi terputus
-            }
-        }
-
-        private boolean isNetworkAvailable(Context context) {
-            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-            if (connectivityManager != null) {
-                NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-                return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-            }
-
-            return false;
-        }
-    }
+//        private boolean isNetworkAvailable(Context context) {
+//            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//
+//            if (connectivityManager != null) {
+//                NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+//                return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+//            }
+//
+//            return false;
+//        }
+//    }
 
     @Override
     public void onBackPressed() {
