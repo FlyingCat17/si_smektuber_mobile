@@ -142,6 +142,8 @@ public class Login extends AppCompatActivity {
                     String email = userData.getString("email");
                     String role = userData.getString("role");
                     String username = userData.getString("username");
+                    int expiresIn = jsonObject.getJSONObject("data").getInt("expires_in");
+
 
                     // save user data to SharedPreferences
                     SharedPreferences userPref = getSharedPreferences("user", MODE_PRIVATE);
@@ -151,6 +153,7 @@ public class Login extends AppCompatActivity {
                     editor.putString("email", email);
                     editor.putString("role", role);
                     editor.putString("username", username);
+                    editor.putLong("expires_at", System.currentTimeMillis() + (expiresIn * 1000)); // set token expiration time
                     editor.putBoolean( "isLoggedIn",true );
                     editor.apply();
 
