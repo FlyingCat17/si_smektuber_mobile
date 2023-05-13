@@ -1,5 +1,6 @@
 package com.nekoid.smektuber.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,49 +12,46 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.models.MajorModel;
+import com.nekoid.smektuber.screen.home.jurusan.DetailJurusan;
 import com.nekoid.smektuber.screen.home.jurusan.MenuJurus;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class AdapterDataJurusan extends RecyclerView.Adapter<AdapterDataJurusan.MyViewHolder> {
-    private final Context context;
-    private final List<MenuJurus> list;
-    private Dialog dialog;
+    private final Activity activity;
+    private final List<MajorModel> majorModels;
 
-    public void setDialog(Dialog dialog) {
-        this.dialog = dialog;
-    }
-
-    //    sintaks untuk mau membawa data dari card yang di klick
-    public interface Dialog{
-        void onClick(MenuJurus menuJurus);
-    }
-
-    public AdapterDataJurusan(Context context, List<MenuJurus> list) {
-        this.context = context;
-        this.list = list;
+    public AdapterDataJurusan(Activity activity, List<MajorModel> list) {
+        this.activity = activity;
+        this.majorModels = list;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.row_menu_jurusan, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.row_menu_jurusan, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.TitleMenuJurusan.setText(list.get(position).getTitleMenuJurus());
-        holder.ImageJurus.setImageDrawable(list.get(position).getImageJurus());
+        holder.TitleMenuJurusan.setText(majorModels.get(position).name);
+        Picasso.get().load(majorModels.get(position).photo).into(holder.ImageJurus);
+        holder.majorModel = majorModels.get(position);
     }
 
     @Override
     public int getItemCount() {
 
-        return list.size();
+        return majorModels.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
+
+        MajorModel majorModel;
         ImageView ImageJurus;
         TextView TitleMenuJurusan;
         public MyViewHolder(@NonNull View itemView) {
@@ -62,9 +60,7 @@ public class AdapterDataJurusan extends RecyclerView.Adapter<AdapterDataJurusan.
             TitleMenuJurusan = itemView.findViewById(R.id.TitleMenuJurusan);
 
             itemView.setOnClickListener(v -> {
-                if (dialog!=null){
-                    dialog.onClick(list.get(getLayoutPosition()));
-                }
+                Navigator.of(activity).push(DetailJurusan.class, majorModel);
             });
         }
     }

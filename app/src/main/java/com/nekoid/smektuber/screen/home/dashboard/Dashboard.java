@@ -21,6 +21,7 @@ import com.nekoid.smektuber.adapter.AdapterData;
 import com.nekoid.smektuber.config.volley.Endpoint;
 import com.nekoid.smektuber.config.volley.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.helpers.utils.LocalStorage;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.screen.home.about.AboutSchool;
 import com.nekoid.smektuber.screen.home.article.ArticleViewAll;
@@ -47,6 +48,8 @@ public class Dashboard extends Fragment {
     AdapterData adapterData;
 
     List<ArticleModel> listArticle = new ArrayList<ArticleModel>();
+
+    TextView fullName;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -99,25 +102,31 @@ public class Dashboard extends Fragment {
         ConstraintLayout n = view.findViewById(R.id.Map_Lokasi);
         ConstraintLayout extra = view.findViewById(R.id.Extrakurikuler);
         ConstraintLayout jurusan = view.findViewById(R.id.Jurusan);
+        fullName = view.findViewById(R.id.Fullname);
 
+        if (LocalStorage.userModel != null) {
+            fullName.setText(LocalStorage.userModel.name);
+        } else {
+            fullName.setText("");
+        }
 
         jurusan.setOnClickListener(v -> {
-            Navigator.of(getActivity()).push( Jurusan.class);
+            Navigator.of(getActivity()).push(Jurusan.class);
         });
         extra.setOnClickListener(v -> {
-            Navigator.of(getActivity()).push( Extrakurikuler.class);
+            Navigator.of(getActivity()).push(Extrakurikuler.class);
         });
         n.setOnClickListener(v -> {
-            Navigator.of(getActivity()).push( MapsActivity.class);
+            Navigator.of(getActivity()).push(MapsActivity.class);
         });
-        ntm.setOnClickListener(v ->{
-            Navigator.of(getActivity()).push( ArticleViewAll.class);
+        ntm.setOnClickListener(v -> {
+            Navigator.of(getActivity()).push(ArticleViewAll.class);
         });
         btn.setOnClickListener(v -> {
-            Navigator.of(getActivity()).push( VisiAndMisi.class);
+            Navigator.of(getActivity()).push(VisiAndMisi.class);
         });
         jk.setOnClickListener(v -> {
-            Navigator.of(getActivity()).push( AboutSchool.class);
+            Navigator.of(getActivity()).push(AboutSchool.class);
         });
         request();
 
@@ -137,16 +146,15 @@ public class Dashboard extends Fragment {
         return response -> {
             try {
                 JSONObject responses = new JSONObject(response);
-                if (responses.getInt("status") == 200) {
-                    JSONArray arrays = responses.getJSONArray("data");
-                    if (arrays.length() > 0) {
-                        for (int i = 0; i < arrays.length(); i++) {
-                            listArticle.add(ArticleModel.fromJson(new JSONObject(arrays.getString(i))));
-                            if (i == 5) break;
-                        }
-                        setAdapterData();
-                    }
+                if (responses.getInt("status") != 200) {
+                    return;
                 }
+                JSONArray arrays = responses.getJSONArray("data");
+                for (int i = 0; i < arrays.length(); i++) {
+                    listArticle.add(ArticleModel.fromJson(new JSONObject(arrays.getString(i))));
+                    if (i == 5) break;
+                }
+                setAdapterData();
             } catch (JSONException e) {
             }
         };

@@ -2,14 +2,22 @@ package com.nekoid.smektuber.helpers.utils;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.nekoid.smektuber.config.volley.Endpoint;
@@ -64,6 +72,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private List<StringRequest> requestList = new ArrayList<>();
 
+    private boolean isLogin = false;
+
     /**
      * <p>Base url</p>
      * 
@@ -83,6 +93,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             requestQueue.stop();
         }
         super.onDestroy();
+    }
+
+    public boolean isLogin() {
+        return isLogin;
     }
 
     /**
@@ -289,21 +303,28 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param password
      */
     public final void doLogin(String username, String password) {
-        StringRequest doAuth = new StringRequest(Request.Method.POST, BASE_URL + Endpoint.LOGIN.getUrl(), __onResponseAuth(username, password), onResponseError()) {
-            @NonNull
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("username", username);
-                params.put("password", password);
-                return params;
-            }
+        JsonObjectRequest doAuth = new JsonObjectRequest(Request.Method.POST,  BASE_URL + Endpoint.LOGIN.getUrl(), null,  response -> {
+            System.out.println(response);
+        }, error -> {
+            System.out.println(error);
+        }) {
+
+//            @NonNull
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("username", username);
+//                params.put("password", password);
+//                return params;
+//            }
 
             @Override
             public Map<String, String> getHeaders() {
                 return getHeader();
             }
         };
+
+        JsonObjectRequest auth = new JsonObjectRequest(BASE_URL + Endpoint.LOGIN.getUrl(), __onResponseAuth(username, password), error -> {});
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(doAuth);
@@ -316,8 +337,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 
      * @return Response.ErrorListener
      */
-    protected Response.ErrorListener onResponseError() {
-        return error -> {};
+    protected void onResponseError(VolleyError error) {
+
     }
 
     /**
@@ -329,11 +350,12 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param password
      * @return Response.Listener<String>
      */
-    private Response.Listener<String> __onResponseAuth(String username, String password) {
+    private Response.Listener<JSONObject> __onResponseAuth(String username, String password) {
         return response -> {
             try {
-                JSONObject responseBody = new JSONObject(response);
+                JSONObject responseBody = response;
                 if (responseBody.getInt("status") == 200) {
+                    this.isLogin = true;
                     setAuthPreferences(username, password);
                     JSONObject body = responseBody.getJSONObject("data");
                     responseAuthDataToToken(body);
@@ -394,7 +416,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private Map<String, String> getHeader() {
         Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/x-www-form-urlencoded");
+//        headers.put("Content-Type", "application/x-www-form-urlencoded");
+        headers.put("Content-Type", "application/json");
         return headers;
     }
 }

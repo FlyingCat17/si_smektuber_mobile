@@ -16,6 +16,7 @@ import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.screen.home.article.DetailArticle;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,11 +48,8 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull AdapterData.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        if (holder.DataTextArtikel != null) {
-            holder.DataTextArtikel.setText(articleModels.get(position).title != null ? articleModels.get(position).title : "");
-        }
-
-//        Picasso.get().load(articleModels.get(position).thumbnail).into(holder.ImageArtikel);
+        holder.DataTextArtikel.setText(articleModels.get(position).title != null ? articleModels.get(position).title : "");
+        holder.ImageArtikel.setImageBitmap(Utils.downloadImage(articleModels.get(position).thumbnail));
         holder.articleModel = articleModels.get(position);
     }
 
@@ -62,12 +60,12 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.MyViewHolder> 
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         ArticleModel articleModel;
-        ImageView ImageArtikel;
-        TextView DataTextArtikel;
+        ImageView articleThumbnail;
+        TextView articleDescription;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            ImageArtikel = itemView.findViewById(R.id.ImageArtikel);
-            DataTextArtikel = itemView.findViewById(R.id.DataTextArtikel);
+            articleThumbnail = itemView.findViewById(R.id.ImageArtikel);
+            articleDescription = itemView.findViewById(R.id.DataTextArtikel);
 
             itemView.setOnClickListener(v -> {
                 Navigator.of(activity).push(DetailArticle.class, articleModel);
