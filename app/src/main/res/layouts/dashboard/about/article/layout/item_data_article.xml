@@ -20,9 +20,10 @@
             app:cardCornerRadius="15dp"
             android:layout_height="121dp"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="17.64dp"
             android:layout_alignParentRight="true">
             <TextView
-                android:id="@+id/DataTextArtikel"
+                android:id="@+id/DataTextArtikelViewAll"
                 android:layout_width="wrap_content"
                 android:layout_height="121dp"
                 android:layout_alignParentLeft="true"
@@ -43,7 +44,7 @@
                 >
 
                 <ImageView
-                    android:id="@+id/ImageArtikel"
+                    android:id="@+id/ImageArtikelViewAll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/imageartikel"
