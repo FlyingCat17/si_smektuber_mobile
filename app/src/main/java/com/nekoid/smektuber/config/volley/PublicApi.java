@@ -1,16 +1,21 @@
 package com.nekoid.smektuber.config.volley;
 
+import android.app.Activity;
+
 import androidx.annotation.Nullable;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
+import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.helpers.utils.LocalStorage;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
 
 public class PublicApi {
+    private static BaseActivity baseActivity;
     private static String BASE_URL = "https://lutfisobri.my.id/api/v1";
 
     private static Map<String, String> params = new HashMap<>();
@@ -18,6 +23,12 @@ public class PublicApi {
 
     private static String token;
     private static int expiredTime;
+    private static Timer timer;
+    private static LocalStorage.Api api;
+
+    public static void setBaseActivity(BaseActivity baseActivity) {
+        PublicApi.baseActivity = baseActivity;
+    }
 
     // method get
     public static StringRequest get(String url, Response.Listener<java.lang.String> listener) {
@@ -75,6 +86,8 @@ public class PublicApi {
     public static void addToken(String token, int expiredTime) {
         PublicApi.token = token;
         PublicApi.expiredTime = expiredTime;
+        api = new LocalStorage.Api(token, expiredTime);
+        LocalStorage.setApi(api);
     }
 
     private static Response.ErrorListener onError() {
@@ -86,8 +99,16 @@ public class PublicApi {
     private static Map<String, String> getHeaders() {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/x-www-form-urlencoded");
+        System.out.println(token);
 
-        if (!token.isEmpty()) {
+        if (token != null) {
+            if (api.isExpired() && baseActivity != null) {
+                    baseActivity.doLogin(
+                            baseActivity.getAuthPreferences().getString("_username", ""),
+                            baseActivity.getAuthPreferences().getString("_credentials", "")
+                    );
+                return getHeaders();
+            }
             headers.put("Authorization", "Bearer " + token);
         }
 

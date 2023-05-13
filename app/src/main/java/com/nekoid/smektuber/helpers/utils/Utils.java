@@ -1,4 +1,4 @@
-package com.nekoid.smektuber.helpers;
+package com.nekoid.smektuber.helpers.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
