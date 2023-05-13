@@ -303,28 +303,22 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param password
      */
     public final void doLogin(String username, String password) {
-        JsonObjectRequest doAuth = new JsonObjectRequest(Request.Method.POST,  BASE_URL + Endpoint.LOGIN.getUrl(), null,  response -> {
-            System.out.println(response);
-        }, error -> {
-            System.out.println(error);
-        }) {
+        StringRequest doAuth = new StringRequest(Request.Method.POST,  BASE_URL + Endpoint.LOGIN.getUrl(), __onResponseAuth(username, password), error -> {onResponseError(error);}) {
 
-//            @NonNull
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("username", username);
-//                params.put("password", password);
-//                return params;
-//            }
+            @NonNull
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                params.put("password", password);
+                return params;
+            }
 
             @Override
             public Map<String, String> getHeaders() {
                 return getHeader();
             }
         };
-
-        JsonObjectRequest auth = new JsonObjectRequest(BASE_URL + Endpoint.LOGIN.getUrl(), __onResponseAuth(username, password), error -> {});
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(doAuth);
@@ -350,10 +344,10 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param password
      * @return Response.Listener<String>
      */
-    private Response.Listener<JSONObject> __onResponseAuth(String username, String password) {
+    private Response.Listener<String> __onResponseAuth(String username, String password) {
         return response -> {
             try {
-                JSONObject responseBody = response;
+                JSONObject responseBody = new JSONObject(response);
                 if (responseBody.getInt("status") == 200) {
                     this.isLogin = true;
                     setAuthPreferences(username, password);
@@ -416,8 +410,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private Map<String, String> getHeader() {
         Map<String, String> headers = new HashMap<>();
-//        headers.put("Content-Type", "application/x-www-form-urlencoded");
-        headers.put("Content-Type", "application/json");
+        headers.put("Content-Type", "application/x-www-form-urlencoded");
         return headers;
     }
 }
