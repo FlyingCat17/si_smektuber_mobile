@@ -1,51 +1,31 @@
 package com.nekoid.smektuber.screen.home.dashboard;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.adapter.AdapterData;
-import com.nekoid.smektuber.adapter.AdapterDataExtra;
-import com.nekoid.smektuber.adapter.AdapterDataJurusan;
+import com.nekoid.smektuber.config.volley.Endpoint;
 import com.nekoid.smektuber.config.volley.PublicApi;
-import com.nekoid.smektuber.config.volley.UrlsApi;
-import com.nekoid.smektuber.helpers.Utils;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.screen.home.about.AboutSchool;
 import com.nekoid.smektuber.screen.home.article.ArticleViewAll;
-import com.nekoid.smektuber.screen.home.article.MenuArtikelDashboard;
-
 import com.nekoid.smektuber.screen.home.ekstarkurikuler.Extrakurikuler;
-import com.nekoid.smektuber.screen.home.ekstarkurikuler.MenuExtra;
 import com.nekoid.smektuber.screen.home.jurusan.Jurusan;
-import com.nekoid.smektuber.screen.home.jurusan.MenuJurus;
 import com.nekoid.smektuber.screen.home.maps.MapsActivity;
 import com.nekoid.smektuber.screen.home.visiMisi.VisiAndMisi;
 
@@ -53,12 +33,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -123,14 +99,7 @@ public class Dashboard extends Fragment {
         ConstraintLayout n = view.findViewById(R.id.Map_Lokasi);
         ConstraintLayout extra = view.findViewById(R.id.Extrakurikuler);
         ConstraintLayout jurusan = view.findViewById(R.id.Jurusan);
-        ImageView image = view.findViewById(R.id.IconPesan);
 
-
-        image.setOnClickListener(v -> {
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse("https://wa.me/+6285604982258"));
-            startActivity(intent);
-        });
 
         jurusan.setOnClickListener(v -> {
             Navigator.of(getActivity()).push( Jurusan.class);
@@ -157,7 +126,7 @@ public class Dashboard extends Fragment {
     }
 
     protected void request() {
-        StringRequest getArticle = PublicApi.get("/article", listArticles());
+        StringRequest getArticle = PublicApi.get(Endpoint.LIST_ARTICLE.getUrl(), listArticles());
         PublicApi.addParams(null);
 
         RequestQueue queue = Volley.newRequestQueue(getContext());

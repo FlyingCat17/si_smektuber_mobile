@@ -23,6 +23,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.config.volley.Endpoint;
+import com.nekoid.smektuber.config.volley.PublicApi;
 import com.nekoid.smektuber.config.volley.UrlsApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.screen.auth.Login;
@@ -117,45 +119,27 @@ public class Account extends Fragment {
     }
 
     private void doLogout() {
-        //get Tokens
-        SharedPreferences userPref = getActivity().getSharedPreferences( "user", MODE_PRIVATE );
-        String accessToken = userPref.getString( "access_token", "" );
+        SharedPreferences user = getActivity().getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences token = getActivity().getSharedPreferences("__accessToken", MODE_PRIVATE);
+        SharedPreferences auth = getActivity().getSharedPreferences("__auth", MODE_PRIVATE);
 
-        // add access token to headers
-        Map<String, String> headers = new HashMap<>();
-        headers.put( "Authorization", "Bearer " + accessToken );
-
-        // send request to server using Volley
-        StringRequest request = new StringRequest( Request.Method.POST, UrlsApi.LOGOUT, response -> {
+        StringRequest request = PublicApi.post(Endpoint.LOGOUT.getUrl(), response -> {
             try {
-                JSONObject jsonObject = new JSONObject( response );
-                if (jsonObject.getInt( "status" ) == 200) {
-                    // remove user data from SharedPreferences
-                    SharedPreferences.Editor editor = userPref.edit();
-                    editor.clear();
-                    editor.apply();
+                JSONObject responseBody = new JSONObject(response);
+                if (responseBody.getInt("status") == 200) {
+                    user.edit().clear().apply();
+                    token.edit().clear().apply();
+                    auth.edit().clear().apply();
 
-                    Navigator.of( getActivity() ).pushReplacement( Login.class );
-                } else {
-//                    Toast.makeText(this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                    Navigator.of(getActivity()).pushReplacement(Login.class);
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
-        }, error -> {
-            error.printStackTrace();
-
-        } ) {
-            // add headers to POST request
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return headers;
-            }
-        };
+        });
 
         // add request to Volley request queue
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         queue.add( request );
-
     }
 }
