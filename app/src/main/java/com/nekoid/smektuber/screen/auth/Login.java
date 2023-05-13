@@ -2,11 +2,15 @@ package com.nekoid.smektuber.screen.auth;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nekoid.smektuber.R;
@@ -62,11 +66,16 @@ public class Login extends BaseActivity {
                 // we will send data to server
                 doLogin(et_username.getText().toString(), et_password.getText().toString());
 
-                // we need to peek isLogin value
-                if (getUserPreferences().getBoolean("isLogin", false)) {
-                    Navigator.of(this).pushReplacement(HomeMember.class);
-                    Toast.makeText( this, "Login Berhasil", Toast.LENGTH_SHORT ).show();
-                }
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // we need to peek isLogin value
+                        if (isLogin()) {
+                            Toast.makeText( Login.this, "Login Berhasil", Toast.LENGTH_SHORT ).show();
+                            Navigator.of(Login.this).pushReplacement(HomeMember.class);
+                        }
+                    }
+                }, 4000);
             }
         });
 
@@ -100,6 +109,11 @@ public class Login extends BaseActivity {
     @Override
     protected void onLoginError(JSONObject response) throws JSONException {
         Toast.makeText(this, response.getString("message"), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResponseError(VolleyError error) {
+        super.onResponseError(error);
     }
 
     private boolean validate(){
