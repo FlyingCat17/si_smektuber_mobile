@@ -2,6 +2,7 @@ package com.nekoid.smektuber.screen.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,7 +25,7 @@ public class HomeMember extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Account account = new Account();
     Dashboard dashboard = new Dashboard();
-//    No_Information_Ppdb ppdb = new No_Information_Ppdb();
+    //    No_Information_Ppdb ppdb = new No_Information_Ppdb();
     NoJobs jobs = new NoJobs();
     Ppdb ppdb = new Ppdb();
     boolean doubleBackToExitPressedOnce = false;
@@ -38,6 +39,7 @@ public class HomeMember extends AppCompatActivity {
         bottomNavigationView.setItemTextColor(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.r,dashboard).commit();
         StatusBarUtil.setTransparentStatusBar(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Menu menu = bottomNavigationView.getMenu();
         SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
