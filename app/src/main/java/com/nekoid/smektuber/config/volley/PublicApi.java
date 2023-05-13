@@ -99,10 +99,10 @@ public class PublicApi {
     private static Map<String, String> getHeaders() {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/x-www-form-urlencoded");
-        System.out.println(token);
 
         if (token != null) {
             if (api.isExpired() && baseActivity != null) {
+                System.out.println("token expired");
                     baseActivity.doLogin(
                             baseActivity.getAuthPreferences().getString("_username", ""),
                             baseActivity.getAuthPreferences().getString("_credentials", "")
