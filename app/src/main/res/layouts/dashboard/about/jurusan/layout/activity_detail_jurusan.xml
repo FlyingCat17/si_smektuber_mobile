@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.home.DetailJurusan">
+    tools:context=".screen.home.jurusan.DetailJurusan">
 
     <include
         android:id="@+id/backIcon"
@@ -41,6 +41,7 @@
                 android:id="@+id/ImageJurusan"
                 android:layout_width="match_parent"
                 android:layout_height="310.37dp"
+                android:scaleType="fitXY"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/imagenoarticle"
                 />

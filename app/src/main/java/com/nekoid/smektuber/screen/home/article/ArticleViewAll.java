@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import com.android.volley.Response;
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.adapter.AdapterData;
+import com.nekoid.smektuber.adapter.AdapterDataArticleViewAll;
 import com.nekoid.smektuber.config.volley.Endpoint;
 import com.nekoid.smektuber.config.volley.PublicApi;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
@@ -27,15 +27,14 @@ public class ArticleViewAll extends BaseActivity {
     private RecyclerView recyclerView;
 
     List<ArticleModel> articleModelList = new ArrayList<ArticleModel>();
-
-    AdapterData adapterData;
+    AdapterDataArticleViewAll adapterDataArticleViewAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_view_all);
         setToolbar();
-        recyclerView = findViewById(R.id.rvData);
+        recyclerView = findViewById(R.id.rvDataViewAll);
         setAdapterData();
         addRequest(PublicApi.get(Endpoint.LIST_ARTICLE.getUrl(), listArticles()));
         runQueue();
@@ -72,10 +71,10 @@ public class ArticleViewAll extends BaseActivity {
     }
 
     protected void setAdapterData() {
-        adapterData = new AdapterData(this, articleModelList);
+        adapterDataArticleViewAll = new AdapterDataArticleViewAll(this, articleModelList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapterData);
+        recyclerView.setAdapter(adapterDataArticleViewAll);
     }
 }
