@@ -1,14 +1,9 @@
 package com.nekoid.smektuber.screen.home;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -20,12 +15,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
+import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.screen.home.account.Account;
 import com.nekoid.smektuber.screen.home.dashboard.Dashboard;
 import com.nekoid.smektuber.screen.home.job.NoJobs;
 import com.nekoid.smektuber.screen.home.ppdb.Ppdb;
 
-public class HomeMember extends AppCompatActivity {
+public class HomeMember extends BaseActivity {
     private static final int REQUEST_PERMISSIONS = 100;
     BottomNavigationView bottomNavigationView;
     Account account = new Account();
@@ -47,7 +43,7 @@ public class HomeMember extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Menu menu = bottomNavigationView.getMenu();
-        SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getUserPreferences();
         String role = sharedPreferences.getString("role", null);
         if (!role.isEmpty() && role.equals("member")) {
             menu.removeItem(R.id.Loker);
@@ -75,8 +71,6 @@ public class HomeMember extends AppCompatActivity {
                 return false;
             }
         });
-
-        onPermission();
     }
     @Override
     public void onBackPressed() {
@@ -88,21 +82,5 @@ public class HomeMember extends AppCompatActivity {
         Toast.makeText(this, "Ketuk sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
-    }
-
-    private void onPermission() {
-        if ((ContextCompat.checkSelfPermission(getApplicationContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(getApplicationContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
-            if ((ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) && (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE))) {
-
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_PERMISSIONS);
-            }
-        }
     }
 }
