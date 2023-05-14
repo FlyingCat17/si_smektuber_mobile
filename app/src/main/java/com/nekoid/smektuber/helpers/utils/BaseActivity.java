@@ -2,6 +2,7 @@ package com.nekoid.smektuber.helpers.utils;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.nekoid.smektuber.config.volley.Endpoint;
 import com.nekoid.smektuber.config.volley.PublicApi;
 import com.nekoid.smektuber.models.UserModel;
@@ -84,6 +87,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         PublicApi.setBaseActivity(this);
+        LocalStorage.setCache(new Cache(getCacheDir()));
         super.onCreate(savedInstanceState);
     }
 
@@ -160,7 +164,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 
      * @return String
      */
-    private String getToken() {
+    protected String getToken() {
         return this.getTokenPreferences().getString(accessToken, "");
     }
 
@@ -195,6 +199,10 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public final SharedPreferences getAuthPreferences() {
         return getSharedPreferences("__auth", MODE_PRIVATE);
+    }
+
+    protected final String getCredentials() {
+        return getAuthPreferences().getString("_credentials", "");
     }
 
     /**
@@ -412,5 +420,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/x-www-form-urlencoded");
         return headers;
+    }
+
+    /**
+     * <p> the function which triggered when the VALIDATE button is clicked </p>
+     * <p>which validates the email address entered by the user</p>
+     */
+    public final boolean emailValidator(TextInputLayout textInputLayout, TextInputEditText textInputEditText) {
+
+        // extract the entered data from the EditText
+        String emailToText = textInputEditText.getText().toString();
+
+        // Android offers the inbuilt patterns which the entered
+        // data from the EditText field needs to be compared with
+        // In this case the entered data needs to compared with
+        // the EMAIL_ADDRESS, which is implemented same below
+        if (!emailToText.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
+            textInputLayout.setErrorEnabled(false);
+            return true;
+        }
+        textInputLayout.setErrorEnabled(true);
+        textInputLayout.setError("silahkan isi email dengan benar");
+        return false;
     }
 }

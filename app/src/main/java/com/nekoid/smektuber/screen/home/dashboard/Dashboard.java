@@ -12,10 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.adapter.AdapterData;
 import com.nekoid.smektuber.config.volley.Endpoint;
@@ -23,6 +19,8 @@ import com.nekoid.smektuber.config.volley.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.LocalStorage;
 import com.nekoid.smektuber.models.ArticleModel;
+import com.nekoid.smektuber.network.Http;
+import com.nekoid.smektuber.network.Response;
 import com.nekoid.smektuber.screen.home.about.AboutSchool;
 import com.nekoid.smektuber.screen.home.article.ArticleViewAll;
 import com.nekoid.smektuber.screen.home.ekstarkurikuler.Extrakurikuler;
@@ -34,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +88,7 @@ public class Dashboard extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+//        getRequest();
     }
 
     @Override
@@ -128,36 +128,40 @@ public class Dashboard extends Fragment {
         jk.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(AboutSchool.class);
         });
-        request();
+
+        getRequest();
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    protected void request() {
-        StringRequest getArticle = PublicApi.get(Endpoint.LIST_ARTICLE.getUrl(), listArticles());
-        PublicApi.addParams(null);
-
-        RequestQueue queue = Volley.newRequestQueue(getContext());
-        queue.add(getArticle);
+    private void getRequest() {
+        try {
+            Http.get(Endpoint.LIST_ARTICLE.getUrl(), PublicApi.getHeaders(), this::getListArticles);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    protected Response.Listener<String> listArticles() {
-        return response -> {
-            try {
-                JSONObject responses = new JSONObject(response);
-                if (responses.getInt("status") != 200) {
-                    return;
-                }
-                JSONArray arrays = responses.getJSONArray("data");
-                for (int i = 0; i < arrays.length(); i++) {
-                    listArticle.add(ArticleModel.fromJson(new JSONObject(arrays.getString(i))));
-                    if (i == 5) break;
-                }
-                setAdapterData();
-            } catch (JSONException e) {
+    protected void getListArticles(Response response) {
+        listArticle.clear();
+        try {
+            if (response.statusCode != 200) {
+                return;
             }
-        };
+
+            JSONObject responses = new JSONObject(response.body.toString());
+            JSONArray arrays = responses.getJSONArray("data");
+
+            for (int i = 0; i < arrays.length(); i++) {
+                listArticle.add(ArticleModel.fromJson(new JSONObject(arrays.getString(i))));
+                if (i == 5) break;
+            }
+
+            setAdapterData();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected void setAdapterData() {
