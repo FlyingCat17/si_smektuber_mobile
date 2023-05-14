@@ -1,36 +1,23 @@
 package com.nekoid.smektuber.network;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Process;
 
 import androidx.annotation.Nullable;
-
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.lang.annotation.Native;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.file.Files;
-import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.Future;
 
-public class Request extends Thread {
+public class Request {
 
     private final URL mUrl;
 
@@ -48,6 +35,8 @@ public class Request extends Thread {
 
     private Response response = null;
 
+    private Async async;
+
     private String charset = "UTF-8";
 
     private String boundary = "*R*I*Y*U*";
@@ -62,7 +51,7 @@ public class Request extends Thread {
      * @param u the URL
      */
     public Request(URL u, String method, Map<String, String> headers, Map<String, String> body,
-            @Nullable Map<String, File> file, @Nullable Map<String, Bitmap> bitmap, @Nullable Map<String, Uri> uri) {
+                  @Nullable Map<String, File> file, @Nullable Map<String, Bitmap> bitmap, @Nullable Map<String, Uri> uri) {
         mUrl = u;
         mMethod = method;
         mHeaders = headers;
@@ -72,8 +61,19 @@ public class Request extends Thread {
         mUri = uri;
     }
 
+    public Async getAsync() {
+        return async;
+    }
+
+    public void setAsync(Async async) {
+        this.async = async;
+    }
+
     public void setResponse(Response response) {
         this.response = response;
+//        if (this.async != null) {
+//            async.onResponse(response);
+//        }
     }
 
     public Response getResponse() {
@@ -83,7 +83,9 @@ public class Request extends Thread {
     private void setProperty(HttpURLConnection connection) throws ProtocolException {
         connection.setUseCaches(false);
         connection.setRequestMethod(mMethod);
-        connection.setDoOutput(true);
+        if (mMethod != "GET") {
+            connection.setDoOutput(true);
+        }
         connection.setDoInput(true);
         connection.setRequestProperty("Connection", "keep-alive");
         connection.setRequestProperty("User-Agent", "Kateru-riyu");
@@ -220,10 +222,9 @@ public class Request extends Thread {
         }
 
         HttpURLConnection connection = (HttpURLConnection) mUrl.openConnection();
+
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         setProperty(connection);
-        boolean isContentType = false;
-//        PrintWriter writer = new PrintWriter(connection.getOutputStream(), true);
 
         try {
             setHeaders(connection);
@@ -231,18 +232,12 @@ public class Request extends Thread {
             if (this.mBody != null) {
                 StringBuilder data = new StringBuilder();
                 for (Map.Entry<String, String> entry : this.mBody.entrySet()) {
-//                    addFormField(entry.getKey(), entry.getValue(), writer);
                     data.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
                 }
                 byte[] dataBytes = data.toString().getBytes();
                 connection.setRequestProperty("Content-Length", String.valueOf(dataBytes.length));
                 connection.getOutputStream().write(dataBytes);
-                isContentType = true;
             }
-
-//            writer.append(newLine).flush();
-//            writer.append(twoHyphens + boundary + twoHyphens).append(newLine);
-//            writer.close();
 
             connection.connect();
             this.setResponse(new Response(connection));
@@ -250,16 +245,6 @@ public class Request extends Thread {
             throw new RuntimeException(e);
         } finally {
             connection.disconnect();
-        }
-    }
-
-    @Override
-    public void run() {
-        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
-        try {
-            connect();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 }
