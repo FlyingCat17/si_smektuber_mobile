@@ -41,6 +41,7 @@
                 android:id="@+id/ImageSchool"
                 android:layout_width="match_parent"
                 android:layout_height="310.37dp"
+                android:scaleType="fitXY"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/imagenoimageschool"
                 />
@@ -89,6 +90,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
+                android:scaleType="fitXY"
                 android:layout_below="@+id/Titleheadmaster"
                 android:background="@drawable/imageheadmaster"
                 />
