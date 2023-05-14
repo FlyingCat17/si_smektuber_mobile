@@ -69,11 +69,8 @@ public class VisiAndMisi extends BaseActivity {
         contentVM = findViewById(R.id.cVM);
 //        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
 //        swipeRefreshLayout.setOnRefreshListener(this);
-//        cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
-        // Set up network request queue
-//        Network network = new BasicNetwork(new HurlStack());
-//        queue = new RequestQueue(cache, network);
-//        queue.start();
+
+
     }
 
     protected Response.Listener<String> onResponse() {
@@ -97,21 +94,7 @@ public class VisiAndMisi extends BaseActivity {
     }
 
 
-//    private void fetchData() {
-////        addRequest(PublicApi.get(Endpoint.ABOUT.getUrl(), onResponse()));
-//        String url = Endpoint.ABOUT.getUrl();
-//        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, onResponse(),
-//                error -> {
-//                    // handle error
-//                    progressBar.setVisibility(View.GONE);
-//                    contentVM.setVisibility(View.VISIBLE);
-//                });
-//        runQueue();
-//    }
-
     private void setDataToView(AboutModel aboutModel) {
-//        visi.setText(aboutModel.getVisi());
-//        misi.setText(aboutModel.getMisi());
         visi.setText( aboutModel.visi );
         misi.setText( aboutModel.misi );
 

@@ -18,6 +18,8 @@ import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.screen.home.HomeMember;
+import com.nekoid.smektuber.screen.notification.LoadingDialog;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,7 +67,9 @@ public class Login extends BaseActivity {
             if (validate()){
                 // we will send data to server
                 doLogin(et_username.getText().toString(), et_password.getText().toString());
-
+                // Create a LoadingDialog object and start loading
+                LoadingDialog loadingDialog = new LoadingDialog(Login.this);
+                loadingDialog.startLoading();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -74,8 +78,10 @@ public class Login extends BaseActivity {
                             Toast.makeText( Login.this, "Login Berhasil", Toast.LENGTH_SHORT ).show();
                             Navigator.of(Login.this).pushReplacement(HomeMember.class);
                         }
+                        Toast.makeText( Login.this, "Login Gagal", Toast.LENGTH_SHORT ).show();
+                        loadingDialog.isDismiss();
                     }
-                }, 4000);
+                }, 3000);
             }
         });
 
