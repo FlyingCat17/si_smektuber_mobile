@@ -166,10 +166,10 @@ public class ChangeDataAccount extends BaseActivity {
         return updatePassword;
     }
 
-    private Map<String, String> getUpdateAvatar() {
-        Map<String, String> updateAvatar = new HashMap<>();
-        updateAvatar.put("avatar", uri.toString());
-        return updateAvatar;
+    private Map<String, File> getUpdateAvatar() {
+        Map<String, File> avatar = new HashMap<>();
+        avatar.put("avatar", new File(getExternalCacheDir(), new File(this.uri.toString()).getName()));
+        return avatar;
     }
 
     /**
@@ -212,18 +212,24 @@ public class ChangeDataAccount extends BaseActivity {
             if (!emailValidator(layoutCaEmail, caEmail)) return;
 
             // add request for update account
-            doAccountUpdate();
+            try {
+                Http.put(Endpoint.UPDATE_USER.getUrl(), getHeaders(), getUpdateAccount(), this::doAccountUpdate);
 
-            // user change avatar
-            if (isUpdateAvatar) {
-                doUpdateAvatar();
-                isUpdateAvatar = false;
+                // user change avatar
+                if (isUpdateAvatar) {
+                    Http.multipartFile(Endpoint.UPDATE_AVATAR.getUrl(), getUpdateAvatar(), getHeaders(), this::doUpdateAvatar);
+                    isUpdateAvatar = false;
+                }
+
+                // user want to change password
+                if (isChangePassword()) {
+                    Http.put(Endpoint.UPDATE_PASSWORD.getUrl(), getHeaders(), getUpdatePassword(), this::doChangePassword);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
-            // user want to change password
-            if (isChangePassword()) {
-                doChangePassword();
-            }
+
 
             resetViewPassword();
         });
@@ -267,9 +273,8 @@ public class ChangeDataAccount extends BaseActivity {
         return headers;
     }
 
-    private void doAccountUpdate() {
+    private void doAccountUpdate(Response response) {
         try {
-            Response response = Http.put(Endpoint.UPDATE_USER.getUrl(), getHeaders(), getUpdateAccount());
             JSONObject body = new JSONObject(response.body.toString());
             if (response.statusCode != 200) {
                 Toast.makeText(this, body.getString("message"), Toast.LENGTH_SHORT).show();
@@ -281,32 +286,26 @@ public class ChangeDataAccount extends BaseActivity {
 
             // you can add more action after update account
             Toast.makeText(this, "Berhasil memperbarui akun", Toast.LENGTH_SHORT).show();
-        } catch (IOException | JSONException e) {
+        } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void doChangePassword() {
+    private void doChangePassword(Response response) {
         try {
-            Response response = Http.put(Endpoint.UPDATE_PASSWORD.getUrl(), getHeaders(), getUpdatePassword());
             JSONObject body = new JSONObject(response.body.toString());
             if (response.statusCode != 202) {
                 Toast.makeText(this, body.getString("message"), Toast.LENGTH_SHORT).show();
                 return;
             }
             doLogin(username(), password());
-        } catch (IOException | JSONException e) {
+        } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void doUpdateAvatar() {
+    private void doUpdateAvatar(Response response) {
         try {
-            Map<String, File> body = new HashMap<>();
-            body.put("avatar", new File(getExternalCacheDir(), new File(this.uri.toString()).getName()));
-
-            Response response = Http.multipartFile(Endpoint.UPDATE_AVATAR.getUrl(), body, getHeaders());
-
             if (response.statusCode != 200) {
                 System.out.println(response.body);
                 Toast.makeText(this, "engror" + response.statusCode, Toast.LENGTH_SHORT).show();
@@ -318,7 +317,7 @@ public class ChangeDataAccount extends BaseActivity {
             userModel = UserModel.fromJson(responseBody.getJSONObject("data"));
             LocalStorage.setUserModel(userModel);
             setModelToView();
-        } catch (IOException | JSONException e) {
+        } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }
