@@ -26,10 +26,8 @@
         android:layout_centerHorizontal="true"
         />
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvData"
+                android:id="@+id/rvDataViewAll"
                 android:layout_marginTop="34dp"
-                android:paddingRight="22dp"
-                android:paddingLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/TitleArtikel"/>
