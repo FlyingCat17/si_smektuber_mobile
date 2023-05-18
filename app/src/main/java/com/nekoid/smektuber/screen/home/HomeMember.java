@@ -1,7 +1,6 @@
 package com.nekoid.smektuber.screen.home;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.SharedPreferences;
@@ -16,12 +15,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
+import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.screen.home.account.Account;
 import com.nekoid.smektuber.screen.home.dashboard.Dashboard;
 import com.nekoid.smektuber.screen.home.job.NoJobs;
 import com.nekoid.smektuber.screen.home.ppdb.Ppdb;
 
-public class HomeMember extends AppCompatActivity {
+public class HomeMember extends BaseActivity {
+    private static final int REQUEST_PERMISSIONS = 100;
     BottomNavigationView bottomNavigationView;
     Account account = new Account();
     Dashboard dashboard = new Dashboard();
@@ -42,7 +43,7 @@ public class HomeMember extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Menu menu = bottomNavigationView.getMenu();
-        SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getUserPreferences();
         String role = sharedPreferences.getString("role", null);
         if (!role.isEmpty() && role.equals("member")) {
             menu.removeItem(R.id.Loker);

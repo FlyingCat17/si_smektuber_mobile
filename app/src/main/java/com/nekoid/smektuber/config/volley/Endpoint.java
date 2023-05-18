@@ -24,7 +24,7 @@ public enum Endpoint {
     // USER
     GET_USER("/user/detail"),
     UPDATE_USER("/user/update"),
-    UPDATE_AVATAR("/user/update-avatar"),
+    UPDATE_AVATAR("/user/avatar"),
 
     // PPDB
 
