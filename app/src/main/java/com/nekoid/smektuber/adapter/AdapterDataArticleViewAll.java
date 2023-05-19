@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.models.ArticleModel;
+import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.screen.home.article.DetailArticle;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class AdapterDataArticleViewAll extends RecyclerView.Adapter<AdapterDataA
     @Override
     public void onBindViewHolder(@NonNull AdapterDataArticleViewAll.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.articleDescription.setText(articleModels.get(position).title != null ? articleModels.get(position).title : "");
-        Picasso.get().load(articleModels.get(position).thumbnail).into(holder.articleThumbnail);
+        Http.loadImage(articleModels.get(position).thumbnail, holder.articleThumbnail);
         holder.articleModel = articleModels.get(position);
     }
 

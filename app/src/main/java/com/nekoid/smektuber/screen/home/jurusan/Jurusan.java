@@ -4,25 +4,18 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.android.volley.Response;
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.adapter.AdapterDataExtra;
 import com.nekoid.smektuber.adapter.AdapterDataJurusan;
-import com.nekoid.smektuber.config.volley.Endpoint;
-import com.nekoid.smektuber.config.volley.PublicApi;
+import com.nekoid.smektuber.api.*;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
-import com.nekoid.smektuber.models.ExtracurricularModel;
 import com.nekoid.smektuber.models.MajorModel;
+import com.nekoid.smektuber.network.*;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Jurusan extends BaseActivity {
     private RecyclerView recyclerView;
@@ -34,27 +27,26 @@ public class Jurusan extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jurusan);
         recyclerView = findViewById(R.id.rvDataJurusan);
-
-        addRequest(PublicApi.get(Endpoint.LIST_MAJOR.getUrl(), onResponse()));
-        runQueue();
+        Http.get(Endpoint.LIST_MAJOR.getUrl(), PublicApi.getHeaders(), this::onResponse);
     }
 
-    protected final Response.Listener<String> onResponse() {
-        return response -> {
-            try {
-                JSONObject rawBody = new JSONObject(response);
-                if (rawBody.getInt("status") != 200) {
-                    return;
-                }
-                JSONArray listExtra = rawBody.getJSONArray("data");
-                for (int i = 0; i < listExtra.length(); i++) {
-                    majorModels.add(MajorModel.fromJson(new JSONObject(listExtra.getString(i))));
-                }
-                setAdapterExtracurricular();
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
+    protected final void onResponse(Response response) {
+        if (response.statusCode != 200) {
+            return;
+        }
+        try {
+            JSONObject rawBody = new JSONObject(response.body.toString());
+            if (rawBody.getInt("status") != 200) {
+                return;
             }
-        };
+            JSONArray listExtra = rawBody.getJSONArray("data");
+            for (int i = 0; i < listExtra.length(); i++) {
+                majorModels.add(MajorModel.fromJson(new JSONObject(listExtra.getString(i))));
+            }
+            setAdapterExtracurricular();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected final void setAdapterExtracurricular() {
