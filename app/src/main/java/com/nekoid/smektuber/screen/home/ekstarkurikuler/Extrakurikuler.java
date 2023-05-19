@@ -1,5 +1,6 @@
 package com.nekoid.smektuber.screen.home.ekstarkurikuler;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.adapter.AdapterDataExtra;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.models.ExtracurricularModel;
 import com.nekoid.smektuber.network.Http;
@@ -24,6 +26,8 @@ import java.util.List;
 
 public class Extrakurikuler extends BaseActivity {
     private RecyclerView recyclerView;
+
+    private Toolbar toolbar;
     private AdapterDataExtra adapterDataExtra;
 
     private List<ExtracurricularModel> extracurricularModels = new ArrayList<>();
@@ -32,6 +36,7 @@ public class Extrakurikuler extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extrakurikuler);
+        setToolbar();
         recyclerView = findViewById(R.id.rvDataExtra);
         Http.get(Endpoint.LIST_EXTRACURRICULAR.getUrl(), PublicApi.getHeaders(), this::onResponse);
     }
@@ -60,5 +65,17 @@ public class Extrakurikuler extends BaseActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterDataExtra);
+    }
+
+    private void setToolbar(){
+        toolbar = findViewById(R.id.backIcon);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Navigator.of(this).pop();
+        return true;
     }
 }

@@ -1,5 +1,6 @@
 package com.nekoid.smektuber.screen.home.jurusan;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.adapter.AdapterDataJurusan;
 import com.nekoid.smektuber.api.*;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.models.MajorModel;
 import com.nekoid.smektuber.network.*;
@@ -19,6 +21,8 @@ import java.util.*;
 
 public class Jurusan extends BaseActivity {
     private RecyclerView recyclerView;
+
+    private Toolbar toolbar;
     private List<MajorModel> majorModels = new ArrayList<>();
     private AdapterDataJurusan adapterDataJurusan;
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -28,6 +32,7 @@ public class Jurusan extends BaseActivity {
         setContentView(R.layout.activity_jurusan);
         recyclerView = findViewById(R.id.rvDataJurusan);
         Http.get(Endpoint.LIST_MAJOR.getUrl(), PublicApi.getHeaders(), this::onResponse);
+        setToolbar();
     }
 
     protected final void onResponse(Response response) {
@@ -54,5 +59,17 @@ public class Jurusan extends BaseActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterDataJurusan);
+    }
+
+    private void setToolbar(){
+        toolbar = findViewById(R.id.backIcon);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Navigator.of(this).pop();
+        return true;
     }
 }

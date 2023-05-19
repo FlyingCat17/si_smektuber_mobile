@@ -163,7 +163,7 @@ public class Register extends BaseActivity {
     }
 
     private void setToolbar() {
-        toolbar = findViewById(R.id.backIconL);
+        toolbar = findViewById(R.id.backIcon);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
