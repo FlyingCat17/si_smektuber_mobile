@@ -12,27 +12,21 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textfield.*;
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.config.volley.Endpoint;
-import com.nekoid.smektuber.config.volley.PublicApi;
+import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
-import com.nekoid.smektuber.helpers.utils.LocalStorage;
+import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.utils.TextChangeListerner;
 import com.nekoid.smektuber.models.UserModel;
-import com.nekoid.smektuber.network.Http;
-import com.nekoid.smektuber.network.Response;
-import com.squareup.picasso.Picasso;
+import com.nekoid.smektuber.network.*;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.*;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ChangeDataAccount extends BaseActivity {
 
@@ -89,7 +83,7 @@ public class ChangeDataAccount extends BaseActivity {
 
     private void setVariable() {
         // User Model
-        userModel = LocalStorage.userModel;
+        userModel = State.userModel;
 
         // toolbar
         toolbar = findViewById(R.id.backIcon);
@@ -125,7 +119,8 @@ public class ChangeDataAccount extends BaseActivity {
             caFullName.setText(userModel.name);
             caEmail.setText(userModel.email);
             if (userModel.avatar != null && !userModel.avatar.isEmpty()) {
-                Picasso.get().load(userModel.avatar).into(ImageUser);
+                if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://"))
+                    Http.loadImage(userModel.avatar, ImageUser);
             }
         }
     }
@@ -212,23 +207,19 @@ public class ChangeDataAccount extends BaseActivity {
             if (!emailValidator(layoutCaEmail, caEmail)) return;
 
             // add request for update account
-            try {
-                Http.put(Endpoint.UPDATE_USER.getUrl(), getHeaders(), getUpdateAccount(), this::doAccountUpdate);
+            Http.put(Endpoint.UPDATE_USER.getUrl(), PublicApi.getHeaders(), getUpdateAccount(), this::doAccountUpdate);
 
-                // user change avatar
-                if (isUpdateAvatar) {
-                    Http.multipartFile(Endpoint.UPDATE_AVATAR.getUrl(), getUpdateAvatar(), getHeaders(), this::doUpdateAvatar);
-                    isUpdateAvatar = false;
-                }
-
-                // user want to change password
-                if (isChangePassword()) {
-                    Http.put(Endpoint.UPDATE_PASSWORD.getUrl(), getHeaders(), getUpdatePassword(), this::doChangePassword);
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            // user change avatar
+            if (isUpdateAvatar) {
+                Http.multipartFile(Endpoint.UPDATE_AVATAR.getUrl(), getUpdateAvatar(), PublicApi.getHeaders(), this::doUpdateAvatar);
+                isUpdateAvatar = false;
+                ImageUser.setBackgroundResource(R.drawable.iconuser);
             }
 
+            // user want to change password
+            if (isChangePassword()) {
+                Http.put(Endpoint.UPDATE_PASSWORD.getUrl(), PublicApi.getHeaders(), getUpdatePassword(), this::doChangePassword);
+            }
 
 
             resetViewPassword();
@@ -267,12 +258,6 @@ public class ChangeDataAccount extends BaseActivity {
         caConfirmPassword.setText("");
     }
 
-    private Map<String, String> getHeaders() {
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Authorization", "Bearer " + getToken());
-        return headers;
-    }
-
     private void doAccountUpdate(Response response) {
         try {
             JSONObject body = new JSONObject(response.body.toString());
@@ -281,7 +266,7 @@ public class ChangeDataAccount extends BaseActivity {
                 return;
             }
             userModel = UserModel.fromJson(body.getJSONObject("data"));
-            LocalStorage.setUserModel(userModel);
+            State.setUserModel(userModel);
             setModelToView();
 
             // you can add more action after update account
@@ -315,7 +300,7 @@ public class ChangeDataAccount extends BaseActivity {
             JSONObject responseBody = new JSONObject(response.body.toString());
 
             userModel = UserModel.fromJson(responseBody.getJSONObject("data"));
-            LocalStorage.setUserModel(userModel);
+            State.setUserModel(userModel);
             setModelToView();
         } catch (JSONException e) {
             throw new RuntimeException(e);

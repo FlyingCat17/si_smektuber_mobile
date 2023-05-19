@@ -1,57 +1,37 @@
 package com.nekoid.smektuber.screen.splash;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.adapter.AdapterData;
-import com.nekoid.smektuber.config.volley.PublicApi;
-import com.nekoid.smektuber.config.volley.UrlsApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
+import com.nekoid.smektuber.helpers.utils.AnimationListener;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
-import com.nekoid.smektuber.helpers.utils.LocalStorage;
-import com.nekoid.smektuber.helpers.widget.Style;
-import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.screen.auth.Login;
-import com.nekoid.smektuber.screen.auth.WelcomeAuth;
 import com.nekoid.smektuber.screen.home.HomeMember;
-import com.nekoid.smektuber.screen.home.dashboard.Dashboard;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Calendar;
 
 public class SplashScreen extends BaseActivity {
 
     private ImageView logo;
     private Animation anim;
+
+    private TextView txtSplashVersion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        txtSplashVersion = findViewById(R.id.splashVersion);
+        getVersion();
 
         // reLogin if user is login.
         if (getUserPreferences().getBoolean("isLogin", false)) {
@@ -63,20 +43,11 @@ public class SplashScreen extends BaseActivity {
 
         logo = findViewById(R.id.logo);
         anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade);
-        anim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
 
-            }
-
+        anim.setAnimationListener(new AnimationListener() {
             @Override
             public void onAnimationEnd(Animation animation) {
                 animationEnd();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
             }
         });
 
@@ -95,7 +66,19 @@ public class SplashScreen extends BaseActivity {
     private void redirectToLogin(){
         Navigator.of(SplashScreen.this).pushReplacement(Login.class);
     }
-    private void redirectToHome(){
+
+    private void redirectToHome() {
         Navigator.of(SplashScreen.this).pushReplacement(HomeMember.class);
+    }
+
+    private void getVersion() {
+        try {
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+            String version = "Version " + packageInfo.versionName + " \n JTI POLIJE NekoID " + year;
+            txtSplashVersion.setText(version);
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

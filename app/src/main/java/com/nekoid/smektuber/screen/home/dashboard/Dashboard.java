@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.adapter.AdapterData;
-import com.nekoid.smektuber.config.volley.Endpoint;
-import com.nekoid.smektuber.config.volley.PublicApi;
+import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.LocalStorage;
+import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
@@ -32,7 +32,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,8 +103,8 @@ public class Dashboard extends Fragment {
         ConstraintLayout jurusan = view.findViewById(R.id.Jurusan);
         fullName = view.findViewById(R.id.Fullname);
 
-        if (LocalStorage.userModel != null) {
-            fullName.setText(LocalStorage.userModel.name);
+        if (State.userModel != null) {
+            fullName.setText(State.userModel.name);
         } else {
             fullName.setText("");
         }
@@ -136,11 +135,7 @@ public class Dashboard extends Fragment {
     }
 
     private void getRequest() {
-        try {
-            Http.get(Endpoint.LIST_ARTICLE.getUrl(), PublicApi.getHeaders(), this::getListArticles);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Http.get(Endpoint.LIST_ARTICLE.getUrl(), PublicApi.getHeaders(), this::getListArticles);
     }
 
     protected void getListArticles(Response response) {

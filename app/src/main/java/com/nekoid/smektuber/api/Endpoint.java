@@ -1,4 +1,4 @@
-package com.nekoid.smektuber.config.volley;
+package com.nekoid.smektuber.api;
 
 /**
  * Endpoints for API

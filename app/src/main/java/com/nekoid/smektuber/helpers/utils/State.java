@@ -9,7 +9,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalStorage {
+public class State {
+
+    public static Cache cache;
 
     static List<Bitmap> listImageArticleDashboard = new ArrayList<>();
 
@@ -20,15 +22,23 @@ public class LocalStorage {
     public static Api api;
 
     public static void setApi(Api api) {
-        LocalStorage.api = api;
+        State.api = api;
     }
 
     public static Api getApi() {
         return api;
     }
 
+    public static void setCache(Cache cache) {
+        State.cache = cache;
+    }
+
+    public static Cache getCache() {
+        return cache;
+    }
+
     public static void setUserModel(UserModel userModel) {
-        LocalStorage.userModel = userModel;
+        State.userModel = userModel;
     }
 
     public static UserModel getUserModel() {
