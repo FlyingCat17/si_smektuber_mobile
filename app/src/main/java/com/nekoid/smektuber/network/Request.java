@@ -1,13 +1,18 @@
 package com.nekoid.smektuber.network;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Process;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -15,23 +20,25 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
 import java.util.Map;
+import java.util.UUID;
 
 public class Request {
 
     private final URL mUrl;
 
-    private final String mMethod;
+    private String mMethod;
 
-    private final Map<String, String> mHeaders;
+    private Map<String, String> mHeaders;
 
-    private final Map<String, String> mBody;
+    private Map<String, String> mBody;
 
-    private final Map<String, File> mFile;
+    private Map<String, File> mFile;
 
-    private final Map<String, Bitmap> mBitmap;
+    private Map<String, Bitmap> mBitmap;
 
-    private final Map<String, Uri> mUri;
+    private Map<String, Uri> mUri;
 
     private Response response = null;
 
@@ -39,11 +46,15 @@ public class Request {
 
     private String charset = "UTF-8";
 
-    private String boundary = "*R*I*Y*U*";
+    private final String boundary = "*R*I*Y*U*";
 
-    private String newLine = "\r\n";
+    private final String newLine = "\r\n";
 
-    private String twoHyphens = "--";
+    private final String twoHyphens = "--";
+
+    private Bitmap imageBitmap;
+
+    private String mBoundray;
 
     /**
      * Constructor for the Request.
@@ -51,7 +62,7 @@ public class Request {
      * @param u the URL
      */
     public Request(URL u, String method, Map<String, String> headers, Map<String, String> body,
-                  @Nullable Map<String, File> file, @Nullable Map<String, Bitmap> bitmap, @Nullable Map<String, Uri> uri) {
+                   @Nullable Map<String, File> file, @Nullable Map<String, Bitmap> bitmap, @Nullable Map<String, Uri> uri) {
         mUrl = u;
         mMethod = method;
         mHeaders = headers;
@@ -59,21 +70,15 @@ public class Request {
         mFile = file;
         mBitmap = bitmap;
         mUri = uri;
+        mBoundray = UUID.randomUUID().toString();
     }
 
-    public Async getAsync() {
-        return async;
-    }
-
-    public void setAsync(Async async) {
-        this.async = async;
+    public Request(URL mUrl) {
+        this.mUrl = mUrl;
     }
 
     public void setResponse(Response response) {
         this.response = response;
-//        if (this.async != null) {
-//            async.onResponse(response);
-//        }
     }
 
     public Response getResponse() {
@@ -88,7 +93,7 @@ public class Request {
         }
         connection.setDoInput(true);
         connection.setRequestProperty("Connection", "keep-alive");
-        connection.setRequestProperty("User-Agent", "Kateru-riyu");
+        connection.setRequestProperty("User-Agent", "Kateru-Riyu");
     }
 
     private void setHeaders(HttpURLConnection connection) {
@@ -100,7 +105,8 @@ public class Request {
     }
 
     private String getBoundary() {
-        return "*****";
+//        return mBoundray;
+        return "----WebKitFormBoundary7MA4YWxkTrZu0gW";
     }
 
     /**
@@ -132,18 +138,19 @@ public class Request {
         writer.append(twoHyphens + getBoundary()).append(newLine);
         writer.append("Content-Disposition: form-data; name=\"" + fieldName + "\"; filename=\"" + fileName + "\"").append(newLine);
         writer.append("Content-Type: " + URLConnection.guessContentTypeFromName(fileName)).append(newLine);
-        writer.append("Content-Transfer-Encoding: binary").append(newLine);
+//        writer.append("Content-Transfer-Encoding: binary").append(newLine);
         writer.append(newLine);
         writer.flush();
 
         FileInputStream inputStream = new FileInputStream(uploadFile);
-        byte[] buffer = new byte[4096];
+        byte[] buffer = new byte[10240];
         int bytesRead = -1;
         while ((bytesRead = inputStream.read(buffer)) != -1) {
             outputStream.write(buffer, 0, bytesRead);
         }
         outputStream.flush();
         inputStream.close();
+
         writer.append(newLine);
         writer.flush();
     }
@@ -156,15 +163,16 @@ public class Request {
         setHeaders(connection);
 
         if (mFile != null) {
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(connection.getOutputStream()), true);
+            OutputStream outputStream = connection.getOutputStream();
             for (Map.Entry<String, File> entry : this.mFile.entrySet()) {
-                PrintWriter writer = new PrintWriter(new OutputStreamWriter(connection.getOutputStream()), true);
+                addFilePart(entry.getKey(), entry.getValue(), writer, outputStream);
 
-                addFilePart(entry.getKey(), entry.getValue(), writer, connection.getOutputStream());
-
-                writer.append(newLine).flush();
-                writer.append(twoHyphens + boundary + twoHyphens).append(newLine);
-                writer.close();
             }
+            writer.append(newLine).flush();
+            writer.append(twoHyphens + boundary + twoHyphens).append(newLine);
+            writer.close();
+            outputStream.close();
         }
 
 //        if (mBitmap != null) {
@@ -206,7 +214,6 @@ public class Request {
 //        }
 
 
-
         try {
             connection.connect();
             this.setResponse(new Response(connection));
@@ -241,10 +248,28 @@ public class Request {
 
             connection.connect();
             this.setResponse(new Response(connection));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         } finally {
             connection.disconnect();
         }
+    }
+
+    public void loadImage() throws IOException {
+        HttpURLConnection connection = null;
+        try {
+            connection = (HttpURLConnection) mUrl.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream inputStream = connection.getInputStream();
+            imageBitmap = BitmapFactory.decodeStream(inputStream);
+            inputStream.close();
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    public Bitmap getImageBitmap() {
+        return imageBitmap;
     }
 }
