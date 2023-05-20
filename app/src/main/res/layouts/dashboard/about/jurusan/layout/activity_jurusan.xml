@@ -31,9 +31,8 @@
         android:paddingRight="22dp"
         android:paddingLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/TitleJurusan"
-        android:visibility="gone"
         />
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/rvDataJurusanShimmer"

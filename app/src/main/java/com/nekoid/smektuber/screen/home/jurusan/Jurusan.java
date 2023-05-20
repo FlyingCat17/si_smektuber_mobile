@@ -56,13 +56,12 @@ public class Jurusan extends BaseActivity {
                 majorModels.add(MajorModel.fromJson(new JSONObject(listExtra.getString(i))));
             }
             setAdapterExtracurricular();
-//            Animation animation = new AlphaAnimation(0,1);
-//            animation.setDuration(1000);
-//            shimmerFrameLayout.stopShimmer();
-//            shimmerFrameLayout.setAnimation(animation);
-//            shimmerFrameLayout.setVisibility(View.GONE);
-//            recyclerView.setVisibility(View.VISIBLE);
-//            recyclerView.setAnimation(animation);
+            Animation animation = new AlphaAnimation(0,1);
+            animation.setDuration(1000);
+            shimmerFrameLayout.stopShimmer();
+            shimmerFrameLayout.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            recyclerView.setAnimation(animation);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
