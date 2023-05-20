@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.home.Jurusan">
+    tools:context=".screen.home.jurusan.Jurusan">
 
     <include
         android:id="@+id/backIcon"
@@ -32,7 +32,56 @@
         android:paddingLeft="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TitleJurusan"/>
+        android:layout_below="@+id/TitleJurusan"
+        android:visibility="gone"
+        />
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/rvDataJurusanShimmer"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="34dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TitleJurusan"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <include layout="@layout/item_data_fasilitas_jurusan_shimmer"/>
+                <include layout="@layout/item_data_fasilitas_jurusan_shimmer"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="180dp"
+                >
+                <include layout="@layout/item_data_fasilitas_jurusan_shimmer"/>
+                <include layout="@layout/item_data_fasilitas_jurusan_shimmer"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="360dp"
+                >
+                <include layout="@layout/item_data_fasilitas_jurusan_shimmer"/>
+                <include layout="@layout/item_data_fasilitas_jurusan_shimmer"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="540dp"
+                >
+                <include layout="@layout/item_data_fasilitas_jurusan_shimmer"/>
+                <include layout="@layout/item_data_fasilitas_jurusan_shimmer"/>
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
 
 </RelativeLayout>

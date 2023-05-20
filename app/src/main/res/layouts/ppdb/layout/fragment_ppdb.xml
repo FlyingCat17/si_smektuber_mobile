@@ -19,7 +19,7 @@
             android:layout_width="140dp"
             android:layout_height="24dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="41dp"
+            android:layout_marginTop="65dp"
             android:text="@string/informasi_Ppdb"
             android:textAppearance="@style/informasi_p"
             android:lineSpacingExtra="-2sp"
@@ -27,7 +27,24 @@
             android:layout_centerHorizontal="true"
             />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/ShimmerInformasiPPDB"
+            android:layout_below="@+id/InformasiPPDB"
+            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <include layout="@layout/item_data_visi_misi_shimmer"/>
+                <include layout="@layout/item_data_visi_misi_shimmer"/>
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <ScrollView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="false">
@@ -36,7 +53,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
-
                 <TextView
                     android:id="@+id/TxtPPDB"
                     android:layout_width="match_parent"

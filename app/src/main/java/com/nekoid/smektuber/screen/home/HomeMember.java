@@ -18,6 +18,7 @@ import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.screen.home.account.Account;
 import com.nekoid.smektuber.screen.home.dashboard.Dashboard;
+import com.nekoid.smektuber.screen.home.job.Jobs;
 import com.nekoid.smektuber.screen.home.job.NoJobs;
 import com.nekoid.smektuber.screen.home.ppdb.Ppdb;
 
@@ -27,7 +28,7 @@ public class HomeMember extends BaseActivity {
     Account account = new Account();
     Dashboard dashboard = new Dashboard();
     //    No_Information_Ppdb ppdb = new No_Information_Ppdb();
-    NoJobs jobs = new NoJobs();
+    Jobs jobs = new Jobs();
     Ppdb ppdb = new Ppdb();
     boolean doubleBackToExitPressedOnce = false;
 
