@@ -9,11 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.helpers.utils.AnimationListener;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.helpers.utils.State;
+import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.screen.auth.Login;
 import com.nekoid.smektuber.screen.home.HomeMember;
 
@@ -29,6 +33,7 @@ public class SplashScreen extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        deleteCache();
         setContentView(R.layout.activity_splash_screen);
         txtSplashVersion = findViewById(R.id.splashVersion);
         getVersion();
