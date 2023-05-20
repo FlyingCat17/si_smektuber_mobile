@@ -1,10 +1,10 @@
 package com.nekoid.smektuber.models;
 
-import androidx.annotation.NonNull;
-
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserModel extends Models {
+
     public String name;
 
     public String email;
@@ -26,19 +26,14 @@ public class UserModel extends Models {
         this.emailVerified = emailVerified;
     }
 
-    public static UserModel fromJson(JSONObject json) {
-        try {
-            return new UserModel(
-                    json.getString("name"),
-                    json.getString("email"),
-                    json.getString("role"),
-                    json.getString("avatar"),
-                    json.getString("username"),
-                    json.getBoolean("email_verified_at")
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static UserModel fromJson(JSONObject json) throws JSONException {
+        return new UserModel(
+                json.getString("name"),
+                json.getString("email"),
+                json.getString("role"),
+                json.getString("avatar"),
+                json.getString("username"),
+                json.getBoolean("email_verified_at")
+        );
     }
 }
