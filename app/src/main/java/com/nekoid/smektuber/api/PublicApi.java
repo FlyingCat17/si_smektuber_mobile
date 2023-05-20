@@ -32,7 +32,9 @@ public class PublicApi {
                             baseActivity.getAuthPreferences().getString("_username", ""),
                             baseActivity.getAuthPreferences().getString("_credentials", "")
                     );
-                return getHeaders();
+                    while (baseActivity.isLogin()) {
+                        return getHeaders();
+                    }
             }
             headers.put("Authorization", "Bearer " + token);
         }
