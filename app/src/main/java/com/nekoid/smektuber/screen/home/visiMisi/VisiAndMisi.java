@@ -10,6 +10,7 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.*;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.models.AboutModel;
 import com.nekoid.smektuber.network.*;
 
@@ -35,9 +36,22 @@ public class VisiAndMisi extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visi_and_misi);
+        startShimmer();
         setToolbar();
         setVariable();
-        Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
+        if (State.aboutModel != null) {
+            setModelToView(State.aboutModel);
+        } else {
+            Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
+        }
+    }
+
+    private void startShimmer() {
+        // start shimmer
+    }
+
+    private void stopShimmer() {
+        // stop shimmer
     }
 
     private void setVariable() {
@@ -72,8 +86,10 @@ public class VisiAndMisi extends BaseActivity {
 
 
     private void setModelToView(AboutModel aboutModel) {
+        State.aboutModel = aboutModel;
         visi.setText(aboutModel.schoolVision);
         misi.setText(aboutModel.schoolMission);
+        stopShimmer();
     }
 
     private void setToolbar(){

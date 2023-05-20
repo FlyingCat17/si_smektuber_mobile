@@ -21,6 +21,22 @@
             android:progressTint="@color/blue01"
             android:layout_centerInParent="true" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/ShimmerVisiMisi"
+        android:layout_below="@+id/backIcon"
+        android:layout_marginTop="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <include layout="@layout/item_data_visi_misi_shimmer"/>
+            <include layout="@layout/item_data_visi_misi_shimmer"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <TextView
         android:id="@+id/TitleVisiMisi"
         android:layout_width="wrap_content"
@@ -37,7 +53,9 @@
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/backIcon">
+        android:layout_below="@id/backIcon"
+        android:visibility="gone"
+        >
     <ScrollView
         android:layout_below="@+id/backIcon"
         android:layout_width="match_parent"

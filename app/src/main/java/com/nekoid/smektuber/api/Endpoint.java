@@ -51,6 +51,7 @@ public enum Endpoint {
     }
 
     public String getUrl() {
-        return url;
+        String baseUrl = "https://lutfisobri.my.id/api/v1";
+        return baseUrl + url;
     }
 }

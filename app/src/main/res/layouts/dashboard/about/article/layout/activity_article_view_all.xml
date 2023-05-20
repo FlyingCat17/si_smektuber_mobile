@@ -30,7 +30,26 @@
                 android:layout_marginTop="34dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TitleArtikel"/>
+                android:layout_below="@+id/TitleArtikel"
+                android:visibility="gone"
+                />
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_below="@+id/backIcon"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <include layout="@layout/item_data_article_shimmer"/>
+            <include layout="@layout/item_data_article_shimmer"/>
+            <include layout="@layout/item_data_article_shimmer"/>
+            <include layout="@layout/item_data_article_shimmer"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
 
 
 </RelativeLayout>

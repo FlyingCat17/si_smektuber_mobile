@@ -13,6 +13,7 @@ import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.models.AboutModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
@@ -36,10 +37,23 @@ public class AboutSchool extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_school);
+        startShimmer();
         setVariable();
         init();
         setToolbar();
-        Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
+        if (State.aboutModel != null) {
+            setDataToView(State.aboutModel);
+        } else {
+            Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
+        }
+    }
+
+    private void startShimmer() {
+        // start shimmer
+    }
+
+    private void stopShimmer() {
+        // stop shimmer
     }
 
     private void init() {
@@ -92,14 +106,18 @@ public class AboutSchool extends BaseActivity {
     }
 
     private void setDataToView(AboutModel aboutModel) {
-        headmaster.setText(aboutModel.schoolHeadmasterName);
-        schoolDescription.setText(aboutModel.schoolHistory);
-        accreditation.setText(aboutModel.schoolAccreditation);
-        Http.loadImage(aboutModel.schoolHeadmasterPicture, headMasterPhoto);
-        Http.loadImage(aboutModel.schoolLogo, imageSchool);
-        facebook = aboutModel.schoolFacebook;
-        instagram = aboutModel.schoolInstagram;
-        youtube = aboutModel.schoolYoutube;
+        State.aboutModel = aboutModel;
+        Http.loadImage(aboutModel.schoolLogo, imageSchool, () -> {
+            Http.loadImage(aboutModel.schoolHeadmasterPicture, headMasterPhoto, () -> {
+                headmaster.setText(aboutModel.schoolHeadmasterName);
+                schoolDescription.setText(aboutModel.schoolHistory);
+                accreditation.setText(aboutModel.schoolAccreditation);
+                facebook = aboutModel.schoolFacebook;
+                instagram = aboutModel.schoolInstagram;
+                youtube = aboutModel.schoolYoutube;
+                stopShimmer();
+            });
+        });
     }
 
     private void setVariable() {

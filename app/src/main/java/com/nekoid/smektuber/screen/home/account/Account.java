@@ -19,6 +19,7 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.helpers.utils.BaseFragment;
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.models.UserModel;
 import com.nekoid.smektuber.network.Http;
@@ -30,7 +31,7 @@ import com.nekoid.smektuber.screen.auth.Login;
  * Use the {@link Account#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Account extends Fragment {
+public class Account extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -96,22 +97,5 @@ public class Account extends Fragment {
             if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://"))
                 Http.loadImage(userModel.avatar, imageView);
         }
-    }
-
-    private void doLogout(Response response) {
-        SharedPreferences user = getActivity().getSharedPreferences("user", MODE_PRIVATE);
-        SharedPreferences token = getActivity().getSharedPreferences("__accessToken", MODE_PRIVATE);
-        SharedPreferences auth = getActivity().getSharedPreferences("__auth", MODE_PRIVATE);
-
-        if (response.statusCode != 200) {
-            Toast.makeText(getActivity(), "Logout gagal, silahkan coba lagi", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        user.edit().clear().apply();
-        token.edit().clear().apply();
-        auth.edit().clear().apply();
-
-        Navigator.of(getActivity()).pushReplacement(Login.class);
     }
 }

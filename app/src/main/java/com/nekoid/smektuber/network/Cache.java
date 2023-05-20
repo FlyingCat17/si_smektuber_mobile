@@ -7,7 +7,7 @@ public class Cache {
 
     private static Cache instance;
 
-    private Map<String, Object> cache;
+    private final Map<String, Object> cache;
 
     private Cache() {
         cache = new HashMap<>();

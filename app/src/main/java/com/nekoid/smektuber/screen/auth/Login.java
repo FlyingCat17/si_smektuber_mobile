@@ -13,7 +13,7 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
-import com.nekoid.smektuber.helpers.utils.TextChangeListerner;
+import com.nekoid.smektuber.helpers.utils.TextChangeListener;
 import com.nekoid.smektuber.network.Response;
 import com.nekoid.smektuber.screen.home.HomeMember;
 import com.nekoid.smektuber.screen.notification.LoadingDialog;
@@ -86,7 +86,7 @@ public class Login extends BaseActivity {
             }
         });
 
-        et_username.addTextChangedListener(new TextChangeListerner() {
+        et_username.addTextChangedListener(new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (!et_username.getText().toString().isEmpty()) {
@@ -95,7 +95,7 @@ public class Login extends BaseActivity {
             }
         });
 
-        et_password.addTextChangedListener(new TextChangeListerner() {
+        et_password.addTextChangedListener(new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (!et_password.getText().toString().isEmpty()) {
@@ -104,7 +104,7 @@ public class Login extends BaseActivity {
             }
         });
 
-        et_password.addTextChangedListener(new TextChangeListerner() {
+        et_password.addTextChangedListener(new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
 

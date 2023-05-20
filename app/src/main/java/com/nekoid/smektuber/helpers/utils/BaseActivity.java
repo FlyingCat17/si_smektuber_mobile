@@ -18,9 +18,16 @@ import com.nekoid.smektuber.network.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>Base activity</p>
@@ -60,6 +67,38 @@ public abstract class BaseActivity extends AppCompatActivity {
         PublicApi.setBaseActivity(this);
         State.setCache(new Cache(getCacheDir()));
         super.onCreate(savedInstanceState);
+    }
+
+    protected final void deleteCache() {
+        List<File> files = new ArrayList<>();
+        files.add(getCacheDir());
+        files.add(getExternalCacheDir());
+        files.add(getCodeCacheDir());
+
+        try {
+            com.nekoid.smektuber.network.Cache cache = com.nekoid.smektuber.network.Cache.getInstance();
+            cache.clear();
+            for (File file : files) {
+                deleteDir(file);
+            }
+        } catch (Exception e) { e.printStackTrace();}
+    }
+
+    private static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if(dir!= null && dir.isFile()) {
+            return dir.delete();
+        } else {
+            return false;
+        }
     }
 
     public boolean isLogin() {
@@ -255,7 +294,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 assert userModel != null;
                 State.setUserModel(userModel);
                 userModelToPreferences(userModel);
-            } else {
             }
         } catch (JSONException e) {
         }

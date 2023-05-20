@@ -3,6 +3,10 @@ package com.nekoid.smektuber.helpers.utils;
 import android.graphics.Bitmap;
 import android.os.Build;
 
+import com.nekoid.smektuber.models.AboutModel;
+import com.nekoid.smektuber.models.ArticleModel;
+import com.nekoid.smektuber.models.ExtracurricularModel;
+import com.nekoid.smektuber.models.MajorModel;
 import com.nekoid.smektuber.models.UserModel;
 
 import java.time.LocalDateTime;
@@ -20,6 +24,14 @@ public class State {
     public static UserModel userModel;
 
     public static Api api;
+
+    public static List<ArticleModel> articleModels = new ArrayList<>();
+
+    public static AboutModel aboutModel;
+
+    public static List<ExtracurricularModel> extracurricularModels = new ArrayList<>();
+
+    public static List<MajorModel> majorModels = new ArrayList<>();
 
     public static void setApi(Api api) {
         State.api = api;

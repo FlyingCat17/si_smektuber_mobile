@@ -6,7 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.adapter.AdapterDataJurusan;
 import com.nekoid.smektuber.api.*;
@@ -21,7 +25,7 @@ import java.util.*;
 
 public class Jurusan extends BaseActivity {
     private RecyclerView recyclerView;
-
+    private ShimmerFrameLayout shimmerFrameLayout;
     private Toolbar toolbar;
     private List<MajorModel> majorModels = new ArrayList<>();
     private AdapterDataJurusan adapterDataJurusan;
@@ -30,12 +34,15 @@ public class Jurusan extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jurusan);
+        shimmerFrameLayout = findViewById(R.id.rvDataJurusanShimmer);
+        shimmerFrameLayout.startShimmer();
         recyclerView = findViewById(R.id.rvDataJurusan);
         Http.get(Endpoint.LIST_MAJOR.getUrl(), PublicApi.getHeaders(), this::onResponse);
         setToolbar();
     }
 
     protected final void onResponse(Response response) {
+
         if (response.statusCode != 200) {
             return;
         }
@@ -49,6 +56,13 @@ public class Jurusan extends BaseActivity {
                 majorModels.add(MajorModel.fromJson(new JSONObject(listExtra.getString(i))));
             }
             setAdapterExtracurricular();
+//            Animation animation = new AlphaAnimation(0,1);
+//            animation.setDuration(1000);
+//            shimmerFrameLayout.stopShimmer();
+//            shimmerFrameLayout.setAnimation(animation);
+//            shimmerFrameLayout.setVisibility(View.GONE);
+//            recyclerView.setVisibility(View.VISIBLE);
+//            recyclerView.setAnimation(animation);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -72,4 +86,16 @@ public class Jurusan extends BaseActivity {
         Navigator.of(this).pop();
         return true;
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+    }
+
+    @Override
+    protected void onPause() {
+        shimmerFrameLayout.stopShimmer();
+        super.onPause();
+    }
+
 }
