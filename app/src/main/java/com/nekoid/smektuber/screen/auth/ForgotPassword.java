@@ -12,7 +12,7 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
-import com.nekoid.smektuber.helpers.utils.TextChangeListerner;
+import com.nekoid.smektuber.helpers.utils.TextChangeListener;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
 
@@ -50,7 +50,7 @@ public class ForgotPassword extends BaseActivity {
             }
         });
 
-        et_email.addTextChangedListener(new TextChangeListerner() {
+        et_email.addTextChangedListener(new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (!et_email.getText().toString().isEmpty()) {

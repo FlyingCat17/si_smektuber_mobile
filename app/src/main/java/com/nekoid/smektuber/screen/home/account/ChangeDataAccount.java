@@ -19,7 +19,7 @@ import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.State;
-import com.nekoid.smektuber.helpers.utils.TextChangeListerner;
+import com.nekoid.smektuber.helpers.utils.TextChangeListener;
 import com.nekoid.smektuber.models.UserModel;
 import com.nekoid.smektuber.network.*;
 
@@ -221,11 +221,10 @@ public class ChangeDataAccount extends BaseActivity {
                 Http.put(Endpoint.UPDATE_PASSWORD.getUrl(), PublicApi.getHeaders(), getUpdatePassword(), this::doChangePassword);
             }
 
-
             resetViewPassword();
         });
 
-        caUsername.addTextChangedListener(new TextChangeListerner() {
+        caUsername.addTextChangedListener(new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (!username().isEmpty()) {
@@ -234,7 +233,7 @@ public class ChangeDataAccount extends BaseActivity {
             }
         });
 
-        caFullName.addTextChangedListener(new TextChangeListerner() {
+        caFullName.addTextChangedListener(new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (!fullName().isEmpty()) {
@@ -243,7 +242,7 @@ public class ChangeDataAccount extends BaseActivity {
             }
         });
 
-        caEmail.addTextChangedListener(new TextChangeListerner() {
+        caEmail.addTextChangedListener(new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (!email().isEmpty()) {
@@ -292,7 +291,6 @@ public class ChangeDataAccount extends BaseActivity {
     private void doUpdateAvatar(Response response) {
         try {
             if (response.statusCode != 200) {
-                System.out.println(response.body);
                 Toast.makeText(this, "engror" + response.statusCode, Toast.LENGTH_SHORT).show();
                 return;
             }

@@ -2,6 +2,7 @@ package com.nekoid.smektuber.screen.home.ekstarkurikuler;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
@@ -18,6 +19,8 @@ public class DetailExtra extends BaseActivity {
 
     private ExtracurricularModel extracurricularModel;
 
+    private TextView title, description;
+
     private ImageView photo;
 
     @Override
@@ -26,30 +29,21 @@ public class DetailExtra extends BaseActivity {
         setContentView(R.layout.activity_detail_extra);
         setVariable();
         extracurricularModel = (ExtracurricularModel) Navigator.getArgs(this);
-        Http.get(Endpoint.GET_EXTRACURRICULAR_BY_ID.getUrl() + extracurricularModel.id, this::onResponse);
-    }
-
-    private void onResponse(Response response) {
-        if (response.statusCode != 200) {
-            return;
-        }
-        try {
-            JSONObject body = new JSONObject(response.body.toString());
-            if (body.getInt("status") != 200) {
-                return;
-            }
-            extracurricularModel = ExtracurricularModel.fromJson(body.getJSONObject("data"));
+        if (extracurricularModel != null) {
             setModelToView();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
         }
     }
 
     private void setModelToView() {
-        Http.loadImage(extracurricularModel.photo, photo);
+        Http.loadImage(extracurricularModel.photo, photo, () -> {
+            title.setText(extracurricularModel.name);
+            description.setText(extracurricularModel.description);
+        });
     }
 
     private void setVariable() {
+        title = findViewById(R.id.TitleDetailExtra);
+        description = findViewById(R.id.TxtAboutExtra);
         photo = findViewById(R.id.ImageExtra);
     }
 }

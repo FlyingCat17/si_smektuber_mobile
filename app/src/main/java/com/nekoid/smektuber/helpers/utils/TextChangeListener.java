@@ -13,7 +13,7 @@ import android.text.TextWatcher;
  * </ul>
  * Created by Kateru Riyu.
  */
-public abstract class TextChangeListerner implements TextWatcher {
+public abstract class TextChangeListener implements TextWatcher {
     /**
      * Unchanged sequence which is placed before the updated sequence.
      */

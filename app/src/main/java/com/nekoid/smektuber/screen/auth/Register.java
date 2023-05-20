@@ -14,7 +14,7 @@ import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
-import com.nekoid.smektuber.helpers.utils.TextChangeListerner;
+import com.nekoid.smektuber.helpers.utils.TextChangeListener;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
 
@@ -61,7 +61,7 @@ public class Register extends BaseActivity {
             }
         });
 
-        et_username.addTextChangedListener(new TextChangeListerner() {
+        et_username.addTextChangedListener(new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (!et_username.getText().toString().isEmpty()) {
@@ -70,7 +70,7 @@ public class Register extends BaseActivity {
             }
         });
 
-        et_name.addTextChangedListener(new TextChangeListerner() {
+        et_name.addTextChangedListener(new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (!et_name.getText().toString().isEmpty()) {
@@ -79,7 +79,7 @@ public class Register extends BaseActivity {
             }
         });
 
-        et_email.addTextChangedListener(new TextChangeListerner() {
+        et_email.addTextChangedListener(new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (emailValidator(txtLayoutEmail, et_email)) {
@@ -88,7 +88,7 @@ public class Register extends BaseActivity {
             }
         });
 
-        et_password.addTextChangedListener(new TextChangeListerner() {
+        et_password.addTextChangedListener(new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (isPasswordValid(et_password.getText().toString())) {
