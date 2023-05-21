@@ -1,8 +1,27 @@
 package com.nekoid.smektuber.helpers.utils;
 
+import android.app.Activity;
 import android.view.animation.AlphaAnimation;
 
 public class Utils {
+
+    private static BaseActivity baseActivity;
+
+    public static void setBaseActivity(BaseActivity baseActivity) {
+        Utils.baseActivity = baseActivity;
+    }
+
+    public static BaseActivity getBaseActivity() {
+        return baseActivity;
+    }
+
+    public static int intToDp(int size) {
+        return (int) (size * baseActivity.getResources().getDisplayMetrics().density);
+    }
+
+    public static RecycleItemDecoration setRecyclerPaddingRight(int right) {
+        return new RecycleItemDecoration(intToDp(right));
+    }
 
     /**
      * <p>Set Animation for load image</p>

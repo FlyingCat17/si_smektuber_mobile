@@ -15,9 +15,9 @@ public class ArticleModel extends Models {
 
     public String thumbnail;
 
-    public String created_at;
+    public String createdAt;
 
-    public String updated_at;
+    public String updatedAt;
 
 
     public ArticleModel(int id, String title, String slug, String description, String thumbnail, String created_at, String updated_at) {
@@ -26,8 +26,8 @@ public class ArticleModel extends Models {
         this.slug = slug;
         this.description = description;
         this.thumbnail = thumbnail;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.createdAt = created_at;
+        this.updatedAt = updated_at;
     }
 
     public static ArticleModel fromJson(JSONObject json) throws JSONException {

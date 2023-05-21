@@ -27,6 +27,7 @@ public enum Endpoint {
     UPDATE_AVATAR("/user/avatar"),
 
     // PPDB
+    PPDB("/ppdb"),
 
     // LOKER
     LIST_JOBS("/jobs"),
