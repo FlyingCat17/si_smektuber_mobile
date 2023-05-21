@@ -352,7 +352,7 @@
                                         </androidx.constraintlayout.widget.ConstraintLayout>
                                         
                                 </RelativeLayout>
-                                
+
                                 <RelativeLayout
                                     android:id="@+id/Title"
                                     android:layout_width="match_parent"
@@ -386,7 +386,7 @@
                                             android:lineSpacingExtra="-1sp"
                                             android:gravity="center_vertical"
                                             />
-                                                <LinearLayout
+                                                <RelativeLayout
                                                     android:id="@+id/ItemArtikel"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
@@ -397,7 +397,7 @@
                                                             android:id="@+id/rvData"
                                                             android:layout_width="match_parent"
                                                             android:layout_height="wrap_content"
-                                                            android:visibility="gone"
+                                                            android:paddingBottom="20dp"
                                                             />
 
                                                         <com.facebook.shimmer.ShimmerFrameLayout
@@ -414,7 +414,7 @@
                                                                 </LinearLayout>
                                                         </com.facebook.shimmer.ShimmerFrameLayout>
 
-                                                </LinearLayout>
+                                                </RelativeLayout>
 
                                 </RelativeLayout>
 
