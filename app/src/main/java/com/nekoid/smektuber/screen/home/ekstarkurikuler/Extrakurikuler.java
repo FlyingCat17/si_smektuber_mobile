@@ -20,6 +20,7 @@ import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.ScrollListener;
 import com.nekoid.smektuber.helpers.utils.State;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.ExtracurricularModel;
 import com.nekoid.smektuber.models.Pagination;
 import com.nekoid.smektuber.network.Http;
@@ -77,12 +78,9 @@ public class Extrakurikuler extends BaseActivity {
 
     private void stopShimmer() {
         // stop shimmer
-        Animation animation = new AlphaAnimation(0,1);
-        animation.setDuration(1000);
-        shimmerFrameLayout.stopShimmer();
         shimmerFrameLayout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
-        recyclerView.setAnimation(animation);
+        recyclerView.setAnimation(Utils.animation(1000));
     }
 
     protected final void onResponse(Response response) {
@@ -144,9 +142,7 @@ public class Extrakurikuler extends BaseActivity {
                 while (!adapterDataExtra.isLoad()) {
                     // don't delete this line;
                 }
-                handler.post(() -> {
-                    stopShimmer();
-                });
+                handler.post(this::stopShimmer);
             });
         });
     }

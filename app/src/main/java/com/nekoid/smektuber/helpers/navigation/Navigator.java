@@ -3,12 +3,55 @@ package com.nekoid.smektuber.helpers.navigation;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 public class Navigator {
-    public static final String TAG = "Navigator";
+    /**
+     * Used to indicate that some piece of data should be attached to some other
+     * place.  For example, image data could be attached to a contact.  It is up
+     * to the recipient to decide where the data should be attached; the intent
+     * does not specify the ultimate destination.
+     * <p>Output: nothing.
+     */
+    public static final String DATA = "android.intent.action.ATTACH_DATA";
+
+    /**
+     * Activity Action: Provide explicit editable access to the given data.
+     * <p>Output: nothing.
+     */
+    public static final String EDIT = "android.intent.action.EDIT";
+
+    /**
+     * Activity Action: Pick an existing item, or insert a new item, and then edit it.
+     * The extras can contain type specific data to pass through to the editing/creating
+     * activity.
+     * <p>Output: The URI of the item that was picked.  This must be a content:
+     * URI so that any receiver can access it.
+     */
+    public static final String INSERT_OR_EDIT = "android.intent.action.INSERT_OR_EDIT";
+
+    /**
+     * Activity Action: Pick an item from the data, returning what was selected.
+     * (vnd.android.cursor.dir/*) from which to pick an item.
+     * <p>Output: The URI of the item that was picked.
+     */
+    public static final String PICK = "android.intent.action.PICK";
+
+
+    /**
+     * Activity Action: Display the data to the user.  This is the most common
+     * action performed on data -- it is the generic action you can use on
+     * a piece of data to get the most reasonable thing to occur.  For example,
+     * when used on a contacts entry it will view the entry; when used on a
+     * mailto: URI it will bring up a compose window filled with the information
+     * supplied by the URI; when used with a tel: URI it will invoke the
+     * dialer.
+     * <p>Output: nothing.
+     */
+    public static final String VIEW = "android.intent.action.VIEW";
 
     public static Of.Animation push(Activity activity, Class route) {
         return new Of(activity).push(route);
@@ -16,6 +59,22 @@ public class Navigator {
 
     public static Of.Animation push(Activity activity, Class route, Object arguments) {
         return new Of(activity).push(route, arguments);
+    }
+
+    public static void to(String action, Uri uri) {
+        new Of(action).start(uri);
+    }
+
+    public static void to(String action) {
+        to(action, null);
+    }
+
+    /**
+     * <p>Default is Action VIEW</p>
+     * <p>Open youtube, facebook, whatsapp and other app with uri</p>
+     * **/
+    public static void to(Uri uri) {
+        to(VIEW, uri);
     }
 
     public static Of.Animation pushUntil(Activity activity, Class route) {

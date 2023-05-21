@@ -44,7 +44,8 @@
         </com.facebook.shimmer.ShimmerFrameLayout>
 
         <ScrollView
-            android:visibility="gone"
+            android:id="@+id/layoutPpdb"
+            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="false">

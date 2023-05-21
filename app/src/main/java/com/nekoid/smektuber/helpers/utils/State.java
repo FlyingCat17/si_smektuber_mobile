@@ -7,6 +7,7 @@ import com.nekoid.smektuber.models.AboutModel;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.models.ExtracurricularModel;
 import com.nekoid.smektuber.models.MajorModel;
+import com.nekoid.smektuber.models.PpdbModel;
 import com.nekoid.smektuber.models.UserModel;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,10 @@ import java.util.List;
 public class State {
 
     public static Cache cache;
+
+    public static List<ArticleModel> articles = new ArrayList<>();
+
+    public static PpdbModel PpdbModel;
 
     static List<Bitmap> listImageArticleDashboard = new ArrayList<>();
 

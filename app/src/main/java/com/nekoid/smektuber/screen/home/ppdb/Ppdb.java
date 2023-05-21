@@ -8,9 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.helpers.utils.State;
+import com.nekoid.smektuber.helpers.utils.Utils;
+import com.nekoid.smektuber.models.PpdbModel;
+import com.nekoid.smektuber.network.Http;
+import com.nekoid.smektuber.network.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,28 +33,28 @@ import com.nekoid.smektuber.helpers.navigation.Navigator;
  */
 public class Ppdb extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ShimmerFrameLayout shimmerFrameLayout;
+
+    PpdbModel ppdbModel;
+
+    ShapeableImageView posterImage;
+
+    TextView description;
+
+    ScrollView layoutPpdb;
+
+    boolean withAnimation = true;
 
     public Ppdb() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Ppdb.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Ppdb newInstance(String param1, String param2) {
         Ppdb fragment = new Ppdb();
         Bundle args = new Bundle();
@@ -64,11 +78,69 @@ public class Ppdb extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ppdb, container, false);
-        Button btn = view.findViewById(R.id.BtnDaftarSiswa);
-        btn.setOnClickListener(v -> {
-            Navigator.of(getActivity()).push( DaftarPPDB.class);
-        });
+        setVar(view);
+        startShimmer();
+        if (State.PpdbModel != null) {
+            withAnimation = false;
+            ppdbModel = State.PpdbModel;
+            setModelToView();
+            openRequest();
+        } else {
+            withAnimation = true;
+            openRequest();
+        }
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void startShimmer() {
+
+    }
+
+    public void stopShimmer() {
+        shimmerFrameLayout.setVisibility(View.GONE);
+        layoutPpdb.setVisibility(View.VISIBLE);
+        if (withAnimation) layoutPpdb.setAnimation(Utils.animation());
+    }
+
+    private void setVar(View view) {
+        posterImage = view.findViewById(R.id.ImagePPDB);
+        description = view.findViewById(R.id.TxtPPDB);
+        shimmerFrameLayout = view.findViewById(R.id.ShimmerInformasiPPDB);
+        layoutPpdb = view.findViewById(R.id.layoutPpdb);
+
+        Button btn = view.findViewById(R.id.BtnDaftarSiswa);
+        btn.setOnClickListener(v -> Navigator.of(getActivity()).push(DaftarPPDB.class));
+    }
+
+    private void openRequest() {
+        Http.get(Endpoint.PPDB.getUrl(), PublicApi.getHeaders(), this::onResponse);
+    }
+
+    private void loadModel() {
+        if (ppdbModel != null && ppdbModel.poster != null && !ppdbModel.poster.isEmpty() && !ppdbModel.poster.equals("null")) {
+            Http.loadImage(ppdbModel.poster, posterImage, this::setModelToView);
+            return;
+        }
+        setModelToView();
+    }
+
+    private void setModelToView() {
+        description.setText(ppdbModel.description);
+        stopShimmer();
+    }
+
+    private void onResponse(Response response) {
+        if (response.statusCode != 200) {
+            return;
+        }
+        try {
+            JSONObject body = new JSONObject(response.body.toString());
+            ppdbModel = PpdbModel.fromJson(body.getJSONObject("data"));
+            State.PpdbModel = ppdbModel;
+            loadModel();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

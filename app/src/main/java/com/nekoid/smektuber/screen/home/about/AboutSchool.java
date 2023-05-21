@@ -2,7 +2,6 @@ package com.nekoid.smektuber.screen.home.about;
 
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -63,29 +62,13 @@ public class AboutSchool extends BaseActivity {
         BtnTT = findViewById(R.id.Tiktok);
         toolbar = findViewById(R.id.backIcon);
 
-        BtnFB.setOnClickListener(v -> {
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse(facebook));
-            startActivity(intent);
-        });
+        BtnFB.setOnClickListener(v -> Navigator.to(Uri.parse(facebook)));
 
-        BtnIG.setOnClickListener(v -> {
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse(instagram));
-            startActivity(intent);
-        });
+        BtnIG.setOnClickListener(v -> Navigator.to(Uri.parse(instagram)));
 
-        BtnYoutube.setOnClickListener(v -> {
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse(youtube));
-            startActivity(intent);
-        });
+        BtnYoutube.setOnClickListener(v -> Navigator.to(Uri.parse(youtube)));
 
-        BtnTT.setOnClickListener(v -> {
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse(tiktok));
-            startActivity(intent);
-        });
+        BtnTT.setOnClickListener(v -> Navigator.to(Uri.parse(tiktok)));
     }
 
     protected void onResponse(Response response) {

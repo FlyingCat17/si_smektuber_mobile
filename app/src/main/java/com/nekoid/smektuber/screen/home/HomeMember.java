@@ -27,7 +27,6 @@ public class HomeMember extends BaseActivity {
     BottomNavigationView bottomNavigationView;
     Account account = new Account();
     Dashboard dashboard = new Dashboard();
-    //    No_Information_Ppdb ppdb = new No_Information_Ppdb();
     Jobs jobs = new Jobs();
     Ppdb ppdb = new Ppdb();
     boolean doubleBackToExitPressedOnce = false;
@@ -41,7 +40,6 @@ public class HomeMember extends BaseActivity {
         bottomNavigationView.setItemTextColor(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.r,dashboard).commit();
         StatusBarUtil.setTransparentStatusBar(this);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Menu menu = bottomNavigationView.getMenu();
         SharedPreferences sharedPreferences = getUserPreferences();
