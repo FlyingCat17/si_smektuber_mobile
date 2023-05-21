@@ -1,16 +1,22 @@
 package com.nekoid.smektuber.screen.home.ekstarkurikuler;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.adapter.AdapterDataExtra;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.ScrollListener;
 import com.nekoid.smektuber.helpers.utils.State;
@@ -37,8 +43,10 @@ public class Extrakurikuler extends BaseActivity {
 
     private RecyclerView recyclerView;
 
-    private boolean isScroll = false, isFromState = false;
+    private Toolbar toolbar;
 
+    private boolean isScroll = false, isFromState = false;
+    ShimmerFrameLayout shimmerFrameLayout;
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,8 @@ public class Extrakurikuler extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extrakurikuler);
         startShimmer();
+        setToolbar();
+        shimmerFrameLayout = findViewById(R.id.rvDataExtrakurikulerShimmer);
         recyclerView = findViewById(R.id.rvDataExtra);
         recyclerView.setAdapter(adapterDataExtra);
         recyclerView.setLayoutManager(layoutManager);
@@ -67,6 +77,11 @@ public class Extrakurikuler extends BaseActivity {
 
     private void stopShimmer() {
         // stop shimmer
+        Animation animation = new AlphaAnimation(0,1);
+        animation.setDuration(1000);
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        recyclerView.setAnimation(animation);
     }
 
     protected final void onResponse(Response response) {
@@ -133,5 +148,17 @@ public class Extrakurikuler extends BaseActivity {
                 });
             });
         });
+    }
+
+    private void setToolbar() {
+        toolbar = findViewById(R.id.backIcon);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Navigator.of(this).pop();
+        return true;
     }
 }
