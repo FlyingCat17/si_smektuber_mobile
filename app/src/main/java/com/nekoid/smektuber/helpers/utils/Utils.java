@@ -8,8 +8,15 @@ public class Utils {
      * <p>Set Animation for load image</p>
      * */
     public static android.view.animation.Animation animation() {
+        return animation(500);
+    }
+
+    /**
+     * <p>Set Animation for load image</p>
+     * */
+    public static android.view.animation.Animation animation(long duration) {
         android.view.animation.Animation fadeInAnimation = new AlphaAnimation(0, 1);
-        fadeInAnimation.setDuration(500); // Set the duration of the animation
+        fadeInAnimation.setDuration(duration); // Set the duration of the animation
 
         // Set animation listener
         fadeInAnimation.setAnimationListener(new Animation());
