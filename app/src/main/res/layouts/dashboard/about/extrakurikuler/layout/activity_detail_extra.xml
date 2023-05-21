@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.home.ekstarkurikuler.DetailExtra">
+
+    <include
+        android:id="@+id/backIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="22dp"
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/TitleDetailExtra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/TxtxExtra"
+        android:textAppearance="@style/informasi_p"
+        android:lineSpacingExtra="-2sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/ShimmerAboutSchool"
+        android:layout_below="@+id/backIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            >
+            <include layout="@layout/item_data_visi_misi_shimmer"/>
+            <include layout="@layout/item_data_about_school_shimmer"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <ScrollView
+        android:layout_below="@+id/backIcon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp"
+        android:visibility="gone"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/ImageExtra"
+                android:layout_width="match_parent"
+                android:layout_height="310.37dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/imagenoarticle"
+                />
+
+            <TextView
+                android:id="@+id/TitleTentangExtra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16.63dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/ImageExtra"
+                android:text="@string/TxtTentang"
+                android:textAppearance="@style/selayang_title"
+                />
+
+            <TextView
+                android:id="@+id/TxtAboutExtra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TitleTentangExtra"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/AboutExtra"
+                android:textAppearance="@style/selayang_pa"
+                />
+
+            <TextView
+                android:id="@+id/TitlePrestasiExtra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/TxtAboutExtra"
+                android:text="@string/TxtPrestasi"
+                android:textAppearance="@style/selayang_title"
+                />
+
+            <TextView
+                android:id="@+id/TxtViewPrestasiExtra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TitlePrestasiExtra"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:lineSpacingExtra="3sp"
+                android:text="Duta Ambalan Suropati- Cut Nyak Dien SMKN 7 Jember Bangkit bersama Saka Dirgantara Kabupaten Jember."
+                android:textAppearance="@style/Text_Prestasi"
+                />
+
+            <TextView
+                android:id="@+id/TitleFasilitasExtra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/TxtViewPrestasiExtra"
+                android:text="@string/TxtFasilitas"
+                android:textAppearance="@style/selayang_title"
+                />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true"
+                android:layout_marginTop="10dp"
+                android:overScrollMode="never"
+                android:layout_below="@+id/TitleFasilitasExtra"
+                >
+                <LinearLayout
+                    android:id="@+id/ItemFasilitasExtra"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvDataFasilitasExtra"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

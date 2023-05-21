@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
+    tools:context=".screen.home.visiMisi.VisiAndMisi">
+
+    <include
+        android:id="@+id/backIcon"
+        layout="@layout/toolbar"
+        android:clickable="true"
+        android:focusable="true"/>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:progressTint="@color/blue01"
+            android:layout_centerInParent="true" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/ShimmerVisiMisi"
+        android:layout_below="@+id/backIcon"
+        android:layout_marginTop="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <include layout="@layout/item_data_visi_misi_shimmer"/>
+            <include layout="@layout/item_data_visi_misi_shimmer"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <TextView
+        android:id="@+id/TitleVisiMisi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/visi_misi"
+        android:textAppearance="@style/informasi_p"
+        android:lineSpacingExtra="-2sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/backIcon"
+        android:visibility="gone"
+        >
+    <ScrollView
+        android:layout_below="@+id/backIcon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp"
+        android:id="@+id/cVM"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <LinearLayout
+                android:id="@+id/cardVisi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_visiandmisi"
+                android:orientation="vertical"
+                android:paddingTop="32dp"
+                android:paddingRight="25dp"
+                android:paddingLeft="25dp"
+                android:paddingBottom="32dp"
+                android:layout_marginBottom="32dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Visi :"
+                    android:textColor="@color/white"
+                    android:textAppearance="@style/visi_terwuj"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="3sp"/>
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/TxtVisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textAppearance="@style/visi_terwuj"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="3sp"/>
+            </LinearLayout>
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/txtMisi"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:paddingLeft="25dp"-->
+            <!--                android:paddingTop="32dp"-->
+            <!--                android:paddingBottom="32dp"-->
+            <!--                android:layout_marginTop="278dp"-->
+            <!--                android:text="@string/misi_memben"-->
+            <!--                android:textAppearance="@style/visi_terwuj"-->
+            <!--                android:lineSpacingExtra="3sp"-->
+            <!--                android:gravity="center_vertical"-->
+            <!--                android:background="@drawable/rectangle_visiandmisi"-->
+            <!--                android:layout_marginBottom="47dp"-->
+            <!--                />-->
+            <LinearLayout
+                android:id="@+id/cardMisi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardVisi"
+                android:layout_marginTop="25dp"
+                android:paddingTop="32dp"
+                android:paddingRight="25dp"
+                android:paddingLeft="25dp"
+                android:paddingBottom="32dp"
+                android:background="@drawable/rectangle_visiandmisi"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Misi :"
+                    android:textColor="@color/white"
+                    android:textAppearance="@style/visi_terwuj"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="3sp"/>
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/TxtMisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textAppearance="@style/visi_terwuj"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="3sp"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</RelativeLayout>

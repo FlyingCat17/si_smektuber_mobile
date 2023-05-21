@@ -1,114 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="22dp"
-    android:paddingRight="22dp"
+    android:background="@color/blue01"
     tools:context=".screen.auth.Login">
-    <include
-        android:id="@+id/backIcon"
-        layout="@layout/toolbar"/>
-    <TextView
-        android:id="@+id/title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/titleLogin"
-        android:textSize="35sp"
-        android:textColor="@color/cyanblue"
-        android:fontFamily="@font/urbanist_bold"
-        android:layout_below="@+id/backIcon"
-        android:layout_marginTop="20dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:id="@+id/formInput"
-        android:orientation="vertical">
-        <com.google.android.material.textfield.TextInputLayout
+        android:layout_height="match_parent"
+        android:fillViewport="false">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:hint="@string/hintUsername"
-            app:endIconMode="clear_text">
-            <com.google.android.material.textfield.TextInputEditText
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:id="@+id/et_username"
-                android:inputType="textEmailAddress"
-                android:fontFamily="@font/urbanist"
-                android:textSize="15sp"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginEnd="26dp">
+                <TextView
+                    android:id="@+id/titleWelcome"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="67.7dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="@string/titleLogin"
+                    android:textSize="30sp"
+                    android:fontFamily="@font/urbanist_bold"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:hint="@string/hintPassword"
-            app:endIconMode="password_toggle"
-            app:endIconTint="@color/black"
-            app:passwordToggleTint="@color/black"
-            app:hintTextAppearance="@style/TextAppearance.MaterialComponents.Caption">
-            <com.google.android.material.textfield.TextInputEditText
+                <ImageView
+                    android:id="@+id/vectorLogin"
+                    android:layout_marginTop="92dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    app:srcCompat="@drawable/loginimg" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:id="@+id/et_password"
-                android:inputType="textPassword"
-                android:fontFamily="@font/urbanist"
-                android:textSize="15sp"/>
+                android:layout_height="620dp"
+                android:background="@drawable/background_home"
+                android:paddingStart="22dp"
+                android:paddingEnd="22dp">
 
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/hidden_password_edit_text"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="textPassword"-->
-<!--                android:fontFamily="@font/urbanist_bold"-->
-<!--                android:theme="@style/HiddenPasswordStyle" />-->
-        </com.google.android.material.textfield.TextInputLayout>
-        <TextView
-            android:id="@+id/forgotPw"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/urbanist_bold"
-            android:textAlignment="textEnd"
-            android:textSize="15sp"
-            android:text="@string/titleForgotPw"/>
-        <include
-            android:id="@+id/btnLogin"
-            layout="@layout/button"
-            android:layout_marginTop="40dp"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginBottom="26dp"
-        android:layout_marginTop="159dp"
-        android:layout_below="@+id/formInput"
-        android:layout_alignParentBottom="true">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tidak punya akun? "
-            android:textSize="15sp"
-            android:fontFamily="@font/urbanist"
-            android:textColor="@color/cyanblue" />
-        <TextView
-            android:id="@+id/txtToRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="3dp"
-            android:text="Daftar Sekarang"
-            android:textSize="15sp"
-            android:fontFamily="@font/urbanist_bold"
-            android:textColor="@color/blue03" />
-    </LinearLayout>
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:fontFamily="@font/urbanist_bold"
+                    android:text="Masuk ke Akun Anda"
+                    android:textColor="@color/black"
+                    android:textSize="21sp" />
+
+                <LinearLayout
+                    android:id="@+id/formInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/txtLayoutUsername"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:hint="@string/hintUsername"
+                        app:endIconMode="clear_text">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:fontFamily="@font/urbanist"
+                            android:inputType="textEmailAddress"
+                            android:textSize="15sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/txtLayoutPassword"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="36dp"
+                        android:hint="@string/hintPassword"
+                        app:endIconMode="password_toggle"
+                        app:endIconTint="@color/black"
+                        app:hintTextAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                        app:passwordToggleTint="@color/black">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:fontFamily="@font/urbanist"
+                            android:inputType="textPassword"
+                            android:textSize="15sp" />
+
+                        <!--            <com.google.android.material.textfield.TextInputEditText-->
+                        <!--                android:id="@+id/hidden_password_edit_text"-->
+                        <!--                android:layout_width="match_parent"-->
+                        <!--                android:layout_height="wrap_content"-->
+                        <!--                android:inputType="textPassword"-->
+                        <!--                android:fontFamily="@font/urbanist_bold"-->
+                        <!--                android:theme="@style/HiddenPasswordStyle" />-->
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/forgotPw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/urbanist_bold"
+                        android:text="@string/titleForgotPw"
+                        android:textAlignment="textEnd"
+                        android:textSize="15sp" />
+
+                    <include
+                        android:id="@+id/btnLogin"
+                        layout="@layout/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="75dp"
+                        android:layout_marginTop="40dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="359dp"
+                    android:layout_height="44dp"
+                    android:layout_below="@+id/formInput"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="29dp"
+                    android:layout_marginBottom="107dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/urbanist"
+                        android:text="Belum punya akun? "
+                        android:textColor="@color/cyanblue"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/txtToRegister"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/urbanist_bold"
+                        android:paddingLeft="3dp"
+                        android:text="Daftar Sekarang"
+                        android:textColor="@color/blue03"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

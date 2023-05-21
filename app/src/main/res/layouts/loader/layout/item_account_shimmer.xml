@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screen.home.account.Account">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ImageProfil"
+        android:layout_width="73.6dp"
+        android:layout_height="73.6dp"
+        android:layout_marginTop="72.64dp"
+        android:layout_marginLeft="32.64dp"
+        android:padding="5dp"
+        android:background="@color/grey"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/grey"
+        app:shapeAppearanceOverlay="@style/circleImageView"
+        />
+
+    <TextView
+        android:id="@+id/FullnameAccount"
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:background="@color/grey"
+        android:text="@string/Fullname"
+        android:fontFamily="@font/urbanist"
+        android:textSize="18sp"
+        android:layout_marginTop="89dp"
+        android:layout_marginLeft="132dp"
+        android:layout_marginRight="52dp"
+        android:textColor="@color/grey"
+        />
+
+    <TextView
+        android:id="@+id/UsernameAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:text="@string/Username"
+        android:background="@color/grey"
+        android:fontFamily="@font/urbanist"
+        android:layout_marginTop="114dp"
+        android:layout_marginLeft="132dp"
+        android:layout_marginRight="52dp"
+        android:textColor="@color/grey"
+        />
+
+
+</RelativeLayout>

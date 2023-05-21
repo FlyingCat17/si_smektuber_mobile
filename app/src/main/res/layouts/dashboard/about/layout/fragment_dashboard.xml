@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.home.Dashboard"
+    tools:context=".screen.home.dashboard.Dashboard"
     >
         <ScrollView
             android:layout_width="match_parent"
@@ -21,7 +21,7 @@
                                 <ImageView
                                     android:layout_width="38.51dp"
                                     android:layout_height="45.53dp"
-                                    android:id="@+id/imageView"
+                                    android:id="@+id/IconPesan"
                                     android:layout_marginTop="38dp"
                                     android:layout_marginEnd="22.49dp"
                                     android:layout_marginBottom="20.47dp"
@@ -40,23 +40,23 @@
                                     android:fontFamily="@font/urbanistsemibold"
                                     android:textSize="19sp"
                                     android:textColor="@color/white"
-                                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                                    app:layout_constraintBottom_toBottomOf="@+id/IconPesan"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                                    app:layout_constraintTop_toTopOf="@+id/IconPesan"
                                     />
 
                                 <TextView
                                     android:id="@+id/Fullname"
-                                    android:layout_width="119dp"
-                                    android:layout_height="27dp"
+                                    android:layout_width="240dp"
+                                    android:layout_height="25dp"
                                     android:layout_marginStart="63dp"
                                     android:text="@string/Fullname"
                                     android:fontFamily="@font/urbanistsemibold"
                                     android:textSize="19sp"
                                     android:textColor="@color/white"
-                                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                                    app:layout_constraintBottom_toBottomOf="@+id/IconPesan"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                                    app:layout_constraintTop_toTopOf="@+id/IconPesan"
                                     />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -76,7 +76,7 @@
                                     android:layout_marginTop="28dp">
 
                                         <TextView
-                                            android:id="@+id/sistem_info"
+                                            android:id="@+id/TitleSistemInformasi"
                                             android:layout_width="wrap_content"
                                             android:layout_height="36dp"
                                             android:layout_alignParentLeft="true"
@@ -92,21 +92,6 @@
 
                                         <TextView
                                             android:id="@+id/ButtonSelengkapnya"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="36dp"
-                                            android:layout_alignParentLeft="true"
-                                            android:layout_marginLeft="20dp"
-                                            android:layout_marginStart="20dp"
-                                            android:layout_alignParentTop="true"
-                                            android:layout_marginTop="20dp"
-                                            android:textAppearance="@style/sistem_info"
-                                            android:text="@string/titleHome"
-                                            app:layout_constraintStart_toStartOf="parent"
-                                            app:layout_constraintTop_toTopOf="parent"
-                                            />
-
-                                        <TextView
-                                            android:id="@+id/selengkapny"
                                             android:layout_width="wrap_content"
                                             android:layout_height="18dp"
                                             app:layout_constraintStart_toStartOf="parent"
@@ -173,7 +158,9 @@
                                             android:backgroundTint="@color/Color312E48"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginLeft="22dp"
-                                            android:layout_marginTop="24dp">
+                                            android:layout_marginTop="24dp"
+                                            android:clickable="true"
+                                            android:focusable="true">
 
                                                 <ImageView
                                                     android:layout_width="24dp"
@@ -220,6 +207,8 @@
                                             android:backgroundTint="@color/ColorFC313D"
                                             android:layout_alignParentRight="true"
                                             android:layout_marginRight="22dp"
+                                            android:clickable="true"
+                                            android:focusable="true"
                                             android:layout_marginTop="24dp">
 
                                                 <ImageView
@@ -273,6 +262,8 @@
                                             android:backgroundTint="@color/Color05D77F"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginLeft="22dp"
+                                            android:clickable="true"
+                                            android:focusable="true"
                                             android:layout_marginTop="14dp">
 
                                                 <ImageView
@@ -320,6 +311,8 @@
                                             android:backgroundTint="@color/ColorFFC22E"
                                             android:layout_alignParentRight="true"
                                             android:layout_marginRight="22dp"
+                                            android:clickable="true"
+                                            android:focusable="true"
                                             android:layout_marginTop="14dp">
 
                                                 <ImageView
@@ -361,11 +354,12 @@
                                 </RelativeLayout>
                                 
                                 <RelativeLayout
-                                    android:id="@+id/TitleArtikel"
+                                    android:id="@+id/Title"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
 
                                         <TextView
+                                            android:id="@+id/TitleArtikel"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
@@ -379,11 +373,12 @@
                                             />
 
                                         <TextView
-                                            android:id="@+id/lihat_semua"
+                                            android:id="@+id/Titlelihat_semua"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentRight="true"
                                             android:layout_marginRight="22dp"
+                                            android:clickable="true"
                                             android:layout_alignParentTop="true"
                                             android:layout_marginTop="20dp"
                                             android:text="@string/lihat_semua"
@@ -391,28 +386,35 @@
                                             android:lineSpacingExtra="-1sp"
                                             android:gravity="center_vertical"
                                             />
-                                        
-                                        <HorizontalScrollView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:fillViewport="true"
-                                            android:overScrollMode="never"
-                                            >
                                                 <LinearLayout
                                                     android:id="@+id/ItemArtikel"
                                                     android:layout_width="match_parent"
-                                                    android:layout_height="match_parent"
-                                                    android:orientation="horizontal"
-                                                    android:layout_marginTop="49dp">
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="49dp"
+                                                    android:orientation="horizontal">
 
                                                         <androidx.recyclerview.widget.RecyclerView
                                                             android:id="@+id/rvData"
                                                             android:layout_width="match_parent"
-                                                            android:layout_height="match_parent"/>
+                                                            android:layout_height="wrap_content"
+                                                            android:visibility="gone"
+                                                            />
+
+                                                        <com.facebook.shimmer.ShimmerFrameLayout
+                                                            android:id="@+id/rvDataShimmer"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content">
+                                                                <LinearLayout
+                                                                    android:layout_width="wrap_content"
+                                                                    android:layout_height="wrap_content"
+                                                                    android:orientation="horizontal"
+                                                                    >
+                                                                        <include layout="@layout/item_data_shimmer"/>
+                                                                        <include layout="@layout/item_data_shimmer"/>
+                                                                </LinearLayout>
+                                                        </com.facebook.shimmer.ShimmerFrameLayout>
 
                                                 </LinearLayout>
-
-                                        </HorizontalScrollView>
 
                                 </RelativeLayout>
 

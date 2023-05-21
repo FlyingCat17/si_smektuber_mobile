@@ -3,10 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.home.Jobs">
+    tools:context=".screen.notification.Notification">
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/TitleInformasiLowongan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="41dp"
+        android:text="@string/informasi_lowongan"
+        android:textAppearance="@style/informasi_p"
+        android:lineSpacingExtra="-2sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
     <ImageView
+        android:id="@+id/ImageTidakAdaInformasiLowongan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/iconnojobs"

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="217dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="5dp"
+                    app:cardCornerRadius="15dp"
+                    android:background="@drawable/rectangle_artikel"
+                    android:layout_height="122dp">
+
+                        <ImageView
+                            android:id="@+id/ImageArtikel"
+                            android:layout_width="217dp"
+                            android:layout_height="122dp"
+                            android:background="@drawable/rectangle_artikel"
+                            android:scaleType="fitXY"/>
+
+                </androidx.cardview.widget.CardView>
+            
+
+                <TextView
+                    android:id="@+id/DataTextArtikel"
+                    android:layout_width="217dp"
+                    android:layout_height="34dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="22dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="9dp"
+                    android:text="Artikel Artikel ini sangat keren jadi ini sebenarnya jangan lupa"
+                    android:textAppearance="@style/artikel_ini"
+                    android:lineSpacingExtra="2sp"
+                    android:gravity="center_vertical"
+                    />
+
+        </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,82 @@
+package com.nekoid.smektuber.screen.home.article;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+
+import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.adapter.AdapterDataArticleViewAll;
+import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.PublicApi;
+import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.models.ArticleModel;
+import com.nekoid.smektuber.network.Http;
+import com.nekoid.smektuber.network.Response;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ArticleViewAll extends BaseActivity {
+
+    private RecyclerView recyclerView;
+
+    List<ArticleModel> articleModelList = new ArrayList<ArticleModel>();
+    AdapterDataArticleViewAll adapterDataArticleViewAll;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_article_view_all);
+        setToolbar();
+        recyclerView = findViewById(R.id.rvDataViewAll);
+        setAdapterData();
+        Http.get(Endpoint.LIST_ARTICLE.getUrl(), PublicApi.getHeaders(), this::listArticles);
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.backIcon);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Navigator.of(this).pop();
+        return true;
+    }
+
+    protected void listArticles(Response response) {
+        if (response.statusCode != 200) {
+            return;
+        }
+
+        try {
+            JSONObject responses = new JSONObject(response.body.toString());
+            if (responses.getInt("status") != 200) {
+                return;
+            }
+            JSONArray arrays = responses.getJSONArray("data");
+            for (int i = 0; i < arrays.length(); i++) {
+                articleModelList.add(ArticleModel.fromJson(new JSONObject(arrays.getString(i))));
+            }
+            setAdapterData();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void setAdapterData() {
+        adapterDataArticleViewAll = new AdapterDataArticleViewAll(this, articleModelList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapterDataArticleViewAll);
+    }
+}

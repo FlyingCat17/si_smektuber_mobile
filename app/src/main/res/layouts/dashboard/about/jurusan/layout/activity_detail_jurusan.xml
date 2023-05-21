@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.home.jurusan.DetailJurusan">
+
+    <include
+        android:id="@+id/backIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="22dp"
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/TitleDetailJurusan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/TxtxJurusan"
+        android:textAppearance="@style/informasi_p"
+        android:lineSpacingExtra="-2sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/ShimmerAboutSchool"
+        android:layout_below="@+id/backIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            >
+            <include layout="@layout/item_data_visi_misi_shimmer"/>
+            <include layout="@layout/item_data_about_school_shimmer"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <ScrollView
+        android:layout_below="@+id/backIcon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp"
+        android:visibility="gone"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/ImageJurusan"
+                android:layout_width="match_parent"
+                android:layout_height="310.37dp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/imagenoarticle"
+                />
+
+            <TextView
+                android:id="@+id/TitleTentangJurusan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16.63dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/ImageJurusan"
+                android:text="@string/TxtTentang"
+                android:textAppearance="@style/selayang_title"
+                />
+
+            <TextView
+                android:id="@+id/TxtAboutJurusan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TitleTentangJurusan"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/AboutJurusan"
+                android:textAppearance="@style/selayang_pa"
+                />
+
+            <TextView
+                android:id="@+id/TitlePrestasiJurusan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/TxtAboutJurusan"
+                android:text="@string/TxtPrestasi"
+                android:textAppearance="@style/selayang_title"
+                />
+
+            <TextView
+                android:id="@+id/TxtViewPrestasiJurusan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TitlePrestasiJurusan"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:lineSpacingExtra="3sp"
+                android:text="Juara 1 Kecantikan Tingkat Kabupaten Jember"
+                android:textAppearance="@style/Text_Prestasi"
+                />
+
+            <TextView
+                android:id="@+id/TitleFasilitasJurusan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/TxtViewPrestasiJurusan"
+                android:text="@string/TxtFasilitas"
+                android:textAppearance="@style/selayang_title"
+                />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true"
+                android:layout_marginTop="10dp"
+                android:overScrollMode="never"
+                android:layout_below="@+id/TitleFasilitasJurusan"
+                >
+                <LinearLayout
+                    android:id="@+id/ItemFasilitasJurusan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvDataFasilitasJurusan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

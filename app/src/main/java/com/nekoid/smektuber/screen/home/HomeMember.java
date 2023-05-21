@@ -1,24 +1,36 @@
 package com.nekoid.smektuber.screen.home;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
-import android.content.res.ColorStateList;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Menu;
 import android.view.MenuItem;
+
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
+import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.screen.home.account.Account;
+import com.nekoid.smektuber.screen.home.dashboard.Dashboard;
+import com.nekoid.smektuber.screen.home.job.Jobs;
+import com.nekoid.smektuber.screen.home.job.NoJobs;
+import com.nekoid.smektuber.screen.home.ppdb.Ppdb;
 
-public class HomeMember extends AppCompatActivity {
+public class HomeMember extends BaseActivity {
+    private static final int REQUEST_PERMISSIONS = 100;
     BottomNavigationView bottomNavigationView;
     Account account = new Account();
     Dashboard dashboard = new Dashboard();
-
-    NoJobs jobs = new NoJobs();
+    //    No_Information_Ppdb ppdb = new No_Information_Ppdb();
+    Jobs jobs = new Jobs();
     Ppdb ppdb = new Ppdb();
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +41,16 @@ public class HomeMember extends AppCompatActivity {
         bottomNavigationView.setItemTextColor(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.r,dashboard).commit();
         StatusBarUtil.setTransparentStatusBar(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        Menu menu = bottomNavigationView.getMenu();
+        SharedPreferences sharedPreferences = getUserPreferences();
+        String role = sharedPreferences.getString("role", null);
+        if (!role.isEmpty() && role.equals("member")) {
+            menu.removeItem(R.id.Loker);
+        } else if (!role.isEmpty() && role.equals("siswa")) {
+            menu.removeItem(R.id.Ppdb);
+        }
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -50,5 +72,16 @@ public class HomeMember extends AppCompatActivity {
                 return false;
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Ketuk sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 }

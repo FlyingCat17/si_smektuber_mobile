@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.home.about.AboutSchool">
+
+    <include
+        android:id="@+id/backIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="22dp"
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/TitleTentang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/tentang"
+        android:textAppearance="@style/informasi_p"
+        android:lineSpacingExtra="-2sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/ShimmerAboutSchool"
+        android:layout_below="@+id/backIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            >
+            <include layout="@layout/item_data_visi_misi_shimmer"/>
+            <include layout="@layout/item_data_about_school_shimmer"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <ScrollView
+        android:id="@+id/TampilanAboutScholl"
+        android:layout_below="@+id/backIcon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp"
+        android:visibility="gone"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/ImageSchool"
+                android:layout_width="match_parent"
+                android:layout_height="310.37dp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/imagenoimageschool"
+                />
+
+            <TextView
+                android:id="@+id/TitleSelayangPadang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16.63dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/ImageSchool"
+                android:text="@string/Title1"
+                android:textAppearance="@style/selayang_title"
+                />
+
+            <TextView
+                android:id="@+id/TxtAboutSchool"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TitleSelayangPadang"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/selayang_pa"
+                android:textAppearance="@style/selayang_pa"
+                />
+
+            <TextView
+                android:id="@+id/Titleheadmaster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="46.63dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/TxtAboutSchool"
+                android:text="@string/Title2"
+                android:textAppearance="@style/selayang_title"
+                />
+
+            <ImageView
+                android:id="@+id/ImageHeadMaster"
+                android:layout_width="174dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:scaleType="fitXY"
+                android:layout_below="@+id/Titleheadmaster"
+                android:background="@drawable/imageheadmaster"
+                />
+
+            <TextView
+                android:id="@+id/TitleNameHeadMaster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="212dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/Titleheadmaster"
+                android:text="@string/Title3"
+                android:textAppearance="@style/selayang_title"
+                />
+            <TextView
+                android:id="@+id/TxtNameHeadMaster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="212dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/TitleNameHeadMaster"
+                android:text="@string/NamaHeadMaster"
+                android:textAppearance="@style/selayang_pa"
+                />
+
+            <TextView
+                android:id="@+id/TitleAkreditasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/ImageHeadMaster"
+                android:text="@string/Title4"
+                android:textAppearance="@style/selayang_title"
+                />
+
+            <TextView
+                android:id="@+id/Akreditasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/TitleAkreditasi"
+                android:text="@string/Akreditasi"
+                android:textAppearance="@style/Akreditasi"
+                />
+
+            <TextView
+                android:id="@+id/TitleMediaSosial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_below="@+id/Akreditasi"
+                android:text="@string/Title5"
+                android:textAppearance="@style/selayang_title"
+                />
+
+            <ImageView
+                android:id="@+id/FaceBook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_marginBottom="94dp"
+                android:layout_below="@+id/TitleMediaSosial"
+                android:background="@drawable/facebook___original"
+                />
+
+            <ImageView
+                android:id="@+id/Instagram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="82dp"
+                android:layout_marginRight="22dp"
+                android:layout_marginBottom="94dp"
+                android:layout_below="@+id/TitleMediaSosial"
+                android:background="@drawable/_instagram"
+                />
+
+            <ImageView
+                android:id="@+id/Youtube"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="142dp"
+                android:layout_marginRight="22dp"
+                android:layout_marginBottom="94dp"
+                android:layout_below="@+id/TitleMediaSosial"
+                android:background="@drawable/youtube___original"
+                />
+
+            <ImageView
+                android:id="@+id/Tiktok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="202dp"
+                android:layout_marginRight="22dp"
+                android:layout_marginBottom="94dp"
+                android:layout_below="@+id/TitleMediaSosial"
+                android:background="@drawable/tiktok___original"
+                />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

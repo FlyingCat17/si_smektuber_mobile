@@ -3,14 +3,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.home.Jobs">
+    tools:context=".screen.home.job.Jobs">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/TitleInformasiLowongan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Loker"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="65dp"
+        android:text="@string/informasi_lowongan"
+        android:textAppearance="@style/informasi_p"
+        android:lineSpacingExtra="-2sp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TitleInformasiLowongan"
+        >
+            <RelativeLayout
+                android:layout_marginTop="24dp"
+                android:paddingRight="22dp"
+                android:paddingLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/DataLowongan"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            >
+                            <include layout="@layout/item_data_jobs_shimmer"/>
+                            <include layout="@layout/item_data_jobs_shimmer"/>
+                            <include layout="@layout/item_data_jobs_shimmer"/>
+                            <include layout="@layout/item_data_jobs_shimmer"/>
+                        </LinearLayout>
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+            </RelativeLayout>
+
+    </ScrollView>
+
 
 </RelativeLayout>

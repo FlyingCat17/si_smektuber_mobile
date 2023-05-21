@@ -4,44 +4,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".screen.home.Account">
+    tools:context=".screen.home.account.Account">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="73.6dp"
-        android:layout_height="73.6dp"
-        android:layout_marginTop="72.64dp"
-        android:layout_marginLeft="32.64dp"
-        android:padding="5dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/Color00000"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        android:background="@drawable/iconuser"
-        />
-
-    <TextView
-        android:id="@+id/FullnameAccount"
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/ShimmerAccount"
         android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:text="@string/Fullname"
-        android:fontFamily="@font/urbanist"
-        android:textSize="18sp"
-        android:layout_marginTop="89dp"
-        android:layout_marginLeft="132dp"
-        android:layout_marginRight="52dp"
-        android:textColor="@color/Color00000"
-        />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <include layout="@layout/item_account_shimmer"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <TextView
-        android:id="@+id/UsernameAccount"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="17dp"
-        android:text="@string/Username"
-        android:fontFamily="@font/urbanist"
-        android:layout_marginTop="114dp"
-        android:layout_marginLeft="132dp"
-        android:layout_marginRight="52dp"
-        android:textColor="@color/Color7D7D7D"
-        />
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ImageProfil"
+            android:layout_width="73.6dp"
+            android:layout_height="73.6dp"
+            android:layout_marginTop="72.64dp"
+            android:layout_marginLeft="32.64dp"
+            android:padding="5dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/Color00000"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            android:background="@drawable/iconuser"
+            />
+
+        <TextView
+            android:id="@+id/FullnameAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:text="@string/Fullname"
+            android:fontFamily="@font/urbanist"
+            android:textSize="18sp"
+            android:layout_marginTop="89dp"
+            android:layout_marginLeft="132dp"
+            android:layout_marginRight="52dp"
+            android:textColor="@color/Color00000"
+            />
+
+        <TextView
+            android:id="@+id/UsernameAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:text="@string/Username"
+            android:fontFamily="@font/urbanist"
+            android:layout_marginTop="114dp"
+            android:layout_marginLeft="132dp"
+            android:layout_marginRight="52dp"
+            android:textColor="@color/Color7D7D7D"
+            />
+
+    </RelativeLayout>
 
     <com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -54,6 +74,7 @@
         android:textColor="@color/white"
         app:cornerRadius="8dp"
         android:id="@+id/ButtonUbahProfil"
+        android:onClick="ButtonUbahProfill"
         android:layout_marginTop="191dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="20dp"
@@ -74,6 +95,7 @@
         android:layout_marginLeft="21dp"
         android:layout_marginRight="23dp"
         />
+
 
 
 </RelativeLayout>
