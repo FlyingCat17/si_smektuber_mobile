@@ -64,7 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        PublicApi.setBaseActivity(this);
+        Utils.setBaseActivity(this);
         State.setCache(new Cache(getCacheDir()));
         super.onCreate(savedInstanceState);
     }
