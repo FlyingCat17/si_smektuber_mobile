@@ -79,6 +79,7 @@ public class Extrakurikuler extends BaseActivity {
         // stop shimmer
         Animation animation = new AlphaAnimation(0,1);
         animation.setDuration(1000);
+        shimmerFrameLayout.stopShimmer();
         shimmerFrameLayout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
         recyclerView.setAnimation(animation);
