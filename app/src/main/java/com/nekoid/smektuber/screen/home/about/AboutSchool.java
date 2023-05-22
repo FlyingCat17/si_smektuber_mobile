@@ -2,7 +2,6 @@ package com.nekoid.smektuber.screen.home.about;
 
 import androidx.appcompat.widget.Toolbar;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +12,7 @@ import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.State;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.AboutModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
@@ -62,13 +62,13 @@ public class AboutSchool extends BaseActivity {
         BtnTT = findViewById(R.id.Tiktok);
         toolbar = findViewById(R.id.backIcon);
 
-        BtnFB.setOnClickListener(v -> Navigator.to(Uri.parse(facebook)));
+        BtnFB.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(facebook)));
 
-        BtnIG.setOnClickListener(v -> Navigator.to(Uri.parse(instagram)));
+        BtnIG.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(instagram)));
 
-        BtnYoutube.setOnClickListener(v -> Navigator.to(Uri.parse(youtube)));
+        BtnYoutube.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(youtube)));
 
-        BtnTT.setOnClickListener(v -> Navigator.to(Uri.parse(tiktok)));
+        BtnTT.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(tiktok)));
     }
 
     protected void onResponse(Response response) {

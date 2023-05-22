@@ -1,7 +1,6 @@
 package com.nekoid.smektuber.screen.home.dashboard;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -42,6 +41,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -160,7 +160,7 @@ public class Dashboard extends BaseFragment {
         ConstraintLayout n = view.findViewById(R.id.Map_Lokasi);
         ConstraintLayout extra = view.findViewById(R.id.Extrakurikuler);
         ConstraintLayout jurusan = view.findViewById(R.id.Jurusan);
-        ImageView buttonMessage = view.findViewById(R.id.IconPesan);
+        btnMessage(view);
 
         jurusan.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(Jurusan.class);
@@ -180,8 +180,29 @@ public class Dashboard extends BaseFragment {
         jk.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(AboutSchool.class);
         });
-        buttonMessage.setOnClickListener(v -> {
-            Navigator.openApp(Navigator.VIEW);
+    }
+
+    private void onClickMessage(View view) {
+        String phoneNumber = State.aboutModel.schoolWhatsapp;
+        if (phoneNumber.startsWith("0")) phoneNumber = phoneNumber.substring(1);
+        String url = String.format("https://api.whatsapp.com/send/phone=%s", "62" + phoneNumber);
+        Navigator.openApp(getActivity(), Utils.toUri(url));
+    }
+
+    private void btnMessage(View view) {
+        ImageView buttonMessage = view.findViewById(R.id.IconPesan);
+        AtomicBoolean isClickable = new AtomicBoolean(false);
+        Threads.execute((executor, handler) -> {
+            executor.execute(() -> {
+                while (State.aboutModel == null) {
+                    isClickable.set(false);
+                    if (State.aboutModel != null) {
+                        isClickable.set(true);
+                        break;
+                    }
+                }
+                handler.post(() -> buttonMessage.setOnClickListener(this::onClickMessage));
+            });
         });
     }
 
