@@ -2,24 +2,17 @@ package com.nekoid.smektuber.helpers.navigation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 
-import androidx.activity.ComponentActivity;
-import androidx.activity.OnBackPressedCallback;
 import androidx.activity.OnBackPressedDispatcher;
 
 public class Of {
     private Activity activity;
 
-    private String action;
-
     public Of(Activity activity) {
         this.activity = activity;
-    }
-
-    public Of(String action) {
-        this.action = action;
     }
 
     private Animation animation() {
@@ -51,17 +44,18 @@ public class Of {
     }
 
     private void startIntent(Intent intent, boolean isReplacement, boolean isUntil, Object args) {
+        if (args != null) setArgs(intent, args);
         activity.startActivity(intent);
-        setArgs(intent, args);
         if (isUntil) activity.finishAffinity();
         if (isReplacement) activity.finish();
     }
 
-    public void start(Uri uri) {
+    public void start(String action, Uri uri) {
+        Intent intent = new Intent(action);
         if (uri != null) {
-            Intent intent = new Intent(action, uri);
-            activity.startActivity(intent);
+            intent.setData(uri);
         }
+        activity.startActivity(intent);
     }
 
     public Animation push(Class route) {
@@ -163,7 +157,7 @@ public class Of {
         intent.putExtra("_args", arguments);
     }
 
-    private final OnBackPressedDispatcher onBack(Activity activity) {
+    private OnBackPressedDispatcher onBack(Activity activity) {
         return new OnBackPressedDispatcher(new Runnable() {
             @Override
             public void run() {
