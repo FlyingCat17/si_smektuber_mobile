@@ -1,6 +1,9 @@
 package com.nekoid.smektuber.helpers.utils;
 
-import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.view.animation.AlphaAnimation;
 
 public class Utils {
@@ -40,5 +43,22 @@ public class Utils {
         // Set animation listener
         fadeInAnimation.setAnimationListener(new Animation());
         return fadeInAnimation;
+    }
+
+    public static boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) baseActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        }
+        return false;
+    }
+
+    public static Uri toUri(String s) {
+        return Uri.parse(s);
+    }
+
+    public static String toString(Object x) {
+        return String.valueOf(x);
     }
 }
