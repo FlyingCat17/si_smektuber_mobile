@@ -30,7 +30,6 @@ public class DetailArticle extends BaseActivity {
         setContentView(R.layout.activity_detail_article);
         setVariable();
         setArticleModel();
-        Http.get(Endpoint.GET_ARTICLE_BY_ID.getUrl() + articleModel.id, PublicApi.getHeaders(), this::onResponse);
     }
 
     protected void onResponse(Response response) {
@@ -49,8 +48,10 @@ public class DetailArticle extends BaseActivity {
     }
 
     protected void setArticleModel() {
-        description.setText(articleModel.description);
-        Http.loadImage(articleModel.thumbnail, thumbnail);
+        Http.get(Endpoint.GET_ARTICLE_BY_ID.getUrl() + articleModel.id, PublicApi.getHeaders(), this::onResponse);
+        Http.loadImage(articleModel.thumbnail, thumbnail, () -> {
+            description.setText(articleModel.description);
+        });
     }
 
     protected void setVariable() {

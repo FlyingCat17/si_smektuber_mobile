@@ -1,10 +1,8 @@
 package com.nekoid.smektuber.helpers.navigation;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -16,13 +14,13 @@ public class Navigator {
      * does not specify the ultimate destination.
      * <p>Output: nothing.
      */
-    public static final String DATA = "android.intent.action.ATTACH_DATA";
+    public static final String DATA = Intent.ACTION_ATTACH_DATA;
 
     /**
      * Activity Action: Provide explicit editable access to the given data.
      * <p>Output: nothing.
      */
-    public static final String EDIT = "android.intent.action.EDIT";
+    public static final String EDIT = Intent.ACTION_EDIT;
 
     /**
      * Activity Action: Pick an existing item, or insert a new item, and then edit it.
@@ -31,14 +29,14 @@ public class Navigator {
      * <p>Output: The URI of the item that was picked.  This must be a content:
      * URI so that any receiver can access it.
      */
-    public static final String INSERT_OR_EDIT = "android.intent.action.INSERT_OR_EDIT";
+    public static final String INSERT_OR_EDIT = Intent.ACTION_INSERT_OR_EDIT;
 
     /**
      * Activity Action: Pick an item from the data, returning what was selected.
      * (vnd.android.cursor.dir/*) from which to pick an item.
      * <p>Output: The URI of the item that was picked.
      */
-    public static final String PICK = "android.intent.action.PICK";
+    public static final String PICK = Intent.ACTION_PICK;
 
 
     /**
@@ -51,7 +49,7 @@ public class Navigator {
      * dialer.
      * <p>Output: nothing.
      */
-    public static final String VIEW = "android.intent.action.VIEW";
+    public static final String VIEW = Intent.ACTION_VIEW;
 
     public static Of.Animation push(Activity activity, Class route) {
         return new Of(activity).push(route);
@@ -61,20 +59,20 @@ public class Navigator {
         return new Of(activity).push(route, arguments);
     }
 
-    public static void to(String action, Uri uri) {
-        new Of(action).start(uri);
+    public static void openApp(Activity activity, String action, Uri uri) {
+        new Of(activity).start(action, uri);
     }
 
-    public static void to(String action) {
-        to(action, null);
+    public static void openApp(Activity activity, String action) {
+        openApp(activity, action, null);
     }
 
     /**
      * <p>Default is Action VIEW</p>
      * <p>Open youtube, facebook, whatsapp and other app with uri</p>
      * **/
-    public static void to(Uri uri) {
-        to(VIEW, uri);
+    public static void openApp(Activity activity, Uri uri) {
+        openApp(activity, VIEW, uri);
     }
 
     public static Of.Animation pushUntil(Activity activity, Class route) {
@@ -125,11 +123,7 @@ public class Navigator {
     public static Object getArgs(Activity activity) {
         Intent intent = activity.getIntent();
         Arguments args = (Arguments) intent.getSerializableExtra("_args");
-
-        if (args != null) {
-            return args.getArgs();
-        }
-
-        return new Arguments(null).getArgs();
+        if (args != null) return args.getArgs();
+        return null;
     }
 }
