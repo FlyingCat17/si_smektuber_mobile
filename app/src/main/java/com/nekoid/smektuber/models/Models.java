@@ -1,11 +1,13 @@
 package com.nekoid.smektuber.models;
 
-import org.json.JSONObject;
+import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
 abstract class Models implements Serializable {
-    public String toJson() {
-        return "";
+    @NonNull
+    @Override
+    public String toString() {
+        return this.getClass().getName();
     }
 }
