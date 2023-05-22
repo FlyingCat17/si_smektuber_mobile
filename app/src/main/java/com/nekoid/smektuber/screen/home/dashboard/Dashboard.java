@@ -180,9 +180,9 @@ public class Dashboard extends BaseFragment {
         jk.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(AboutSchool.class);
         });
-        buttonMessage.setOnClickListener(v -> {
-            Navigator.openApp(Navigator.VIEW);
-        });
+//        buttonMessage.setOnClickListener(v -> {
+//            Navigator.openApp(Navigator.VIEW);
+//        });
     }
 
     private void getRequest() {

@@ -46,15 +46,14 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <ScrollView
-        android:id="@+id/TampilanAboutScholl"
         android:layout_below="@+id/backIcon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="7dp"
-        android:visibility="gone"
         >
 
         <RelativeLayout
+            android:id="@+id/TampilanAboutScholl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
