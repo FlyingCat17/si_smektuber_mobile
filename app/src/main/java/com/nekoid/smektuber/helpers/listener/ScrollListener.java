@@ -1,4 +1,4 @@
-package com.nekoid.smektuber.helpers.utils;
+package com.nekoid.smektuber.helpers.listener;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

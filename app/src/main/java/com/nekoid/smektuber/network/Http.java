@@ -2,14 +2,12 @@ package com.nekoid.smektuber.network;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
-import com.nekoid.smektuber.helpers.utils.Utils;
+import com.nekoid.smektuber.helpers.thread.Threads;
 
 import java.io.File;
 import java.io.IOException;

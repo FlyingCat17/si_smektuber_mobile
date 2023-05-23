@@ -1,4 +1,4 @@
-package com.nekoid.smektuber.helpers.utils;
+package com.nekoid.smektuber.app;
 
 import static android.content.Context.MODE_PRIVATE;
 

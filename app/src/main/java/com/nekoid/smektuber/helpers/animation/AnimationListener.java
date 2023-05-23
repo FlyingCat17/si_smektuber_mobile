@@ -1,4 +1,4 @@
-package com.nekoid.smektuber.helpers.utils;
+package com.nekoid.smektuber.helpers.animation;
 
 import android.view.animation.Animation;
 

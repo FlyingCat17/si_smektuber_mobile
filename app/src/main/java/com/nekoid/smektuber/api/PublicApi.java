@@ -2,6 +2,7 @@ package com.nekoid.smektuber.api;
 
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.utils.Utils;
+import com.nekoid.smektuber.helpers.thread.Threads;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,17 +24,22 @@ public class PublicApi {
 
         if (token != null) {
             if (api.isExpired() && Utils.getBaseActivity() != null) {
-                    Utils.getBaseActivity().doLogin(
-                            Utils.getBaseActivity().getAuthPreferences().getString("_username", ""),
-                            Utils.getBaseActivity().getAuthPreferences().getString("_credentials", "")
-                    );
-                    while (Utils.getBaseActivity().isLogin()) {
-                        return getHeaders();
-                    }
+                handlerHeaders();
+            } else {
+                headers.put("Authorization", "Bearer " + token);
             }
-            headers.put("Authorization", "Bearer " + token);
         }
-
         return headers;
+    }
+
+    private static void handlerHeaders() {
+        Threads.execute((executor, handler) -> executor.execute(() -> {
+            long startTime = Utils.getCurrentTimeMillis();
+            Utils.getBaseActivity().doLogin();
+            long timeOut = Utils.secondToMillis(60);
+            while (Utils.getCurrentTimeMillis() - startTime < timeOut) {
+                if (Utils.getBaseActivity().isLogin()) break;
+            }
+        }));
     }
 }
