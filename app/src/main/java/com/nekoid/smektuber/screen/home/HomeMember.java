@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -35,6 +36,8 @@ public class HomeMember extends BaseActivity {
     Fragment fragment;
 
     boolean networkIsAvailable = false;
+
+    private NotifNoInternet noInternet = new NotifNoInternet(this::onClickTryAgain);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -109,7 +112,15 @@ public class HomeMember extends BaseActivity {
     }
 
     public void fragmentNoInternet() {
-        replaceFragment(R.id.r, new NotifNoInternet());
+        replaceFragment(R.id.r, noInternet);
+    }
+
+    public void onClickTryAgain(View view) {
+        if (!networkIsAvailable) {
+            Toast.makeText(this, "Please connect to internet, and try again", Toast.LENGTH_SHORT).show();
+        } else {
+            removeFragment(noInternet);
+        }
     }
 
     @Override
