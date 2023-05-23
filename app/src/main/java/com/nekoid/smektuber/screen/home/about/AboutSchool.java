@@ -51,7 +51,7 @@ public class AboutSchool extends BaseActivity {
         if (State.aboutModel != null) {
             setDataToView(State.aboutModel);
             withAnimation = false;
-            aboutModel = State.aboutModel;
+//            aboutModel = State.aboutModel;
             openRequest();
         } else {
             withAnimation = true;

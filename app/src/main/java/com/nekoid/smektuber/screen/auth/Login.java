@@ -3,6 +3,7 @@ package com.nekoid.smektuber.screen.auth;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,9 +15,11 @@ import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.listener.TextChangeListener;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.network.Response;
 import com.nekoid.smektuber.screen.home.HomeMember;
 import com.nekoid.smektuber.screen.notification.LoadingDialog;
+import com.nekoid.smektuber.screen.notification.NotifNoInternet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,6 +67,10 @@ public class Login extends BaseActivity {
         loadingDialog = new LoadingDialog(Login.this);
 
         btnLogin.setOnClickListener(v -> {
+            if (!Utils.isNetworkAvailable()){
+                fragmentNoInternet();
+                return;
+            }
             if (validate()) {
                 // start loading
                 loadingDialog.startLoading();
@@ -110,6 +117,20 @@ public class Login extends BaseActivity {
 
             }
         });
+    }
+
+    public void fragmentNoInternet() {
+        findViewById(R.id.loginScroll).setVisibility(View.INVISIBLE);
+        findViewById(R.id.loginFragment).setVisibility(View.VISIBLE);
+        replaceFragment(R.id.loginFragment, new NotifNoInternet(view -> {
+            if (Utils.isNetworkAvailable()){
+                findViewById(R.id.loginScroll).setVisibility(View.VISIBLE);
+                findViewById(R.id.loginFragment).setVisibility(View.INVISIBLE);
+
+            } else {
+                Toast.makeText(this, "Please connect to internet, and try again", Toast.LENGTH_SHORT).show();
+            }
+        }));
     }
 
     @Override
