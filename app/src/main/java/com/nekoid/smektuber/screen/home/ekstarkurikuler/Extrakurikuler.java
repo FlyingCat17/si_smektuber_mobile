@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
@@ -17,15 +15,15 @@ import com.nekoid.smektuber.adapter.AdapterDataExtra;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
-import com.nekoid.smektuber.helpers.utils.ScrollListener;
+import com.nekoid.smektuber.app.BaseActivity;
+import com.nekoid.smektuber.helpers.listener.ScrollListener;
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.ExtracurricularModel;
 import com.nekoid.smektuber.models.Pagination;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
-import com.nekoid.smektuber.network.Threads;
+import com.nekoid.smektuber.helpers.thread.Threads;
 
 import org.json.JSONArray;
 import org.json.JSONException;

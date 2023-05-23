@@ -1,7 +1,5 @@
 package com.nekoid.smektuber.screen.splash;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,12 +12,11 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
-import com.nekoid.smektuber.helpers.utils.AnimationListener;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.helpers.animation.AnimationListener;
+import com.nekoid.smektuber.app.BaseActivity;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.screen.auth.Login;
 import com.nekoid.smektuber.screen.home.HomeMember;
-
-import java.util.Calendar;
 
 public class SplashScreen extends BaseActivity {
 
@@ -39,7 +36,7 @@ public class SplashScreen extends BaseActivity {
 
         // reLogin if user is login.
         if (getUserPreferences().getBoolean("isLogin", false)) {
-            doLogin(getAuthPreferences().getString("_username", ""), getAuthPreferences().getString("_credentials", ""));
+            doLogin();
         }
 
         // Panggil method setTransparentStatusBar()
@@ -76,13 +73,7 @@ public class SplashScreen extends BaseActivity {
     }
 
     private void getVersion() {
-        try {
-            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-            String version = "Version " + packageInfo.versionName + " \n JTI POLIJE NekoID " + year;
-            txtSplashVersion.setText(version);
-        } catch (PackageManager.NameNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        String wm = Utils.strFormat("Version %s \n JTI POLIJE NekoID %s", Utils.getVersionName(), Utils.getYear());
+        txtSplashVersion.setText(wm);
     }
 }
