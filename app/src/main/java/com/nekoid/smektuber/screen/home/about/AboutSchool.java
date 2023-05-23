@@ -3,9 +3,13 @@ package com.nekoid.smektuber.screen.home.about;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
@@ -31,11 +35,15 @@ public class AboutSchool extends BaseActivity {
     private AboutModel aboutModel;
 
     private String facebook, instagram, youtube, tiktok;
+    ShimmerFrameLayout shimmerFrameLayout;
+    RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_school);
+        shimmerFrameLayout = findViewById(R.id.ShimmerAboutSchool);
+        relativeLayout = findViewById(R.id.TampilanAboutScholl);
         startShimmer();
         setVariable();
         init();
@@ -49,10 +57,16 @@ public class AboutSchool extends BaseActivity {
 
     private void startShimmer() {
         // start shimmer
+        shimmerFrameLayout.setVisibility(View.VISIBLE);
+        relativeLayout.setVisibility(View.GONE);
+        relativeLayout.setAnimation(Utils.animation(1000));
     }
 
     private void stopShimmer() {
         // stop shimmer
+        shimmerFrameLayout.setVisibility(View.GONE);
+        relativeLayout.setVisibility(View.VISIBLE);
+        relativeLayout.setAnimation(Utils.animation(1000));
     }
 
     private void init() {
