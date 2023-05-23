@@ -72,8 +72,10 @@ JL. PB. SUDIRMAN NO.16, Jatiroto, Kec. Sumberbaru, Kab. Jember Prov. Jawa Timur
     <string name="welcome_bac">Daftar untuk bergabung dengan SMKN 7 JEMBER</string>
     <string name="email">Email</string>
     <string name="kata_sandi">Kata Sandi</string>
+    <string name="hintNisn">Masukkan Nomor Induk Siswa Nasional</string>
     <string name="username">Username</string>
     <string name="nama_lengka">Nama Lengkap</string>
+    <string name="tempat_lahir">Tempat Lahir</string>
     <string name="tanggal_lah">Tanggal Lahir</string>
     <string name="alamat">Alamat</string>
     <string name="no_hp">No HP</string>
