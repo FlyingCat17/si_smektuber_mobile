@@ -33,40 +33,45 @@ public class AboutSchool extends BaseActivity {
     private Toolbar toolbar;
 
     private AboutModel aboutModel;
-
+    boolean withAnimation = true;
     private String facebook, instagram, youtube, tiktok;
     ShimmerFrameLayout shimmerFrameLayout;
-    RelativeLayout relativeLayout;
+    RelativeLayout tampilanAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_school);
         shimmerFrameLayout = findViewById(R.id.ShimmerAboutSchool);
-        relativeLayout = findViewById(R.id.TampilanAboutScholl);
+        tampilanAbout = findViewById(R.id.TampilanAboutScholl);
         startShimmer();
         setVariable();
         init();
         setToolbar();
         if (State.aboutModel != null) {
             setDataToView(State.aboutModel);
+            withAnimation = false;
+            aboutModel = State.aboutModel;
+            openRequest();
         } else {
-            Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
+            withAnimation = true;
+            openRequest();
         }
+    }
+
+    private void openRequest() {
+        Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
     }
 
     private void startShimmer() {
         // start shimmer
-        shimmerFrameLayout.setVisibility(View.VISIBLE);
-        relativeLayout.setVisibility(View.GONE);
-        relativeLayout.setAnimation(Utils.animation(1000));
     }
 
     private void stopShimmer() {
         // stop shimmer
         shimmerFrameLayout.setVisibility(View.GONE);
-        relativeLayout.setVisibility(View.VISIBLE);
-        relativeLayout.setAnimation(Utils.animation(1000));
+        tampilanAbout.setVisibility(View.VISIBLE);
+        if (withAnimation) tampilanAbout.setAnimation(Utils.animation());
     }
 
     private void init() {

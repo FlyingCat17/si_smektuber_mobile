@@ -1,5 +1,7 @@
 package com.nekoid.smektuber.screen.home.dashboard;
 
+import static com.nekoid.smektuber.helpers.utils.Utils.isNetworkAvailable;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
@@ -145,7 +147,6 @@ public class Dashboard extends BaseFragment {
         adapterData = new AdapterData(this.getActivity(), listArticle);
         shimmerFrameLayout = view.findViewById(R.id.rvDataShimmer);
         recyclerView = view.findViewById(R.id.rvData);
-
         if (State.userModel != null) {
             fullName.setText(State.userModel.name);
         } else {

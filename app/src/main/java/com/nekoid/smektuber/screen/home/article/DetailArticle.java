@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
@@ -21,7 +23,7 @@ public class DetailArticle extends BaseActivity {
     ArticleModel articleModel;
 
     ImageView thumbnail;
-
+    private Toolbar toolbar;
     TextView description;
 
     @Override
@@ -29,6 +31,7 @@ public class DetailArticle extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_article);
         setVariable();
+        setToolbar();
         setArticleModel();
     }
 
@@ -58,5 +61,17 @@ public class DetailArticle extends BaseActivity {
         articleModel = (ArticleModel) Navigator.getArgs(this);
         thumbnail = findViewById(R.id.ImageDetailArtikel);
         description = findViewById(R.id.TextArticle);
+    }
+
+    private void setToolbar(){
+        toolbar = findViewById(R.id.backIcon);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Navigator.of(this).pop();
+        return true;
     }
 }

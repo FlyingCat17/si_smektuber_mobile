@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,14 +43,14 @@ public class Account extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    boolean withAnimation = true;
     private String mParam1;
     private String mParam2;
     private TextView tvFullName, tvUsername;
     ShimmerFrameLayout shimmerFrameLayout;
     private ShapeableImageView imageView;
-    RelativeLayout layoutProfil;
+    RelativeLayout layoutAccount;
     private UserModel userModel;
+    boolean withAnimation = true;
     public Account() {
         // Required empty public constructor
     }
@@ -78,12 +79,11 @@ public class Account extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
-        startShimmer();
         tvFullName = view.findViewById(R.id.FullnameAccount);
         tvUsername = view.findViewById(R.id.UsernameAccount);
-        imageView = view.findViewById(R.id.ImageProfil);
         shimmerFrameLayout = view.findViewById(R.id.ShimmerAccount);
-        layoutProfil = view.findViewById(R.id.LayoutProfil);
+        layoutAccount = view.findViewById(R.id.LayoutProfil);
+        imageView = view.findViewById(R.id.ImageProfil);
         Button btnUpdate = view.findViewById(R.id.ButtonUbahProfil);
         Button btnLogout = view.findViewById(R.id.ButtonKeluarAkun);
         btnUpdate.setOnClickListener(v -> {
@@ -92,17 +92,16 @@ public class Account extends BaseFragment {
         btnLogout.setOnClickListener(v -> {
             Http.post(Endpoint.LOGOUT.getUrl(), PublicApi.getHeaders(), this::doLogout);
         });
-        init();
+        startShimmer();
         if (State.userModel != null) {
             withAnimation = false;
             userModel = State.userModel;
             setModelToView();
-            openRequest();
+            init();
         } else {
             withAnimation = true;
-            openRequest();
+            init();
         }
-        // Inflate the layout for this fragment
         return view;
     }
 
@@ -112,51 +111,59 @@ public class Account extends BaseFragment {
 
     public void stopShimmer() {
         shimmerFrameLayout.setVisibility(View.GONE);
-        layoutProfil.setVisibility(View.VISIBLE);
-        if (withAnimation) layoutProfil.setAnimation(Utils.animation());
+        layoutAccount.setVisibility(View.VISIBLE);
+        if (withAnimation) layoutAccount.setAnimation(Utils.animation());
     }
 
-    private void setModelToView() {
-        tvFullName.setText(userModel.name);
-        tvUsername.setText(userModel.username);
-        stopShimmer();
-    }
-    private void openRequest() {
-        Http.get(Endpoint.PPDB.getUrl(), PublicApi.getHeaders(), this::onResponse);
-    }
-
-    private void onResponse(Response response) {
-        if (response.statusCode != 200) {
-            return;
-        }
-        try {
-            JSONObject body = new JSONObject(response.body.toString());
-            userModel = UserModel.fromJson(body.getJSONObject("data"));
-            State.userModel = userModel;
-            loadModel();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void loadModel() {
-        if (userModel != null && userModel.avatar != null && !userModel.avatar.isEmpty() && !userModel.avatar.equals("null")) {
-            Http.loadImage(userModel.avatar, imageView, this::setModelToView);
-            return;
-        }
-        setModelToView();
-    }
     private void init() {
         // Get user data from State
-        userModel = State.getUserModel();
+        userModel = State.userModel;
 
-        // Set user data to views
-        tvFullName.setText(userModel.name);
-        tvUsername.setText(userModel.username);
         if (userModel.avatar != null && !userModel.avatar.isEmpty()) {
             if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://"))
-                Http.loadImage(userModel.avatar, imageView);
+                Http.loadImage(userModel.avatar, imageView, this::setModelToView);
         }
         setModelToView();
     }
+
+//    private void openRequest() {
+//        Http.get(Endpoint.GET_USER.getUrl(), PublicApi.getHeaders(), this::onResponse);
+//    }
+
+//    private void loadModel() {
+//        if (userModel != null && userModel.avatar != null && !userModel.avatar.isEmpty() && !userModel.avatar.equals("null")) {
+//            Http.loadImage(userModel.avatar, imageView, this::setModelToView);
+//            return;
+//        }
+//        setModelToView();
+//    }
+
+    private void setModelToView() {
+        if (userModel != null){
+            tvFullName.setText(userModel.name);
+            tvUsername.setText(userModel.username);
+            System.out.println("model=null");
+        }
+        stopShimmer();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        System.out.println(Navigator.getArgs(getActivity()));
+    }
+
+    //    private void onResponse(Response response) {
+//        if (response.statusCode != 200) {
+//            return;
+//        }
+//        try {
+//            JSONObject body = new JSONObject(response.body.toString());
+//            userModel = UserModel.fromJson(body.getJSONObject("data"));
+//            State.userModel = userModel;
+//            loadModel();
+//        } catch (JSONException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

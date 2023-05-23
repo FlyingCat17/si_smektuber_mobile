@@ -28,19 +28,25 @@
         />
 
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/ShimmerAboutSchool"
+        android:id="@+id/ShimmerDetailJobs"
         android:layout_below="@+id/backIcon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="22dp"
-            android:layout_marginLeft="22dp"
             android:layout_marginTop="20dp"
             android:orientation="vertical"
             >
             <include layout="@layout/item_data_visi_misi_shimmer"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="260dp"
+            android:orientation="vertical"
+            >
             <include layout="@layout/item_data_about_school_shimmer"/>
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
@@ -50,7 +56,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="7dp"
-        android:visibility="gone"
         >
 
         <RelativeLayout
