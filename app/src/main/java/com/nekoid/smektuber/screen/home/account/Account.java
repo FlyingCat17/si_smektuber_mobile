@@ -1,8 +1,5 @@
 package com.nekoid.smektuber.screen.home.account;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,7 +11,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -22,14 +18,12 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseFragment;
+import com.nekoid.smektuber.app.BaseFragment;
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.PpdbModel;
 import com.nekoid.smektuber.models.UserModel;
 import com.nekoid.smektuber.network.Http;
-import com.nekoid.smektuber.network.Response;
-import com.nekoid.smektuber.screen.auth.Login;
 
 import org.json.JSONException;
 import org.json.JSONObject;

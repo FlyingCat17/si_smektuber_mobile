@@ -13,7 +13,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.*;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.models.AboutModel;
 import com.nekoid.smektuber.network.*;

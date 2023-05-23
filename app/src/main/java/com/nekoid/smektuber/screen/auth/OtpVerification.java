@@ -8,7 +8,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.app.BaseActivity;
 
 public class OtpVerification extends BaseActivity {
     private TextInputLayout txtLayoutOtp01, txtLayoutOtp02, txtLayoutOtp03, txtLayoutOtp04;

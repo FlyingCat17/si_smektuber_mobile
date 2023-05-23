@@ -17,9 +17,9 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.State;
-import com.nekoid.smektuber.helpers.utils.TextChangeListener;
+import com.nekoid.smektuber.helpers.listener.TextChangeListener;
 import com.nekoid.smektuber.models.UserModel;
 import com.nekoid.smektuber.network.*;
 
