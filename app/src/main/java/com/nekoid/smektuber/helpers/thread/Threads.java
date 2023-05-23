@@ -1,4 +1,4 @@
-package com.nekoid.smektuber.network;
+package com.nekoid.smektuber.helpers.thread;
 
 import android.os.Handler;
 import android.os.Looper;

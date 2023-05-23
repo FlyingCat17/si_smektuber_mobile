@@ -1,9 +1,11 @@
-package com.nekoid.smektuber.helpers.utils;
+package com.nekoid.smektuber.app;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +13,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
+import com.nekoid.smektuber.helpers.utils.Cache;
+import com.nekoid.smektuber.helpers.utils.State;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.UserModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
@@ -162,6 +167,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         return getSharedPreferences("__auth", MODE_PRIVATE);
     }
 
+    protected final String getUsername() {
+        return getAuthPreferences().getString("_username", "");
+    }
+
     protected final String getCredentials() {
         return getAuthPreferences().getString("_credentials", "");
     }
@@ -268,6 +277,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         Http.post(Endpoint.LOGIN.getUrl(), null, body, response -> __onResponseAuth(response, username, password));
     }
 
+    public final void doLogin() {
+        Map<String, String> body = new HashMap<>();
+        body.put("username", getUsername());
+        body.put("password", getCredentials());
+        Http.post(Endpoint.LOGIN.getUrl(), null, body, response -> __onResponseAuth(response, getUsername(), getCredentials()));
+    }
+
     /**
      * <p>On response auth</p>
      *
@@ -354,5 +370,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         textInputLayout.setErrorEnabled(true);
         textInputLayout.setError("silahkan isi email dengan benar");
         return false;
+    }
+
+    public final void replaceFragment(@IdRes int containerViewId, @NonNull androidx.fragment.app.Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(containerViewId, fragment).commit();
+    }
+
+    public final void removeFragment(@NonNull androidx.fragment.app.Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
     }
 }
