@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.network.Http;
@@ -30,7 +30,6 @@ public class DetailArticle extends BaseActivity {
         setContentView(R.layout.activity_detail_article);
         setVariable();
         setArticleModel();
-        Http.get(Endpoint.GET_ARTICLE_BY_ID.getUrl() + articleModel.id, PublicApi.getHeaders(), this::onResponse);
     }
 
     protected void onResponse(Response response) {
@@ -49,8 +48,10 @@ public class DetailArticle extends BaseActivity {
     }
 
     protected void setArticleModel() {
-        description.setText(articleModel.description);
-        Http.loadImage(articleModel.thumbnail, thumbnail);
+        Http.get(Endpoint.GET_ARTICLE_BY_ID.getUrl() + articleModel.id, PublicApi.getHeaders(), this::onResponse);
+        Http.loadImage(articleModel.thumbnail, thumbnail, () -> {
+            description.setText(articleModel.description);
+        });
     }
 
     protected void setVariable() {

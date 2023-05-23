@@ -2,10 +2,10 @@ package com.nekoid.smektuber.helpers.navigation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 
-import androidx.activity.ComponentActivity;
-import androidx.activity.OnBackPressedCallback;
 import androidx.activity.OnBackPressedDispatcher;
 
 public class Of {
@@ -15,66 +15,87 @@ public class Of {
         this.activity = activity;
     }
 
+    private Animation animation() {
+        return new Animation(activity);
+    }
+
+    private Intent intent(Class route) {
+        return new Intent(activity, route);
+    }
+
+    private void startIntent(Intent intent) {
+        startIntent(intent, false);
+    }
+
+    private void startIntent(Intent intent, Object args) {
+        startIntent(intent, false, false, args);
+    }
+
+    private void startIntent(Intent intent, boolean isReplacement) {
+        startIntent(intent, isReplacement, false);
+    }
+
+    private void startIntent(Intent intent, boolean isReplacement, Object args) {
+        startIntent(intent, isReplacement, false, args);
+    }
+
+    private void startIntent(Intent intent, boolean isReplacement, boolean isUntil) {
+        startIntent(intent, isReplacement, isUntil, null);
+    }
+
+    private void startIntent(Intent intent, boolean isReplacement, boolean isUntil, Object args) {
+        if (args != null) setArgs(intent, args);
+        activity.startActivity(intent);
+        if (isUntil) activity.finishAffinity();
+        if (isReplacement) activity.finish();
+    }
+
+    public void start(String action, Uri uri) {
+        Intent intent = new Intent(action);
+        if (uri != null) {
+            intent.setData(uri);
+        }
+        activity.startActivity(intent);
+    }
+
     public Animation push(Class route) {
-        Intent intent = new Intent(this.activity, route);
-        this.activity.startActivity(intent);
-        return new Animation(this.activity);
+        startIntent(intent(route));
+        return animation();
     }
 
     public Animation push(Class route, Object args) {
-        Intent intent = new Intent(this.activity, route);
-        this.setArgs(intent, args);
-        this.activity.startActivity(intent);
-        return new Animation(this.activity);
+        startIntent(intent(route), args);
+        return animation();
     }
 
     public Animation pushUntil(Class route) {
-        Intent intent = new Intent(this.activity, route);
-        this.activity.startActivity(intent);
-        this.activity.finishAffinity();
-        this.activity.finish();
-        return new Animation(this.activity);
+        startIntent(intent(route), true);
+        return animation();
     }
 
     public Animation pushUntil(Class route, Object args) {
-        Intent intent = new Intent(this.activity, route);
-        this.setArgs(intent, args);
-        this.activity.startActivity(intent);
-        this.activity.finishAffinity();
-        this.activity.finish();
-        return new Animation(this.activity);
+        startIntent(intent(route), true, true, args);
+        return animation();
     }
 
     public Animation pushReplacement(Class route) {
-        Intent intent = new Intent(this.activity, route);
-        this.activity.startActivity(intent);
-        this.activity.finish();
-        return new Animation(this.activity);
+        startIntent(intent(route), true);
+        return animation();
     }
 
     public Animation pushReplacement(Class route, Object args) {
-        Intent intent = new Intent(this.activity, route);
-        this.setArgs(intent, args);
-        this.activity.startActivity(intent);
-        this.activity.finish();
-        return new Animation(this.activity);
+        startIntent(intent(route), true, args);
+        return animation();
     }
 
     public Animation pushReplacementUntil(Class route) {
-        Intent intent = new Intent(this.activity, route);
-        this.activity.startActivity(intent);
-        this.activity.finishAffinity();
-        this.activity.finish();
-        return new Animation(this.activity);
+        startIntent(intent(route), true, true);
+        return animation();
     }
 
     public Animation pushReplacementUntil(Class route, Object args) {
-        Intent intent = new Intent(this.activity, route);
-        this.setArgs(intent, args);
-        this.activity.startActivity(intent);
-        this.activity.finishAffinity();
-        this.activity.finish();
-        return new Animation(this.activity);
+        startIntent(intent(route), true, true, args);
+        return animation();
     }
 
     public Animation pop() {
@@ -136,7 +157,7 @@ public class Of {
         intent.putExtra("_args", arguments);
     }
 
-    private final OnBackPressedDispatcher onBack(Activity activity) {
+    private OnBackPressedDispatcher onBack(Activity activity) {
         return new OnBackPressedDispatcher(new Runnable() {
             @Override
             public void run() {

@@ -5,15 +5,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.models.ExtracurricularModel;
 import com.nekoid.smektuber.network.Http;
-import com.nekoid.smektuber.network.Response;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class DetailExtra extends BaseActivity {
 

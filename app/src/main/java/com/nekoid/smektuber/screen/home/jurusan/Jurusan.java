@@ -15,7 +15,7 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.adapter.AdapterDataJurusan;
 import com.nekoid.smektuber.api.*;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.models.MajorModel;
 import com.nekoid.smektuber.network.*;
 

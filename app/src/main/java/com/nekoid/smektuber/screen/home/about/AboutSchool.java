@@ -2,8 +2,6 @@ package com.nekoid.smektuber.screen.home.about;
 
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,8 +10,9 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.State;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.AboutModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
@@ -63,29 +62,13 @@ public class AboutSchool extends BaseActivity {
         BtnTT = findViewById(R.id.Tiktok);
         toolbar = findViewById(R.id.backIcon);
 
-        BtnFB.setOnClickListener(v -> {
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse(facebook));
-            startActivity(intent);
-        });
+        BtnFB.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(facebook)));
 
-        BtnIG.setOnClickListener(v -> {
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse(instagram));
-            startActivity(intent);
-        });
+        BtnIG.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(instagram)));
 
-        BtnYoutube.setOnClickListener(v -> {
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse(youtube));
-            startActivity(intent);
-        });
+        BtnYoutube.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(youtube)));
 
-        BtnTT.setOnClickListener(v -> {
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse(tiktok));
-            startActivity(intent);
-        });
+        BtnTT.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(tiktok)));
     }
 
     protected void onResponse(Response response) {

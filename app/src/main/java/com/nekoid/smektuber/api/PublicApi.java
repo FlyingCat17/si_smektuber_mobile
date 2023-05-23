@@ -1,21 +1,17 @@
 package com.nekoid.smektuber.api;
 
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.State;
+import com.nekoid.smektuber.helpers.utils.Utils;
+import com.nekoid.smektuber.helpers.thread.Threads;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class PublicApi {
-    private static BaseActivity baseActivity;
 
     private static String token;
 
     private static State.Api api;
-
-    public static void setBaseActivity(BaseActivity baseActivity) {
-        PublicApi.baseActivity = baseActivity;
-    }
 
     public static void addToken(String token, int expiredTime) {
         PublicApi.token = token;
@@ -27,18 +23,23 @@ public class PublicApi {
         Map<String, String> headers = new HashMap<>();
 
         if (token != null) {
-            if (api.isExpired() && baseActivity != null) {
-                    baseActivity.doLogin(
-                            baseActivity.getAuthPreferences().getString("_username", ""),
-                            baseActivity.getAuthPreferences().getString("_credentials", "")
-                    );
-                    while (baseActivity.isLogin()) {
-                        return getHeaders();
-                    }
+            if (api.isExpired() && Utils.getBaseActivity() != null) {
+                handlerHeaders();
+            } else {
+                headers.put("Authorization", "Bearer " + token);
             }
-            headers.put("Authorization", "Bearer " + token);
         }
-
         return headers;
+    }
+
+    private static void handlerHeaders() {
+        Threads.execute((executor, handler) -> executor.execute(() -> {
+            long startTime = Utils.getCurrentTimeMillis();
+            Utils.getBaseActivity().doLogin();
+            long timeOut = Utils.secondToMillis(60);
+            while (Utils.getCurrentTimeMillis() - startTime < timeOut) {
+                if (Utils.getBaseActivity().isLogin()) break;
+            }
+        }));
     }
 }
