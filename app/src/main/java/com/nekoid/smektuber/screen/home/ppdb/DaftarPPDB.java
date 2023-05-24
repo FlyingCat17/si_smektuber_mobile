@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,12 +55,12 @@ public class DaftarPPDB extends BaseActivity {
     private MajorModel selectedMajor, selectedMajor2;
     private List<MajorModel> majorList = new ArrayList<>();
     AutoCompleteTextView autoCompleteTxt, autoCompleteTxt02;
-    private EditText TanggalLahir, TahunLulus;
+//    private EditText TanggalLahir, TahunLulus;
     ArrayAdapter<String> adapterItems;
     Toolbar toolbar;
     private Button btnRegisterPpdb;
-    private TextInputLayout txtLayoutNisn, txtLayoutName, txtLayoutPlaceBirth, txtLayoutAddress,txtLayoutNoHp, txtLayoutNameFather, txtLayoutNameMother,txtLayoutSchoolOrigin, txtLayoutMajor;
-    private TextInputEditText et_nisn, et_name,et_placeBirth, et_address, et_Nohp, et_father, et_mother, et_guardian,et_schoolOrigin;
+    private TextInputLayout txtLayoutNisn, txtLayoutName, txtLayoutPlaceBirth,txtLayoutDateBirth, txtLayoutAddress,txtLayoutNoHp, txtLayoutNameFather, txtLayoutNameMother,txtLayoutGraduationYear,txtLayoutSchoolOrigin, txtLayoutMajor1, txtLayoutMajor2;
+    private TextInputEditText et_nisn, et_name,et_placeBirth, et_address, et_Nohp, et_father, et_mother, et_guardian,et_schoolOrigin,TanggalLahir, TahunLulus;
     LoadingDialog loadingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,18 @@ public class DaftarPPDB extends BaseActivity {
         adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, new ArrayList<>(items));
         autoCompleteTxt.setAdapter(adapterItems);
         autoCompleteTxt02.setAdapter( adapterItems );
+        txtLayoutNisn = findViewById( R.id.txtLayoutNisn );
+        txtLayoutName = findViewById( R.id.txtLayoutName );
+        txtLayoutPlaceBirth = findViewById( R.id.txtLayoutPlaceBirth );
+        txtLayoutDateBirth = findViewById( R.id.txtLayoutDateBirth );
+        txtLayoutAddress = findViewById( R.id.txtLayoutAddress );
+        txtLayoutNoHp = findViewById( R.id.txtLayoutPhone );
+        txtLayoutNameFather = findViewById( R.id.txtLayoutFather );
+        txtLayoutNameMother = findViewById( R.id.txtLayoutMother );
+        txtLayoutSchoolOrigin = findViewById( R.id.txtLayoutSchoolOrigin );
+        txtLayoutGraduationYear = findViewById( R.id.txtLayoutGraduationYear );
+        txtLayoutMajor1 = findViewById( R.id.txtLayoutMajor1 );
+        txtLayoutMajor2 = findViewById( R.id.txtLayoutMajor2 );
         et_nisn = findViewById( R.id.Dp_NISN );
         et_name = findViewById( R.id.Dp_Name_Lengkap );
         et_placeBirth = findViewById( R.id.Dp_TempatLahir);
@@ -117,10 +132,99 @@ public class DaftarPPDB extends BaseActivity {
         });
 
         btnRegisterPpdb.setOnClickListener( v->{
-            loadingDialog.startLoading();
-            Http.post( Endpoint.PPDB.getUrl(), PublicApi.getHeaders(),getBody(),this::doRegisterPpdb );
+            if (isFromValid()){
+                loadingDialog.startLoading();
+                Http.post( Endpoint.PPDB.getUrl(), PublicApi.getHeaders(),getBody(),this::doRegisterPpdb );
+            }
         } );
+        setupFormValidation();
+    }
+    private boolean isFromValid(){
+        boolean isValid = true;
 
+        isValid = validateField( et_nisn,txtLayoutNisn,"Mohon isi NISN anda" )&& isValid;
+        isValid = validateField( et_name, txtLayoutName, "Mohon isi nama anda" )&& isValid;
+        isValid = validateField( et_placeBirth, txtLayoutPlaceBirth, "Mohon isi tempat lahir anda" )&& isValid;
+        isValid = validateField( TanggalLahir, txtLayoutDateBirth, "Mohon isi tanggal lahir anda" )&& isValid;
+        isValid = validateField( et_address, txtLayoutAddress, "Mohon isi alamat anda" )&& isValid;
+        isValid = validateField( et_Nohp, txtLayoutNoHp, "Mohon isi no handphone anda" )&& isValid;
+        isValid = validateField( et_father, txtLayoutNameFather, "Mohon isi nama ayah anda" )&& isValid;
+        isValid = validateField( et_mother, txtLayoutNameMother, "Mohon isi nama ibu anda" )&& isValid;
+        isValid = validateField( et_schoolOrigin, txtLayoutSchoolOrigin, "Mohon isi asal sekolah anda" )&& isValid;
+        isValid = validateField( TahunLulus, txtLayoutGraduationYear, "Mohon isi tahun lulus anda" )&& isValid;
+        isValid = validateMajorSelection( autoCompleteTxt, txtLayoutMajor1,"Mohon pilih jurusan 1 yang anda minati" )&& isValid;
+        isValid = validateMajorSelection( autoCompleteTxt02, txtLayoutMajor2,"Mohon pilih jurusan 2 yang anda minati" )&& isValid;
+
+        return isValid;
+    }
+    private boolean validateField(TextInputEditText editText, TextInputLayout textInputLayout, String errorMessage) {
+        if (TextUtils.isEmpty(editText.getText().toString())) {
+            textInputLayout.setError(errorMessage);
+            return false;
+        } else {
+            textInputLayout.setError(null);
+            return true;
+        }
+    }
+    private boolean validateMajorSelection(AutoCompleteTextView autoCompleteTextView, TextInputLayout textInputLayout, String errorMessage) {
+        String selectedMajorText = autoCompleteTextView.getText().toString().trim();
+        if (TextUtils.isEmpty(selectedMajorText)) {
+            textInputLayout.setError(errorMessage);
+            return false;
+        } else {
+            textInputLayout.setError(null);
+            return true;
+        }
+    }
+    private void setupFormValidation() {
+        et_nisn.addTextChangedListener(createTextWatcher(et_nisn, txtLayoutNisn));
+        et_name.addTextChangedListener(createTextWatcher(et_name, txtLayoutName));
+        et_placeBirth.addTextChangedListener(createTextWatcher(et_placeBirth, txtLayoutPlaceBirth));
+        TanggalLahir.addTextChangedListener(createTextWatcher(TanggalLahir, txtLayoutDateBirth));
+        et_address.addTextChangedListener(createTextWatcher(et_address, txtLayoutAddress));
+        et_Nohp.addTextChangedListener(createTextWatcher(et_Nohp, txtLayoutNoHp));
+        et_father.addTextChangedListener(createTextWatcher(et_father, txtLayoutNameFather));
+        et_mother.addTextChangedListener(createTextWatcher(et_mother, txtLayoutNameMother));
+        et_schoolOrigin.addTextChangedListener(createTextWatcher(et_schoolOrigin, txtLayoutSchoolOrigin));
+        TahunLulus.addTextChangedListener(createTextWatcher(TahunLulus, txtLayoutGraduationYear));
+        autoCompleteTxt.addTextChangedListener(createTextWatcher(autoCompleteTxt, txtLayoutMajor1));
+        autoCompleteTxt02.addTextChangedListener(createTextWatcher(autoCompleteTxt02, txtLayoutMajor2));
+
+    }
+    private TextWatcher createTextWatcher(final TextInputEditText editText, final TextInputLayout textInputLayout) {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                validateField(editText, textInputLayout, null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        };
+    }
+    private TextWatcher createTextWatcher(final AutoCompleteTextView autoCompleteTextView, final TextInputLayout textInputLayout) {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String selectedMajorText = autoCompleteTextView.getText().toString().trim();
+                if (!TextUtils.isEmpty(selectedMajorText)) {
+                    textInputLayout.setError(null);
+                }
+            }
+        };
     }
     private void setToolbar(){
         toolbar = findViewById( R.id.backIcon );
