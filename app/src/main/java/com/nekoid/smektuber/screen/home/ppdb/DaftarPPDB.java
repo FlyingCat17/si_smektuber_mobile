@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,12 +38,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 public class DaftarPPDB extends BaseActivity {
-    String[] items = {};
+//    String[] items = {};
+    ArrayList<String> items = new ArrayList<>();
     private MajorModel selectedMajor;
     private List<MajorModel> majorList = new ArrayList<>();
     AutoCompleteTextView autoCompleteTxt;
@@ -61,7 +64,8 @@ public class DaftarPPDB extends BaseActivity {
     }
     private void init(){
         autoCompleteTxt = findViewById(R.id.Dp_Jurusan);
-        adapterItems = new ArrayAdapter<String>(this,R.layout.list_item,items);
+//        adapterItems = new ArrayAdapter<String>(this,R.layout.list_item,items);
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, new ArrayList<>(items));
         autoCompleteTxt.setAdapter(adapterItems);
         et_nisn = findViewById( R.id.Dp_NISN );
         et_name = findViewById( R.id.Dp_Name_Lengkap );
@@ -97,6 +101,7 @@ public class DaftarPPDB extends BaseActivity {
                 selectedMajor = majorList.get(position);
             }
         });
+
         btnRegisterPpdb.setOnClickListener( v->{
             Http.post( Endpoint.PPDB.getUrl(), PublicApi.getHeaders(),getBody(),this::doRegisterPpdb );
         } );
@@ -184,8 +189,15 @@ public class DaftarPPDB extends BaseActivity {
     }
 
     private void onFetchMajors(Response response) {
+        if (response.statusCode != 200) {
+            return;
+        }
         try {
-            JSONArray jsonArray = new JSONArray(response.body);
+            JSONObject rawBody = new JSONObject(response.body.toString());
+            if (rawBody.getInt("status") != 200) {
+                return;
+            }
+            JSONArray jsonArray = rawBody.getJSONArray("data");
             majorList.clear();
 
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -240,7 +252,10 @@ public class DaftarPPDB extends BaseActivity {
         return TahunLulus.getText().toString();
     }
     private Integer majorId1(){
-        return selectedMajor.id;
+        if (selectedMajor != null) {
+            return selectedMajor.id;
+        }
+        return null;
     }
     private Integer MajorId2(){
         return selectedMajor.id;
@@ -257,19 +272,46 @@ public class DaftarPPDB extends BaseActivity {
         body.put("motherName", motherName());
         body.put("guardianName", guardianName());
         body.put("schoolOrigin", schoolOrigin());
+        body.put("graduationYear", "2022");
         body.put("graduationYear", graduationYear());
-        body.put("majorId1", String.valueOf(majorId1()));
+//        body.put("majorId1", "1");
 //        body.put("majorId2", String.valueOf(majorId2()));
+        Integer major1 = majorId1();
+        if (major1 != null) {
+            body.put("majorId1", String.valueOf(major1));
+        }
 
         return body;
     }
-    private void doRegisterPpdb(Response response){
-        if (response.statusCode != 200){
-            Toast.makeText( this, "Pendaftaran Gagal", Toast.LENGTH_SHORT ).show();
-            return;
+private void doRegisterPpdb(Response response) {
+    if (response.statusCode != 200) {
+        String errorMessage = "";
+        try {
+            JSONObject errorBody = new JSONObject(response.body.toString());
+            if (errorBody.has("message")) {
+                errorMessage = errorBody.getString("message");
+            } else if (errorBody.has("errors")) {
+                JSONObject errors = errorBody.getJSONObject("errors");
+                Iterator<String> keys = errors.keys();
+                while (keys.hasNext()) {
+                    String key = keys.next();
+                    String error = errors.getJSONArray(key).getString(0);
+                    errorMessage += key + ": " + error + "\n";
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        Toast.makeText( this, "Pendaftaran Berhasil", Toast.LENGTH_SHORT ).show();
-        Navigator.of( this ).push( Notif_Succes_register_Ppdb.class );
-
+        if (errorMessage.isEmpty()) {
+            errorMessage = "Terjadi kesalahan saat mengirimkan data pendaftaran. Silakan coba lagi.";
+        }
+        Toast.makeText(this, "Pendaftaran Gagal: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Log.e("Pendaftaran Gagal", errorMessage);
+        return;
     }
+
+    Toast.makeText(this, "Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
+    Navigator.of(this).push(Notif_Succes_register_Ppdb.class);
+}
+
 }
