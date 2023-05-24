@@ -40,6 +40,8 @@ public class ChangeDataAccount extends BaseActivity {
 
     Button btnUpdate;
 
+    private boolean isUpdate = false;
+
     private UserModel userModel;
 
     private boolean isUpdateAvatar = false;
@@ -77,7 +79,7 @@ public class ChangeDataAccount extends BaseActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        Navigator.of(this).pop();
+        Navigator.of(this).pop(isUpdate);
         return true;
     }
 
@@ -222,6 +224,7 @@ public class ChangeDataAccount extends BaseActivity {
             }
 
             resetViewPassword();
+            isUpdate = true;
         });
 
         caUsername.addTextChangedListener(new TextChangeListener() {
@@ -267,7 +270,7 @@ public class ChangeDataAccount extends BaseActivity {
             userModel = UserModel.fromJson(body.getJSONObject("data"));
             State.setUserModel(userModel);
             setModelToView();
-
+//            Intent intent = new Intent(ChangeDataAccount.this,ChangeDataAccount.class); intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); finish();
             // you can add more action after update account
             Toast.makeText(this, "Berhasil memperbarui akun", Toast.LENGTH_SHORT).show();
         } catch (JSONException e) {

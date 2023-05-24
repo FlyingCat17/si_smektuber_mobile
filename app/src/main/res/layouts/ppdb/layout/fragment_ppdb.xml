@@ -4,38 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="22dp"
-    android:paddingRight="22dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screen.home.ppdb.Ppdb">
-
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/InformasiPPDB"
-            android:layout_width="140dp"
-            android:layout_height="24dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="65dp"
-            android:text="@string/informasi_Ppdb"
-            android:textAppearance="@style/informasi_p"
-            android:lineSpacingExtra="-2sp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            />
-
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/ShimmerInformasiPPDB"
-            android:layout_below="@+id/InformasiPPDB"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="114dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 >
                 <include layout="@layout/item_data_visi_misi_shimmer"/>
@@ -44,8 +27,6 @@
         </com.facebook.shimmer.ShimmerFrameLayout>
 
         <ScrollView
-            android:id="@+id/layoutPpdb"
-            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="false">
@@ -53,41 +34,61 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingLeft="22dp"
+                android:paddingRight="22dp"
                 >
                 <TextView
-                    android:id="@+id/TxtPPDB"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="114dp"
-                    android:text="  "
-                    android:textAppearance="@style/penerimaan_"
-                    android:lineSpacingExtra="3sp"
-                    android:gravity="center_vertical"
+                    android:id="@+id/InformasiPPDB"
+                    android:layout_width="140dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="65dp"
+                    android:text="@string/informasi_Ppdb"
+                    android:textAppearance="@style/informasi_p"
+                    android:lineSpacingExtra="-2sp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
                     />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/ImagePPDB"
-                    android:layout_below="@+id/TxtPPDB"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:padding="5dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/Color1A000000"
-                    android:background="@drawable/image"
-                    android:src="@drawable/image"
-                    android:scaleType="fitXY"
-                    />
+                    <RelativeLayout
+                        android:id="@+id/layoutPpdb"
+                        android:visibility="invisible"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/TxtPPDB"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="114dp"
+                            android:text="  "
+                            android:textAppearance="@style/penerimaan_"
+                            android:lineSpacingExtra="3sp"
+                            android:gravity="center_vertical"
+                            />
 
-                <include
-                    android:id="@+id/BtnDaftarSiswa"
-                    android:layout_below="@+id/ImagePPDB"
-                    layout="@layout/button_daftar_siswa"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginBottom="44dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp"/>
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ImagePPDB"
+                            android:layout_below="@+id/TxtPPDB"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="17dp"
+                            android:padding="5dp"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="@color/Color1A000000"
+                            android:background="@drawable/image"
+                            android:src="@drawable/image"
+                            android:scaleType="fitXY"
+                            />
 
+                        <include
+                            android:id="@+id/BtnDaftarSiswa"
+                            android:layout_below="@+id/ImagePPDB"
+                            layout="@layout/button_daftar_siswa"
+                            android:layout_marginTop="28dp"
+                            android:layout_marginBottom="44dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"/>
+                    </RelativeLayout>
             </RelativeLayout>
 
 

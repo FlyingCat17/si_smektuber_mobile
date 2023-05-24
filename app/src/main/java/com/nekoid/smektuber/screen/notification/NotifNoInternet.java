@@ -35,7 +35,7 @@ public class NotifNoInternet extends Fragment {
         this.buttonTryAgain = tryAgain;
     }
 
-    private NotifNoInternet() {}
+    public NotifNoInternet() {}
 
     public static NotifNoInternet newInstance(String param1, String param2) {
         NotifNoInternet fragment = new NotifNoInternet();
@@ -60,8 +60,10 @@ public class NotifNoInternet extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_notif_no_internet, container, false);
-        noInternet = view.findViewById(R.id.BtnNotifNoInternet);
-        noInternet.setOnClickListener(v -> buttonTryAgain.onClickTryAgain(v));
+        if (buttonTryAgain != null) {
+            noInternet = view.findViewById(R.id.BtnNotifNoInternet);
+            noInternet.setOnClickListener(v -> buttonTryAgain.onClickTryAgain(v));
+        }
         return view;
     }
 }

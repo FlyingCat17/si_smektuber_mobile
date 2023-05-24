@@ -54,6 +54,7 @@
 
         <RelativeLayout
             android:id="@+id/TampilanAboutScholl"
+            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -105,7 +106,7 @@
             <ImageView
                 android:id="@+id/ImageHeadMaster"
                 android:layout_width="174dp"
-                android:layout_height="wrap_content"
+                android:layout_height="261.16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"

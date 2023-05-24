@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.Network;
@@ -37,7 +38,7 @@ public class HomeMember extends BaseActivity {
 
     boolean networkIsAvailable = false;
 
-    private NotifNoInternet noInternet = new NotifNoInternet(this::onClickTryAgain);
+    private NotifNoInternet noInternet = new NotifNoInternet();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,14 +113,12 @@ public class HomeMember extends BaseActivity {
     }
 
     public void fragmentNoInternet() {
-        replaceFragment(R.id.r, noInternet);
+        replaceFragment(R.id.r, new NotifNoInternet());
     }
 
     public void onClickTryAgain(View view) {
         if (!networkIsAvailable) {
             Toast.makeText(this, "Please connect to internet, and try again", Toast.LENGTH_SHORT).show();
-        } else {
-            removeFragment(noInternet);
         }
     }
 

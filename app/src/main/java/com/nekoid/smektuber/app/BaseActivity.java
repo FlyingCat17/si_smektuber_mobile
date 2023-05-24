@@ -373,7 +373,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public final void replaceFragment(@IdRes int containerViewId, @NonNull androidx.fragment.app.Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(containerViewId, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(containerViewId, fragment).commitAllowingStateLoss();
     }
 
     public final void removeFragment(@NonNull androidx.fragment.app.Fragment fragment) {
