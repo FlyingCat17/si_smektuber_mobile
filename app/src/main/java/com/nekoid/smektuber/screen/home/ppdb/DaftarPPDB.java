@@ -49,9 +49,9 @@ import java.util.Map;
 public class DaftarPPDB extends BaseActivity {
 //    String[] items = {};
     ArrayList<String> items = new ArrayList<>();
-    private MajorModel selectedMajor;
+    private MajorModel selectedMajor, selectedMajor2;
     private List<MajorModel> majorList = new ArrayList<>();
-    AutoCompleteTextView autoCompleteTxt;
+    AutoCompleteTextView autoCompleteTxt, autoCompleteTxt02;
     private EditText TanggalLahir, TahunLulus;
     ArrayAdapter<String> adapterItems;
     Toolbar toolbar;
@@ -68,9 +68,11 @@ public class DaftarPPDB extends BaseActivity {
     }
     private void init(){
         autoCompleteTxt = findViewById(R.id.Dp_Jurusan);
+        autoCompleteTxt02 = findViewById( R.id.Dp_Jurusan02 );
 //        adapterItems = new ArrayAdapter<String>(this,R.layout.list_item,items);
         adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, new ArrayList<>(items));
         autoCompleteTxt.setAdapter(adapterItems);
+        autoCompleteTxt02.setAdapter( adapterItems );
         et_nisn = findViewById( R.id.Dp_NISN );
         et_name = findViewById( R.id.Dp_Name_Lengkap );
         et_placeBirth = findViewById( R.id.Dp_TempatLahir);
@@ -104,6 +106,13 @@ public class DaftarPPDB extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
                 selectedMajor = majorList.get(position);
+            }
+        });
+        autoCompleteTxt02.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                selectedMajor2 = majorList.get(position);
             }
         });
 
@@ -263,8 +272,12 @@ public class DaftarPPDB extends BaseActivity {
         }
         return null;
     }
-    private Integer MajorId2(){
-        return selectedMajor.id;
+    private Integer majorId2(){
+//        return selectedMajor.id;
+        if (selectedMajor != null) {
+            return selectedMajor2.id;
+        }
+        return null;
     }
     private Map<String, String> getBody(){
         HashMap<String, String> body = new HashMap<>();
@@ -286,6 +299,10 @@ public class DaftarPPDB extends BaseActivity {
         Integer major1 = majorId1();
         if (major1 != null) {
             body.put("major_id_1", String.valueOf(major1));
+        }
+        Integer major2 = majorId2();
+        if (major2 != null) {
+            body.put("major_id_2", String.valueOf(major2));
         }
 
         return body;
@@ -337,6 +354,7 @@ private void doRegisterPpdb(Response response) {
         }
         Toast.makeText(this, "Pendaftaran Gagal: " + errorMessage, Toast.LENGTH_SHORT).show();
         Log.e("Pendaftaran Gagal", errorMessage);
+        loadingDialog.isDismiss();
         return;
     }
     loadingDialog.isDismiss();

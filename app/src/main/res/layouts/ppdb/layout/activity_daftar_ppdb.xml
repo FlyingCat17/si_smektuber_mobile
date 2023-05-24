@@ -244,6 +244,21 @@
                     android:inputType="text"/>
 
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:hint="@string/jurusan_yan2">
+                <AutoCompleteTextView
+                    android:id="@+id/Dp_Jurusan02"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/urbanist"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <include
                 android:id="@+id/BtnDaftarPPDB"
