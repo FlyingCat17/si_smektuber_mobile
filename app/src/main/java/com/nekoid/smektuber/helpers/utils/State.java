@@ -1,6 +1,5 @@
 package com.nekoid.smektuber.helpers.utils;
 
-import android.graphics.Bitmap;
 import android.os.Build;
 
 import com.nekoid.smektuber.models.AboutModel;
@@ -18,13 +17,7 @@ public class State {
 
     public static Cache cache;
 
-    public static List<ArticleModel> articles = new ArrayList<>();
-
     public static PpdbModel PpdbModel;
-
-    static List<Bitmap> listImageArticleDashboard = new ArrayList<>();
-
-    static List<Bitmap> listArticleAll = new ArrayList<>();
 
     public static UserModel userModel;
 
@@ -83,12 +76,14 @@ public class State {
 
         private void setExpired() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                this.expiredAt = this.createdAt.plusSeconds(this.expired - 600);
+                this.expiredAt = this.createdAt.plusSeconds(this.expired);
             }
         }
 
         public boolean isExpired() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                System.out.println("now " + LocalDateTime.now());
+                System.out.println("expired " + this.expiredAt);
                 return LocalDateTime.now().isAfter(this.expiredAt);
             }
             return false;

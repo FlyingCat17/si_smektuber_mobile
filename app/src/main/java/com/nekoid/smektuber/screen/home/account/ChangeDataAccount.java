@@ -17,9 +17,9 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.State;
-import com.nekoid.smektuber.helpers.utils.TextChangeListener;
+import com.nekoid.smektuber.helpers.listener.TextChangeListener;
 import com.nekoid.smektuber.models.UserModel;
 import com.nekoid.smektuber.network.*;
 
@@ -39,6 +39,8 @@ public class ChangeDataAccount extends BaseActivity {
     TextInputEditText caUsername, caFullName, caEmail, caPassword, caConfirmPassword;
 
     Button btnUpdate;
+
+    private boolean isUpdate = false;
 
     private UserModel userModel;
 
@@ -77,7 +79,7 @@ public class ChangeDataAccount extends BaseActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        Navigator.of(this).pop();
+        Navigator.of(this).pop(isUpdate);
         return true;
     }
 
@@ -222,6 +224,7 @@ public class ChangeDataAccount extends BaseActivity {
             }
 
             resetViewPassword();
+            isUpdate = true;
         });
 
         caUsername.addTextChangedListener(new TextChangeListener() {
@@ -267,7 +270,7 @@ public class ChangeDataAccount extends BaseActivity {
             userModel = UserModel.fromJson(body.getJSONObject("data"));
             State.setUserModel(userModel);
             setModelToView();
-
+//            Intent intent = new Intent(ChangeDataAccount.this,ChangeDataAccount.class); intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); finish();
             // you can add more action after update account
             Toast.makeText(this, "Berhasil memperbarui akun", Toast.LENGTH_SHORT).show();
         } catch (JSONException e) {

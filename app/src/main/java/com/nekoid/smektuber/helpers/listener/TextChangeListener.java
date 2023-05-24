@@ -1,4 +1,4 @@
-package com.nekoid.smektuber.helpers.utils;
+package com.nekoid.smektuber.helpers.listener;
 
 import android.text.Editable;
 import android.text.TextWatcher;

@@ -1,5 +1,7 @@
 package com.nekoid.smektuber.screen.home.dashboard;
 
+import static com.nekoid.smektuber.helpers.utils.Utils.isNetworkAvailable;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
@@ -20,14 +22,14 @@ import com.nekoid.smektuber.adapter.AdapterData;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseFragment;
+import com.nekoid.smektuber.app.BaseFragment;
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.AboutModel;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
-import com.nekoid.smektuber.network.Threads;
+import com.nekoid.smektuber.helpers.thread.Threads;
 import com.nekoid.smektuber.screen.home.about.AboutSchool;
 import com.nekoid.smektuber.screen.home.article.ArticleViewAll;
 import com.nekoid.smektuber.screen.home.ekstarkurikuler.Extrakurikuler;
@@ -145,7 +147,6 @@ public class Dashboard extends BaseFragment {
         adapterData = new AdapterData(this.getActivity(), listArticle);
         shimmerFrameLayout = view.findViewById(R.id.rvDataShimmer);
         recyclerView = view.findViewById(R.id.rvData);
-
         if (State.userModel != null) {
             fullName.setText(State.userModel.name);
         } else {

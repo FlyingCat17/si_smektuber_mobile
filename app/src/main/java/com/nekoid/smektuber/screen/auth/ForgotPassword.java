@@ -11,8 +11,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
-import com.nekoid.smektuber.helpers.utils.TextChangeListener;
+import com.nekoid.smektuber.app.BaseActivity;
+import com.nekoid.smektuber.helpers.listener.TextChangeListener;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
 

@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     android:background="@color/blue01"
     tools:context=".screen.auth.Login">
+
+
     <ScrollView
+        android:id="@+id/loginScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="false">
@@ -162,5 +165,12 @@
 
     </ScrollView>
 
+    <FrameLayout
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/loginFragment"
+        android:background="@color/white"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

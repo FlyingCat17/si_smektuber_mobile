@@ -22,13 +22,13 @@ public class MajorModel extends Models {
 
     public MajorModel(int id, String majorName, String majorDescription, String majorLogo, String picture1, String picture2, String createdAt, String updatedAt) {
         this.id = id;
-        this.majorName = majorName;
-        this.majorDescription = majorDescription;
-        this.majorLogo = majorLogo;
-        this.picture1 = picture1;
-        this.picture2 = picture2;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.majorName = isEmpty(majorName);
+        this.majorDescription = isEmpty(majorDescription);
+        this.majorLogo = isEmpty(majorLogo);
+        this.picture1 = isEmpty(picture1);
+        this.picture2 = isEmpty(picture2);
+        this.createdAt = isEmpty(createdAt);
+        this.updatedAt = isEmpty(updatedAt);
     }
 
     public static MajorModel fromJson(JSONObject json) {

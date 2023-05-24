@@ -3,14 +3,18 @@ package com.nekoid.smektuber.screen.home.about;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
-import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.AboutModel;
@@ -29,22 +33,34 @@ public class AboutSchool extends BaseActivity {
     private Toolbar toolbar;
 
     private AboutModel aboutModel;
-
+    boolean withAnimation = true;
     private String facebook, instagram, youtube, tiktok;
+    ShimmerFrameLayout shimmerFrameLayout;
+    RelativeLayout tampilanAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_school);
+        shimmerFrameLayout = findViewById(R.id.ShimmerAboutSchool);
+        tampilanAbout = findViewById(R.id.TampilanAboutScholl);
         startShimmer();
         setVariable();
         init();
         setToolbar();
         if (State.aboutModel != null) {
             setDataToView(State.aboutModel);
+            withAnimation = false;
+//            aboutModel = State.aboutModel;
+            openRequest();
         } else {
-            Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
+            withAnimation = true;
+            openRequest();
         }
+    }
+
+    private void openRequest() {
+        Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
     }
 
     private void startShimmer() {
@@ -53,6 +69,9 @@ public class AboutSchool extends BaseActivity {
 
     private void stopShimmer() {
         // stop shimmer
+        shimmerFrameLayout.setVisibility(View.GONE);
+        tampilanAbout.setVisibility(View.VISIBLE);
+        if (withAnimation) tampilanAbout.setAnimation(Utils.animation());
     }
 
     private void init() {

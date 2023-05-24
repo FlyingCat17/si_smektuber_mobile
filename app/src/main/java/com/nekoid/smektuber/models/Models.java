@@ -10,4 +10,9 @@ abstract class Models implements Serializable {
     public String toString() {
         return this.getClass().getName();
     }
+
+    protected String isEmpty(String value) {
+        if (value.equals("") | value.equals("null") | value.isEmpty()) return "";
+        return value;
+    }
 }
