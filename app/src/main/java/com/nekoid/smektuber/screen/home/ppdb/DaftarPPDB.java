@@ -2,6 +2,7 @@ package com.nekoid.smektuber.screen.home.ppdb;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -27,12 +28,14 @@ import com.nekoid.smektuber.helpers.utils.BaseActivity;
 import com.nekoid.smektuber.models.MajorModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
+import com.nekoid.smektuber.screen.notification.LoadingDialog;
 import com.nekoid.smektuber.screen.notification.Notif_Succes_register_Ppdb;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -54,7 +57,8 @@ public class DaftarPPDB extends BaseActivity {
     Toolbar toolbar;
     private Button btnRegisterPpdb;
     private TextInputLayout txtLayoutNisn, txtLayoutName, txtLayoutPlaceBirth, txtLayoutAddress,txtLayoutNoHp, txtLayoutNameFather, txtLayoutNameMother,txtLayoutSchoolOrigin, txtLayoutMajor;
-    private TextInputEditText et_nisn, et_name,et_placeBirth, et_address, et_Nohp, et_father, et_mother, et_guardian,et_schoolOrigin,et_major;
+    private TextInputEditText et_nisn, et_name,et_placeBirth, et_address, et_Nohp, et_father, et_mother, et_guardian,et_schoolOrigin;
+    LoadingDialog loadingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +84,7 @@ public class DaftarPPDB extends BaseActivity {
         TahunLulus = findViewById(R.id.Dp_tahun_lulus);
         btnRegisterPpdb = findViewById( R.id.BtnDaftarPPDB );
         fetchMajors();
+        loadingDialog = new LoadingDialog( DaftarPPDB.this );
         TahunLulus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +108,7 @@ public class DaftarPPDB extends BaseActivity {
         });
 
         btnRegisterPpdb.setOnClickListener( v->{
+            loadingDialog.startLoading();
             Http.post( Endpoint.PPDB.getUrl(), PublicApi.getHeaders(),getBody(),this::doRegisterPpdb );
         } );
 
@@ -263,25 +269,49 @@ public class DaftarPPDB extends BaseActivity {
     private Map<String, String> getBody(){
         HashMap<String, String> body = new HashMap<>();
         body.put("nisn", nisn());
-        body.put("placeBirth", placeBirth());
-        body.put("fullName", fullName());
-        body.put("dateBirth", dateBirth());
+        body.put("place_birth", placeBirth());
+        body.put("full_name", fullName());
+//        body.put("dateBirth", dateBirth());
+        body.put("date_birth", convertToDate(dateBirth()));
         body.put("address", address());
         body.put("phone", phone());
-        body.put("fatherName", fatherName());
-        body.put("motherName", motherName());
-        body.put("guardianName", guardianName());
-        body.put("schoolOrigin", schoolOrigin());
-        body.put("graduationYear", "2022");
-        body.put("graduationYear", graduationYear());
+        body.put("father_name", fatherName());
+        body.put("mother_name", motherName());
+        body.put("guardian_name", guardianName());
+        body.put("school_origin", schoolOrigin());
+//        body.put("graduationYear", graduationYear());
+        body.put("graduation_year", convertToYear(graduationYear()));
 //        body.put("majorId1", "1");
 //        body.put("majorId2", String.valueOf(majorId2()));
         Integer major1 = majorId1();
         if (major1 != null) {
-            body.put("majorId1", String.valueOf(major1));
+            body.put("major_id_1", String.valueOf(major1));
         }
 
         return body;
+    }
+    private String convertToDate(String dateString) {
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("dd MM yyyy", Locale.getDefault());
+            Date date = inputFormat.parse(dateString);
+            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    private String convertToYear(String yearString) {
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+            Date date = inputFormat.parse(yearString);
+            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 private void doRegisterPpdb(Response response) {
     if (response.statusCode != 200) {
@@ -309,9 +339,14 @@ private void doRegisterPpdb(Response response) {
         Log.e("Pendaftaran Gagal", errorMessage);
         return;
     }
-
+    loadingDialog.isDismiss();
     Toast.makeText(this, "Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
-    Navigator.of(this).push(Notif_Succes_register_Ppdb.class);
+//    Navigator.of(this).push(Notif_Succes_register_Ppdb.class);
+    Fragment notifFragment = new Notif_Succes_register_Ppdb();
+    getSupportFragmentManager().beginTransaction()
+            .replace(R.id.container, notifFragment)
+            .addToBackStack(null)
+            .commit();
 }
 
 }

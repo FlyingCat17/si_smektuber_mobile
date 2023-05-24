@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:id="@+id/Dp_NISN"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text|number"
                     android:fontFamily="@font/urbanist"
                     android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -255,4 +255,9 @@
         </LinearLayout>
 
     </ScrollView>
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
 </RelativeLayout>
