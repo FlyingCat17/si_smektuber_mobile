@@ -18,11 +18,11 @@ public class UserModel extends Models {
     public boolean emailVerified;
 
     public UserModel(String name, String email, String role, String avatar, String username, boolean emailVerified) {
-        this.name = name;
-        this.email = email;
-        this.role = role;
-        this.avatar = avatar;
-        this.username = username;
+        this.name = isEmpty(name);
+        this.email = isEmpty(email);
+        this.role = isEmpty(role);
+        this.avatar = isEmpty(avatar);
+        this.username = isEmpty(username);
         this.emailVerified = emailVerified;
     }
 
