@@ -18,11 +18,11 @@ public class ExtracurricularModel extends Models {
 
     public ExtracurricularModel(int id, String name, String description, String photo, String createdAt, String updatedAt) {
         this.id = id;
-        this.name = name;
-        this.description = description;
-        this.photo = photo;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.name = isEmpty(name);
+        this.description = isEmpty(description);
+        this.photo = isEmpty(photo);
+        this.createdAt = isEmpty(createdAt);
+        this.updatedAt = isEmpty(updatedAt);
     }
 
     public static ExtracurricularModel fromJson(JSONObject json) {
