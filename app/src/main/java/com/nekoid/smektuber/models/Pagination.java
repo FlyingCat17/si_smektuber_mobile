@@ -30,10 +30,10 @@ public class Pagination extends Models {
         this.perPage = perPage;
         this.currentPage = currentPage;
         this.lastPage = lastPage;
-        this.firstPageUrl = firstPageUrl;
-        this.lastPageUrl = lastPageUrl;
-        this.nextPageUrl = nextPageUrl;
-        this.prevPageUrl = prevPageUrl;
+        this.firstPageUrl = isEmpty(firstPageUrl);
+        this.lastPageUrl = isEmpty(lastPageUrl);
+        this.nextPageUrl = isEmpty(nextPageUrl);
+        this.prevPageUrl = isEmpty(prevPageUrl);
         this.from = from;
         this.to = to;
     }

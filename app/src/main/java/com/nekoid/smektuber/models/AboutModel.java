@@ -58,28 +58,28 @@ public class AboutModel extends Models {
             String schoolPicture1, String schoolPicture2, String schoolHeadmasterName,
             String schoolHeadmasterPicture, String schoolHeadmasterQuote, String createdAt, String updatedAt) {
         this.id = id;
-        this.schoolName = schoolName;
-        this.schoolAccreditation = schoolAccreditation;
-        this.schoolHistory = schoolHistory;
-        this.schoolSlogan = schoolSlogan;
-        this.schoolVision = schoolVision;
-        this.schoolMission = schoolMission;
-        this.schoolAddress = schoolAddress;
-        this.schoolPhone = schoolPhone;
-        this.schoolEmail = schoolEmail;
-        this.schoolWhatsapp = schoolWhatsapp;
-        this.schoolFacebook = schoolFacebook;
-        this.schoolInstagram = schoolInstagram;
-        this.schoolTwitter = schoolTwitter;
-        this.schoolYoutube = schoolYoutube;
-        this.schoolLogo = schoolLogo;
-        this.schoolPicture1 = schoolPicture1;
-        this.schoolPicture2 = schoolPicture2;
-        this.schoolHeadmasterName = schoolHeadmasterName;
-        this.schoolHeadmasterPicture = schoolHeadmasterPicture;
-        this.schoolHeadmasterQuote = schoolHeadmasterQuote;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.schoolName = isEmpty(schoolName);
+        this.schoolAccreditation = isEmpty(schoolAccreditation);
+        this.schoolHistory = isEmpty(schoolHistory);
+        this.schoolSlogan = isEmpty(schoolSlogan);
+        this.schoolVision = isEmpty(schoolVision);
+        this.schoolMission = isEmpty(schoolMission);
+        this.schoolAddress = isEmpty(schoolAddress);
+        this.schoolPhone = isEmpty(schoolPhone);
+        this.schoolEmail = isEmpty(schoolEmail);
+        this.schoolWhatsapp = isEmpty(schoolWhatsapp);
+        this.schoolFacebook = isEmpty(schoolFacebook);
+        this.schoolInstagram = isEmpty(schoolInstagram);
+        this.schoolTwitter = isEmpty(schoolTwitter);
+        this.schoolYoutube = isEmpty(schoolYoutube);
+        this.schoolLogo = isEmpty(schoolLogo);
+        this.schoolPicture1 = isEmpty(schoolPicture1);
+        this.schoolPicture2 = isEmpty(schoolPicture2);
+        this.schoolHeadmasterName = isEmpty(schoolHeadmasterName);
+        this.schoolHeadmasterPicture = isEmpty(schoolHeadmasterPicture);
+        this.schoolHeadmasterQuote = isEmpty(schoolHeadmasterQuote);
+        this.createdAt = isEmpty(createdAt);
+        this.updatedAt = isEmpty(updatedAt);
     }
 
     public static AboutModel fromJson(JSONObject json) throws JSONException {

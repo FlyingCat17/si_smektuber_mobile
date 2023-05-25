@@ -46,6 +46,7 @@ public class Extrakurikuler extends BaseActivity {
 
     private boolean isScroll = false, isFromState = false;
     ShimmerFrameLayout shimmerFrameLayout;
+
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,11 +123,10 @@ public class Extrakurikuler extends BaseActivity {
     @SuppressLint("NotifyDataSetChanged")
     protected final void setAdapterExtracurricular() {
         isScroll = true;
-        if (State.extracurricularModels.size() <= 10) {
-            for (ExtracurricularModel model : extracurricularModels) {
-                if (State.extracurricularModels.size() >= 10) break;
-                State.extracurricularModels.add(model);
-            }
+        State.extracurricularModels.clear();
+        for (ExtracurricularModel model : extracurricularModels) {
+            if (State.extracurricularModels.size() >= 10) break;
+            State.extracurricularModels.add(model);
         }
         adapterDataExtra.notifyDataSetChanged();
     }
