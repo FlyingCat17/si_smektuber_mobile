@@ -27,6 +27,7 @@
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDataExtra"
+        android:visibility="invisible"
         android:layout_marginTop="34dp"
         android:paddingRight="22dp"
         android:paddingLeft="20dp"

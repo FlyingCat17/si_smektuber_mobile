@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,7 +128,7 @@ public class Ppdb extends Fragment {
     }
 
     private void setModelToView() {
-        description.setText(ppdbModel.description);
+        description.setText(Html.fromHtml(ppdbModel.description));
         stopShimmer();
     }
 

@@ -19,9 +19,11 @@ import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.Network;
+import com.nekoid.smektuber.models.PpdbModel;
 import com.nekoid.smektuber.screen.home.account.Account;
 import com.nekoid.smektuber.screen.home.dashboard.Dashboard;
 import com.nekoid.smektuber.screen.home.job.Jobs;
+import com.nekoid.smektuber.screen.home.ppdb.No_Information_Ppdb;
 import com.nekoid.smektuber.screen.home.ppdb.Ppdb;
 import com.nekoid.smektuber.screen.notification.NotifNoInternet;
 
@@ -32,6 +34,8 @@ public class HomeMember extends BaseActivity {
     Dashboard dashboard = new Dashboard();
     Jobs jobs = new Jobs();
     Ppdb ppdb = new Ppdb();
+    No_Information_Ppdb no_information_ppdb = new No_Information_Ppdb();
+    PpdbModel ppdbModel;
     boolean doubleBackToExitPressedOnce = false;
 
     Fragment fragment;
@@ -48,9 +52,8 @@ public class HomeMember extends BaseActivity {
         bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setItemTextColor(null);
         fragment = dashboard;
-        replaceFragment(R.id.r, dashboard);
+//        replaceFragment(R.id.r, dashboard);
         StatusBarUtil.setTransparentStatusBar(this);
-
         Menu menu = bottomNavigationView.getMenu();
         SharedPreferences sharedPreferences = getUserPreferences();
         String role = sharedPreferences.getString("role", null);
@@ -58,6 +61,12 @@ public class HomeMember extends BaseActivity {
             menu.removeItem(R.id.Loker);
         } else if (!role.isEmpty() && role.equals("siswa")) {
             menu.removeItem(R.id.Ppdb);
+        }
+
+        if (!networkIsAvailable) {
+            fragmentNoInternet();
+        } else if (networkIsAvailable){
+            replaceFragment(R.id.r, dashboard);
         }
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -72,8 +81,9 @@ public class HomeMember extends BaseActivity {
                         }
                         return true;
                     case R.id.Ppdb:
-                        fragment = ppdb;
-                        replaceFragment(R.id.r, ppdb);
+                            fragment = ppdb;
+                            replaceFragment(R.id.r, ppdb);
+
                         if (!networkIsAvailable) {
                             fragmentNoInternet();
                         }

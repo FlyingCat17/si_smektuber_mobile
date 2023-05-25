@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -22,6 +23,9 @@ import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.listener.TextChangeListener;
 import com.nekoid.smektuber.models.UserModel;
 import com.nekoid.smektuber.network.*;
+import com.nekoid.smektuber.screen.notification.NotifNoInternet;
+import com.nekoid.smektuber.screen.notification.Notif_Succes_Change_Password;
+import com.nekoid.smektuber.screen.notification.Notif_Succes_change_Data_Account;
 
 import org.json.*;
 
@@ -272,6 +276,10 @@ public class ChangeDataAccount extends BaseActivity {
             setModelToView();
 //            Intent intent = new Intent(ChangeDataAccount.this,ChangeDataAccount.class); intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); finish();
             // you can add more action after update account
+
+            findViewById(R.id.changeDataScroll).setVisibility(View.INVISIBLE);
+            findViewById(R.id.changeDataFragment).setVisibility(View.VISIBLE);
+            replaceFragment(R.id.changeDataFragment, new Notif_Succes_change_Data_Account());
             Toast.makeText(this, "Berhasil memperbarui akun", Toast.LENGTH_SHORT).show();
         } catch (JSONException e) {
             throw new RuntimeException(e);

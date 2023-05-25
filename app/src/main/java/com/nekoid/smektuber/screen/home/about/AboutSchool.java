@@ -3,11 +3,13 @@ package com.nekoid.smektuber.screen.home.about;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
@@ -81,13 +83,29 @@ public class AboutSchool extends BaseActivity {
         BtnTT = findViewById(R.id.Tiktok);
         toolbar = findViewById(R.id.backIcon);
 
-        BtnFB.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(facebook)));
+        BtnFB.setOnClickListener(v -> {
+            if (facebook != null && !facebook.isEmpty()) {
+                Navigator.openApp(this, Utils.toUri(facebook));
+            }
+        });
 
-        BtnIG.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(instagram)));
+        BtnIG.setOnClickListener(v -> {
+            if (instagram != null && !instagram.isEmpty()) {
+                Navigator.openApp(this, Utils.toUri(instagram));
+            }
+        });
 
-        BtnYoutube.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(youtube)));
+        BtnYoutube.setOnClickListener(v -> {
+            if (youtube != null && !youtube.isEmpty()) {
+                Navigator.openApp(this, Utils.toUri(youtube));
+            }
+        });
 
-        BtnTT.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(tiktok)));
+        BtnTT.setOnClickListener(v -> {
+            if (tiktok != null && !tiktok.isEmpty()) {
+                Navigator.openApp(this, Utils.toUri(tiktok));
+            }
+        });
     }
 
     protected void onResponse(Response response) {
@@ -112,7 +130,7 @@ public class AboutSchool extends BaseActivity {
         Http.loadImage(aboutModel.schoolLogo, imageSchool, () -> {
             Http.loadImage(aboutModel.schoolHeadmasterPicture, headMasterPhoto, () -> {
                 headmaster.setText(aboutModel.schoolHeadmasterName);
-                schoolDescription.setText(aboutModel.schoolHistory);
+                schoolDescription.setText(Html.fromHtml(aboutModel.schoolHistory));
                 accreditation.setText(aboutModel.schoolAccreditation);
                 facebook = aboutModel.schoolFacebook;
                 instagram = aboutModel.schoolInstagram;

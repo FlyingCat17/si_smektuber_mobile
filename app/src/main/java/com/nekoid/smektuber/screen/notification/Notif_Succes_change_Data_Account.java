@@ -1,14 +1,23 @@
 package com.nekoid.smektuber.screen.notification;
 
+import static com.nekoid.smektuber.helpers.utils.Utils.replaceFragment;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ScrollView;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.screen.home.HomeMember;
+import com.nekoid.smektuber.screen.home.account.Account;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +34,9 @@ public class Notif_Succes_change_Data_Account extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    ScrollView cdScroll;
+    FrameLayout cdFragment;
+    private Button BtnChangeData;
 
     public Notif_Succes_change_Data_Account() {
         // Required empty public constructor
@@ -61,6 +73,19 @@ public class Notif_Succes_change_Data_Account extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notif__succes_change__data__account, container, false);
+        View view = inflater.inflate(R.layout.fragment_notif__succes_change__data__account, container, false);
+        BtnChangeData = view.findViewById(R.id.BtnChangeDataAccount);
+        cdFragment = view.findViewById(R.id.changeDataFragment);
+        cdScroll = view.findViewById(R.id.changeDataScroll);
+        BtnChangeData.setOnClickListener(v -> {
+//            cdFragment.setVisibility(View.INVISIBLE);
+//            cdScroll.setVisibility(View.VISIBLE);
+//            FragmentManager fragmentManager = getChildFragmentManager();
+//            Fragment fragment = new Account(); // Ganti dengan fragment yang ingin ditampilkan
+//            fragmentManager.beginTransaction().replace(R.id.r, fragment).commit();
+            Intent intent = new Intent(getActivity(), HomeMember.class);
+            startActivity(intent);
+        });
+        return view;
     }
 }
