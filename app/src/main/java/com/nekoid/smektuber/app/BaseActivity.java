@@ -186,6 +186,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         return getSharedPreferences("user", MODE_PRIVATE);
     }
 
+    public final UserModel getUserModelFromPreferences() {
+        return new UserModel(getUserPreferences()
+                .getString("name", null), getUserPreferences()
+                .getString("email", null), getUserPreferences()
+                .getString("role", null), "", getUserPreferences()
+                .getString("username", null), getUserPreferences()
+                .getBoolean("emailVerified", false));
+    }
+
     /**
      * <p>Set Auth from shared preferences</p>
      *
