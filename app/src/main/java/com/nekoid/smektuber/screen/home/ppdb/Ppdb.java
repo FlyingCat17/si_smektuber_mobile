@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -26,6 +27,12 @@ import com.nekoid.smektuber.network.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -111,9 +118,42 @@ public class Ppdb extends Fragment {
         layoutPpdb = view.findViewById(R.id.layoutPpdb);
 
         Button btn = view.findViewById(R.id.BtnDaftarSiswa);
-        btn.setOnClickListener(v -> Navigator.of(getActivity()).push(DaftarPPDB.class));
+//        btn.setOnClickListener(v -> Navigator.of(getActivity()).push(DaftarPPDB.class));
+        btn.setOnClickListener( v->{
+            if (ppdbModel != null) {
+                handleRegistration();
+            }
+        } );
+    }
+    private void handleRegistration() {
+        Date currentDate = Calendar.getInstance().getTime();
+        Date startDate = parseDate(ppdbModel.dateStart);
+        Date endDate = parseDate(ppdbModel.dateEnd);
+
+        if (currentDate.before(startDate)) {
+            showToast("Pendaftaran belum dibuka");
+        } else if (currentDate.after(endDate)) {
+            showToast("Pendaftaran telah ditutup");
+        } else {
+            navigateToRegistration();
+        }
+    }
+    private Date parseDate(String dateString) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            return format.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    private void showToast(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
+    private void navigateToRegistration() {
+        Navigator.of(getActivity()).push(DaftarPPDB.class);
+    }
     private void openRequest() {
         Http.get(Endpoint.PPDB.getUrl(), PublicApi.getHeaders(), this::onResponse);
     }
@@ -127,7 +167,8 @@ public class Ppdb extends Fragment {
     }
 
     private void setModelToView() {
-        description.setText(ppdbModel.description);
+        CharSequence htmlDesc = Utils.fromHtml( ppdbModel.description );
+        description.setText( htmlDesc );
         stopShimmer();
     }
 
@@ -139,6 +180,15 @@ public class Ppdb extends Fragment {
             JSONObject body = new JSONObject(response.body.toString());
             ppdbModel = PpdbModel.fromJson(body.getJSONObject("data"));
             State.PpdbModel = ppdbModel;
+//            if (ppdbModel == null){
+//                getActivity().runOnUiThread( ()->{
+//                    Fragment noInfoPpdb = new No_Information_Ppdb();
+//                    HomeMember homeAct = (HomeMember) getActivity();
+//                    homeAct.replaceFragment( R.id.r, noInfoPpdb );
+//                } );
+//            }else {
+//                loadModel();
+//            }
             loadModel();
         } catch (JSONException e) {
             throw new RuntimeException(e);
