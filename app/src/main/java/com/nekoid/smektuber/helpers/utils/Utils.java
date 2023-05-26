@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.text.Html;
 import android.view.animation.AlphaAnimation;
 
 import androidx.annotation.IdRes;
@@ -121,5 +122,9 @@ public class Utils {
 
     public static long secondToMillis(long time) {
         return time * 1000;
+    }
+
+    public static String fromHtml(String html){
+        return Html.fromHtml( html ).toString();
     }
 }
