@@ -17,6 +17,9 @@ import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.listener.TextChangeListener;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
+import com.nekoid.smektuber.screen.notification.LoadingDialog;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +30,7 @@ public class Register extends BaseActivity {
     private TextView txtToLogin;
     private TextInputLayout txtLayoutUsername, txtLayoutname, txtLayoutEmail, txtLayoutPassword;
     private TextInputEditText et_username, et_name, et_email, et_password;
-
+    private LoadingDialog loadingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,54 +53,59 @@ public class Register extends BaseActivity {
         txtToLogin = findViewById(R.id.txtToLogin);
         btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setText("Register");
-
+        loadingDialog = new LoadingDialog( this );
         // action
-        txtToLogin.setOnClickListener(v -> {
-            onBackPressed();
-        });
+        setClickListener();
+        setTextChangeListener();
+    }
+    private void setClickListener(){
+        txtToLogin.setOnClickListener(v -> onBackPressed());
         btnRegister.setOnClickListener(v -> {
             if (validate()) {
+                loadingDialog.startLoading();
                 Http.post(Endpoint.REGISTER.getUrl(), null, getBody(), this::doRegister);
             }
         });
-
-        et_username.addTextChangedListener(new TextChangeListener() {
+    }
+    private void setTextChangeListener(){
+        et_username.addTextChangedListener(createTextChangeListener(txtLayoutUsername));
+        et_name.addTextChangedListener(createTextChangeListener(txtLayoutname));
+        et_email.addTextChangedListener(createEmailTextChangeListener(txtLayoutEmail));
+        et_password.addTextChangedListener( createPasswordTextChangeListener( txtLayoutPassword ) );
+    }
+    private TextChangeListener createTextChangeListener(TextInputLayout layout) {
+        return new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
-                if (!et_username.getText().toString().isEmpty()) {
-                    txtLayoutUsername.setErrorEnabled(false);
+                if (!aNew.isEmpty()) {
+                    layout.setErrorEnabled(false);
                 }
             }
-        });
-
-        et_name.addTextChangedListener(new TextChangeListener() {
+        };
+    }
+    private TextChangeListener createEmailTextChangeListener(TextInputLayout layout) {
+        return new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
-                if (!et_name.getText().toString().isEmpty()) {
-                    txtLayoutname.setErrorEnabled(false);
+                if (emailValidator(layout, et_email)) {
+                    layout.setErrorEnabled(false);
                 }
             }
-        });
-
-        et_email.addTextChangedListener(new TextChangeListener() {
-            @Override
-            protected void onTextChanged(String before, String old, String aNew, String after) {
-                if (emailValidator(txtLayoutEmail, et_email)) {
-                    txtLayoutEmail.setErrorEnabled(false);
-                }
-            }
-        });
-
-        et_password.addTextChangedListener(new TextChangeListener() {
+        };
+    }
+    private TextChangeListener createPasswordTextChangeListener(TextInputLayout layout){
+        return new TextChangeListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (isPasswordValid(et_password.getText().toString())) {
-                    txtLayoutPassword.setErrorEnabled(false);
+                    layout.setErrorEnabled(false);
+                }else {
+                    layout.setErrorEnabled(true);
+                    layout.setError("Password harus mengandung huruf besar, huruf kecil, angka, dan minimal 8 karakter.");
                 }
             }
-        });
+        };
     }
-
     private Map<String, String> getBody() {
         HashMap<String, String> body = new HashMap<>();
         body.put("username", et_username.getText().toString().trim());
@@ -108,8 +116,16 @@ public class Register extends BaseActivity {
     }
 
     private void doRegister(Response response) {
+        loadingDialog.isDismiss();
         if (response.statusCode != 200) {
-            Toast.makeText(this, "Auth failure", Toast.LENGTH_SHORT).show();
+            try {
+                JSONObject responseObject = new JSONObject( String.valueOf( response.body ) );
+                String errorMessage = responseObject.optString("message");
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Error: " + response.statusCode, Toast.LENGTH_SHORT).show();
+            }
             return;
         }
         Toast.makeText(this, "Register Berhasil", Toast.LENGTH_SHORT).show();
@@ -129,7 +145,7 @@ public class Register extends BaseActivity {
             return setError(true, "Mohon isi nama lengkap anda", txtLayoutname);
         }
 
-        if (emailValidator(txtLayoutEmail, et_email)) {
+        if (!emailValidator(txtLayoutEmail, et_email)) {
             return false;
         }
 
@@ -140,19 +156,13 @@ public class Register extends BaseActivity {
     }
 
     private boolean isPasswordValid(String password) {
-        if (password.isEmpty()) {
-            return setError(true, "Mohon isi password anda", txtLayoutPassword);
-        }
-
         if (password.length() < 8) {
-            return setError(true, "Password minimal harus 8 karakter", txtLayoutPassword);
+            return false;
         }
-
-        if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{8,}$")) {
-            return setError(true, "Password harus terdiri dari kombinasi huruf besar, huruf kecil, angka, dan karakter seperti !@#$%^&+=", txtLayoutPassword);
+        if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")) {
+            return false;
         }
-
-        return setError(false, null, txtLayoutPassword);
+        return true;
     }
 
     private boolean setError(boolean error, String message, TextInputLayout layout) {
