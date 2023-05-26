@@ -24,8 +24,8 @@
     <string name="btnLogin">Masuk</string>
     <string name="btnRegister">Daftar</string>
 <!--    Menu Account-->
-    <string name="Fullname">Muhammad Sulaiman</string>
-    <string name="Username">msulaiman_</string>
+    <string name="Fullname">Nama lengkap anda</string>
+    <string name="Username">username_</string>
     <string name="ButtonUbahProfil">Ubah Profil</string>
     <string name="ButtonKeluarAkun">Keluar Akun</string>
 <!--    Menu Dashboard-->
@@ -72,8 +72,10 @@ JL. PB. SUDIRMAN NO.16, Jatiroto, Kec. Sumberbaru, Kab. Jember Prov. Jawa Timur
     <string name="welcome_bac">Daftar untuk bergabung dengan SMKN 7 JEMBER</string>
     <string name="email">Email</string>
     <string name="kata_sandi">Kata Sandi</string>
+    <string name="hintNisn">Masukkan Nomor Induk Siswa Nasional</string>
     <string name="username">Username</string>
     <string name="nama_lengka">Nama Lengkap</string>
+    <string name="tempat_lahir">Tempat Lahir</string>
     <string name="tanggal_lah">Tanggal Lahir</string>
     <string name="alamat">Alamat</string>
     <string name="no_hp">No HP</string>
@@ -83,7 +85,8 @@ JL. PB. SUDIRMAN NO.16, Jatiroto, Kec. Sumberbaru, Kab. Jember Prov. Jawa Timur
     <string name="asal_sekola">Asal Sekolah</string>
     <string name="tahun_lulus">Tahun Lulus</string>
     <string name="tahun_penda">Tahun Pendaftaran</string>
-    <string name="jurusan_yan">Jurusan Yang Dipilih</string>
+    <string name="jurusan_yan">Jurusan 1 Yang Dipilih</string>
+    <string name="jurusan_yan2">Jurusan 2 Yang Dipilih</string>
     <string name="my_dropdown_prompt">Pilih item</string>
 
 <!--    Jobs-->

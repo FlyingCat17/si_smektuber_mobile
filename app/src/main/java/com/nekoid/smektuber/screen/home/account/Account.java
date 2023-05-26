@@ -118,7 +118,7 @@ public class Account extends BaseFragment {
         // Get user data from State
         userModel = State.userModel;
 
-        if (userModel != null && userModel.avatar != null && !userModel.avatar.isEmpty()) {
+        if (userModel !=null && userModel.avatar != null && !userModel.avatar.isEmpty()) {
             if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://"))
                 Http.loadImage(userModel.avatar, imageView, this::setModelToView);
         }

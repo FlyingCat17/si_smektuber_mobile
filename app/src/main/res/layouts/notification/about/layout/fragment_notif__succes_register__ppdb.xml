@@ -6,6 +6,7 @@
     tools:context=".screen.notification.Notif_Fail_Login_Password"
     android:paddingLeft="22dp"
     android:paddingRight="22dp"
+    android:background="@color/white"
     >
 
     <RelativeLayout
@@ -20,10 +21,9 @@
         android:clipToOutline="true"
         android:background="@drawable/icon_success"
         />
-
     <TextView
         android:id="@+id/gagal_masuk"
-        android:layout_width="255dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="52dp"
         android:layout_marginRight="52dp"
@@ -35,6 +35,7 @@
         />
 
     <TextView
+        android:layout_below="@id/gagal_masuk"
         android:layout_width="226dp"
         android:layout_height="46dp"
         android:layout_marginLeft="63dp"

@@ -127,4 +127,8 @@ public class Utils {
     public static long secondToMillis(long time) {
         return time * 1000;
     }
+
+    public static String fromHtml(String html){
+        return Html.fromHtml( html ).toString();
+    }
 }
