@@ -99,9 +99,6 @@ public class Register extends BaseActivity {
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 if (isPasswordValid(et_password.getText().toString())) {
                     layout.setErrorEnabled(false);
-                }else {
-                    layout.setErrorEnabled(true);
-                    layout.setError("Password harus mengandung huruf besar, huruf kecil, angka, dan minimal 8 karakter.");
                 }
             }
         };
@@ -138,7 +135,7 @@ public class Register extends BaseActivity {
         String password = et_password.getText().toString().trim();
 
         if (username.isEmpty()) {
-            return setError(true, "Mohon isi Username anda", txtLayoutUsername);
+            return setError(true, "Mohon isi username anda", txtLayoutUsername);
         }
 
         if (name.isEmpty()) {
@@ -156,11 +153,14 @@ public class Register extends BaseActivity {
     }
 
     private boolean isPasswordValid(String password) {
+        if (password.isEmpty()){
+            return setError( true,"Mohon isi Password anda",txtLayoutPassword );
+        }
         if (password.length() < 8) {
-            return false;
+            return setError( true,"Password minimal 8 karakter", txtLayoutPassword );
         }
         if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")) {
-            return false;
+            return setError( true,"Password harus mengandung huruf besar, huruf kecil, dan angka",txtLayoutPassword );
         }
         return true;
     }
