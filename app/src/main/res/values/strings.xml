@@ -24,8 +24,8 @@
     <string name="btnLogin">Masuk</string>
     <string name="btnRegister">Daftar</string>
 <!--    Menu Account-->
-    <string name="Fullname">Muhammad Sulaiman</string>
-    <string name="Username">msulaiman_</string>
+    <string name="Fullname">Nama lengkap anda</string>
+    <string name="Username">username_</string>
     <string name="ButtonUbahProfil">Ubah Profil</string>
     <string name="ButtonKeluarAkun">Keluar Akun</string>
 <!--    Menu Dashboard-->

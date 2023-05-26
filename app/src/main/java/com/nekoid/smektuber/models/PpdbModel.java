@@ -17,15 +17,15 @@ public class PpdbModel extends  Models{
 //    String deletedAt,
     public PpdbModel(int id, String schoolYear, String description, String poster, String dateStart, String dateEnd, String status,  String createdAt, String updatedAt) {
         this.id = id;
-        this.schoolYear = schoolYear;
-        this.description = description;
-        this.poster = poster;
-        this.dateStart = dateStart;
-        this.dateEnd = dateEnd;
-        this.status = status;
+        this.schoolYear = isEmpty( schoolYear );
+        this.description = isEmpty( description );
+        this.poster = isEmpty( poster );
+        this.dateStart = isEmpty( dateStart );
+        this.dateEnd = isEmpty( dateEnd );
+        this.status = isEmpty( status );
 //        this.deletedAt = deletedAt;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;   
+        this.createdAt = isEmpty( createdAt );
+        this.updatedAt = isEmpty( updatedAt );
     }
 
     public static PpdbModel fromJson(JSONObject json) throws JSONException {
