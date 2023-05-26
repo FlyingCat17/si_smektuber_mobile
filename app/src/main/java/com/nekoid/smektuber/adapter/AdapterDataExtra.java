@@ -50,11 +50,21 @@ public class AdapterDataExtra extends RecyclerView.Adapter<AdapterDataExtra.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.animateExtracurricular.setVisibility(View.GONE);
-        Http.loadImage(extracurricularModels.get(position).photo, holder.ImageExtra, () -> {
-            isLoadAll(holder.animateExtracurricular);
-            holder.TitleMenuExtra.setText(extracurricularModels.get(position).name);
-            holder.extracurricularModel = extracurricularModels.get(position);
-        });
+        if (!extracurricularModels.get(position).photo.isEmpty()) {
+            Http.loadImage(extracurricularModels.get(position).photo, holder.ImageExtra, () -> {
+                setTextAndModel(holder, extracurricularModels.get(position));
+            });
+        } else {
+            setTextAndModel(holder, extracurricularModels.get(position));
+        }
+    }
+
+    private void setTextAndModel(MyViewHolder holder, ExtracurricularModel model) {
+        isLoadAll(holder.animateExtracurricular);
+        if (!model.name.isEmpty()) {
+            holder.TitleMenuExtra.setText(model.name);
+        }
+        holder.extracurricularModel = model;
     }
 
     private void isLoadAll(View holderView) {

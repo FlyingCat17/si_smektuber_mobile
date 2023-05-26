@@ -23,6 +23,7 @@ import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseFragment;
+import com.nekoid.smektuber.helpers.utils.Network;
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.AboutModel;
@@ -109,6 +110,17 @@ public class Dashboard extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         init(view);
+        new Network(getActivity(), new Network.Listener() {
+            @Override
+            public void onNetworkAvailable() {
+                openRequest();
+            }
+
+            @Override
+            public void onNetworkUnavailable() {
+
+            }
+        });
         // Inflate the layout for this fragment
         return view;
     }
