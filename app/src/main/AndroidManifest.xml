@@ -89,9 +89,6 @@
             android:name=".screen.home.account.ChangeDataAccount"
             android:exported="false" />
         <activity
-            android:name=".screen.home.account.ImageCrop"
-            android:exported="false" />
-        <activity
             android:name=".screen.home.account.ViewZoomImage"
             android:exported="false" />
         <activity

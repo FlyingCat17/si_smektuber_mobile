@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
-        android:text="@string/TxtxExtra"
+        android:text=" "
         android:textAppearance="@style/informasi_p"
         android:lineSpacingExtra="-2sp"
         android:layout_centerVertical="true"
@@ -67,7 +67,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:lineSpacingExtra="3sp"
-                android:text="@string/AboutExtra"
+                android:text=" "
                 android:textAppearance="@style/selayang_pa"
                 />
 
@@ -92,7 +92,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:lineSpacingExtra="3sp"
-                android:text="Duta Ambalan Suropati- Cut Nyak Dien SMKN 7 Jember Bangkit bersama Saka Dirgantara Kabupaten Jember."
+                android:text=" "
                 android:textAppearance="@style/Text_Prestasi"
                 />
 

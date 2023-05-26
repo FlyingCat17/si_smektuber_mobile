@@ -88,9 +88,6 @@ public class Utils {
         return String.format(format, args);
     }
 
-    public static String fromHtml(String html) {
-        return Html.fromHtml(html).toString();
-    }
 
     public static PackageInfo getPackageInfo() {
         try {

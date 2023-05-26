@@ -1,30 +1,23 @@
 package com.nekoid.smektuber.screen.notification;
 
-import static com.nekoid.smektuber.helpers.utils.Utils.replaceFragment;
-
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ScrollView;
 
 import com.nekoid.smektuber.R;
-import com.nekoid.smektuber.screen.home.HomeMember;
-import com.nekoid.smektuber.screen.home.account.Account;
+import com.nekoid.smektuber.screen.home.ppdb.Ppdb;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Notif_Succes_change_Data_Account#newInstance} factory method to
+ * Use the {@link Notif_Ppdb_Belum_Dibuka#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Notif_Succes_change_Data_Account extends Fragment {
+public class Notif_Ppdb_Belum_Dibuka extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,11 +27,8 @@ public class Notif_Succes_change_Data_Account extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    ScrollView cdScroll;
-    FrameLayout cdFragment;
-    private Button BtnChangeData;
-
-    public Notif_Succes_change_Data_Account() {
+    private Button BtnData;
+    public Notif_Ppdb_Belum_Dibuka() {
         // Required empty public constructor
     }
 
@@ -48,11 +38,11 @@ public class Notif_Succes_change_Data_Account extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Notif_Succes_change_Data_Account.
+     * @return A new instance of fragment Notif_Ppdb_Belum_Dibuka.
      */
     // TODO: Rename and change types and number of parameters
-    public static Notif_Succes_change_Data_Account newInstance(String param1, String param2) {
-        Notif_Succes_change_Data_Account fragment = new Notif_Succes_change_Data_Account();
+    public static Notif_Ppdb_Belum_Dibuka newInstance(String param1, String param2) {
+        Notif_Ppdb_Belum_Dibuka fragment = new Notif_Ppdb_Belum_Dibuka();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,14 +63,19 @@ public class Notif_Succes_change_Data_Account extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_notif__succes_change__data__account, container, false);
-        BtnChangeData = view.findViewById(R.id.BtnChangeDataAccount);
-        cdFragment = view.findViewById(R.id.changeDataFragment);
-        cdScroll = view.findViewById(R.id.changeDataScroll);
-        BtnChangeData.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), HomeMember.class);
-            startActivity(intent);
+        View view = inflater.inflate(R.layout.fragment_notif__ppdb__belum__dibuka, container, false);
+        BtnData = view.findViewById(R.id.BtnPPDBBelumDibuka);
+        BtnData.setOnClickListener(v -> {
+            replaceFragment(new Ppdb());
         });
         return view;
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        if (getActivity() != null) {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.r, fragment)
+                    .commit();
+        }
     }
 }

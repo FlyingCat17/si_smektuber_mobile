@@ -14,6 +14,7 @@ import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.models.ArticleModel;
+import com.nekoid.smektuber.models.ExtracurricularModel;
 import com.nekoid.smektuber.models.JobsModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
@@ -26,14 +27,17 @@ public class DetailJobs extends BaseActivity {
     JobsModel jobsModel;
 
     ImageView thumbnail;
-    TextView description;
+    TextView descriptionJobs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_jobs);
         setVariable();
         setToolbar();
-        setArticleModel();
+        jobsModel = (JobsModel) Navigator.getArgs(this);
+        if (jobsModel != null){
+            setArticleModel();
+        }
     }
 
     protected void onResponse(Response response) {
@@ -54,14 +58,14 @@ public class DetailJobs extends BaseActivity {
     protected void setArticleModel() {
         Http.get(Endpoint.GET_JOB_BY_ID.getUrl() + jobsModel.id, PublicApi.getHeaders(), this::onResponse);
         Http.loadImage(jobsModel.thumbnail, thumbnail, () -> {
-            description.setText(Html.fromHtml(jobsModel.description));
+            descriptionJobs.setText(Html.fromHtml(jobsModel.description));
         });
     }
 
     protected void setVariable() {
         jobsModel = (JobsModel) Navigator.getArgs(this);
         thumbnail = findViewById(R.id.ImageJobsDetail);
-        description = findViewById(R.id.TextDetailJobs);
+        descriptionJobs = findViewById(R.id.TextDetailJobs);
     }
 
     private void setToolbar(){

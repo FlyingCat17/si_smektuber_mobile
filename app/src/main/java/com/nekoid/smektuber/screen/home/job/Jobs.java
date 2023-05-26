@@ -110,6 +110,9 @@ public class Jobs extends BaseFragment {
         });
         return view;
     }
+    private void startShimmer() {
+
+    }
 
     private void stopShimmer() {
         if (withAnimation) recyclerView.setAnimation(Utils.animation());
@@ -117,9 +120,6 @@ public class Jobs extends BaseFragment {
         recyclerView.setVisibility(View.VISIBLE);
     }
 
-    private void startShimmer() {
-
-    }
     private void openRequest() {
         if (!State.jobsModels.isEmpty()) {
             withAnimation = false;
@@ -132,10 +132,10 @@ public class Jobs extends BaseFragment {
     }
 
     private void init(View view) {
+        startShimmer();
         setVar(view);
         setAdapterDataJob();
         onLoad();
-        startShimmer();
         openRequest();
     }
 
