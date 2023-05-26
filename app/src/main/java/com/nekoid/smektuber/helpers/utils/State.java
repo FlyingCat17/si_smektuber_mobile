@@ -5,6 +5,7 @@ import android.os.Build;
 import com.nekoid.smektuber.models.AboutModel;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.models.ExtracurricularModel;
+import com.nekoid.smektuber.models.JobsModel;
 import com.nekoid.smektuber.models.MajorModel;
 import com.nekoid.smektuber.models.PpdbModel;
 import com.nekoid.smektuber.models.UserModel;
@@ -21,10 +22,13 @@ public class State {
 
     public static UserModel userModel;
 
+    public static JobsModel jobsModel;
+
     public static Api api;
 
     public static List<ArticleModel> articleModels = new ArrayList<>();
 
+    public static  List<JobsModel> jobsModels = new ArrayList<>();
     public static AboutModel aboutModel;
 
     public static List<ExtracurricularModel> extracurricularModels = new ArrayList<>();

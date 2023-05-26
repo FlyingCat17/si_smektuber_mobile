@@ -7,7 +7,7 @@
     tools:context=".screen.home.job.DetailJobs">
 
     <include
-        android:id="@+id/backIcon"
+        android:id="@+id/backIconJobs"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
@@ -28,7 +28,7 @@
         />
 
     <ScrollView
-        android:layout_below="@+id/backIcon"
+        android:layout_below="@+id/backIconJobs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="7dp"
@@ -38,23 +38,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/ImageJobs"
+                android:id="@+id/ImageJobsDetail"
                 android:layout_width="match_parent"
                 android:layout_height="310.37dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/welcome_img"
+                android:background="@drawable/imagenoarticle"
                 />
 
             <TextView
                 android:id="@+id/TextDetailJobs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ImageJobs"
+                android:layout_below="@+id/ImageJobsDetail"
                 android:layout_marginTop="16.63dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:lineSpacingExtra="3sp"
-                android:text="@string/artikel_ini"
+                android:text=" "
                 android:textAppearance="@style/Text_Jobs"
                 />
 

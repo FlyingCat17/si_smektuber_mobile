@@ -1,21 +1,49 @@
 package com.nekoid.smektuber.screen.home.job;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.adapter.AdapterData;
+import com.nekoid.smektuber.adapter.AdapterDataArticleViewAll;
+import com.nekoid.smektuber.adapter.AdapterDataJobs;
+import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.PublicApi;
+import com.nekoid.smektuber.app.BaseFragment;
+import com.nekoid.smektuber.helpers.listener.ScrollListener;
+import com.nekoid.smektuber.helpers.thread.Threads;
+import com.nekoid.smektuber.helpers.utils.Network;
+import com.nekoid.smektuber.helpers.utils.State;
+import com.nekoid.smektuber.helpers.utils.Utils;
+import com.nekoid.smektuber.models.ArticleModel;
+import com.nekoid.smektuber.models.JobsModel;
+import com.nekoid.smektuber.models.Pagination;
+import com.nekoid.smektuber.network.Http;
+import com.nekoid.smektuber.network.Response;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Jobs#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Jobs extends Fragment {
+public class Jobs extends BaseFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +53,13 @@ public class Jobs extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private boolean withAnimation = true;
+    private RecyclerView recyclerView;
+    List<JobsModel> jobsModels = new ArrayList<>();
+    AdapterDataJobs adapterDataJobs;
+    ShimmerFrameLayout shimmerFrameLayout;
+    Pagination pagination;
+    private boolean isScroll = false, isFromState = false;
     public Jobs() {
         // Required empty public constructor
     }
@@ -61,6 +95,118 @@ public class Jobs extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_jobs, container, false);
+        View view = inflater.inflate(R.layout.fragment_jobs, container, false);
+        init(view);
+        new Network(getActivity(), new Network.Listener() {
+            @Override
+            public void onNetworkAvailable() {
+                openRequest();
+            }
+
+            @Override
+            public void onNetworkUnavailable() {
+
+            }
+        });
+        return view;
     }
+
+    private void stopShimmer() {
+        if (withAnimation) recyclerView.setAnimation(Utils.animation());
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    private void startShimmer() {
+
+    }
+    private void openRequest() {
+        if (!State.jobsModels.isEmpty()) {
+            withAnimation = false;
+            jobsModels = State.jobsModels;
+            updateAdapter();
+            getRequest();
+        } else {
+            getRequest();
+        }
+    }
+
+    private void init(View view) {
+        setVar(view);
+        setAdapterDataJob();
+        onLoad();
+        startShimmer();
+        openRequest();
+    }
+
+    private void setVar(View view) {
+        adapterDataJobs = new AdapterDataJobs(getActivity(), jobsModels);
+        shimmerFrameLayout = view.findViewById(R.id.rvDataShimmerJobs);
+        recyclerView = view.findViewById(R.id.DataLowongan);
+    }
+
+    private void onLoad() {
+        Threads.execute((executor, handler) -> executor.execute(() -> {
+            while (!adapterDataJobs.isLoad()) {
+                // don't delete this line;
+            }
+            handler.post(this::stopShimmer);
+        }));
+    }
+
+
+
+    private void getRequest() {
+        Http.get(Endpoint.LIST_JOBS.getUrl(), PublicApi.getHeaders(), this::listArticles);
+    }
+
+    protected void listArticles(Response response) {
+        if (response.statusCode != 200) {
+            return;
+        }
+
+        try {
+            JSONObject responses = new JSONObject(response.body.toString());
+            pagination = Pagination.fromJson(responses.getJSONObject("pagination"));
+            JSONArray arrays = responses.getJSONArray("data");
+            for (int i = 0; i < arrays.length(); i++) {
+                jobsModels.add(JobsModel.fromJson(new JSONObject(arrays.getString(i))));
+            }
+            updateAdapter();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void setAdapterDataJob() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapterDataJobs);
+        recyclerView.addItemDecoration(Utils.setRecyclerPaddingRight(20));
+        recyclerView.addOnScrollListener(new ScrollListener() {
+            @Override
+            public void onScroll(@NonNull RecyclerView recyclerView, int horizontal, int vertical, int newState) {
+                if (!recyclerView.canScrollVertically(2) && isScroll) {
+                    onLastScroll();
+                }
+            }
+        });
+
+    }
+    protected void onLastScroll() {
+        if (pagination != null && pagination.nextPageUrl != null && !pagination.nextPageUrl.isEmpty() && !pagination.nextPageUrl.equals("null")) {
+            isScroll = false;
+            Http.get(pagination.nextPageUrl, PublicApi.getHeaders(), this::listArticles);
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    protected void updateAdapter() {
+        adapterDataJobs.notifyDataSetChanged();
+        stopShimmer();
+        isScroll = true;
+    }
+
+
 }

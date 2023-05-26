@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -80,6 +81,10 @@ public class Account extends BaseFragment {
         imageView = view.findViewById(R.id.ImageProfil);
         Button btnUpdate = view.findViewById(R.id.ButtonUbahProfil);
         Button btnLogout = view.findViewById(R.id.ButtonKeluarAkun);
+        ImageView imageZoom = view.findViewById(R.id.ImageProfil);
+        imageZoom.setOnClickListener(v -> {
+            Navigator.of(getActivity()).push(ViewZoomImage.class);
+        });
         btnUpdate.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(ChangeDataAccount.class);
         });
