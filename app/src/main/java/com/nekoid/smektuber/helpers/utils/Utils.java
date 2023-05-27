@@ -88,6 +88,7 @@ public class Utils {
         return String.format(format, args);
     }
 
+
     public static PackageInfo getPackageInfo() {
         try {
             return baseActivity.getPackageManager().getPackageInfo(baseActivity.getPackageName(), 0);

@@ -1,6 +1,7 @@
 package com.nekoid.smektuber.screen.home.ekstarkurikuler;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class DetailExtra extends BaseActivity {
     private void setModelToView() {
         Http.loadImage(extracurricularModel.photo, photo, () -> {
             title.setText(extracurricularModel.name);
-            description.setText(extracurricularModel.description);
+            description.setText(Html.fromHtml(extracurricularModel.description));
         });
     }
 

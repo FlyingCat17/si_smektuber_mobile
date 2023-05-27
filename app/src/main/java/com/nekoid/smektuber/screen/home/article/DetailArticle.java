@@ -1,6 +1,7 @@
 package com.nekoid.smektuber.screen.home.article;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,7 +54,7 @@ public class DetailArticle extends BaseActivity {
     protected void setArticleModel() {
         Http.get(Endpoint.GET_ARTICLE_BY_ID.getUrl() + articleModel.id, PublicApi.getHeaders(), this::onResponse);
         Http.loadImage(articleModel.thumbnail, thumbnail, () -> {
-            description.setText(articleModel.description);
+            description.setText(Html.fromHtml(articleModel.description));
         });
     }
 
