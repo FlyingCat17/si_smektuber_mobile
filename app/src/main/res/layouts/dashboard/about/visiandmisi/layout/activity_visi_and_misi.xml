@@ -5,20 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingLeft="22dp"
-    android:paddingRight="22dp"
     tools:context=".screen.home.visiMisi.VisiAndMisi">
 
-    <include
-        android:id="@+id/backIcon"
-        layout="@layout/toolbar"
-        android:clickable="true"
-        android:focusable="true"/>
+    <RelativeLayout
+        android:id="@+id/upRelative"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_height="wrap_content">
+        <include
+            android:id="@+id/backIcon"
+            layout="@layout/toolbar"
+            android:clickable="true"
+            android:focusable="true"/>
+    </RelativeLayout>
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/progressBarShimmer"
-        android:layout_below="@+id/backIcon"
+        android:layout_below="@+id/upRelative"
         android:layout_marginTop="7dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginLeft="22dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -43,23 +49,22 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
+    <ScrollView
+        android:layout_below="@+id/upRelative"
+        android:visibility="invisible"
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/backIcon"
-        >
-    <ScrollView
-        android:layout_below="@+id/backIcon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_marginTop="7dp"
-        android:id="@+id/cVM"
         >
         <RelativeLayout
+            android:paddingLeft="22dp"
+            android:paddingRight="22dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            >
             <LinearLayout
                 android:id="@+id/cardVisi"
                 android:layout_width="match_parent"
@@ -90,27 +95,13 @@
                     android:lineSpacingExtra="3sp"/>
             </LinearLayout>
 
-            <!--            <TextView-->
-            <!--                android:id="@+id/txtMisi"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:paddingLeft="25dp"-->
-            <!--                android:paddingTop="32dp"-->
-            <!--                android:paddingBottom="32dp"-->
-            <!--                android:layout_marginTop="278dp"-->
-            <!--                android:text="@string/misi_memben"-->
-            <!--                android:textAppearance="@style/visi_terwuj"-->
-            <!--                android:lineSpacingExtra="3sp"-->
-            <!--                android:gravity="center_vertical"-->
-            <!--                android:background="@drawable/rectangle_visiandmisi"-->
-            <!--                android:layout_marginBottom="47dp"-->
-            <!--                />-->
             <LinearLayout
                 android:id="@+id/cardMisi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cardVisi"
                 android:layout_marginTop="25dp"
+                android:layout_marginBottom="45dp"
                 android:paddingTop="32dp"
                 android:paddingRight="25dp"
                 android:paddingLeft="25dp"
@@ -139,7 +130,6 @@
         </RelativeLayout>
 
     </ScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </RelativeLayout>

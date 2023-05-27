@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseFragment;
+import com.nekoid.smektuber.helpers.utils.Network;
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.PpdbModel;
@@ -80,6 +82,10 @@ public class Account extends BaseFragment {
         imageView = view.findViewById(R.id.ImageProfil);
         Button btnUpdate = view.findViewById(R.id.ButtonUbahProfil);
         Button btnLogout = view.findViewById(R.id.ButtonKeluarAkun);
+        ImageView imageZoom = view.findViewById(R.id.ImageProfil);
+        imageZoom.setOnClickListener(v -> {
+            Navigator.of(getActivity()).push(ViewZoomImage.class);
+        });
         btnUpdate.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(ChangeDataAccount.class);
         });
@@ -96,6 +102,18 @@ public class Account extends BaseFragment {
             withAnimation = true;
             init();
         }
+
+        new Network(getActivity(), new Network.Listener() {
+            @Override
+            public void onNetworkAvailable() {
+                init();
+            }
+
+            @Override
+            public void onNetworkUnavailable() {
+                init();
+            }
+        });
         return view;
     }
 

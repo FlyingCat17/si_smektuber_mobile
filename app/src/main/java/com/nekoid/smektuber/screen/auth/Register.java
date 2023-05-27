@@ -1,6 +1,7 @@
 package com.nekoid.smektuber.screen.auth;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,11 +16,16 @@ import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.statusBar.StatusBarUtil;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.listener.TextChangeListener;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
+
 import com.nekoid.smektuber.screen.notification.LoadingDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.nekoid.smektuber.screen.notification.NotifNoInternet;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,6 +67,10 @@ public class Register extends BaseActivity {
     private void setClickListener(){
         txtToLogin.setOnClickListener(v -> onBackPressed());
         btnRegister.setOnClickListener(v -> {
+            if (!Utils.isNetworkAvailable()){
+                fragmentNoInternet();
+                return;
+            }
             if (validate()) {
                 loadingDialog.startLoading();
                 Http.post(Endpoint.REGISTER.getUrl(), null, getBody(), this::doRegister);
@@ -110,6 +120,20 @@ public class Register extends BaseActivity {
         body.put("email", et_email.getText().toString());
         body.put("password", et_password.getText().toString().trim());
         return body;
+    }
+
+    public void fragmentNoInternet() {
+        findViewById(R.id.registerScroll).setVisibility(View.INVISIBLE);
+        findViewById(R.id.registerFragment).setVisibility(View.VISIBLE);
+        replaceFragment(R.id.registerFragment, new NotifNoInternet(view -> {
+            if (Utils.isNetworkAvailable()){
+                findViewById(R.id.registerScroll).setVisibility(View.VISIBLE);
+                findViewById(R.id.registerFragment).setVisibility(View.INVISIBLE);
+
+            } else {
+                Toast.makeText(this, "Please connect to internet, and try again", Toast.LENGTH_SHORT).show();
+            }
+        }));
     }
 
     private void doRegister(Response response) {

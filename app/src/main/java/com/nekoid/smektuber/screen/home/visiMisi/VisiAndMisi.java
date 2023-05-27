@@ -4,6 +4,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -15,6 +16,7 @@ import com.nekoid.smektuber.api.*;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.State;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.AboutModel;
 import com.nekoid.smektuber.network.*;
 
@@ -29,10 +31,10 @@ public class VisiAndMisi extends BaseActivity {
     private LinearLayout cardVisi, cardMisi;
 
     private ScrollView contentVM;
-
+    boolean withAnimation = true;
     private ShimmerFrameLayout shimmerFrameLayout;
 
-    private SwipeRefreshLayout swipeRefreshLayout;
+    private ScrollView swipeRefreshLayout;
 
     private boolean isDataLoaded = false;
 
@@ -47,9 +49,16 @@ public class VisiAndMisi extends BaseActivity {
         setVariable();
         if (State.aboutModel != null) {
             setModelToView(State.aboutModel);
+            withAnimation = false;
+            openRequest();
         } else {
-            Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
+            withAnimation = true;
+            openRequest();
         }
+    }
+
+    private void openRequest() {
+        Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
     }
 
     private void startShimmer() {
@@ -58,12 +67,9 @@ public class VisiAndMisi extends BaseActivity {
 
     private void stopShimmer() {
         // stop shimmer
-        Animation animation = new AlphaAnimation(0,1);
-        animation.setDuration(1000);
-        shimmerFrameLayout.stopShimmer();
         shimmerFrameLayout.setVisibility(View.GONE);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
-        swipeRefreshLayout.setAnimation(animation);
+        if (withAnimation) swipeRefreshLayout.setAnimation(Utils.animation());
     }
 
     private void setVariable() {
@@ -72,7 +78,6 @@ public class VisiAndMisi extends BaseActivity {
         misi = findViewById(R.id.TxtMisi);
         cardVisi = findViewById( R.id.cardVisi );
         cardMisi = findViewById( R.id.cardMisi );
-        contentVM = findViewById(R.id.cVM);
         shimmerFrameLayout = findViewById(R.id.progressBarShimmer);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
     }
@@ -98,8 +103,8 @@ public class VisiAndMisi extends BaseActivity {
 
     private void setModelToView(AboutModel aboutModel) {
         State.aboutModel = aboutModel;
-        visi.setText(aboutModel.schoolVision);
-        misi.setText(aboutModel.schoolMission);
+        visi.setText(Html.fromHtml(aboutModel.schoolVision));
+        misi.setText(Html.fromHtml(aboutModel.schoolVision));
         stopShimmer();
     }
 

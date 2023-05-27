@@ -41,7 +41,7 @@ public class Extrakurikuler extends BaseActivity {
     private final AdapterDataExtra adapterDataExtra = new AdapterDataExtra(this, extracurricularModels);
 
     private RecyclerView recyclerView;
-
+    boolean withAnimation = true;
     private Toolbar toolbar;
 
     private boolean isScroll = false, isFromState = false;
@@ -63,11 +63,19 @@ public class Extrakurikuler extends BaseActivity {
         recyclerView.addOnScrollListener(scrollListener());
         if (!State.extracurricularModels.isEmpty()) {
             isFromState = true;
+            withAnimation = false;
             extracurricularModels.addAll(State.extracurricularModels);
             setAdapterExtracurricular();
+            openRequest();
         } else {
+            withAnimation = true;
             isFromState = false;
+            openRequest();
         }
+        openRequest();
+    }
+
+    private void openRequest() {
         Http.get(Endpoint.LIST_EXTRACURRICULAR.getUrl(), PublicApi.getHeaders(), this::onResponse);
     }
 
@@ -79,7 +87,7 @@ public class Extrakurikuler extends BaseActivity {
         // stop shimmer
         shimmerFrameLayout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
-        recyclerView.setAnimation(Utils.animation(1000));
+        if (withAnimation) recyclerView.setAnimation(Utils.animation());
     }
 
     protected final void onResponse(Response response) {
