@@ -84,7 +84,7 @@ public class Account extends BaseFragment {
         Button btnLogout = view.findViewById(R.id.ButtonKeluarAkun);
         ImageView imageZoom = view.findViewById(R.id.ImageProfil);
         imageZoom.setOnClickListener(v -> {
-            Navigator.of(getActivity()).push(ViewZoomImage.class);
+            Navigator.of(getActivity()).push(ViewZoomImage.class).animation( R.anim.fade_in, R.anim.fade_out );
         });
         btnUpdate.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(ChangeDataAccount.class);
