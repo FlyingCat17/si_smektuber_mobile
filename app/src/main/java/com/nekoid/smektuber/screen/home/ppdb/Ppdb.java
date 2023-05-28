@@ -103,17 +103,17 @@ public class Ppdb extends BaseFragment {
             openRequest();
         }
 
-        new Network(getActivity(), new Network.Listener() {
-            @Override
-            public void onNetworkAvailable() {
-                openRequest();
-            }
-
-            @Override
-            public void onNetworkUnavailable() {
-                openRequest();
-            }
-        });
+//        new Network(getActivity(), new Network.Listener() {
+//            @Override
+//            public void onNetworkAvailable() {
+//                openRequest();
+//            }
+//
+//            @Override
+//            public void onNetworkUnavailable() {
+//                openRequest();
+//            }
+//        });
         // Inflate the layout for this fragment
         return view;
     }
