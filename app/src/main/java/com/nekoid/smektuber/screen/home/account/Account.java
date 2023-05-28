@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,7 +86,7 @@ public class Account extends BaseFragment {
         Button btnLogout = view.findViewById(R.id.ButtonKeluarAkun);
         ImageView imageZoom = view.findViewById(R.id.ImageProfil);
         imageZoom.setOnClickListener(v -> {
-            Navigator.of(getActivity()).push(ViewZoomImage.class);
+            Navigator.of(getActivity()).push(ViewZoomImage.class).animation( R.anim.fade_in, R.anim.fade_out );
         });
         btnUpdate.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(ChangeDataAccount.class);
@@ -103,17 +105,6 @@ public class Account extends BaseFragment {
             init();
         }
 
-        new Network(getActivity(), new Network.Listener() {
-            @Override
-            public void onNetworkAvailable() {
-                init();
-            }
-
-            @Override
-            public void onNetworkUnavailable() {
-                init();
-            }
-        });
         return view;
     }
 
@@ -141,7 +132,7 @@ public class Account extends BaseFragment {
 //    private void openRequest() {
 //        Http.get(Endpoint.GET_USER.getUrl(), PublicApi.getHeaders(), this::onResponse);
 //    }
-
+//
 //    private void loadModel() {
 //        if (userModel != null && userModel.avatar != null && !userModel.avatar.isEmpty() && !userModel.avatar.equals("null")) {
 //            Http.loadImage(userModel.avatar, imageView, this::setModelToView);

@@ -64,9 +64,7 @@ public class Dashboard extends BaseFragment {
     ShimmerFrameLayout shimmerFrameLayout;
 
     private boolean withAnimation = true;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private boolean dataLoaded = false;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -110,17 +108,17 @@ public class Dashboard extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         init(view);
-        new Network(getActivity(), new Network.Listener() {
-            @Override
-            public void onNetworkAvailable() {
-                openRequest();
-            }
-
-            @Override
-            public void onNetworkUnavailable() {
-
-            }
-        });
+//        new Network(getActivity(), new Network.Listener() {
+//            @Override
+//            public void onNetworkAvailable() {
+//                openRequest();
+//            }
+//
+//            @Override
+//            public void onNetworkUnavailable() {
+//
+//            }
+//        });
         // Inflate the layout for this fragment
         return view;
     }
@@ -147,11 +145,12 @@ public class Dashboard extends BaseFragment {
 
     private void init(View view) {
         setVar(view);
-        onLoad();
+//        onLoad();
         setAdapterData();
         startShimmer();
         listener(view);
         openRequest();
+        onLoad();
     }
 
     private void setVar(View view) {
@@ -167,30 +166,30 @@ public class Dashboard extends BaseFragment {
     }
 
     private void listener(View view) {
-        ConstraintLayout btn = view.findViewById(R.id.Visi_Misi);
-        TextView ntm = view.findViewById(R.id.Titlelihat_semua);
-        TextView jk = view.findViewById(R.id.ButtonSelengkapnya);
-        ConstraintLayout n = view.findViewById(R.id.Map_Lokasi);
-        ConstraintLayout extra = view.findViewById(R.id.Extrakurikuler);
+        ConstraintLayout cardVisiMisi = view.findViewById(R.id.Visi_Misi);
+        TextView txtSeeArticle = view.findViewById(R.id.Titlelihat_semua);
+        TextView txtSeeAbout = view.findViewById(R.id.ButtonSelengkapnya);
+        ConstraintLayout cardMaps = view.findViewById(R.id.Map_Lokasi);
+        ConstraintLayout cardExtra = view.findViewById(R.id.Extrakurikuler);
         ConstraintLayout jurusan = view.findViewById(R.id.Jurusan);
         btnMessage(view);
 
         jurusan.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(Jurusan.class);
         });
-        extra.setOnClickListener(v -> {
+        cardExtra.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(Extrakurikuler.class);
         });
-        n.setOnClickListener(v -> {
+        cardMaps.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(MapsActivity.class);
         });
-        ntm.setOnClickListener(v -> {
+        txtSeeArticle.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(ArticleViewAll.class);
         });
-        btn.setOnClickListener(v -> {
+        cardVisiMisi.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(VisiAndMisi.class);
         });
-        jk.setOnClickListener(v -> {
+        txtSeeAbout.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(AboutSchool.class);
         });
     }
@@ -269,6 +268,10 @@ public class Dashboard extends BaseFragment {
     private void updateAdapter() {
         State.articleModels = listArticle;
         adapterData.notifyDataSetChanged();
+
+        if (dataLoaded){
+            fullName.setText( State.userModel != null ? State.userModel.name : "___" );
+        }
     }
 
     private void onLoad() {
@@ -276,7 +279,12 @@ public class Dashboard extends BaseFragment {
             while (!adapterData.isLoad()) {
                 // don't delete this line;
             }
-            handler.post(this::stopShimmer);
+            dataLoaded = true; // set dataLoaded true
+//            handler.post(this::stopShimmer);
+            handler.post( ()->{
+                stopShimmer();
+                fullName.setText( State.userModel != null ? State.userModel.name : "___" );
+            } );
         }));
     }
 }
