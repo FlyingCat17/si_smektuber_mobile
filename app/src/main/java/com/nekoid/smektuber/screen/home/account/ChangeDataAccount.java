@@ -23,6 +23,7 @@ import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.listener.TextChangeListener;
 import com.nekoid.smektuber.models.UserModel;
 import com.nekoid.smektuber.network.*;
+import com.nekoid.smektuber.screen.notification.LoadingDialog;
 import com.nekoid.smektuber.screen.notification.NotifNoInternet;
 import com.nekoid.smektuber.screen.notification.Notif_Succes_Change_Password;
 import com.nekoid.smektuber.screen.notification.Notif_Succes_change_Data_Account;
@@ -51,12 +52,12 @@ public class ChangeDataAccount extends BaseActivity {
     private boolean isUpdateAvatar = false;
 
     private Uri uri;
-
+    private LoadingDialog loadingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_data_account);
-
+        loadingDialog = new LoadingDialog( this );
         setVariable();
         setToolbar();
         onListener();
@@ -211,7 +212,7 @@ public class ChangeDataAccount extends BaseActivity {
         btnUpdate.setOnClickListener(v -> {
             if (!validator()) return;
             if (!emailValidator(layoutCaEmail, caEmail)) return;
-
+            loadingDialog.startLoading();
             // add request for update account
             Http.put(Endpoint.UPDATE_USER.getUrl(), PublicApi.getHeaders(), getUpdateAccount(), this::doAccountUpdate);
 
@@ -276,7 +277,7 @@ public class ChangeDataAccount extends BaseActivity {
             setModelToView();
 //            Intent intent = new Intent(ChangeDataAccount.this,ChangeDataAccount.class); intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); finish();
             // you can add more action after update account
-
+            loadingDialog.isDismiss();
             findViewById(R.id.changeDataScroll).setVisibility(View.INVISIBLE);
             findViewById(R.id.changeDataFragment).setVisibility(View.VISIBLE);
             replaceFragment(R.id.changeDataFragment, new Notif_Succes_change_Data_Account());
@@ -294,6 +295,7 @@ public class ChangeDataAccount extends BaseActivity {
                 return;
             }
             doLogin(username(), password());
+            loadingDialog.isDismiss();
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -311,6 +313,7 @@ public class ChangeDataAccount extends BaseActivity {
             userModel = UserModel.fromJson(responseBody.getJSONObject("data"));
             State.setUserModel(userModel);
             setModelToView();
+            loadingDialog.isDismiss();
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

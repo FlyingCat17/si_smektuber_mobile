@@ -1,19 +1,16 @@
 package com.nekoid.smektuber.screen.home.ppdb;
 
-import static com.nekoid.smektuber.helpers.utils.Utils.replaceFragment;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +19,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
+import com.nekoid.smektuber.app.BaseFragment;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.Network;
 import com.nekoid.smektuber.helpers.utils.State;
@@ -29,8 +27,6 @@ import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.PpdbModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
-import com.nekoid.smektuber.screen.home.HomeMember;
-import com.nekoid.smektuber.screen.notification.NotifNoInternet;
 import com.nekoid.smektuber.screen.notification.Notif_Ppdb_Belum_Dibuka;
 import com.nekoid.smektuber.screen.notification.Notif_Ppdb_Closed;
 
@@ -48,7 +44,7 @@ import java.util.Locale;
  * Use the {@link Ppdb#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Ppdb extends Fragment {
+public class Ppdb extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -107,17 +103,17 @@ public class Ppdb extends Fragment {
             openRequest();
         }
 
-        new Network(getActivity(), new Network.Listener() {
-            @Override
-            public void onNetworkAvailable() {
-                openRequest();
-            }
-
-            @Override
-            public void onNetworkUnavailable() {
-                openRequest();
-            }
-        });
+//        new Network(getActivity(), new Network.Listener() {
+//            @Override
+//            public void onNetworkAvailable() {
+//                openRequest();
+//            }
+//
+//            @Override
+//            public void onNetworkUnavailable() {
+//                openRequest();
+//            }
+//        });
         // Inflate the layout for this fragment
         return view;
     }
@@ -139,7 +135,6 @@ public class Ppdb extends Fragment {
         layoutPpdb = view.findViewById(R.id.layoutPpdb);
 
         Button btn = view.findViewById(R.id.BtnDaftarSiswa);
-//        btn.setOnClickListener(v -> Navigator.of(getActivity()).push(DaftarPPDB.class));
         btn.setOnClickListener( v->{
             if (ppdbModel != null) {
                 handleRegistration();
@@ -204,21 +199,13 @@ public class Ppdb extends Fragment {
 
     private void onResponse(Response response) {
         if (response.statusCode != 200) {
+            replaceFragment( new No_Information_Ppdb() );
             return;
         }
         try {
             JSONObject body = new JSONObject(response.body.toString());
             ppdbModel = PpdbModel.fromJson(body.getJSONObject("data"));
             State.PpdbModel = ppdbModel;
-//            if (ppdbModel == null){
-//                getActivity().runOnUiThread( ()->{
-//                    Fragment noInfoPpdb = new No_Information_Ppdb();
-//                    HomeMember homeAct = (HomeMember) getActivity();
-//                    homeAct.replaceFragment( R.id.r, noInfoPpdb );
-//                } );
-//            }else {
-//                loadModel();
-//            }
             loadModel();
         } catch (JSONException e) {
             throw new RuntimeException(e);
