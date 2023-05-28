@@ -354,38 +354,43 @@
                                 </RelativeLayout>
 
                                 <RelativeLayout
-                                    android:id="@+id/Title"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
+                                        <RelativeLayout
+                                            android:id="@+id/idll"
+                                            android:visibility="invisible"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+                                                <TextView
+                                                    android:id="@+id/TitleArtikel"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_alignParentLeft="true"
+                                                    android:layout_marginLeft="27dp"
+                                                    android:layout_alignParentTop="true"
+                                                    android:layout_marginTop="16dp"
+                                                    android:text="@string/artikel"
+                                                    android:textAppearance="@style/artikel"
+                                                    android:lineSpacingExtra="-2sp"
+                                                    android:gravity="center_vertical"
+                                                    />
 
-                                        <TextView
-                                            android:id="@+id/TitleArtikel"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_alignParentLeft="true"
-                                            android:layout_marginLeft="27dp"
-                                            android:layout_alignParentTop="true"
-                                            android:layout_marginTop="16dp"
-                                            android:text="@string/artikel"
-                                            android:textAppearance="@style/artikel"
-                                            android:lineSpacingExtra="-2sp"
-                                            android:gravity="center_vertical"
-                                            />
+                                                <TextView
+                                                    android:id="@+id/Titlelihat_semua"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_alignParentRight="true"
+                                                    android:layout_marginRight="22dp"
+                                                    android:clickable="true"
+                                                    android:layout_alignParentTop="true"
+                                                    android:layout_marginTop="20dp"
+                                                    android:text="@string/lihat_semua"
+                                                    android:textAppearance="@style/lihat_semua"
+                                                    android:lineSpacingExtra="-1sp"
+                                                    android:gravity="center_vertical"
+                                                    />
+                                        </RelativeLayout>
 
-                                        <TextView
-                                            android:id="@+id/Titlelihat_semua"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_alignParentRight="true"
-                                            android:layout_marginRight="22dp"
-                                            android:clickable="true"
-                                            android:layout_alignParentTop="true"
-                                            android:layout_marginTop="20dp"
-                                            android:text="@string/lihat_semua"
-                                            android:textAppearance="@style/lihat_semua"
-                                            android:lineSpacingExtra="-1sp"
-                                            android:gravity="center_vertical"
-                                            />
                                                 <RelativeLayout
                                                     android:id="@+id/ItemArtikel"
                                                     android:layout_width="match_parent"
