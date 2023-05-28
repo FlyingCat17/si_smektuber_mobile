@@ -51,7 +51,9 @@ public class AdapterDataExtra extends RecyclerView.Adapter<AdapterDataExtra.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.animateExtracurricular.setVisibility(View.GONE);
         if (!extracurricularModels.get(position).photo.isEmpty()) {
-            Http.loadImage(extracurricularModels.get(position).photo, holder.ImageExtra, () -> {
+            String baseUrl = "https://lutfisobri.my.id/";
+            String storagePath = "storage/app/";
+            Http.loadImage(baseUrl+ storagePath + extracurricularModels.get(position).photo, holder.ImageExtra, () -> {
                 setTextAndModel(holder, extracurricularModels.get(position));
             });
         } else {
