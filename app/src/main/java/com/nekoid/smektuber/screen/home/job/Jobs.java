@@ -30,6 +30,7 @@ import com.nekoid.smektuber.models.JobsModel;
 import com.nekoid.smektuber.models.Pagination;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
+import com.nekoid.smektuber.screen.home.ppdb.No_Information_Ppdb;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -162,6 +163,7 @@ public class Jobs extends BaseFragment {
 
     protected void listJobs(Response response) {
         if (response.statusCode != 200) {
+            stopShimmer();
             return;
         }
 
@@ -176,6 +178,19 @@ public class Jobs extends BaseFragment {
             updateAdapter();
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+
+        if (jobsModels.isEmpty()){
+            stopShimmer();
+            replaceFragment( new NoJobs() );
+        }
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        if (getActivity() != null) {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.r, fragment)
+                    .commit();
         }
     }
 

@@ -1,6 +1,8 @@
 package com.nekoid.smektuber.screen.home.dashboard;
 
 import static com.nekoid.smektuber.helpers.utils.Utils.isNetworkAvailable;
+import android.os.Handler;
+import android.os.Looper;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -14,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
@@ -58,7 +62,7 @@ public class Dashboard extends BaseFragment {
     List<ArticleModel> listArticle = new ArrayList<>();
 
     AdapterData adapterData;
-
+    RelativeLayout tampilanArticle;
     TextView fullName;
 
     ShimmerFrameLayout shimmerFrameLayout;
@@ -103,33 +107,66 @@ public class Dashboard extends BaseFragment {
         }
     }
 
+//    private Handler handler = new Handler(Looper.getMainLooper());
+//    private Runnable shimmerTimeoutRunnable = new Runnable() {
+//        @Override
+//        public void run() {
+//            stopShimmer();
+//        }
+//    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         init(view);
-//        new Network(getActivity(), new Network.Listener() {
-//            @Override
-//            public void onNetworkAvailable() {
-//                openRequest();
-//            }
-//
-//            @Override
-//            public void onNetworkUnavailable() {
-//
-//            }
-//        });
+        
+        new Network(getActivity(), new Network.Listener() {
+            @Override
+            public void onNetworkAvailable() {
+                openRequest();
+//                startShimmerTimeout();
+            }
+
+            @Override
+            public void onNetworkUnavailable() {
+
+            }
+        });
+
         // Inflate the layout for this fragment
         return view;
     }
 
     private void startShimmer() {
+
     }
+
+//    private void startShimmerTimeout() {
+//        handler.postDelayed(shimmerTimeoutRunnable, 60000);
+//    }
+//    private void stopShimmerTimeout() {
+//        handler.removeCallbacks(shimmerTimeoutRunnable);
+//    }
+
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        stopShimmerTimeout();
+//    }
+
 
     private void stopShimmer() {
         if (withAnimation) recyclerView.setAnimation(Utils.animation());
         shimmerFrameLayout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
+        setTampilanArticle();
+    }
+
+    private void setTampilanArticle(){
+        if (!State.articleModels.isEmpty()){
+            tampilanArticle.setVisibility(View.VISIBLE);
+        }
     }
 
     private void openRequest() {
@@ -158,6 +195,7 @@ public class Dashboard extends BaseFragment {
         adapterData = new AdapterData(this.getActivity(), listArticle);
         shimmerFrameLayout = view.findViewById(R.id.rvDataShimmer);
         recyclerView = view.findViewById(R.id.rvData);
+        tampilanArticle = view.findViewById(R.id.idll);
         if (State.userModel != null) {
             fullName.setText(State.userModel.name);
         } else {
@@ -238,6 +276,9 @@ public class Dashboard extends BaseFragment {
                 JSONObject json = arrays.getJSONObject(i);
                 listArticle.add(ArticleModel.fromJson(json));
                 if (i >= 5) break;
+            }
+            if (listArticle.isEmpty()){
+                stopShimmer();
             }
             updateAdapter();
         } catch (JSONException e) {
