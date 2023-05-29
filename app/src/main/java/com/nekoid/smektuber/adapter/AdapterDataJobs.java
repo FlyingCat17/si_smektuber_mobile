@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.models.JobsModel;
@@ -56,7 +57,7 @@ public class AdapterDataJobs extends RecyclerView.Adapter<AdapterDataJobs.MyView
     @Override
     public void onBindViewHolder(@NonNull AdapterDataJobs.MyViewHolder holder, int position) {
         holder.DataTextJob.setText(list.get(position).title != null ? list.get(position).title : "");
-        Http.loadImage(list.get(position).thumbnail, holder.ImageJob);
+        Http.loadImage( ImageUrlUtil.manipulateImageUrl( list.get(position).thumbnail ), holder.ImageJob);
         holder.jobsModel = list.get(position);
     }
     private void isLoadAll(View holderView) {

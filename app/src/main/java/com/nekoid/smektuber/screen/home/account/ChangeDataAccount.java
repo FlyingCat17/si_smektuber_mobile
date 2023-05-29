@@ -16,6 +16,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.textfield.*;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseActivity;
@@ -126,8 +127,13 @@ public class ChangeDataAccount extends BaseActivity {
             caFullName.setText(userModel.name);
             caEmail.setText(userModel.email);
             if (userModel.avatar != null && !userModel.avatar.isEmpty()) {
-                if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://"))
-                    Http.loadImage(userModel.avatar, ImageUser);
+//                if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://"))
+//                    Http.loadImage(userModel.avatar, ImageUser);
+                if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://")) {
+                    String modifiedUrl = ImageUrlUtil.modifyAvatarUrl(userModel.avatar);
+                    modifiedUrl += "?timestamp=" + System.currentTimeMillis();
+                    Http.loadImage(modifiedUrl, ImageUser);
+                }
             }
         }
     }
@@ -313,6 +319,12 @@ public class ChangeDataAccount extends BaseActivity {
             userModel = UserModel.fromJson(responseBody.getJSONObject("data"));
             State.setUserModel(userModel);
             setModelToView();
+
+//            if (userModel != null && userModel.avatar != null && !userModel.avatar.isEmpty()) {
+//                String modifiedUrl = ImageUrlUtil.modifyImageUrl(userModel.avatar);
+//                modifiedUrl += "?timestamp=" + System.currentTimeMillis();
+//                Http.loadImage(modifiedUrl, ImageUser);
+//            }
             loadingDialog.isDismiss();
         } catch (JSONException e) {
             throw new RuntimeException(e);
