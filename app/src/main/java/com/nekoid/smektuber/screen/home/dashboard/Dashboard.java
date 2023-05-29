@@ -235,7 +235,8 @@ public class Dashboard extends BaseFragment {
     private void onClickMessage(View view) {
         String phoneNumber = State.aboutModel.schoolWhatsapp;
         if (phoneNumber.startsWith("0")) phoneNumber = phoneNumber.substring(1);
-        String url = String.format("https://api.whatsapp.com/send/phone=%s", "62" + phoneNumber);
+        String url = String.format("https://api.whatsapp.com/send?phone=%s", "62" + phoneNumber);
+
         Navigator.openApp(getActivity(), Utils.toUri(url));
     }
 
