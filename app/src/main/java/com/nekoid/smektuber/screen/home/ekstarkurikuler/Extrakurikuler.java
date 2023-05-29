@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Extrakurikuler extends BaseActivity {
@@ -72,7 +73,7 @@ public class Extrakurikuler extends BaseActivity {
             isFromState = false;
             openRequest();
         }
-        openRequest();
+//        openRequest(); 
     }
 
     private void openRequest() {
@@ -115,19 +116,26 @@ public class Extrakurikuler extends BaseActivity {
 
     protected void onLastScroll() {
         if (pagination != null && pagination.nextPageUrl != null && !pagination.nextPageUrl.isEmpty() && !pagination.nextPageUrl.equals("null")) {
-            isScroll = false;
+            isScroll = true;
             Http.get(pagination.nextPageUrl, PublicApi.getHeaders(), this::onResponse);
+        }else {
+            isScroll = false;
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
     protected final void setAdapterExtracurricular() {
         isScroll = true;
-        State.extracurricularModels.clear();
-        for (ExtracurricularModel model : extracurricularModels) {
-            if (State.extracurricularModels.size() >= 10) break;
-            State.extracurricularModels.add(model);
-        }
+//        State.extracurricularModels.clear();
+//        for (ExtracurricularModel model : extracurricularModels) {
+//            if (State.extracurricularModels.size() >= 10) break;
+//            State.extracurricularModels.add(model);
+//        }
+        HashSet<ExtracurricularModel> uniqueModels = new HashSet<>(extracurricularModels);
+        uniqueModels.addAll(State.extracurricularModels);
+
+        extracurricularModels.clear();
+        extracurricularModels.addAll(uniqueModels);
         adapterDataExtra.notifyDataSetChanged();
     }
 
