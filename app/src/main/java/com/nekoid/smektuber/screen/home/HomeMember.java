@@ -57,9 +57,9 @@ public class HomeMember extends BaseActivity {
         Menu menu = bottomNavigationView.getMenu();
         SharedPreferences sharedPreferences = getUserPreferences();
         String role = sharedPreferences.getString("role", null);
-        if (!role.isEmpty() && role.equals("member")) {
+        if (!role.isEmpty() && role.equals("Member")) {
             menu.removeItem(R.id.Loker);
-        } else if (!role.isEmpty() && role.equals("siswa")) {
+        } else if (!role.isEmpty() && role.equals("Siswa")) {
             menu.removeItem(R.id.Ppdb);
         }
 
