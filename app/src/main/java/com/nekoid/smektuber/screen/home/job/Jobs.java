@@ -50,16 +50,15 @@ public class Jobs extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private boolean withAnimation = true;
     private RecyclerView recyclerView;
-    List<JobsModel> jobsModels = new ArrayList<>();
-    AdapterDataJobs adapterDataJobs;
-    ShimmerFrameLayout shimmerFrameLayout;
-    Pagination pagination;
-    private boolean isScroll = false, isFromState = false;
+    private List<JobsModel> jobsModels = new ArrayList<>();
+    private AdapterDataJobs adapterDataJobs;
+    private ShimmerFrameLayout shimmerFrameLayout;
+    private Pagination pagination;
+    private boolean isScroll = false, isFromState = false, isLoading = false;
     public Jobs() {
         // Required empty public constructor
     }
@@ -125,7 +124,7 @@ public class Jobs extends BaseFragment {
             withAnimation = false;
             jobsModels = State.jobsModels;
             updateAdapter();
-            getRequest();
+//            getRequest();
         } else {
             getRequest();
         }
@@ -137,6 +136,7 @@ public class Jobs extends BaseFragment {
         setAdapterDataJob();
         onLoad();
         openRequest();
+        setupScrollListener();
     }
 
     private void setVar(View view) {
@@ -157,10 +157,10 @@ public class Jobs extends BaseFragment {
 
 
     private void getRequest() {
-        Http.get(Endpoint.LIST_JOBS.getUrl(), PublicApi.getHeaders(), this::listArticles);
+        Http.get(Endpoint.LIST_JOBS.getUrl(), PublicApi.getHeaders(), this::listJobs);
     }
 
-    protected void listArticles(Response response) {
+    protected void listJobs(Response response) {
         if (response.statusCode != 200) {
             return;
         }
@@ -195,12 +195,29 @@ public class Jobs extends BaseFragment {
 
     }
     protected void onLastScroll() {
-        if (pagination != null && pagination.nextPageUrl != null && !pagination.nextPageUrl.isEmpty() && !pagination.nextPageUrl.equals("null")) {
-            isScroll = false;
-            Http.get(pagination.nextPageUrl, PublicApi.getHeaders(), this::listArticles);
+        loadMoreData();
+    }
+    private void loadMoreData() {
+        if (pagination != null && pagination.nextPageUrl != null && !pagination.nextPageUrl.isEmpty() && !pagination.nextPageUrl.equals("null") && !isLoading) {
+            isLoading = true;
+            Http.get(pagination.nextPageUrl, PublicApi.getHeaders(), response -> {
+                listJobs(response);
+                isLoading = false;
+            });
         }
     }
-
+    private void setupScrollListener() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (layoutManager != null && layoutManager.findLastCompletelyVisibleItemPosition() == jobsModels.size() - 1) {
+                    loadMoreData();
+                }
+            }
+        });
+    }
     @SuppressLint("NotifyDataSetChanged")
     protected void updateAdapter() {
         adapterDataJobs.notifyDataSetChanged();

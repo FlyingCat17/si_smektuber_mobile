@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
@@ -53,7 +54,7 @@ public class DetailArticle extends BaseActivity {
 
     protected void setArticleModel() {
         Http.get(Endpoint.GET_ARTICLE_BY_ID.getUrl() + articleModel.id, PublicApi.getHeaders(), this::onResponse);
-        Http.loadImage(articleModel.thumbnail, thumbnail, () -> {
+        Http.loadImage( ImageUrlUtil.manipulateImageUrl( articleModel.thumbnail ), thumbnail, () -> {
             description.setText(Html.fromHtml(articleModel.description));
         });
     }

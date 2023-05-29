@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.ExtracurricularModel;
@@ -51,7 +52,8 @@ public class AdapterDataExtra extends RecyclerView.Adapter<AdapterDataExtra.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.animateExtracurricular.setVisibility(View.GONE);
         if (!extracurricularModels.get(position).photo.isEmpty()) {
-            Http.loadImage(extracurricularModels.get(position).photo, holder.ImageExtra, () -> {
+            String logoEkstra = ImageUrlUtil.manipulateImageUrl( extracurricularModels.get( position ).logo );
+            Http.loadImage(logoEkstra, holder.ImageExtra, () -> {
                 setTextAndModel(holder, extracurricularModels.get(position));
             });
         } else {

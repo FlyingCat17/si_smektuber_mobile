@@ -8,8 +8,10 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseActivity;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.ExtracurricularModel;
 import com.nekoid.smektuber.network.Http;
 
@@ -34,10 +36,15 @@ public class DetailExtra extends BaseActivity {
     }
 
     private void setModelToView() {
-        Http.loadImage(extracurricularModel.photo, photo, () -> {
-            title.setText(extracurricularModel.name);
-            description.setText(Html.fromHtml(extracurricularModel.description));
-        });
+//        Http.loadImage(extracurricularModel.photo, photo, () -> {
+//            title.setText(extracurricularModel.name);
+//            description.setText(Html.fromHtml(extracurricularModel.description));
+//        });
+        String ekstraImageUrl = ImageUrlUtil.manipulateImageUrl( extracurricularModel.photo );
+        Http.loadImage( ekstraImageUrl,photo );
+        title.setText( extracurricularModel.name );
+        CharSequence htmlDescEkstra = Utils.fromHtml( extracurricularModel.description );
+        description.setText( htmlDescEkstra );
     }
 
     private void setVariable() {

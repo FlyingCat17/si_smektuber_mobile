@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
@@ -57,7 +58,7 @@ public class DetailJobs extends BaseActivity {
 
     protected void setArticleModel() {
         Http.get(Endpoint.GET_JOB_BY_ID.getUrl() + jobsModel.id, PublicApi.getHeaders(), this::onResponse);
-        Http.loadImage(jobsModel.thumbnail, thumbnail, () -> {
+        Http.loadImage( ImageUrlUtil.manipulateImageUrl( jobsModel.thumbnail ), thumbnail, () -> {
             descriptionJobs.setText(Html.fromHtml(jobsModel.description));
         });
     }

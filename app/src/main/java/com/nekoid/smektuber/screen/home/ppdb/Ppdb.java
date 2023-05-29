@@ -18,6 +18,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.app.BaseFragment;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
@@ -185,7 +186,7 @@ public class Ppdb extends BaseFragment {
 
     private void loadModel() {
         if (ppdbModel != null && ppdbModel.poster != null && !ppdbModel.poster.isEmpty() && !ppdbModel.poster.equals("null")) {
-            Http.loadImage(ppdbModel.poster, posterImage, this::setModelToView);
+            Http.loadImage( ImageUrlUtil.manipulateImageUrl( ppdbModel.poster ), posterImage, this::setModelToView);
             return;
         }
         setModelToView();

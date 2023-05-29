@@ -103,8 +103,8 @@ public class VisiAndMisi extends BaseActivity {
 
     private void setModelToView(AboutModel aboutModel) {
         State.aboutModel = aboutModel;
-        visi.setText(Html.fromHtml(aboutModel.schoolVision));
-        misi.setText(Html.fromHtml(aboutModel.schoolVision));
+        visi.setText(Utils.fromHtml(aboutModel.schoolVision));
+        misi.setText(Utils.fromHtml(aboutModel.schoolVision));
         stopShimmer();
     }
 
