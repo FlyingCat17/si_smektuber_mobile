@@ -169,6 +169,7 @@ public class Jobs extends BaseFragment {
             JSONObject responses = new JSONObject(response.body.toString());
             pagination = Pagination.fromJson(responses.getJSONObject("pagination"));
             JSONArray arrays = responses.getJSONArray("data");
+            jobsModels.clear();
             for (int i = 0; i < arrays.length(); i++) {
                 jobsModels.add(JobsModel.fromJson(new JSONObject(arrays.getString(i))));
             }
