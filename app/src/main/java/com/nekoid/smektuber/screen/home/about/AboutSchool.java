@@ -128,16 +128,17 @@ public class AboutSchool extends BaseActivity {
         }
     }
     private void loadModel() {
-        if (aboutModel != null && aboutModel.schoolPicture1 != null && !aboutModel.schoolPicture1.isEmpty() && !aboutModel.schoolPicture1.equals("null")) {
-            Http.loadImage(ImageUrlUtil.manipulateImageUrl(aboutModel.schoolPicture1), imageSchool, () -> {
-                if (aboutModel.schoolHeadmasterPicture != null && !aboutModel.schoolHeadmasterPicture.isEmpty() && !aboutModel.schoolHeadmasterPicture.equals("null")) {
-                    Http.loadImage(ImageUrlUtil.manipulateImageUrl(aboutModel.schoolHeadmasterPicture), headMasterPhoto, this::setModelToView);
-                } else {
-                    setModelToView();
-                }
-            });
+        if (aboutModel != null) {
+            if (aboutModel.schoolPicture1 != null && !aboutModel.schoolPicture1.isEmpty() && !aboutModel.schoolPicture1.equals("null")) {
+                Http.loadImage(ImageUrlUtil.manipulateImageUrl(aboutModel.schoolPicture1), imageSchool);
+            }
+            if (aboutModel.schoolHeadmasterPicture != null && !aboutModel.schoolHeadmasterPicture.isEmpty() && !aboutModel.schoolHeadmasterPicture.equals("null")) {
+                Http.loadImage(ImageUrlUtil.manipulateImageUrl(aboutModel.schoolHeadmasterPicture), headMasterPhoto, this::setModelToView);
+            } else {
+                setModelToView();
+            }
         } else {
-            setModelToView();
+            stopShimmer();
         }
     }
     private void setModelToView() {
