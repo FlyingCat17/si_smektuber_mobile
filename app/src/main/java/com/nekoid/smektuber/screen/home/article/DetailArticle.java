@@ -13,6 +13,7 @@ import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
@@ -54,9 +55,10 @@ public class DetailArticle extends BaseActivity {
 
     protected void setArticleModel() {
         Http.get(Endpoint.GET_ARTICLE_BY_ID.getUrl() + articleModel.id, PublicApi.getHeaders(), this::onResponse);
-        Http.loadImage( ImageUrlUtil.manipulateImageUrl( articleModel.thumbnail ), thumbnail, () -> {
-            description.setText(Html.fromHtml(articleModel.description));
-        });
+        String JobsImageUrl = ImageUrlUtil.manipulateImageUrl( articleModel.thumbnail );
+        Http.loadImage( JobsImageUrl,thumbnail );
+        CharSequence htmlDescEkstra = Utils.fromHtml( articleModel.description );
+        description.setText( htmlDescEkstra );
     }
 
     protected void setVariable() {

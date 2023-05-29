@@ -277,6 +277,9 @@ public class Dashboard extends BaseFragment {
                 listArticle.add(ArticleModel.fromJson(json));
                 if (i >= 5) break;
             }
+            if (listArticle.isEmpty()){
+                stopShimmer();
+            }
             updateAdapter();
         } catch (JSONException e) {
             throw new RuntimeException(e);

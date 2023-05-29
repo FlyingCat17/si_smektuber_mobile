@@ -25,7 +25,7 @@
                             android:id="@+id/ImageArtikel"
                             android:layout_width="217dp"
                             android:layout_height="122dp"
-                            android:background="@drawable/rectangle_artikel"
+                            android:background="@drawable/imagenoarticle"
                             android:scaleType="fitXY"/>
 
                 </androidx.cardview.widget.CardView>

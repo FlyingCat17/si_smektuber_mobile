@@ -14,6 +14,7 @@ import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.models.ExtracurricularModel;
 import com.nekoid.smektuber.models.JobsModel;
@@ -28,17 +29,14 @@ public class DetailJobs extends BaseActivity {
     JobsModel jobsModel;
 
     ImageView thumbnail;
-    TextView descriptionJobs;
+    TextView description;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_jobs);
         setVariable();
         setToolbar();
-        jobsModel = (JobsModel) Navigator.getArgs(this);
-        if (jobsModel != null){
-            setArticleModel();
-        }
+        setArticleModel();
     }
 
     protected void onResponse(Response response) {
@@ -58,15 +56,16 @@ public class DetailJobs extends BaseActivity {
 
     protected void setArticleModel() {
         Http.get(Endpoint.GET_JOB_BY_ID.getUrl() + jobsModel.id, PublicApi.getHeaders(), this::onResponse);
-        Http.loadImage( ImageUrlUtil.manipulateImageUrl( jobsModel.thumbnail ), thumbnail, () -> {
-            descriptionJobs.setText(Html.fromHtml(jobsModel.description));
-        });
+        String JobsImageUrl = ImageUrlUtil.manipulateImageUrl( jobsModel.thumbnail );
+        Http.loadImage( JobsImageUrl,thumbnail );
+        CharSequence htmlDescEkstra = Utils.fromHtml( jobsModel.description );
+        description.setText( htmlDescEkstra );
     }
 
     protected void setVariable() {
         jobsModel = (JobsModel) Navigator.getArgs(this);
         thumbnail = findViewById(R.id.ImageJobsDetail);
-        descriptionJobs = findViewById(R.id.TextDetailJobs);
+        description = findViewById(R.id.TextDetailJobs);
     }
 
     private void setToolbar(){
