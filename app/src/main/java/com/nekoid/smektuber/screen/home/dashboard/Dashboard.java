@@ -232,6 +232,8 @@ public class Dashboard extends BaseFragment {
             JSONObject responses = new JSONObject(response.body.toString());
             JSONArray arrays = responses.getJSONArray("data");
 
+            //Clear list article before adding new article (FixedBug)
+            listArticle.clear();
             for (int i = 0; i < arrays.length(); i++) {
                 JSONObject json = arrays.getJSONObject(i);
                 listArticle.add(ArticleModel.fromJson(json));

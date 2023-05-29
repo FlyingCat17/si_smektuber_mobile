@@ -73,7 +73,7 @@ public class Extrakurikuler extends BaseActivity {
             isFromState = false;
             openRequest();
         }
-//        openRequest(); 
+//        openRequest();
     }
 
     private void openRequest() {
