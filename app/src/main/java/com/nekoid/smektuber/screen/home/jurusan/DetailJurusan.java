@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseActivity;
@@ -54,7 +55,7 @@ public class DetailJurusan extends BaseActivity {
     }
 
     private void setModelToView() {
-        Http.loadImage(majorModel.majorLogo, photo);
+        Http.loadImage( ImageUrlUtil.manipulateImageUrl( majorModel.picture1), photo);
         CharSequence htmlAboutDesc = Utils.fromHtml( majorModel.majorDescription );
         txtAboutMajor.setText( htmlAboutDesc );
         txtTitleMajor.setText( majorModel.majorName );

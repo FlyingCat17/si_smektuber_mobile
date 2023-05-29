@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.models.MajorModel;
 import com.nekoid.smektuber.network.Http;
@@ -38,7 +39,7 @@ public class AdapterDataJurusan extends RecyclerView.Adapter<AdapterDataJurusan.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.TitleMenuJurusan.setText(majorModels.get(position).majorName);
-        Http.loadImage(majorModels.get(position).majorLogo, holder.ImageJurus);
+        Http.loadImage( ImageUrlUtil.manipulateImageUrl( majorModels.get(position).majorLogo ), holder.ImageJurus);
         holder.majorModel = majorModels.get(position);
     }
 

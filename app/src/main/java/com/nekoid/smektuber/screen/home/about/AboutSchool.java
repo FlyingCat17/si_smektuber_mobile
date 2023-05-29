@@ -7,13 +7,12 @@ import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseActivity;
@@ -25,6 +24,8 @@ import com.nekoid.smektuber.network.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AboutSchool extends BaseActivity {
 
@@ -51,9 +52,9 @@ public class AboutSchool extends BaseActivity {
         init();
         setToolbar();
         if (State.aboutModel != null) {
-            setDataToView(State.aboutModel);
+//            setDataToView(State.aboutModel);
             withAnimation = false;
-//            aboutModel = State.aboutModel;
+            aboutModel = State.aboutModel;
             openRequest();
         } else {
             withAnimation = true;
@@ -119,26 +120,56 @@ public class AboutSchool extends BaseActivity {
                 return;
             }
             AboutModel aboutModel = AboutModel.fromJson(body.getJSONObject("data"));
-            setDataToView(aboutModel);
+//            setDataToView(aboutModel);
+            State.aboutModel = aboutModel;
+            loadModel();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
-    private void setDataToView(AboutModel aboutModel) {
-        State.aboutModel = aboutModel;
-        Http.loadImage(aboutModel.schoolLogo, imageSchool, () -> {
-            Http.loadImage(aboutModel.schoolHeadmasterPicture, headMasterPhoto, () -> {
-                headmaster.setText(aboutModel.schoolHeadmasterName);
-                schoolDescription.setText(Html.fromHtml(aboutModel.schoolHistory));
-                accreditation.setText(aboutModel.schoolAccreditation);
-                facebook = aboutModel.schoolFacebook;
-                instagram = aboutModel.schoolInstagram;
-                youtube = aboutModel.schoolYoutube;
-                stopShimmer();
+    private void loadModel() {
+        if (aboutModel != null && aboutModel.schoolPicture1 != null && !aboutModel.schoolPicture1.isEmpty() && !aboutModel.schoolPicture1.equals("null")) {
+            Http.loadImage(ImageUrlUtil.manipulateImageUrl(aboutModel.schoolPicture1), imageSchool, () -> {
+                if (aboutModel.schoolHeadmasterPicture != null && !aboutModel.schoolHeadmasterPicture.isEmpty() && !aboutModel.schoolHeadmasterPicture.equals("null")) {
+                    Http.loadImage(ImageUrlUtil.manipulateImageUrl(aboutModel.schoolHeadmasterPicture), headMasterPhoto, this::setModelToView);
+                } else {
+                    setModelToView();
+                }
             });
-        });
+        } else {
+            setModelToView();
+        }
     }
+    private void setModelToView() {
+        headmaster.setText(aboutModel.schoolHeadmasterName);
+        schoolDescription.setText(Utils.fromHtml(aboutModel.schoolHistory));
+        accreditation.setText(aboutModel.schoolAccreditation);
+        facebook = aboutModel.schoolFacebook;
+        instagram = aboutModel.schoolInstagram;
+        youtube = aboutModel.schoolYoutube;
+        stopShimmer();
+    }
+
+
+
+//    private void setDataToView(AboutModel aboutModel) {
+//        State.aboutModel = aboutModel;
+//        String schoolPhoto = ImageUrlUtil.manipulateImageUrl( aboutModel.schoolPicture1 );
+//        String schoolHeadmasterPicture = ImageUrlUtil.manipulateImageUrl( aboutModel.schoolHeadmasterPicture );
+//        Http.loadImage(schoolPhoto, imageSchool, () -> {
+//            Http.loadImage(schoolHeadmasterPicture, headMasterPhoto, () -> {
+//                headmaster.setText(aboutModel.schoolHeadmasterName);
+//                schoolDescription.setText(Utils.fromHtml(aboutModel.schoolHistory));
+//                accreditation.setText(aboutModel.schoolAccreditation);
+//                facebook = aboutModel.schoolFacebook;
+//                instagram = aboutModel.schoolInstagram;
+//                youtube = aboutModel.schoolYoutube;
+//                stopShimmer();
+//            });
+//        });
+//    }
+
+
 
     private void setVariable() {
         aboutModel = (AboutModel) Navigator.getArgs(this);

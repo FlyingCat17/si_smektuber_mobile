@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.Utils;
@@ -39,9 +40,8 @@ public class DetailExtra extends BaseActivity {
 //            title.setText(extracurricularModel.name);
 //            description.setText(Html.fromHtml(extracurricularModel.description));
 //        });
-        String baseUrl = "https://lutfisobri.my.id/";
-        String storagePath = "storage/app/";
-        Http.loadImage( baseUrl+ storagePath+ extracurricularModel.photo,photo );
+        String ekstraImageUrl = ImageUrlUtil.manipulateImageUrl( extracurricularModel.photo );
+        Http.loadImage( ekstraImageUrl,photo );
         title.setText( extracurricularModel.name );
         CharSequence htmlDescEkstra = Utils.fromHtml( extracurricularModel.description );
         description.setText( htmlDescEkstra );
