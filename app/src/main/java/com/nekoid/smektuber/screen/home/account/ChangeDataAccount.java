@@ -193,13 +193,20 @@ public class ChangeDataAccount extends BaseActivity {
 
         if (username.isEmpty()) {
             layoutCaUsername.setErrorEnabled(true);
-            layoutCaUsername.setError("username tidak boleh kosing");
+            layoutCaUsername.setError("username tidak boleh kosong");
             return false;
         }
 
         if (fullName.isEmpty()) {
             layoutCaFullName.setErrorEnabled(true);
             layoutCaFullName.setError("Nama lengkap tidak boleh kosong");
+            return false;
+        }
+
+        if (!password().isEmpty() && !password().equals( confirmPassword() )){
+            layoutCaConfirmPassword.setErrorEnabled( true );
+            layoutCaConfirmPassword.setErrorIconDrawable( null );
+            layoutCaConfirmPassword.setError( "Konfirmasi password tidak sama !!" );
             return false;
         }
 
@@ -218,16 +225,25 @@ public class ChangeDataAccount extends BaseActivity {
         });
 
         btnUpdate.setOnClickListener(v -> {
-            if (!validator()) return;
-            if (!emailValidator(layoutCaEmail, caEmail)) return;
+            
             if (!Utils.isNetworkAvailable()){
                 fragmentNoInternet();
                 return;
-            } else {
-                loadingDialog.startLoading();
-                // add request for update account
-                Http.put(Endpoint.UPDATE_USER.getUrl(), PublicApi.getHeaders(), getUpdateAccount(), this::doAccountUpdate);
             }
+            loadingDialog.startLoading();
+//            if (!validator()) return;
+            if (!validator()){
+                loadingDialog.isDismiss();
+                return;
+            }
+//            if (!emailValidator(layoutCaEmail, caEmail)) return;
+            if (!emailValidator( layoutCaEmail, caEmail )){
+                loadingDialog.isDismiss();
+                return;
+            }
+//            loadingDialog.startLoading();
+            // add request for update account
+            Http.put(Endpoint.UPDATE_USER.getUrl(), PublicApi.getHeaders(), getUpdateAccount(), this::doAccountUpdate);
 
             // user change avatar
             if (isUpdateAvatar) {
@@ -240,7 +256,7 @@ public class ChangeDataAccount extends BaseActivity {
             if (isChangePassword()) {
                 Http.put(Endpoint.UPDATE_PASSWORD.getUrl(), PublicApi.getHeaders(), getUpdatePassword(), this::doChangePassword);
             }
-
+//            replaceFragment(R.id.changeDataFragment, new Notif_Succes_change_Data_Account());
             resetViewPassword();
             isUpdate = true;
         });
@@ -342,11 +358,6 @@ public class ChangeDataAccount extends BaseActivity {
             State.setUserModel(userModel);
             setModelToView();
 
-//            if (userModel != null && userModel.avatar != null && !userModel.avatar.isEmpty()) {
-//                String modifiedUrl = ImageUrlUtil.modifyImageUrl(userModel.avatar);
-//                modifiedUrl += "?timestamp=" + System.currentTimeMillis();
-//                Http.loadImage(modifiedUrl, ImageUser);
-//            }
             loadingDialog.isDismiss();
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -354,8 +365,9 @@ public class ChangeDataAccount extends BaseActivity {
     }
 
     private boolean isChangePassword() {
-        if (!password().isEmpty() && !confirmPassword().isEmpty()) {
-            return password().equals(confirmPassword());
+        if (!password().isEmpty() && !confirmPassword().isEmpty() && password().equals( confirmPassword() ) ) {
+            layoutCaConfirmPassword.setErrorEnabled( false );
+            return password().equals( confirmPassword() );
         }
         return false;
     }
