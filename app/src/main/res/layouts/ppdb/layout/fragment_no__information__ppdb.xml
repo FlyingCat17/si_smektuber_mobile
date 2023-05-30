@@ -6,11 +6,11 @@
     tools:context=".screen.notification.Notification">
 
     <TextView
-        android:id="@+id/TitleInformasiPPDB"
+        android:id="@+id/TitleInformasiNoPPDB"
         android:layout_width="140dp"
         android:layout_height="24dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="65dp"
         android:text="@string/informasi_Ppdb"
         android:textAppearance="@style/informasi_p"
         android:lineSpacingExtra="-2sp"
