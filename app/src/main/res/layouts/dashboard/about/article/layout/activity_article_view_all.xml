@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
     tools:context=".screen.home.article.ArticleViewAll">
 
     <include
@@ -10,7 +12,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="56dp"
-        android:layout_marginStart="22dp"
         layout="@layout/toolbar"/>
 
     <TextView
