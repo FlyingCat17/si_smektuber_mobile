@@ -33,7 +33,11 @@ public class ResetPassword extends AppCompatActivity {
         btnResetPw.setText( "Daftar" );
         btnResetPw.setOnClickListener( v->{
             // todo : reset pw
+            doResetPassword();
         } );
+
+    }
+    private void doResetPassword(){
 
     }
     private void setToolbar(){
@@ -41,8 +45,6 @@ public class ResetPassword extends AppCompatActivity {
         setSupportActionBar( toolbar );
         getSupportActionBar().setDisplayHomeAsUpEnabled( true );
     }
-
-
 
     @Override
     public boolean onSupportNavigateUp() {
