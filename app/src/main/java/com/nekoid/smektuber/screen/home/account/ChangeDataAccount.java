@@ -2,6 +2,7 @@ package com.nekoid.smektuber.screen.home.account;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.listener.TextChangeListener;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.UserModel;
 import com.nekoid.smektuber.network.*;
 import com.nekoid.smektuber.screen.notification.LoadingDialog;
@@ -223,6 +225,11 @@ public class ChangeDataAccount extends BaseActivity {
         });
 
         btnUpdate.setOnClickListener(v -> {
+            
+            if (!Utils.isNetworkAvailable()){
+                fragmentNoInternet();
+                return;
+            }
             loadingDialog.startLoading();
 //            if (!validator()) return;
             if (!validator()){
@@ -287,6 +294,20 @@ public class ChangeDataAccount extends BaseActivity {
         caConfirmPassword.setText("");
     }
 
+    public void fragmentNoInternet() {
+        findViewById(R.id.changeDataScroll).setVisibility(View.INVISIBLE);
+        findViewById(R.id.changeDataFragment).setVisibility(View.VISIBLE);
+        replaceFragment(R.id.changeDataFragment, new NotifNoInternet(view -> {
+            if (Utils.isNetworkAvailable()){
+                findViewById(R.id.changeDataScroll).setVisibility(View.VISIBLE);
+                findViewById(R.id.changeDataFragment).setVisibility(View.INVISIBLE);
+
+            } else {
+                Toast.makeText(this, "Please connect to internet, and try again", Toast.LENGTH_SHORT).show();
+            }
+        }));
+    }
+
     private void doAccountUpdate(Response response) {
         try {
             JSONObject body = new JSONObject(response.body.toString());
@@ -299,11 +320,12 @@ public class ChangeDataAccount extends BaseActivity {
             setModelToView();
 //            Intent intent = new Intent(ChangeDataAccount.this,ChangeDataAccount.class); intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); finish();
             // you can add more action after update account
-            loadingDialog.isDismiss();
-            findViewById(R.id.changeDataScroll).setVisibility(View.INVISIBLE);
-            findViewById(R.id.changeDataFragment).setVisibility(View.VISIBLE);
-            replaceFragment(R.id.changeDataFragment, new Notif_Succes_change_Data_Account());
-            Toast.makeText(this, "Berhasil memperbarui akun", Toast.LENGTH_SHORT).show();
+
+                loadingDialog.isDismiss();
+                findViewById(R.id.changeDataScroll).setVisibility(View.INVISIBLE);
+                findViewById(R.id.changeDataFragment).setVisibility(View.VISIBLE);
+                replaceFragment(R.id.changeDataFragment, new Notif_Succes_change_Data_Account());
+                Toast.makeText(this, "Berhasil memperbarui akun", Toast.LENGTH_SHORT).show();
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

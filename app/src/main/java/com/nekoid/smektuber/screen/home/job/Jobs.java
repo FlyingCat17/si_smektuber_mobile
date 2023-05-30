@@ -164,6 +164,7 @@ public class Jobs extends BaseFragment {
     protected void listJobs(Response response) {
         if (response.statusCode != 200) {
             stopShimmer();
+            replaceFragment( new NoJobs());
             return;
         }
 

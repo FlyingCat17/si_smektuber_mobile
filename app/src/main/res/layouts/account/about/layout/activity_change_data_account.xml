@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:hint="@string/kata_sandi"
+                android:hint="kata Sandi Baru"
                 android:id="@+id/layoutCaPassword"
                 app:endIconMode="password_toggle">
                 <com.google.android.material.textfield.TextInputEditText
@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:hint="@string/hintNewPasswordConfirm"
+                android:hint="Konfirmasi Kata Sandi Baru"
                 android:id="@+id/layoutCaConfirmPassword"
                 app:endIconMode="password_toggle">
 
