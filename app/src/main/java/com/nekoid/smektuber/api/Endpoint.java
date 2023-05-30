@@ -16,6 +16,7 @@ public enum Endpoint {
     UPDATE_PASSWORD("/auth/update-password"),
     FORGOT_PASSWORD("/auth/forgot-password"),
     VALIDATE_OTP("/auth/otp"),
+    RESEND_OTP("/auth/forgot-password"),
 
     // ARTICLE
     LIST_ARTICLE("/article"),
