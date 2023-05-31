@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/ImageProfilZoom"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             android:background="@drawable/iconuser"
             app:zoomage_restrictBounds="true"
             app:zoomage_animateOnReset="false"

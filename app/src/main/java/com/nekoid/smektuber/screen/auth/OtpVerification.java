@@ -3,6 +3,7 @@ package com.nekoid.smektuber.screen.auth;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,8 +14,10 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseActivity;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
+import com.nekoid.smektuber.screen.notification.NotifNoInternet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +55,10 @@ public class OtpVerification extends BaseActivity {
         btnVeryfyOtp.setOnClickListener( v->{
             // todo : Verify otp and if success go to ResetPassword.class
             String otp = getOtpFromInput();
+            if (!Utils.isNetworkAvailable()){
+                fragmentNoInternet();
+                return;
+            }
             if (validateOtp( otp )){
                 handleOtpVeryfication(otp);
             }
@@ -61,6 +68,18 @@ public class OtpVerification extends BaseActivity {
             // todo : Resend Otp email
             handleResendOtp();
         } );
+    }
+    public void fragmentNoInternet() {
+        findViewById(R.id.otpVerificationFragment).setVisibility(View.VISIBLE);
+        findViewById(R.id.otpVerficationRelative).setVisibility(View.INVISIBLE);
+        replaceFragment(R.id.otpVerificationFragment, new NotifNoInternet(view -> {
+            if (Utils.isNetworkAvailable()){
+                findViewById(R.id.otpVerificationFragment).setVisibility(View.INVISIBLE);
+                findViewById(R.id.otpVerficationRelative).setVisibility(View.VISIBLE);
+            } else {
+                Toast.makeText(this, "Please connect to internet, and try again", Toast.LENGTH_SHORT).show();
+            }
+        }));
     }
     private void handleOtpVeryfication(String otp){
         Map<String, String> params = new HashMap<>();

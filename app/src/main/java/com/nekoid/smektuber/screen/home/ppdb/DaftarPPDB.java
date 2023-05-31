@@ -29,10 +29,12 @@ import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 //import com.nekoid.smektuber.helpers.utils.BaseActivity;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.MajorModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
 import com.nekoid.smektuber.screen.notification.LoadingDialog;
+import com.nekoid.smektuber.screen.notification.NotifNoInternet;
 import com.nekoid.smektuber.screen.notification.Notif_Succes_register_Ppdb;
 
 import org.json.JSONArray;
@@ -133,12 +135,28 @@ public class DaftarPPDB extends BaseActivity {
         });
 
         btnRegisterPpdb.setOnClickListener( v->{
-            if (isFromValid()){
+            if (!Utils.isNetworkAvailable()){
+                fragmentNoInternet();
+            } else if (isFromValid()){
                 loadingDialog.startLoading();
                 Http.post( Endpoint.PPDB.getUrl(), PublicApi.getHeaders(),getBody(),this::doRegisterPpdb );
             }
         } );
         setupFormValidation();
+    }
+
+    public void fragmentNoInternet() {
+        findViewById(R.id.content).setVisibility(View.INVISIBLE);
+        findViewById(R.id.daftarPPDBFragment).setVisibility(View.VISIBLE);
+        replaceFragment(R.id.daftarPPDBFragment, new NotifNoInternet(view -> {
+            if (Utils.isNetworkAvailable()){
+                findViewById(R.id.content).setVisibility(View.VISIBLE);
+                findViewById(R.id.daftarPPDBFragment).setVisibility(View.INVISIBLE);
+
+            } else {
+                Toast.makeText(this, "Please connect to internet, and try again", Toast.LENGTH_SHORT).show();
+            }
+        }));
     }
     private boolean isFromValid(){
         boolean isValid = true;

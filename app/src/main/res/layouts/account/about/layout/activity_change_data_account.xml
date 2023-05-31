@@ -5,14 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screen.home.account.ChangeDataAccount">
+    <LinearLayout
+        android:id="@+id/u"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp">
+        <include
+            android:id="@+id/backIcon"
+            layout="@layout/toolbar"/>
+    </LinearLayout>
+
     <FrameLayout
+        android:layout_below="@+id/u"
         android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/changeDataFragment"
         android:background="@color/white"
         />
+
     <ScrollView
+        android:layout_below="@+id/u"
         android:id="@+id/changeDataScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -23,9 +37,6 @@
             android:paddingLeft="22dp"
             android:paddingRight="22dp"
             >
-            <include
-                android:id="@+id/backIcon"
-                layout="@layout/toolbar"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
