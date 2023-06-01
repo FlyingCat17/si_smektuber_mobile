@@ -29,6 +29,7 @@
         android:layout_below="@+id/u"
         android:id="@+id/changeDataScroll"
         android:layout_width="match_parent"
+        android:scrollbars="none"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"

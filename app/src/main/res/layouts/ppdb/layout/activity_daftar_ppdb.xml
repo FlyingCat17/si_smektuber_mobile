@@ -28,6 +28,7 @@
     <ScrollView
         android:id="@+id/content"
         android:layout_below="@+id/u"
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
