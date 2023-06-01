@@ -23,4 +23,10 @@ public class Threads {
 
         service.run(executorService, handler);
     }
+
+    public static void handler(Handling handling) {
+        Looper looper = Looper.getMainLooper();
+        Handler handler = new Handler(looper);
+        handling.run(handler);
+    }
 }

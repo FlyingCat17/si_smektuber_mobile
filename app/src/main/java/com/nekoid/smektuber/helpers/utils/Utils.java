@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.animation.AlphaAnimation;
 
 import androidx.annotation.IdRes;
@@ -125,7 +126,7 @@ public class Utils {
         return time * 1000;
     }
 
-    public static String fromHtml(String html){
-        return Html.fromHtml( html ).toString();
+    public static Spanned fromHtml(String html){
+        return Html.fromHtml( html );
     }
 }
