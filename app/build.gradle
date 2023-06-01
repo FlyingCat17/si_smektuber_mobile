@@ -21,6 +21,7 @@ android {
         main {
             res.srcDirs =
                     [
+                            'src/main/res/layouts/account',
                             'src/main/res/layouts/notification/about',
                             'src/main/res/layouts/loader',
                             'src/main/res/layouts',
@@ -35,7 +36,6 @@ android {
                             'src/main/res/layouts/notification/about/notif no internet',
                             'src/main/res/layouts/jobs/about',
                             'src/main/res/layouts/account/about',
-                            'src/main/res/layouts/account',
                             'src/main/res/layouts/article',
                             'src/main/res/layouts/dashboard',
                             'src/main/res/layouts/auth',
