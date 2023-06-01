@@ -70,12 +70,11 @@
                             android:id="@+id/ImagePPDB"
                             android:layout_below="@+id/TxtPPDB"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="438dp"
                             android:layout_marginTop="17dp"
                             android:padding="5dp"
                             app:strokeWidth="1dp"
                             app:strokeColor="@color/Color1A000000"
-                            android:background="@drawable/image"
                             android:src="@drawable/image"
                             android:scaleType="fitXY"
                             />
