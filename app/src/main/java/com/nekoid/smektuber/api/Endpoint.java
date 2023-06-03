@@ -46,14 +46,13 @@ public enum Endpoint {
     GET_EXTRACURRICULAR_BY_ID("/extracurricular/"),
     ;
 
-    private String url;
+    private final String url;
 
     Endpoint(String url) {
         this.url = url;
     }
 
     public String getUrl() {
-        String baseUrl = "https://lutfisobri.my.id/api/v1";
-        return baseUrl + url;
+        return PublicApi.BASE_URL + PublicApi.API_VERSION + url;
     }
 }

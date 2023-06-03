@@ -1,19 +1,16 @@
 package com.nekoid.smektuber.screen.home.account;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -21,17 +18,12 @@ import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
-import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseFragment;
-import com.nekoid.smektuber.helpers.utils.Network;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.utils.Utils;
-import com.nekoid.smektuber.models.PpdbModel;
 import com.nekoid.smektuber.models.UserModel;
 import com.nekoid.smektuber.network.Http;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,6 +66,7 @@ import org.json.JSONObject;
             }
         }
 
+        @SuppressLint("CutPasteId")
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -124,34 +117,17 @@ import org.json.JSONObject;
             userModel = State.userModel;
 
             if (userModel !=null && userModel.avatar != null && !userModel.avatar.isEmpty()) {
-    //            if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://"))
-    //                Http.loadImage(userModel.avatar, imageView, this::setModelToView);
                 if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://")) {
-                    String modifiedUrl = ImageUrlUtil.modifyAvatarUrl(userModel.avatar);
-                    modifiedUrl += "?timestamp=" + System.currentTimeMillis();
-                    Http.loadImage(modifiedUrl, imageView, this::setModelToView);
+                    Http.loadImageWithoutCache(ImageUrlUtil.modifyAvatarUrl(userModel.avatar), imageView, this::setModelToView);
                 }
             }
             setModelToView();
         }
 
-    //    private void openRequest() {
-    //        Http.get(Endpoint.GET_USER.getUrl(), PublicApi.getHeaders(), this::onResponse);
-    //    }
-    //
-    //    private void loadModel() {
-    //        if (userModel != null && userModel.avatar != null && !userModel.avatar.isEmpty() && !userModel.avatar.equals("null")) {
-    //            Http.loadImage(userModel.avatar, imageView, this::setModelToView);
-    //            return;
-    //        }
-    //        setModelToView();
-    //    }
-
         private void setModelToView() {
             if (userModel != null){
                 tvFullName.setText(userModel.name);
                 tvUsername.setText(userModel.username);
-                System.out.println("model=null");
             }
             stopShimmer();
         }
@@ -159,20 +135,6 @@ import org.json.JSONObject;
         @Override
         public void onResume() {
             super.onResume();
-            System.out.println(Navigator.getArgs(getActivity()));
+            init();
         }
-
-    //    private void onResponse(Response response) {
-//        if (response.statusCode != 200) {
-//            return;
-//        }
-//        try {
-//            JSONObject body = new JSONObject(response.body.toString());
-//            userModel = UserModel.fromJson(body.getJSONObject("data"));
-//            State.userModel = userModel;
-//            loadModel();
-//        } catch (JSONException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }

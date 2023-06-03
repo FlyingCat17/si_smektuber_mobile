@@ -9,6 +9,10 @@ import java.util.Map;
 
 public class PublicApi {
 
+    public static final String BASE_URL = "https://lutfisobri.my.id/";
+
+    public static final String API_VERSION = "api/v1";
+
     private static String token;
 
     private static State.Api api;
