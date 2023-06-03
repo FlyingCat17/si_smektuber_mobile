@@ -106,6 +106,30 @@ public class Http {
         }
     }
 
+    public static void loadImageWithoutCache(String url, ImageView imageView, Animation animation, LoadImage loadImage) {
+        if (url != null && imageView != null) {
+            onLoadImageWithoutCache(url, imageView, animation, loadImage);
+        }
+    }
+
+    public static void loadImageWithoutCache(String url, ImageView imageView, Animation animation) {
+        if (url != null && imageView != null) {
+            loadImageWithoutCache(url, imageView, animation, null);
+        }
+    }
+
+    public static void loadImageWithoutCache(String url, ImageView imageView, LoadImage loadImage) {
+        if (imageView != null && url != null) {
+            loadImageWithoutCache(url, imageView, null, loadImage);
+        }
+    }
+
+    public static void loadImageWithoutCache(String url, ImageView imageView) {
+        if (imageView != null && url != null) {
+            loadImageWithoutCache(url, imageView, null, null);
+        }
+    }
+
     public static void loadImageToBitmap(String url, ResponseBitmap response) {
         Cache cache = Cache.getInstance();
 
@@ -143,6 +167,10 @@ public class Http {
         executeUrlForImage(url, imageView, animation, cache, loadImage);
     }
 
+    private static void onLoadImageWithoutCache(String url, ImageView imageView, Animation animation, LoadImage loadImage) {
+        executeUrlForImage(url, imageView, animation, null, loadImage);
+    }
+
     private static void executeUrlForImage(String url, ImageView imageView, Animation animation, Cache cache, LoadImage loadImage) {
         Threads.execute((executor, handler) -> {
             executor.execute(() -> {
@@ -157,7 +185,7 @@ public class Http {
                 Request finalRequest = request;
                 handler.post(() -> {
                     setImageFromBitmap(imageView, finalRequest.getImageBitmap(), animation, loadImage);
-                    cache.put(url, finalRequest.getImageBitmap());
+                    if (cache != null) cache.put(url, finalRequest.getImageBitmap());
                 });
             });
         });

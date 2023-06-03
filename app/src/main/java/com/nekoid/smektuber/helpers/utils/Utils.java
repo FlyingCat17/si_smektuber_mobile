@@ -126,7 +126,11 @@ public class Utils {
         return time * 1000;
     }
 
-    public static Spanned fromHtml(String html){
-        return Html.fromHtml( html );
+    public static Spanned fromHtml(String html) {
+        return Html.fromHtml(html);
+    }
+
+    public static boolean isUrl(String url) {
+        return url.startsWith("http://") || url.startsWith("https://");
     }
 }
