@@ -56,7 +56,7 @@ public class DetailJobs extends BaseActivity {
 
     protected void setArticleModel() {
         Http.get(Endpoint.GET_JOB_BY_ID.getUrl() + jobsModel.id, PublicApi.getHeaders(), this::onResponse);
-        String JobsImageUrl = ImageUrlUtil.manipulateImageUrl( jobsModel.thumbnail );
+        String JobsImageUrl = jobsModel.thumbnail ;
         Http.loadImage( JobsImageUrl,thumbnail );
         CharSequence htmlDescEkstra = Utils.fromHtml( jobsModel.description );
         description.setText( htmlDescEkstra );

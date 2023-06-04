@@ -52,7 +52,7 @@ public class AdapterDataExtra extends RecyclerView.Adapter<AdapterDataExtra.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.animateExtracurricular.setVisibility(View.GONE);
         if (!extracurricularModels.get(position).photo.isEmpty()) {
-            String logoEkstra = ImageUrlUtil.manipulateImageUrl( extracurricularModels.get( position ).logo );
+            String logoEkstra =  extracurricularModels.get( position ).logo ;
             Http.loadImage(logoEkstra, holder.ImageExtra, () -> {
                 setTextAndModel(holder, extracurricularModels.get(position));
             });

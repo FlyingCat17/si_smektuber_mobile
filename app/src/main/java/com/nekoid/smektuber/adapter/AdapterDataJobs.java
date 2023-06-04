@@ -57,7 +57,7 @@ public class AdapterDataJobs extends RecyclerView.Adapter<AdapterDataJobs.MyView
     @Override
     public void onBindViewHolder(@NonNull AdapterDataJobs.MyViewHolder holder, int position) {
         holder.DataTextJob.setText(list.get(position).title != null ? list.get(position).title : "");
-        Http.loadImage( ImageUrlUtil.manipulateImageUrl( list.get(position).thumbnail ), holder.ImageJob);
+        Http.loadImage(  list.get(position).thumbnail , holder.ImageJob);
         holder.jobsModel = list.get(position);
     }
     private void isLoadAll(View holderView) {

@@ -55,7 +55,7 @@ public class DetailJurusan extends BaseActivity {
     }
 
     private void setModelToView() {
-        Http.loadImage( ImageUrlUtil.manipulateImageUrl( majorModel.picture1), photo);
+        Http.loadImage( majorModel.picture1, photo);
         CharSequence htmlAboutDesc = Utils.fromHtml( majorModel.majorDescription );
         txtAboutMajor.setText( htmlAboutDesc );
         txtTitleMajor.setText( majorModel.majorName );

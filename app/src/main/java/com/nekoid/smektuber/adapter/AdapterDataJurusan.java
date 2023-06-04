@@ -39,7 +39,7 @@ public class AdapterDataJurusan extends RecyclerView.Adapter<AdapterDataJurusan.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.TitleMenuJurusan.setText(majorModels.get(position).majorName);
-        Http.loadImage( ImageUrlUtil.manipulateImageUrl( majorModels.get(position).majorLogo ), holder.ImageJurus);
+        Http.loadImage(  majorModels.get(position).majorLogo , holder.ImageJurus);
         holder.majorModel = majorModels.get(position);
     }
 

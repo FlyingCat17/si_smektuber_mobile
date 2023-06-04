@@ -118,7 +118,7 @@ import com.nekoid.smektuber.network.Http;
 
             if (userModel !=null && userModel.avatar != null && !userModel.avatar.isEmpty()) {
                 if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://")) {
-                    Http.loadImageWithoutCache(ImageUrlUtil.modifyAvatarUrl(userModel.avatar), imageView, this::setModelToView);
+                    Http.loadImageWithoutCache(userModel.avatar, imageView, this::setModelToView);
                 }
             }
             setModelToView();

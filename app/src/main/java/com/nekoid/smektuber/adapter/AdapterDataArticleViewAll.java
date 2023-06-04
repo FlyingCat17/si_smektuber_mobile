@@ -50,7 +50,7 @@ public class AdapterDataArticleViewAll extends RecyclerView.Adapter<AdapterDataA
     @Override
     public void onBindViewHolder(@NonNull AdapterDataArticleViewAll.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.articleDescription.setText(articleModels.get(position).title != null ? articleModels.get(position).title : "");
-        Http.loadImage( ImageUrlUtil.manipulateImageUrl( articleModels.get(position).thumbnail ), holder.articleThumbnail);
+        Http.loadImage(  articleModels.get(position).thumbnail , holder.articleThumbnail);
         holder.articleModel = articleModels.get(position);
     }
 
