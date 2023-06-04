@@ -40,7 +40,7 @@ public class DetailExtra extends BaseActivity {
 //            title.setText(extracurricularModel.name);
 //            description.setText(Html.fromHtml(extracurricularModel.description));
 //        });
-        String ekstraImageUrl = ImageUrlUtil.manipulateImageUrl( extracurricularModel.photo );
+        String ekstraImageUrl = extracurricularModel.photo ;
         Http.loadImage( ekstraImageUrl,photo );
         title.setText( extracurricularModel.name );
         CharSequence htmlDescEkstra = Utils.fromHtml( extracurricularModel.description );

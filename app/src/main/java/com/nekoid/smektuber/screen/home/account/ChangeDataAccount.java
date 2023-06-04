@@ -129,7 +129,7 @@ public class ChangeDataAccount extends BaseActivity {
             caFullName.setText(userModel.name);
             caEmail.setText(userModel.email);
             if (userModel.avatar != null && !userModel.avatar.isEmpty() && Utils.isUrl(userModel.avatar)) {
-                Http.loadImageWithoutCache(ImageUrlUtil.modifyAvatarUrl(userModel.avatar), ImageUser);
+                Http.loadImageWithoutCache(userModel.avatar, ImageUser);
             }
         }
     }

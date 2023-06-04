@@ -186,7 +186,7 @@ public class Ppdb extends BaseFragment {
 
     private void loadModel() {
         if (ppdbModel != null && ppdbModel.poster != null && !ppdbModel.poster.isEmpty() && !ppdbModel.poster.equals("null")) {
-            Http.loadImage( ImageUrlUtil.manipulateImageUrl( ppdbModel.poster ), posterImage, this::setModelToView);
+            Http.loadImage(  ppdbModel.poster , posterImage, this::setModelToView);
             return;
         }
         setModelToView();
