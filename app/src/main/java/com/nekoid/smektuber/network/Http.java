@@ -21,6 +21,7 @@ public class Http {
     private static final String POST = "POST";
 
     private static final String PUT = "PUT";
+    private static final String DELETE = "DELETE";
 
     public static void get(String url, Async async) {
         get(url, null, async);
@@ -61,6 +62,14 @@ public class Http {
     public static void multipartFile(String url, Map<String, File> file, @Nullable Map<String, String> headers, Async async) {
         run(POST, url, async, headers, null, file, null, null);
     }
+//    public static void deleteFile(String url, Map<String, File> file, @Nullable Map<String, String> headers, Async async) {
+//        run(DELETE, url, async, headers, null, null, null, null);
+//    }
+    public static void delete(String url, @Nullable Map<String, String> headers, Async async) {
+        run(DELETE, url, async, headers, null, null, null, null);
+    }
+
+
 
     @Deprecated
     public static void multipartBitmap(String url, Map<String, Bitmap> bitmap, Async async) {
