@@ -38,7 +38,7 @@ public class ViewZoomImage extends AppCompatActivity {
 //            if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://"))
 //                Http.loadImage(userModel.avatar, photo);
             if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://")) {
-                String modifiedUrl = ImageUrlUtil.modifyAvatarUrl(userModel.avatar);
+                String modifiedUrl = userModel.avatar;
                 modifiedUrl += "?timestamp=" + System.currentTimeMillis();
                 Http.loadImage(modifiedUrl, photo);
             }
