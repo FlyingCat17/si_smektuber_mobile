@@ -220,8 +220,8 @@ public class ChangeDataAccount extends BaseActivity {
                 public void onDelete() {
                     ImageUser.setImageResource(R.drawable.iconuser);
                     isUpdateAvatar = true;
-                    Http.multipartFile(Endpoint.UPDATE_AVATAR.getUrl(), getUpdateAvatar(), PublicApi.getHeaders(), response -> {
-                        System.out.println(response.body);
+                    Http.delete(Endpoint.UPDATE_AVATAR.getUrl(),  PublicApi.getHeaders(), response -> {
+                        System.out.println(response);
                     });
                 }
             });
@@ -350,7 +350,7 @@ public class ChangeDataAccount extends BaseActivity {
     private void doUpdateAvatar(Response response) {
         try {
             if (response.statusCode != 200) {
-                Toast.makeText(this, "engror" + response.statusCode, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "engror" + response.statusCode, Toast.LENGTH_SHORT).show();
                 return;
             }
 
