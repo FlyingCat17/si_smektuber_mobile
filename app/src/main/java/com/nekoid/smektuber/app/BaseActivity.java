@@ -186,6 +186,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         return getSharedPreferences("user", MODE_PRIVATE);
     }
 
+    public final UserModel getUserModelFromPreferences() {
+        return new UserModel(getUserPreferences()
+                .getString("name", null), getUserPreferences()
+                .getString("email", null), getUserPreferences()
+                .getString("role", null), "", getUserPreferences()
+                .getString("username", null), getUserPreferences()
+                .getBoolean("emailVerified", false));
+    }
+
     /**
      * <p>Set Auth from shared preferences</p>
      *
@@ -373,6 +382,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public final void replaceFragment(@IdRes int containerViewId, @NonNull androidx.fragment.app.Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(containerViewId, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(containerViewId, fragment).commitAllowingStateLoss();
+    }
+
+    public final void removeFragment(@NonNull androidx.fragment.app.Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
     }
 }

@@ -1,5 +1,9 @@
 package com.nekoid.smektuber.screen.home.dashboard;
 
+import static com.nekoid.smektuber.helpers.utils.Utils.isNetworkAvailable;
+import android.os.Handler;
+import android.os.Looper;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
@@ -12,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
@@ -21,6 +27,7 @@ import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseFragment;
+import com.nekoid.smektuber.helpers.utils.Network;
 import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.AboutModel;
@@ -55,15 +62,13 @@ public class Dashboard extends BaseFragment {
     List<ArticleModel> listArticle = new ArrayList<>();
 
     AdapterData adapterData;
-
+    RelativeLayout tampilanArticle;
     TextView fullName;
 
     ShimmerFrameLayout shimmerFrameLayout;
 
     private boolean withAnimation = true;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private boolean dataLoaded = false;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -102,22 +107,66 @@ public class Dashboard extends BaseFragment {
         }
     }
 
+//    private Handler handler = new Handler(Looper.getMainLooper());
+//    private Runnable shimmerTimeoutRunnable = new Runnable() {
+//        @Override
+//        public void run() {
+//            stopShimmer();
+//        }
+//    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         init(view);
+        
+        new Network(getActivity(), new Network.Listener() {
+            @Override
+            public void onNetworkAvailable() {
+                openRequest();
+//                startShimmerTimeout();
+            }
+
+            @Override
+            public void onNetworkUnavailable() {
+
+            }
+        });
+
         // Inflate the layout for this fragment
         return view;
     }
 
     private void startShimmer() {
+
     }
+
+//    private void startShimmerTimeout() {
+//        handler.postDelayed(shimmerTimeoutRunnable, 60000);
+//    }
+//    private void stopShimmerTimeout() {
+//        handler.removeCallbacks(shimmerTimeoutRunnable);
+//    }
+
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        stopShimmerTimeout();
+//    }
+
 
     private void stopShimmer() {
         if (withAnimation) recyclerView.setAnimation(Utils.animation());
         shimmerFrameLayout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
+        setTampilanArticle();
+    }
+
+    private void setTampilanArticle(){
+        if (!State.articleModels.isEmpty()){
+            tampilanArticle.setVisibility(View.VISIBLE);
+        }
     }
 
     private void openRequest() {
@@ -133,11 +182,12 @@ public class Dashboard extends BaseFragment {
 
     private void init(View view) {
         setVar(view);
-        onLoad();
+//        onLoad();
         setAdapterData();
         startShimmer();
         listener(view);
         openRequest();
+        onLoad();
     }
 
     private void setVar(View view) {
@@ -145,7 +195,7 @@ public class Dashboard extends BaseFragment {
         adapterData = new AdapterData(this.getActivity(), listArticle);
         shimmerFrameLayout = view.findViewById(R.id.rvDataShimmer);
         recyclerView = view.findViewById(R.id.rvData);
-
+        tampilanArticle = view.findViewById(R.id.idll);
         if (State.userModel != null) {
             fullName.setText(State.userModel.name);
         } else {
@@ -154,38 +204,39 @@ public class Dashboard extends BaseFragment {
     }
 
     private void listener(View view) {
-        ConstraintLayout btn = view.findViewById(R.id.Visi_Misi);
-        TextView ntm = view.findViewById(R.id.Titlelihat_semua);
-        TextView jk = view.findViewById(R.id.ButtonSelengkapnya);
-        ConstraintLayout n = view.findViewById(R.id.Map_Lokasi);
-        ConstraintLayout extra = view.findViewById(R.id.Extrakurikuler);
+        ConstraintLayout cardVisiMisi = view.findViewById(R.id.Visi_Misi);
+        TextView txtSeeArticle = view.findViewById(R.id.Titlelihat_semua);
+        TextView txtSeeAbout = view.findViewById(R.id.ButtonSelengkapnya);
+        ConstraintLayout cardMaps = view.findViewById(R.id.Map_Lokasi);
+        ConstraintLayout cardExtra = view.findViewById(R.id.Extrakurikuler);
         ConstraintLayout jurusan = view.findViewById(R.id.Jurusan);
         btnMessage(view);
 
         jurusan.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(Jurusan.class);
         });
-        extra.setOnClickListener(v -> {
+        cardExtra.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(Extrakurikuler.class);
         });
-        n.setOnClickListener(v -> {
+        cardMaps.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(MapsActivity.class);
         });
-        ntm.setOnClickListener(v -> {
+        txtSeeArticle.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(ArticleViewAll.class);
         });
-        btn.setOnClickListener(v -> {
+        cardVisiMisi.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(VisiAndMisi.class);
         });
-        jk.setOnClickListener(v -> {
+        txtSeeAbout.setOnClickListener(v -> {
             Navigator.of(getActivity()).push(AboutSchool.class);
         });
     }
 
     private void onClickMessage(View view) {
         String phoneNumber = State.aboutModel.schoolWhatsapp;
-        if (phoneNumber.startsWith("0")) phoneNumber = phoneNumber.substring(1);
-        String url = String.format("https://api.whatsapp.com/send/phone=%s", "62" + phoneNumber);
+        if (phoneNumber.startsWith("0")) phoneNumber = "62" + phoneNumber.substring(1);
+        String url = String.format("https://api.whatsapp.com/send?phone=%s", phoneNumber);
+
         Navigator.openApp(getActivity(), Utils.toUri(url));
     }
 
@@ -220,10 +271,15 @@ public class Dashboard extends BaseFragment {
             JSONObject responses = new JSONObject(response.body.toString());
             JSONArray arrays = responses.getJSONArray("data");
 
+            //Clear list article before adding new article (FixedBug)
+            listArticle.clear();
             for (int i = 0; i < arrays.length(); i++) {
                 JSONObject json = arrays.getJSONObject(i);
                 listArticle.add(ArticleModel.fromJson(json));
                 if (i >= 5) break;
+            }
+            if (listArticle.isEmpty()){
+                stopShimmer();
             }
             updateAdapter();
         } catch (JSONException e) {
@@ -256,6 +312,10 @@ public class Dashboard extends BaseFragment {
     private void updateAdapter() {
         State.articleModels = listArticle;
         adapterData.notifyDataSetChanged();
+
+        if (dataLoaded){
+            fullName.setText( State.userModel != null ? State.userModel.name : "___" );
+        }
     }
 
     private void onLoad() {
@@ -263,7 +323,12 @@ public class Dashboard extends BaseFragment {
             while (!adapterData.isLoad()) {
                 // don't delete this line;
             }
-            handler.post(this::stopShimmer);
+            dataLoaded = true; // set dataLoaded true
+//            handler.post(this::stopShimmer);
+            handler.post( ()->{
+                stopShimmer();
+                fullName.setText( State.userModel != null ? State.userModel.name : "___" );
+            } );
         }));
     }
 }

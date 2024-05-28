@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.ExtracurricularModel;
@@ -50,11 +51,22 @@ public class AdapterDataExtra extends RecyclerView.Adapter<AdapterDataExtra.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.animateExtracurricular.setVisibility(View.GONE);
-        Http.loadImage(extracurricularModels.get(position).photo, holder.ImageExtra, () -> {
-            isLoadAll(holder.animateExtracurricular);
-            holder.TitleMenuExtra.setText(extracurricularModels.get(position).name);
-            holder.extracurricularModel = extracurricularModels.get(position);
-        });
+        if (!extracurricularModels.get(position).photo.isEmpty()) {
+            String logoEkstra =  extracurricularModels.get( position ).logo ;
+            Http.loadImage(logoEkstra, holder.ImageExtra, () -> {
+                setTextAndModel(holder, extracurricularModels.get(position));
+            });
+        } else {
+            setTextAndModel(holder, extracurricularModels.get(position));
+        }
+    }
+
+    private void setTextAndModel(MyViewHolder holder, ExtracurricularModel model) {
+        isLoadAll(holder.animateExtracurricular);
+        if (!model.name.isEmpty()) {
+            holder.TitleMenuExtra.setText(model.name);
+        }
+        holder.extracurricularModel = model;
     }
 
     private void isLoadAll(View holderView) {

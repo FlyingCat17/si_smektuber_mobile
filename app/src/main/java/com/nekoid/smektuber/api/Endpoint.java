@@ -16,6 +16,7 @@ public enum Endpoint {
     UPDATE_PASSWORD("/auth/update-password"),
     FORGOT_PASSWORD("/auth/forgot-password"),
     VALIDATE_OTP("/auth/otp"),
+    RESEND_OTP("/auth/forgot-password"),
 
     // ARTICLE
     LIST_ARTICLE("/article"),
@@ -45,14 +46,13 @@ public enum Endpoint {
     GET_EXTRACURRICULAR_BY_ID("/extracurricular/"),
     ;
 
-    private String url;
+    private final String url;
 
     Endpoint(String url) {
         this.url = url;
     }
 
     public String getUrl() {
-        String baseUrl = "https://lutfisobri.my.id/api/v1";
-        return baseUrl + url;
+        return PublicApi.BASE_URL + PublicApi.API_VERSION + url;
     }
 }

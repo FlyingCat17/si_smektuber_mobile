@@ -40,6 +40,12 @@
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="20dp"
         android:gravity="center"/>
-
+    <FrameLayout
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/notifContainer"
+        android:background="@color/white"
+        />
 
 </RelativeLayout>

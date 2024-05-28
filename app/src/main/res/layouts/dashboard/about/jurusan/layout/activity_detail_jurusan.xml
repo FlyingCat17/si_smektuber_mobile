@@ -14,43 +14,29 @@
         android:layout_marginStart="22dp"
         layout="@layout/toolbar"/>
 
-    <TextView
-        android:id="@+id/TitleDetailJurusan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="24dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
-        android:text="@string/TxtxJurusan"
-        android:textAppearance="@style/informasi_p"
-        android:lineSpacingExtra="-2sp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:id="@+id/TitleDetailJurusan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=" "
+            android:textAppearance="@style/informasi_p"
+            />
+    </RelativeLayout>
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/ShimmerAboutSchool"
-        android:layout_below="@+id/backIcon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="22dp"
-            android:layout_marginLeft="22dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            >
-            <include layout="@layout/item_data_visi_misi_shimmer"/>
-            <include layout="@layout/item_data_about_school_shimmer"/>
-        </LinearLayout>
-    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <ScrollView
         android:layout_below="@+id/backIcon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="7dp"
-        android:visibility="gone"
+        android:scrollbars="none"
         >
 
         <RelativeLayout
@@ -59,7 +45,7 @@
             <ImageView
                 android:id="@+id/ImageJurusan"
                 android:layout_width="match_parent"
-                android:layout_height="310.37dp"
+                android:layout_height="270.09dp"
                 android:scaleType="fitXY"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/imagenoarticle"
@@ -86,7 +72,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:lineSpacingExtra="3sp"
-                android:text="@string/AboutJurusan"
+                android:text=" "
                 android:textAppearance="@style/selayang_pa"
                 />
 
@@ -98,7 +84,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:layout_below="@+id/TxtAboutJurusan"
-                android:text="@string/TxtPrestasi"
+                android:text=" "
                 android:textAppearance="@style/selayang_title"
                 />
 
@@ -111,7 +97,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:lineSpacingExtra="3sp"
-                android:text="Juara 1 Kecantikan Tingkat Kabupaten Jember"
+                android:text=" "
                 android:textAppearance="@style/Text_Prestasi"
                 />
 
@@ -123,7 +109,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:layout_below="@+id/TxtViewPrestasiJurusan"
-                android:text="@string/TxtFasilitas"
+                android:text=" "
                 android:textAppearance="@style/selayang_title"
                 />
 

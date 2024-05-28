@@ -1,6 +1,7 @@
 package com.nekoid.smektuber.screen.auth;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -13,8 +14,10 @@ import com.nekoid.smektuber.api.Endpoint;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.listener.TextChangeListener;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
+import com.nekoid.smektuber.screen.notification.NotifNoInternet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +46,10 @@ public class ForgotPassword extends BaseActivity {
 
     private void onListen() {
         btnSendEmail.setOnClickListener(v -> {
+            if (!Utils.isNetworkAvailable()){
+                fragmentNoInternet();
+                return;
+            }
             if (emailValidator(txtLayoutEmail, et_email)) {
                 Map<String, String> params = new HashMap<>();
                 params.put("email", et_email.getText().toString());
@@ -58,6 +65,19 @@ public class ForgotPassword extends BaseActivity {
                 }
             }
         });
+    }
+
+    public void fragmentNoInternet() {
+        findViewById(R.id.forgotPasswordFragment).setVisibility(View.VISIBLE);
+        findViewById(R.id.forgotPasswordRelative).setVisibility(View.INVISIBLE);
+        replaceFragment(R.id.forgotPasswordFragment, new NotifNoInternet(view -> {
+            if (Utils.isNetworkAvailable()){
+                findViewById(R.id.forgotPasswordFragment).setVisibility(View.INVISIBLE);
+                findViewById(R.id.forgotPasswordRelative).setVisibility(View.VISIBLE);
+            } else {
+                Toast.makeText(this, "Please connect to internet, and try again", Toast.LENGTH_SHORT).show();
+            }
+        }));
     }
 
     private void init() {

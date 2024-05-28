@@ -7,9 +7,19 @@
     android:background="@color/blue01"
     tools:context=".screen.auth.Register">
 
-    <ScrollView
+    <FrameLayout
+        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/registerFragment"
+        android:background="@color/white"
+        />
+
+    <ScrollView
+        android:id="@+id/registerScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
         android:fillViewport="false">
         <LinearLayout
             android:layout_marginTop="30dp"

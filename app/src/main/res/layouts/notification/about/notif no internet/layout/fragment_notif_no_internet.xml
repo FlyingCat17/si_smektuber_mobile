@@ -11,10 +11,9 @@
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/successmark"
-        android:layout_width="217dp"
-        android:layout_height="182dp"
-        android:layout_marginLeft="61dp"
-        android:layout_marginRight="82dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="185dp"
         android:clipToOutline="true"
@@ -23,22 +22,19 @@
 
     <TextView
         android:id="@+id/gagal_masuk"
-        android:layout_width="221dp"
-        android:layout_height="31dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="69dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         android:layout_marginTop="374dp"
-        android:text="@string/tidak_ada_i"
-        android:textAppearance="@style/gagal_masuk"
         android:gravity="center_horizontal|top"
-        />
+        android:text="@string/tidak_ada_i"
+        android:textAppearance="@style/gagal_masuk" />
 
     <TextView
-        android:layout_width="316dp"
-        android:layout_height="46dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginRight="22dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="413dp"
         android:text="@string/pastikan_in"

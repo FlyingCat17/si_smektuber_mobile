@@ -1,32 +1,43 @@
 package com.nekoid.smektuber.screen.home.account;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.google.android.material.textfield.*;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
-import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseActivity;
-import com.nekoid.smektuber.helpers.utils.State;
 import com.nekoid.smektuber.helpers.listener.TextChangeListener;
+import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.helpers.profile.CallbackListener;
+import com.nekoid.smektuber.helpers.profile.DialogChangePhotoProfile;
+import com.nekoid.smektuber.helpers.utils.State;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.UserModel;
-import com.nekoid.smektuber.network.*;
+import com.nekoid.smektuber.network.Http;
+import com.nekoid.smektuber.network.Response;
+import com.nekoid.smektuber.screen.notification.LoadingDialog;
+import com.nekoid.smektuber.screen.notification.NotifNoInternet;
+import com.nekoid.smektuber.screen.notification.Notif_Succes_change_Data_Account;
 
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChangeDataAccount extends BaseActivity {
 
@@ -40,17 +51,20 @@ public class ChangeDataAccount extends BaseActivity {
 
     Button btnUpdate;
 
+    private boolean isUpdate = false;
+
     private UserModel userModel;
 
     private boolean isUpdateAvatar = false;
 
     private Uri uri;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_data_account);
-
+        loadingDialog = new LoadingDialog(this);
         setVariable();
         setToolbar();
         onListener();
@@ -59,14 +73,10 @@ public class ChangeDataAccount extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
             uri = data.getData();
             ImageUser.setImageURI(uri);
             isUpdateAvatar = uri != null;
-        } else if (resultCode == ImagePicker.RESULT_ERROR) {
-            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -77,7 +87,7 @@ public class ChangeDataAccount extends BaseActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        Navigator.of(this).pop();
+        Navigator.of(this).pop(isUpdate);
         return true;
     }
 
@@ -118,9 +128,8 @@ public class ChangeDataAccount extends BaseActivity {
             caUsername.setText(userModel.username);
             caFullName.setText(userModel.name);
             caEmail.setText(userModel.email);
-            if (userModel.avatar != null && !userModel.avatar.isEmpty()) {
-                if (userModel.avatar.startsWith("http://") || userModel.avatar.startsWith("https://"))
-                    Http.loadImage(userModel.avatar, ImageUser);
+            if (userModel.avatar != null && !userModel.avatar.isEmpty() && Utils.isUrl(userModel.avatar)) {
+                Http.loadImageWithoutCache(userModel.avatar, ImageUser);
             }
         }
     }
@@ -163,7 +172,11 @@ public class ChangeDataAccount extends BaseActivity {
 
     private Map<String, File> getUpdateAvatar() {
         Map<String, File> avatar = new HashMap<>();
-        avatar.put("avatar", new File(getExternalCacheDir(), new File(this.uri.toString()).getName()));
+        if (uri != null) {
+            avatar.put("avatar", new File(getExternalCacheDir(), new File(this.uri.toString()).getName()));
+        } else {
+            avatar.put("avatar", null);
+        }
         return avatar;
     }
 
@@ -178,7 +191,7 @@ public class ChangeDataAccount extends BaseActivity {
 
         if (username.isEmpty()) {
             layoutCaUsername.setErrorEnabled(true);
-            layoutCaUsername.setError("username tidak boleh kosing");
+            layoutCaUsername.setError("username tidak boleh kosong");
             return false;
         }
 
@@ -188,23 +201,49 @@ public class ChangeDataAccount extends BaseActivity {
             return false;
         }
 
+        if (!password().isEmpty() && !password().equals(confirmPassword())) {
+            layoutCaConfirmPassword.setErrorEnabled(true);
+            layoutCaConfirmPassword.setErrorIconDrawable(null);
+            layoutCaConfirmPassword.setError("Konfirmasi password tidak sama !!");
+            return false;
+        }
+
         return true;
     }
 
     private void onListener() {
         iconUpload.setOnClickListener(v -> {
-            ImagePicker.with(this)
-                    .crop()                    //Crop image(Optional), Check Customization for more option
-                    .cropSquare()
-                    .compress(1024)            //Final image size will be less than 1 MB(Optional)
-                    .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
-                    .saveDir(getExternalCacheDir())
-                    .start();
+            DialogChangePhotoProfile dialog = new DialogChangePhotoProfile();
+            dialog.title("Pilih Foto Profil");
+            dialog.show(this, new CallbackListener(this) {
+                @Override
+                public void onDelete() {
+                    ImageUser.setImageResource(R.drawable.iconuser);
+                    isUpdateAvatar = true;
+                    Http.delete(Endpoint.UPDATE_AVATAR.getUrl(),  PublicApi.getHeaders(), response -> {
+                        System.out.println(response);
+                    });
+                }
+            });
         });
 
         btnUpdate.setOnClickListener(v -> {
-            if (!validator()) return;
-            if (!emailValidator(layoutCaEmail, caEmail)) return;
+
+            if (!Utils.isNetworkAvailable()) {
+                fragmentNoInternet();
+                return;
+            }
+            loadingDialog.startLoading();
+
+            if (!validator()) {
+                loadingDialog.isDismiss();
+                return;
+            }
+
+            if (!emailValidator(layoutCaEmail, caEmail)) {
+                loadingDialog.isDismiss();
+                return;
+            }
 
             // add request for update account
             Http.put(Endpoint.UPDATE_USER.getUrl(), PublicApi.getHeaders(), getUpdateAccount(), this::doAccountUpdate);
@@ -222,6 +261,7 @@ public class ChangeDataAccount extends BaseActivity {
             }
 
             resetViewPassword();
+            isUpdate = true;
         });
 
         caUsername.addTextChangedListener(new TextChangeListener() {
@@ -257,6 +297,19 @@ public class ChangeDataAccount extends BaseActivity {
         caConfirmPassword.setText("");
     }
 
+    public void fragmentNoInternet() {
+        findViewById(R.id.changeDataScroll).setVisibility(View.INVISIBLE);
+        findViewById(R.id.changeDataFragment).setVisibility(View.VISIBLE);
+        replaceFragment(R.id.changeDataFragment, new NotifNoInternet(view -> {
+            if (Utils.isNetworkAvailable()) {
+                findViewById(R.id.changeDataScroll).setVisibility(View.VISIBLE);
+                findViewById(R.id.changeDataFragment).setVisibility(View.INVISIBLE);
+            } else {
+                Toast.makeText(this, "Please connect to internet, and try again", Toast.LENGTH_SHORT).show();
+            }
+        }));
+    }
+
     private void doAccountUpdate(Response response) {
         try {
             JSONObject body = new JSONObject(response.body.toString());
@@ -267,8 +320,13 @@ public class ChangeDataAccount extends BaseActivity {
             userModel = UserModel.fromJson(body.getJSONObject("data"));
             State.setUserModel(userModel);
             setModelToView();
-
+//            Intent intent = new Intent(ChangeDataAccount.this,ChangeDataAccount.class); intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); finish();
             // you can add more action after update account
+
+            loadingDialog.isDismiss();
+            findViewById(R.id.changeDataScroll).setVisibility(View.INVISIBLE);
+            findViewById(R.id.changeDataFragment).setVisibility(View.VISIBLE);
+            replaceFragment(R.id.changeDataFragment, new Notif_Succes_change_Data_Account());
             Toast.makeText(this, "Berhasil memperbarui akun", Toast.LENGTH_SHORT).show();
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -283,6 +341,7 @@ public class ChangeDataAccount extends BaseActivity {
                 return;
             }
             doLogin(username(), password());
+            loadingDialog.isDismiss();
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -291,7 +350,7 @@ public class ChangeDataAccount extends BaseActivity {
     private void doUpdateAvatar(Response response) {
         try {
             if (response.statusCode != 200) {
-                Toast.makeText(this, "engror" + response.statusCode, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "engror" + response.statusCode, Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -300,13 +359,16 @@ public class ChangeDataAccount extends BaseActivity {
             userModel = UserModel.fromJson(responseBody.getJSONObject("data"));
             State.setUserModel(userModel);
             setModelToView();
+
+            loadingDialog.isDismiss();
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }
 
     private boolean isChangePassword() {
-        if (!password().isEmpty() && !confirmPassword().isEmpty()) {
+        if (!password().isEmpty() && !confirmPassword().isEmpty() && password().equals(confirmPassword())) {
+            layoutCaConfirmPassword.setErrorEnabled(false);
             return password().equals(confirmPassword());
         }
         return false;

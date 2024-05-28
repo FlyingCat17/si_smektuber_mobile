@@ -96,6 +96,15 @@ public class Request {
     }
 
     public void addFilePart(String fieldName, File uploadFile, PrintWriter writer, OutputStream outputStream) throws IOException {
+        if (uploadFile == null) {
+            writer.append(twoHyphens + boundary).append(newLine);
+            writer.append("Content-Disposition: form-data; name=\"").append(fieldName).append("\"").append(newLine);
+            writer.append("Content-Type: text/plain; charset=UTF-8").append(newLine);
+            writer.append(newLine);
+            writer.flush();
+            return;
+        }
+
         String fileName = uploadFile.getName();
         writer.append(twoHyphens + boundary).append(newLine);
         writer.append("Content-Disposition: form-data; name=\"").append(fieldName).append("\"; filename=\"").append(fileName).append("\"")

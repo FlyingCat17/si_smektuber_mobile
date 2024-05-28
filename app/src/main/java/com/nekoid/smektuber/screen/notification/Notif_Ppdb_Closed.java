@@ -1,5 +1,6 @@
 package com.nekoid.smektuber.screen.notification;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.screen.home.HomeMember;
+import com.nekoid.smektuber.screen.home.ppdb.Ppdb;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +29,7 @@ public class Notif_Ppdb_Closed extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private Button BtnChangeData;
     public Notif_Ppdb_Closed() {
         // Required empty public constructor
     }
@@ -61,6 +65,18 @@ public class Notif_Ppdb_Closed extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notif__ppdb__closed, container, false);
+        View view = inflater.inflate(R.layout.fragment_notif__ppdb__closed, container, false);
+        BtnChangeData = view.findViewById(R.id.BtnPPDBClosed);
+        BtnChangeData.setOnClickListener(v -> {
+            replaceFragment(new Ppdb());
+        });
+        return view;
+    }
+    private void replaceFragment(Fragment fragment) {
+        if (getActivity() != null) {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.r, fragment)
+                    .commit();
+        }
     }
 }

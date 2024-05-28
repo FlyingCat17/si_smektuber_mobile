@@ -18,9 +18,39 @@
         android:layout_centerHorizontal="true"
         />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="22dp"
+        android:paddingRight="22dp"
+        android:layout_below="@+id/TitleInformasiLowongan"
+        >
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/rvDataShimmerJobs"
+            android:layout_width="match_parent"
+            android:layout_marginTop="24dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <include layout="@layout/item_data_jobs_shimmer"/>
+                <include layout="@layout/item_data_jobs_shimmer"/>
+                <include layout="@layout/item_data_jobs_shimmer"/>
+                <include layout="@layout/item_data_jobs_shimmer"/>
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </RelativeLayout>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         android:layout_below="@+id/TitleInformasiLowongan"
         >
             <RelativeLayout
@@ -34,23 +64,8 @@
                         android:id="@+id/DataLowongan"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:visibility="gone"
+                        android:visibility="invisible"
                         />
-
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            >
-                            <include layout="@layout/item_data_jobs_shimmer"/>
-                            <include layout="@layout/item_data_jobs_shimmer"/>
-                            <include layout="@layout/item_data_jobs_shimmer"/>
-                            <include layout="@layout/item_data_jobs_shimmer"/>
-                        </LinearLayout>
-                    </com.facebook.shimmer.ShimmerFrameLayout>
 
             </RelativeLayout>
 

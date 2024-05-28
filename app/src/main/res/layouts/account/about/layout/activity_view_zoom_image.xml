@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screen.home.account.ViewZoomImage"
@@ -20,9 +21,10 @@
 
     </TextView>
 
-    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.appcompat.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarZoom"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="22sp"
@@ -37,15 +39,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="401.89dp"
-        android:background="@drawable/iconuser"
-        android:src="@drawable/rectangle_loader"
         android:layout_gravity="center"
         android:layout_marginRight="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="199dp"
-        android:id="@+id/ImageProfil"
-        android:layout_marginBottom="199dp"
-        android:scaleType="centerCrop">
+        android:layout_marginBottom="199dp">
+
+        <com.jsibbold.zoomage.ZoomageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ImageProfilZoom"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/iconuser"
+            app:zoomage_restrictBounds="true"
+            app:zoomage_animateOnReset="true"
+            app:zoomage_autoResetMode="ALWAYS"
+            app:zoomage_autoCenter="true"
+            app:zoomage_zoomable="true"
+            app:zoomage_translatable="false"
+            app:zoomage_minScale="1"
+            app:zoomage_maxScale="8"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

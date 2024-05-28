@@ -16,9 +16,19 @@
             layout="@layout/toolbar"/>
     </LinearLayout>
 
+    <FrameLayout
+        android:layout_below="@+id/u"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/daftarPPDBFragment"
+        android:background="@color/white"
+        />
+
     <ScrollView
         android:id="@+id/content"
         android:layout_below="@+id/u"
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -52,22 +62,24 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutNisn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:hint="@string/hintUsername"
+                android:hint="@string/hintNisn"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:id="@+id/Dp_NISN"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text|number"
                     android:fontFamily="@font/urbanist"
                     android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -82,8 +94,25 @@
                     android:fontFamily="@font/urbanist"
                     android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutPlaceBirth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:hint="@string/tempat_lahir"
+                app:endIconMode="clear_text">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:id="@+id/Dp_TempatLahir"
+                    android:inputType="text"
+                    android:fontFamily="@font/urbanist"
+                    android:textSize="15sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutDateBirth"
                 android:layout_width="168dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -100,6 +129,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -116,6 +146,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -133,6 +164,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutFather"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -149,6 +181,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutMother"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -165,6 +198,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutGuardian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -181,6 +215,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutSchoolOrigin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -197,6 +232,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutGraduationYear"
                 android:layout_width="168dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -215,6 +251,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutMajor1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -222,6 +259,22 @@
                 android:hint="@string/jurusan_yan">
                 <AutoCompleteTextView
                     android:id="@+id/Dp_Jurusan"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/urbanist"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLayoutMajor2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:hint="@string/jurusan_yan2">
+                <AutoCompleteTextView
+                    android:id="@+id/Dp_Jurusan02"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:textSize="15sp"
@@ -240,4 +293,9 @@
         </LinearLayout>
 
     </ScrollView>
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
 </RelativeLayout>

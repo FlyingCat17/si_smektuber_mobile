@@ -4,22 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="22dp"
-    android:paddingRight="22dp"
     tools:context=".screen.home.account.ChangeDataAccount">
-    <include
-        android:id="@+id/backIcon"
-        layout="@layout/toolbar"/>
-    <ScrollView
-        android:id="@+id/content"
-        android:layout_below="@+id/backIcon"
+    <LinearLayout
+        android:id="@+id/u"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp">
+        <include
+            android:id="@+id/backIcon"
+            layout="@layout/toolbar"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_below="@+id/u"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/changeDataFragment"
+        android:background="@color/white"
+        />
+
+    <ScrollView
+        android:layout_below="@+id/u"
+        android:id="@+id/changeDataScroll"
+        android:layout_width="match_parent"
+        android:scrollbars="none"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:paddingLeft="22dp"
+            android:paddingRight="22dp"
+            >
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -112,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:hint="@string/kata_sandi"
+                android:hint="kata Sandi Baru"
                 android:id="@+id/layoutCaPassword"
                 app:endIconMode="password_toggle">
                 <com.google.android.material.textfield.TextInputEditText
@@ -130,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:hint="@string/hintNewPasswordConfirm"
+                android:hint="Konfirmasi Kata Sandi Baru"
                 android:id="@+id/layoutCaConfirmPassword"
                 app:endIconMode="password_toggle">
 

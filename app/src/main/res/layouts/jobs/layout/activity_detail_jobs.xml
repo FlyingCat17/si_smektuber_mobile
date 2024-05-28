@@ -7,7 +7,7 @@
     tools:context=".screen.home.job.DetailJobs">
 
     <include
-        android:id="@+id/backIcon"
+        android:id="@+id/backIconJobs"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
@@ -27,53 +27,36 @@
         android:layout_centerHorizontal="true"
         />
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/ShimmerAboutSchool"
-        android:layout_below="@+id/backIcon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="22dp"
-            android:layout_marginLeft="22dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            >
-            <include layout="@layout/item_data_visi_misi_shimmer"/>
-            <include layout="@layout/item_data_about_school_shimmer"/>
-        </LinearLayout>
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
     <ScrollView
-        android:layout_below="@+id/backIcon"
+        android:layout_below="@+id/backIconJobs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="7dp"
-        android:visibility="gone"
+        android:scrollbars="none"
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/ImageJobs"
+                android:id="@+id/ImageJobsDetail"
                 android:layout_width="match_parent"
-                android:layout_height="310.37dp"
+                android:layout_height="270.09dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/welcome_img"
+                android:scaleType="fitXY"
+                android:background="@drawable/imagenoarticle"
                 />
 
             <TextView
                 android:id="@+id/TextDetailJobs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ImageJobs"
+                android:layout_below="@+id/ImageJobsDetail"
                 android:layout_marginTop="16.63dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:lineSpacingExtra="3sp"
-                android:text="@string/artikel_ini"
+                android:text=" "
                 android:textAppearance="@style/Text_Jobs"
                 />
 

@@ -4,8 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="22dp"
-    android:paddingRight="22dp"
     >
 
     <RelativeLayout
@@ -32,6 +30,7 @@
                 android:layout_marginLeft="206dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="0dp"
                 android:lineSpacingExtra="2sp"
                 android:text="Artikel Artikel ini sangat keren jadi ini sebenarnya jangan lupa"
@@ -48,7 +47,7 @@
                     android:id="@+id/ImageArtikelViewAll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/imageartikel"
+                    android:background="@drawable/imagenoarticle"
                     android:scaleType="fitXY"/>
 
             </androidx.cardview.widget.CardView>

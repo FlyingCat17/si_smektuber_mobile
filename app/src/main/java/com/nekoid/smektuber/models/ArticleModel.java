@@ -22,12 +22,12 @@ public class ArticleModel extends Models {
 
     public ArticleModel(int id, String title, String slug, String description, String thumbnail, String created_at, String updated_at) {
         this.id = id;
-        this.title = title;
-        this.slug = slug;
-        this.description = description;
-        this.thumbnail = thumbnail;
-        this.createdAt = created_at;
-        this.updatedAt = updated_at;
+        this.title = isEmpty(title);
+        this.slug = isEmpty(slug);
+        this.description = isEmpty(description);
+        this.thumbnail = isEmpty(thumbnail);
+        this.createdAt = isEmpty(created_at);
+        this.updatedAt = isEmpty(updated_at);
     }
 
     public static ArticleModel fromJson(JSONObject json) throws JSONException {

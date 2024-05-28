@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nekoid.smektuber.R;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.network.Http;
@@ -62,7 +63,7 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.MyViewHolder> 
             holder.articleDescription.setText(articleModels.get(position).title != null ? articleModels.get(position).title : "");
             holder.articleModel = articleModels.get(position);
         } else {
-            Http.loadImage(articleModels.get(position).thumbnail, holder.articleThumbnail, () -> {
+            Http.loadImage(  articleModels.get(position).thumbnail , holder.articleThumbnail, () -> {
                 isLoadAll(holder.containerArticleHome);
                 holder.articleDescription.setText(articleModels.get(position).title != null ? articleModels.get(position).title : "");
                 holder.articleModel = articleModels.get(position);

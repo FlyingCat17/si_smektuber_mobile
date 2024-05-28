@@ -20,37 +20,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
-        android:text="@string/TxtxExtra"
+        android:text=" "
         android:textAppearance="@style/informasi_p"
         android:lineSpacingExtra="-2sp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/ShimmerAboutSchool"
-        android:layout_below="@+id/backIcon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="22dp"
-            android:layout_marginLeft="22dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            >
-            <include layout="@layout/item_data_visi_misi_shimmer"/>
-            <include layout="@layout/item_data_about_school_shimmer"/>
-        </LinearLayout>
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
     <ScrollView
         android:layout_below="@+id/backIcon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="7dp"
-        android:visibility="gone"
+        android:scrollbars="none"
         >
 
         <RelativeLayout
@@ -59,7 +41,7 @@
             <ImageView
                 android:id="@+id/ImageExtra"
                 android:layout_width="match_parent"
-                android:layout_height="310.37dp"
+                android:layout_height="270.09dp"
                 android:layout_marginTop="20dp"
                 android:scaleType="fitXY"
                 android:background="@drawable/imagenoarticle"
@@ -86,7 +68,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:lineSpacingExtra="3sp"
-                android:text="@string/AboutExtra"
+                android:text=" "
                 android:textAppearance="@style/selayang_pa"
                 />
 
@@ -98,7 +80,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:layout_below="@+id/TxtAboutExtra"
-                android:text="@string/TxtPrestasi"
+                android:text=" "
                 android:textAppearance="@style/selayang_title"
                 />
 
@@ -111,7 +93,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:lineSpacingExtra="3sp"
-                android:text="Duta Ambalan Suropati- Cut Nyak Dien SMKN 7 Jember Bangkit bersama Saka Dirgantara Kabupaten Jember."
+                android:text=" "
                 android:textAppearance="@style/Text_Prestasi"
                 />
 
@@ -123,7 +105,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:layout_below="@+id/TxtViewPrestasiExtra"
-                android:text="@string/TxtFasilitas"
+                android:text=""
                 android:textAppearance="@style/selayang_title"
                 />
 

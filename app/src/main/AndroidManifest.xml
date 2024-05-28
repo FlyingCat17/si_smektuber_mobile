@@ -61,7 +61,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDT5dNQc8JucaGAw9Qdgy5jKYHA9uv6EEI" />
+            android:value="${MAPS_API_KEY}" />
 
         <activity
             android:name=".screen.home.maps.MapsActivity"
@@ -87,9 +87,6 @@
             android:exported="false" />
         <activity
             android:name=".screen.home.account.ChangeDataAccount"
-            android:exported="false" />
-        <activity
-            android:name=".screen.home.account.ImageCrop"
             android:exported="false" />
         <activity
             android:name=".screen.home.account.ViewZoomImage"

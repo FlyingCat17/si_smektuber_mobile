@@ -1,14 +1,19 @@
 package com.nekoid.smektuber.screen.home.article;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.app.BaseActivity;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
+import com.nekoid.smektuber.helpers.utils.Utils;
 import com.nekoid.smektuber.models.ArticleModel;
 import com.nekoid.smektuber.network.Http;
 import com.nekoid.smektuber.network.Response;
@@ -21,7 +26,7 @@ public class DetailArticle extends BaseActivity {
     ArticleModel articleModel;
 
     ImageView thumbnail;
-
+    private Toolbar toolbar;
     TextView description;
 
     @Override
@@ -29,6 +34,7 @@ public class DetailArticle extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_article);
         setVariable();
+        setToolbar();
         setArticleModel();
     }
 
@@ -49,14 +55,27 @@ public class DetailArticle extends BaseActivity {
 
     protected void setArticleModel() {
         Http.get(Endpoint.GET_ARTICLE_BY_ID.getUrl() + articleModel.id, PublicApi.getHeaders(), this::onResponse);
-        Http.loadImage(articleModel.thumbnail, thumbnail, () -> {
-            description.setText(articleModel.description);
-        });
+        String JobsImageUrl =  articleModel.thumbnail ;
+        Http.loadImage( JobsImageUrl,thumbnail );
+        CharSequence htmlDescEkstra = Utils.fromHtml( articleModel.description );
+        description.setText( htmlDescEkstra );
     }
 
     protected void setVariable() {
         articleModel = (ArticleModel) Navigator.getArgs(this);
         thumbnail = findViewById(R.id.ImageDetailArtikel);
         description = findViewById(R.id.TextArticle);
+    }
+
+    private void setToolbar(){
+        toolbar = findViewById(R.id.backIcon);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Navigator.of(this).pop();
+        return true;
     }
 }

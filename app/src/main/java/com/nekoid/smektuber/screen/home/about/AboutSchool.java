@@ -3,11 +3,16 @@ package com.nekoid.smektuber.screen.home.about;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.text.Html;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nekoid.smektuber.R;
 import com.nekoid.smektuber.api.Endpoint;
+import com.nekoid.smektuber.api.ImageUrlUtil;
 import com.nekoid.smektuber.api.PublicApi;
 import com.nekoid.smektuber.helpers.navigation.Navigator;
 import com.nekoid.smektuber.app.BaseActivity;
@@ -20,6 +25,8 @@ import com.nekoid.smektuber.network.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class AboutSchool extends BaseActivity {
 
     private ImageView BtnFB, BtnIG, BtnYoutube, BtnTT, headMasterPhoto, imageSchool;
@@ -29,22 +36,34 @@ public class AboutSchool extends BaseActivity {
     private Toolbar toolbar;
 
     private AboutModel aboutModel;
-
+    boolean withAnimation = true;
     private String facebook, instagram, youtube, tiktok;
+    ShimmerFrameLayout shimmerFrameLayout;
+    RelativeLayout tampilanAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_school);
+        shimmerFrameLayout = findViewById(R.id.ShimmerAboutSchool);
+        tampilanAbout = findViewById(R.id.TampilanAboutScholl);
         startShimmer();
         setVariable();
         init();
         setToolbar();
         if (State.aboutModel != null) {
-            setDataToView(State.aboutModel);
+//            setDataToView(State.aboutModel);
+            withAnimation = false;
+            aboutModel = State.aboutModel;
+            openRequest();
         } else {
-            Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
+            withAnimation = true;
+            openRequest();
         }
+    }
+
+    private void openRequest() {
+        Http.get(Endpoint.ABOUT.getUrl(), PublicApi.getHeaders(), this::onResponse);
     }
 
     private void startShimmer() {
@@ -53,6 +72,9 @@ public class AboutSchool extends BaseActivity {
 
     private void stopShimmer() {
         // stop shimmer
+        shimmerFrameLayout.setVisibility(View.GONE);
+        tampilanAbout.setVisibility(View.VISIBLE);
+        if (withAnimation) tampilanAbout.setAnimation(Utils.animation());
     }
 
     private void init() {
@@ -62,13 +84,29 @@ public class AboutSchool extends BaseActivity {
         BtnTT = findViewById(R.id.Tiktok);
         toolbar = findViewById(R.id.backIcon);
 
-        BtnFB.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(facebook)));
+        BtnFB.setOnClickListener(v -> {
+            if (facebook != null && !facebook.isEmpty()) {
+                Navigator.openApp(this, Utils.toUri(facebook));
+            }
+        });
 
-        BtnIG.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(instagram)));
+        BtnIG.setOnClickListener(v -> {
+            if (instagram != null && !instagram.isEmpty()) {
+                Navigator.openApp(this, Utils.toUri(instagram));
+            }
+        });
 
-        BtnYoutube.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(youtube)));
+        BtnYoutube.setOnClickListener(v -> {
+            if (youtube != null && !youtube.isEmpty()) {
+                Navigator.openApp(this, Utils.toUri(youtube));
+            }
+        });
 
-        BtnTT.setOnClickListener(v -> Navigator.openApp(this, Utils.toUri(tiktok)));
+        BtnTT.setOnClickListener(v -> {
+            if (tiktok != null && !tiktok.isEmpty()) {
+                Navigator.openApp(this, Utils.toUri(tiktok));
+            }
+        });
     }
 
     protected void onResponse(Response response) {
@@ -82,26 +120,57 @@ public class AboutSchool extends BaseActivity {
                 return;
             }
             AboutModel aboutModel = AboutModel.fromJson(body.getJSONObject("data"));
-            setDataToView(aboutModel);
+//            setDataToView(aboutModel);
+            State.aboutModel = aboutModel;
+            loadModel();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
-    private void setDataToView(AboutModel aboutModel) {
-        State.aboutModel = aboutModel;
-        Http.loadImage(aboutModel.schoolLogo, imageSchool, () -> {
-            Http.loadImage(aboutModel.schoolHeadmasterPicture, headMasterPhoto, () -> {
-                headmaster.setText(aboutModel.schoolHeadmasterName);
-                schoolDescription.setText(aboutModel.schoolHistory);
-                accreditation.setText(aboutModel.schoolAccreditation);
-                facebook = aboutModel.schoolFacebook;
-                instagram = aboutModel.schoolInstagram;
-                youtube = aboutModel.schoolYoutube;
-                stopShimmer();
-            });
-        });
+    private void loadModel() {
+        if (aboutModel != null) {
+            if (aboutModel.schoolPicture1 != null && !aboutModel.schoolPicture1.isEmpty() && !aboutModel.schoolPicture1.equals("null")) {
+                Http.loadImage(ImageUrlUtil.manipulateImageUrl(aboutModel.schoolPicture1), imageSchool);
+            }
+            if (aboutModel.schoolHeadmasterPicture != null && !aboutModel.schoolHeadmasterPicture.isEmpty() && !aboutModel.schoolHeadmasterPicture.equals("null")) {
+                Http.loadImage(ImageUrlUtil.manipulateImageUrl(aboutModel.schoolHeadmasterPicture), headMasterPhoto, this::setModelToView);
+            } else {
+                setModelToView();
+            }
+        } else {
+            stopShimmer();
+        }
     }
+    private void setModelToView() {
+        headmaster.setText(aboutModel.schoolHeadmasterName);
+        schoolDescription.setText(Utils.fromHtml(aboutModel.schoolHistory));
+        accreditation.setText(aboutModel.schoolAccreditation);
+        facebook = aboutModel.schoolFacebook;
+        instagram = aboutModel.schoolInstagram;
+        youtube = aboutModel.schoolYoutube;
+        stopShimmer();
+    }
+
+
+
+//    private void setDataToView(AboutModel aboutModel) {
+//        State.aboutModel = aboutModel;
+//        String schoolPhoto = ImageUrlUtil.manipulateImageUrl( aboutModel.schoolPicture1 );
+//        String schoolHeadmasterPicture = ImageUrlUtil.manipulateImageUrl( aboutModel.schoolHeadmasterPicture );
+//        Http.loadImage(schoolPhoto, imageSchool, () -> {
+//            Http.loadImage(schoolHeadmasterPicture, headMasterPhoto, () -> {
+//                headmaster.setText(aboutModel.schoolHeadmasterName);
+//                schoolDescription.setText(Utils.fromHtml(aboutModel.schoolHistory));
+//                accreditation.setText(aboutModel.schoolAccreditation);
+//                facebook = aboutModel.schoolFacebook;
+//                instagram = aboutModel.schoolInstagram;
+//                youtube = aboutModel.schoolYoutube;
+//                stopShimmer();
+//            });
+//        });
+//    }
+
+
 
     private void setVariable() {
         aboutModel = (AboutModel) Navigator.getArgs(this);
